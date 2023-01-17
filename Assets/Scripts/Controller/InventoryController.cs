@@ -70,7 +70,7 @@ namespace PlayerInventorySystem
         /// Method to generate a new id for chests
         /// </summary>
         /// <returns></returns>
-        internal static int GetNewChestID ()
+        internal static int GetNewChestID()
         {
             int newID = 0;
             foreach (int k in ChestInventories.Keys)
@@ -229,7 +229,7 @@ namespace PlayerInventorySystem
         /// </summary>
         public float DroppedItemTTL = 30;
 
-        void Start ()
+        void Start()
         {
             if (Player == null)
             {
@@ -285,7 +285,7 @@ namespace PlayerInventorySystem
 
         }
 
-        void Update ()
+        void Update()
         {
             // check for user input to display the panels
             if (Input.GetKeyDown(inventoryKey1) || Input.GetKeyDown(inventoryKey2))
@@ -385,7 +385,7 @@ namespace PlayerInventorySystem
         /// <summary>
         /// method used to create an empty player inventory
         /// </summary>
-        private void CreatePlayerInventory ()
+        private void CreatePlayerInventory()
         {
             if (InventoryList.ContainsKey(0) == false)
             {
@@ -405,7 +405,7 @@ namespace PlayerInventorySystem
         /// method to register a callback for when the selected item changes
         /// </summary>
         /// <param name="callbacK"></param>
-        public static void RegisterOnSlectedItemChangeCallback (Action<Item> callbacK)
+        public static void RegisterOnSlectedItemChangeCallback(Action<Item> callbacK)
         {
             InventoryController.Instance.OnSelectedItemChangeCallBack += callbacK;
         }
@@ -414,7 +414,7 @@ namespace PlayerInventorySystem
         /// methdo to unregister a callback for when the selected item changes
         /// </summary>
         /// <param name="callbacK"></param>
-        public static void UnregisterOnSelectedItemChangeCallback (Action<Item> callbacK)
+        public static void UnregisterOnSelectedItemChangeCallback(Action<Item> callbacK)
         {
             if (InventoryController.Instance.OnSelectedItemChangeCallBack != null)
             {
@@ -433,7 +433,7 @@ namespace PlayerInventorySystem
         /// <param name="oldInventory">Inventory to resize</param>
         /// <param name="size"> Size of new inventory</param>
         /// <returns></returns>
-        internal static Inventory ResizeInventory (Inventory oldInventory, int size)
+        internal static Inventory ResizeInventory(Inventory oldInventory, int size)
         {
             Inventory newInv = new Inventory(oldInventory.Index, size);
             if (oldInventory.Count > size)
@@ -461,31 +461,31 @@ namespace PlayerInventorySystem
         /// method to enable or diable the players ablity to move.
         /// </summary>
         /// <param name="b"></param>
-        private void EnablePlayerMovent (bool b)
+        private void EnablePlayerMovent(bool b)
         {
-           /* FirstPersonController fpc = Player.GetComponent<FirstPersonController>();
-            if (fpc != null)
-            {
-                fpc.enabled = b;
-                return;
-            }
-            else
-            {
-                ThirdPersonUserControl tpc = Player.GetComponent<ThirdPersonUserControl>();
-                if (tpc != null)
-                {
-                    tpc.enabled = b;
-                }
-            }*/
+            /*          CharacterController fpc = Player.GetComponent<CharacterController>();
+                      if (fpc != null)
+                      {
+                          fpc.enabled = b;
+                          return;
+                      }
+                      else
+                      {
+                          ThirdPersonUserControl tpc = Player.GetComponent<ThirdPersonUserControl>();
+                          if (tpc != null)
+                          {
+                              tpc.enabled = b;
+                          }
+                      }*/
         }
 
         /// <summary>
         /// method calle whenever an inventory panel is opened.
         /// </summary>
         /// <param name="window"></param>
-        private void WindowOpenCallback (InventorySystemPanel window)
+        private void WindowOpenCallback(InventorySystemPanel window)
         {
-            EnablePlayerMovent(false);// disable player movement while windows are open
+            //  EnablePlayerMovent(false);// disable player movement while windows are open
 
             dropPanel.gameObject.SetActive(true); // turn on the drop panel
 
@@ -500,7 +500,7 @@ namespace PlayerInventorySystem
         /// <summary>
         /// method to display the chest Panel and the selected chest inventory
         /// </summary>
-        private void OpenChest (ChestController chestController)
+        private void OpenChest(ChestController chestController)
         {
             if (chestController != null)
             {
@@ -519,7 +519,7 @@ namespace PlayerInventorySystem
         /// <param name="stackCount">the size of the stack to spawn</param>
         /// <param name="TTL">The time the item will reamin in the world</param>
         /// <returns>Returns true on success else false</returns>
-        public static bool SpawnDroppedItem (int itemID, Vector3 position, int stackCount = 1, float TTL = 30, float Durability = 0)
+        public static bool SpawnDroppedItem(int itemID, Vector3 position, int stackCount = 1, float TTL = 30, float Durability = 0)
         {
             if (itemID <= 0)
             {
@@ -559,7 +559,7 @@ namespace PlayerInventorySystem
         /// <param name="itemCatalogID"></param>
         /// <param name="inventory"></param>
         /// <param name="sTransform"></param>
-        internal static void SpawnChest (int chestID, int itemCatalogID, Inventory inventory, SerialTransform sTransform)
+        internal static void SpawnChest(int chestID, int itemCatalogID, Inventory inventory, SerialTransform sTransform)
         {
             Quaternion q = Quaternion.Euler(sTransform.Rotation);
             GameObject go = Instantiate(Instance.ItemCatalog.list[itemCatalogID].worldPrefab, sTransform.Position, q);
@@ -575,7 +575,7 @@ namespace PlayerInventorySystem
         /// method to store a chest for saving
         /// </summary>
         /// <param name="cc"></param>
-        internal static void MapChest (ChestController cc)
+        internal static void MapChest(ChestController cc)
         {
             ChestInventories.Add(cc.ChestID, cc.Inventory ?? new Inventory(cc.ChestID, cc.Capacity));
             ChestMap.Add(cc.ChestID, cc.gameObject);
@@ -586,7 +586,7 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="item"></param>
         /// <param name="go"></param>
-        internal static void ItemPlaced (Item item, GameObject go)
+        internal static void ItemPlaced(Item item, GameObject go)
         {
             /// if this item ius a chest then we need to map it corretly to be able to save it
             if (item.data.itemType == ITEMTYPE.CHEST)
@@ -620,7 +620,7 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="item"></param>
         /// <param name="quantity"></param>
-        internal static void DropItem (Item item, int quantity = 1)
+        internal static void DropItem(Item item, int quantity = 1)
         {
             GameObject prefab;
 
@@ -664,7 +664,7 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="itemID">The ID of the item to be added</param>
         /// <returns>Returns true on success else false</returns>
-        public static bool GivePlayerItem (int itemID, int stackCount = 1)
+        public static bool GivePlayerItem(int itemID, int stackCount = 1)
         {
             if (itemID <= 0)
             {
@@ -691,7 +691,7 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="collectedObject">The GameObject that is to be picked up</param>
         /// <returns></returns>
-        internal static bool PickUpItem (GameObject collectedObject)
+        internal static bool PickUpItem(GameObject collectedObject)
         {
 
             if (collectedObject.tag != "Item")
@@ -726,7 +726,7 @@ namespace PlayerInventorySystem
         /// <summary>
         /// method to toggle the inventory panel
         /// </summary>
-        public void ToggleInventoryPanel ()
+        public void ToggleInventoryPanel()
         {
             InventoryPanel.gameObject.SetActive(InventoryPanel.gameObject.activeInHierarchy ? false : true);
         }
@@ -734,7 +734,7 @@ namespace PlayerInventorySystem
         /// <summary>
         /// method to toggle the character panel
         /// </summary> 
-        public void ToggleCharacterPanel ()
+        public void ToggleCharacterPanel()
         {
             CharacterPanel.gameObject.SetActive(CharacterPanel.gameObject.activeInHierarchy ? false : true);
         }
@@ -742,7 +742,7 @@ namespace PlayerInventorySystem
         /// <summary>
         /// method to toggle the crafting panel
         /// </summary>
-        public void ToggleCraftingPanel ()
+        public void ToggleCraftingPanel()
         {
             CraftingPanel.gameObject.SetActive(CraftingPanel.gameObject.activeInHierarchy ? false : true);
         }
@@ -750,7 +750,7 @@ namespace PlayerInventorySystem
         /// <summary>
         /// method to toggle the item bar
         /// </summary>
-        public void ToggleItemBar ()
+        public void ToggleItemBar()
         {
             ItemBar.gameObject.SetActive(CraftingPanel.gameObject.activeInHierarchy ? false : true);
         }
@@ -760,7 +760,7 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="size">The capacity of the new inventory</param>
         /// <returns>int, the ID for the new inventory</returns>
-        private int AddNewInventory (int size)
+        private int AddNewInventory(int size)
         {
             int index = InventoryList.Count;
             InventoryList.Add(index, new Inventory(index, size));
@@ -772,7 +772,7 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        internal static Inventory GetInventory (int index)
+        internal static Inventory GetInventory(int index)
         {
             if (InventoryList.ContainsKey(index))
             {
@@ -790,7 +790,7 @@ namespace PlayerInventorySystem
         /// <param name="index">the index of the inventory in the inventory list</param>
         /// <param name="slotID">the ID of the slot in the inventory</param>
         /// <returns></returns>
-        internal static Slot GetInventorySlot (int index, int slotID)
+        internal static Slot GetInventorySlot(int index, int slotID)
         {
 
             if ((InventoryList[index].Count - 1) >= slotID)
@@ -817,7 +817,7 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="chestID"></param>
         /// <returns></returns>
-        internal static Inventory GetChestInventory (int chestID)
+        internal static Inventory GetChestInventory(int chestID)
         {
             if (ChestInventories.ContainsKey(chestID))
             {
@@ -830,7 +830,7 @@ namespace PlayerInventorySystem
         /// <summary>
         /// Method to save the inventory data.
         /// </summary>
-        public static void Save ()
+        public static void Save()
         {
             Serializer.Save();
         }
@@ -838,12 +838,12 @@ namespace PlayerInventorySystem
         /// <summary>
         /// Method to load the current saved data
         /// </summary>
-        public static void Load ()
+        public static void Load()
         {
             Serializer.Load();
         }
 
-        private void OnApplicationQuit ()
+        private void OnApplicationQuit()
         {
             Save();
         }
