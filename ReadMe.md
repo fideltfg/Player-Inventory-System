@@ -68,10 +68,7 @@ For example if you set an objects slot type to HEAD, that item can be placed in 
 **Crafting**
 <p>Each item in the Player Inventory System can be assigned a crafting recipe that allows the player to craft the item in game using other items from the Player Inventory System.</p>
 
-<p>Each item in the Item Catalog has a recipe section. The nine boxes there represent the nine slots on the crafting panel.<br />
-To define a recipe enter the item ID of the ingredients in to the required box as shown in the image below.</p>
-
-<img src="CraftingRecipe.png" name="Image1" title="This image shows the recipe for a torch." align="left"/><br /><br /><br /><br />
+<p>Each item in the Item Catalog has a recipe section. The nine boxes there represent the nine slots on the crafting panel.</p>
 
 <p>In game the player can place the ingredients in to the crafting slots in any location. As long as the pattern the ingredients create matches the recipe defined.</p>
 
