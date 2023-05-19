@@ -73,14 +73,7 @@ To define a recipe enter the item ID of the ingredients in to the required box a
 
 <img src="CraftingRecipe.png" name="Image1" title="This image shows the recipe for a torch." align="left"/><br /><br /><br /><br />
 
-<p>In game the player can place the ingredients in to the crafting slots in any location. As long as the pattern the ingredients create matches the recipe defined.<br />
-The images below possible arrangements of the ingredients to make a torch.</p>
-
-<p>
-<img src="InputExample1.png" name="Image2" align="left"/>
-<img src="InputExample2.png" name="Image3" align="left"/>
-<img src="InputExample3.png" name="Image4" align="left"/>
- </P><br /><br /><br /><br /><br /><br /><br /><br />
+<p>In game the player can place the ingredients in to the crafting slots in any location. As long as the pattern the ingredients create matches the recipe defined.</p>
 
 
 **Craft Count**:
