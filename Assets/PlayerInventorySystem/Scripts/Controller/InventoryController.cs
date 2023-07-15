@@ -8,7 +8,7 @@ namespace PlayerInventorySystem
 {
 
     /// <summary>
-    /// The Primary Component and controller of the player inventry system.
+    /// The Primary Component and controller of the player inventory system.
     /// </summary>
     public class InventoryController : MonoBehaviour
     {
@@ -51,7 +51,7 @@ namespace PlayerInventorySystem
         public static List<DroppedItem> DroppedItems = new List<DroppedItem>();
 
         /// <summary>
-        /// List of items that the player
+        /// List of items that the player has placed in the game world.
         /// </summary>
         public static List<PlacedItem> PlacedItems = new List<PlacedItem>();
 
@@ -135,31 +135,31 @@ namespace PlayerInventorySystem
             }
         } // index 4
 
-        /// <summary>
-        /// Key binding 1 to display the inventory panel
-        /// </summary>
-        public KeyCode inventoryKey1 = KeyCode.Tab;
+        /*        /// <summary>
+                /// Key binding 1 to display the inventory panel
+                /// </summary>
+                public KeyCode inventoryKey1 = KeyCode.Tab;
 
-        /// <summary>
-        /// Key binding 2 to display the inventory panel
-        /// </summary>
-        public KeyCode inventoryKey2 = KeyCode.E;
+                /// <summary>
+                /// Key binding 2 to display the inventory panel
+                /// </summary>
+                public KeyCode inventoryKey2 = KeyCode.E;
 
-        /// <summary>
-        /// Key binding to display the character panel
-        /// </summary>
-        public KeyCode characterKey = KeyCode.C;
+                /// <summary>
+                /// Key binding to display the character panel
+                /// </summary>
+                public KeyCode characterKey = KeyCode.C;
 
-        /// <summary>
-        /// Key binding to display the crafting panel
-        /// </summary>
-        public KeyCode craftingKey = KeyCode.V;
+                /// <summary>
+                /// Key binding to display the crafting panel
+                /// </summary>
+                public KeyCode craftingKey = KeyCode.V;
 
-        /// <summary>
-        /// Key binding to display throw away an item
-        /// </summary>
-        public KeyCode throwawayKey = KeyCode.Q; // key to throw away cuttently selected item
-
+                /// <summary>
+                /// Key binding to display throw away an item
+                /// </summary>
+                public KeyCode throwawayKey = KeyCode.Q; // key to throw away cuttently selected item
+        */
         /// <summary>
         /// The player game object that this inventory is connected to.
         /// </summary>
@@ -224,6 +224,17 @@ namespace PlayerInventorySystem
             }
         }
 
+        bool throwAway;
+
+        /// <summary>
+        /// when called the currently selectedc slots' item will be thrown away
+        /// if the player is holding an item it will be thrown away
+        /// </summary>
+        internal void DroppedItem()
+        {
+            throwAway = true;
+        }
+
         /// <summary>
         /// Default time to live of items dropped by the player into the game world in seconds
         /// </summary>
@@ -239,14 +250,12 @@ namespace PlayerInventorySystem
                     Debug.LogError("No Game Object Tagged as Player was found. Either drag your player object on to the Inventoy Controller component player value or Tag it as Player. ");
                     return;
                 }
-                else
-                {
-                    InventoryPlayerController inventoryPlayerController = Player.GetComponent<InventoryPlayerController>();
-                    if (inventoryPlayerController == null)
-                    {
-                        Player.AddComponent<InventoryPlayerController>();
-                    }
-                }
+            }
+
+            InventoryPlayerController inventoryPlayerController = Player.GetComponent<InventoryPlayerController>();
+            if (inventoryPlayerController == null)
+            {
+                Player.AddComponent<InventoryPlayerController>();
             }
 
             Application.targetFrameRate = -1;
@@ -288,20 +297,20 @@ namespace PlayerInventorySystem
         void Update()
         {
             // check for user input to display the panels
-            if (Input.GetKeyDown(inventoryKey1) || Input.GetKeyDown(inventoryKey2))
-            {
-                ToggleInventoryPanel();
-            }
+            /*   if (Input.GetKeyDown(inventoryKey1) || Input.GetKeyDown(inventoryKey2))
+               {
+                   ToggleInventoryPanel();
+               }
 
-            if (Input.GetKeyDown(characterKey))
-            {
-                ToggleCharacterPanel();
-            }
+               if (Input.GetKeyDown(characterKey))
+               {
+                   ToggleCharacterPanel();
+               }
 
-            if (Input.GetKeyDown(craftingKey))
-            {
-                ToggleCraftingPanel();
-            }
+               if (Input.GetKeyDown(craftingKey))
+               {
+                   ToggleCraftingPanel();
+               }*/
 
             // close all windows
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -324,9 +333,11 @@ namespace PlayerInventorySystem
             if (!AnyWindowOpen)
             {
                 // if the player hits the throwAway button (q) while no windows are open then throw away one of the selected Item
-                if (Input.GetKeyDown(throwawayKey))
+                //if (Input.GetKeyDown(throwawayKey))
+                if (throwAway)
                 {
                     ItemBar.DropSelectedItem();
+                    throwAway = false;
                 }
 
                 if (HeldItem != null)
@@ -463,20 +474,7 @@ namespace PlayerInventorySystem
         /// <param name="b"></param>
         private void EnablePlayerMovent(bool b)
         {
-            /*          CharacterController fpc = Player.GetComponent<CharacterController>();
-                      if (fpc != null)
-                      {
-                          fpc.enabled = b;
-                          return;
-                      }
-                      else
-                      {
-                          ThirdPersonUserControl tpc = Player.GetComponent<ThirdPersonUserControl>();
-                          if (tpc != null)
-                          {
-                              tpc.enabled = b;
-                          }
-                      }*/
+
         }
 
         /// <summary>

@@ -6,7 +6,7 @@ namespace PlayerInventorySystem
 {
 
     /// <summary>
-    /// Component added to item prefabs dot teh inventroy system can identify them for saving and respawning
+    /// Component added to item prefabs so the inventroy system can identify them for saving and respawning
     /// </summary>
     public class PlacedItem : MonoBehaviour
     {

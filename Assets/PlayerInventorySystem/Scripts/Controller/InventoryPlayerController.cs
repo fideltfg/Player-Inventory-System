@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace PlayerInventorySystem
 {
     /// <summary>
-    /// Component added to player objec to allow items to be picked up.
+    /// Component added to player object to allow items to be picked up.
     /// </summary>
     [RequireComponent(typeof(BoxCollider))]
     public class InventoryPlayerController : MonoBehaviour

@@ -16,7 +16,7 @@ namespace PlayerInventorySystem.Serial
 
 
         /// How to change keys to encrypt saved data
-        /// Before you publish your game you should change the values ok kk, and ii byte arrays below.
+        /// Before you publish your game you should change the values of kk, and ii byte arrays below.
         /// run the three lines of code below to output new keys. You can copy them to a new components' Start method 
         /// and the new values will be output to your console
         /// You will then have to format the output in to a byte array. check the existing values to see how this should be done.
@@ -25,8 +25,8 @@ namespace PlayerInventorySystem.Serial
            Debug.Log("new kk = " + BitConverter.ToString(TDES.Key));
            Debug.Log("new ii = " + BitConverter.ToString(TDES.IV));
          **/
-        private static byte[] kk = { 0x93, 0x17, 0x01, 0x9C, 0xE6, 0xB7, 0x11, 0xD1, 0xE0, 0xE7, 0x1E, 0x5E, 0xF8, 0x17, 0xA5, 0xCC, 0xB3, 0x05, 0x88, 0x26, 0xA5, 0x25, 0x15, 0xBD };
-        private static byte[] ii = { 0xD5, 0x65, 0x05, 0xF9, 0xD4, 0x06, 0xDC, 0x42 };
+        private static readonly byte[] kk = { 0x93, 0x17, 0x01, 0x9C, 0xE6, 0xB7, 0x11, 0xD1, 0xE0, 0xE7, 0x1E, 0x5E, 0xF8, 0x17, 0xA5, 0xCC, 0xB3, 0x05, 0x88, 0x26, 0xA5, 0x25, 0x15, 0xBD };
+        private static readonly byte[] ii = { 0xD5, 0x65, 0x05, 0xF9, 0xD4, 0x06, 0xDC, 0x42 };
 
         private static InventorySystemPanel[] panels = { InventoryController.Instance.InventoryPanel, InventoryController.Instance.CharacterPanel, InventoryController.Instance.CraftingPanel, InventoryController.Instance.ChestPanel };
 
