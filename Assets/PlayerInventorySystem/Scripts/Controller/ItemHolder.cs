@@ -18,18 +18,14 @@ namespace PlayerInventorySystem
         public Image image;
         public Text text;
 
-        public void Update()
+        public void Update ()
         {
-          //  Debug.Log("ItemHolder Update");
             Item heldItem = InventoryController.HeldItem;
 
             if (heldItem != null && heldItem.StackCount > 0)
             {
-
-                Debug.Log("Held Item: " + heldItem.data.name);
                 if (heldItem.StackCount <= 0)
                 {
-                    Debug.Log("stack count <= 0");
                     heldItem = null;
                 }
                 else
@@ -49,7 +45,6 @@ namespace PlayerInventorySystem
             }
             else if (heldItem == null || heldItem.StackCount <= 0)
             {
-                Debug.Log("Held Item: null");
                 Cursor.visible = true;
                 text.enabled = false;
                 image.enabled = false;
@@ -59,7 +54,7 @@ namespace PlayerInventorySystem
 
         }
 
-        private void FixedUpdate()
+        private void FixedUpdate ()
         {
             transform.SetAsLastSibling();
         }

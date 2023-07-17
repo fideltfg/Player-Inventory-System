@@ -9,9 +9,6 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
-/[Uu]serSettings/
-/[Pp]rojectSettings/
-/[Aa]ssets/[Ss]omthingNew/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
@@ -50,7 +47,6 @@ ExportedObj/
 *.pidb.meta
 *.pdb.meta
 *.mdb.meta
-*.meta
 
 # Unity3D generated file on crash reports
 sysinfo.txt
@@ -62,6 +58,3 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
-/Data/data.dat
-/UserSettings/EditorUserSettings.asset
-/UserSettings/Layouts/CurrentMaximizeLayout.dwlt
