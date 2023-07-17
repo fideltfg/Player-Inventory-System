@@ -58,3 +58,6 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+/Data/data.dat
+/UserSettings/EditorUserSettings.asset
+/UserSettings/Layouts/CurrentMaximizeLayout.dwlt
