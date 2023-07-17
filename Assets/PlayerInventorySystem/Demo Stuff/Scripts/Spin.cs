@@ -4,7 +4,7 @@ using System.Collections;
 namespace PlayerInventorySystem
 {
     /// <summary>
-    /// Helper component to demo objects in game.
+    /// Helper component to demo objects in game. test
     /// </summary>
     public class Spin : MonoBehaviour
     {
