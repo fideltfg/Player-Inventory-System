@@ -9,7 +9,9 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
-[Aa]ssets/[Ss]omthingNew/
+/[Uu]serSettings/
+/[Pp]rojectSettings/
+/[Aa]ssets/[Ss]omthingNew/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
