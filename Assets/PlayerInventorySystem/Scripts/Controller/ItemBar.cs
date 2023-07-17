@@ -23,9 +23,12 @@ namespace PlayerInventorySystem
             }
             set
             {
+                if(selectedSlotID == value) { return; }
+
                 SlotList[selectedSlotID].Selected = false;
                 selectedSlotID = (int)Mathf.Clamp(value, 0, 9); ;
                 SlotList[selectedSlotID].Selected = true;
+                InventoryController.Instance.OnSelectedItemChangeCallBack?.Invoke(SelectedSlotController.Slot.Item);
             }
         }
 
@@ -86,11 +89,10 @@ namespace PlayerInventorySystem
                     return;
                 }
             }
-            if (InventoryController.Instance.OnSelectedItemChangeCallBack != null)
-            {
-                InventoryController.Instance.OnSelectedItemChangeCallBack(SelectedSlotController.Slot.Item);
-            }
+            //InventoryController.Instance.OnSelectedItemChangeCallBack?.Invoke(SelectedSlotController.Slot.Item);
         }
+
+
         public override void Build (int InventoryIndex)
         {
             base.Build(InventoryIndex);
@@ -124,10 +126,19 @@ namespace PlayerInventorySystem
                 {
                     SelectedSlotController.Slot.SetItem(null);
                 }
-
             }
-
-
         }
+
+
+        public void SelectNextSlot()
+        {
+            SelectedSlotID++;
+        }
+
+        public void SelectPreviousSlot()
+        {
+            SelectedSlotID--;
+        }
+
     }
 }

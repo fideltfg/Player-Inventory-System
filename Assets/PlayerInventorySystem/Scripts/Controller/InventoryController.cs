@@ -130,6 +130,7 @@ namespace PlayerInventorySystem
                 {
                     Cursor.visible = true;
                 }
+                Debug.Log("Held Item SET: " + value);
                 InventoryList[4][0].SetItem(value);
 
             }
@@ -220,20 +221,13 @@ namespace PlayerInventorySystem
                 return InventoryPanel.gameObject.activeSelf ||
                     CraftingPanel.gameObject.activeSelf ||
                     CharacterPanel.gameObject.activeSelf ||
+                    ItemBar.gameObject.activeSelf ||
                     ChestPanel.gameObject.activeSelf;
             }
         }
 
         bool throwAway;
 
-        /// <summary>
-        /// when called the currently selectedc slots' item will be thrown away
-        /// if the player is holding an item it will be thrown away
-        /// </summary>
-        internal void DroppedItem()
-        {
-            throwAway = true;
-        }
 
         /// <summary>
         /// Default time to live of items dropped by the player into the game world in seconds
@@ -332,13 +326,13 @@ namespace PlayerInventorySystem
             // if there are no windows open
             if (!AnyWindowOpen)
             {
-                // if the player hits the throwAway button (q) while no windows are open then throw away one of the selected Item
+             /*   // if the player hits the throwAway button (q) while no windows are open then throw away one of the selected Item
                 //if (Input.GetKeyDown(throwawayKey))
                 if (throwAway)
                 {
                     ItemBar.DropSelectedItem();
                     throwAway = false;
-                }
+                }*/
 
                 if (HeldItem != null)
                 {
@@ -354,6 +348,8 @@ namespace PlayerInventorySystem
 
                 EnablePlayerMovent(true); // enable the player
                 dropPanel.gameObject.SetActive(false); // disable the drop panel
+
+
                 // watch for player interactions with chests
                 if (Input.GetMouseButtonDown(1))
                 {
@@ -422,7 +418,7 @@ namespace PlayerInventorySystem
         }
 
         /// <summary>
-        /// methdo to unregister a callback for when the selected item changes
+        /// method to unregister a callback for when the selected item changes
         /// </summary>
         /// <param name="callbacK"></param>
         public static void UnregisterOnSelectedItemChangeCallback(Action<Item> callbacK)
@@ -474,7 +470,7 @@ namespace PlayerInventorySystem
         /// <param name="b"></param>
         private void EnablePlayerMovent(bool b)
         {
-
+            // TODO: enable player movement
         }
 
         /// <summary>
@@ -517,7 +513,7 @@ namespace PlayerInventorySystem
         /// <param name="stackCount">the size of the stack to spawn</param>
         /// <param name="TTL">The time the item will reamin in the world</param>
         /// <returns>Returns true on success else false</returns>
-        public static bool SpawnDroppedItem(int itemID, Vector3 position, int stackCount = 1, float TTL = 30, float Durability = 0)
+        internal static bool SpawnDroppedItem(int itemID, Vector3 position, int stackCount = 1, float TTL = 30, float Durability = 0)
         {
             if (itemID <= 0)
             {
@@ -618,7 +614,7 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="item"></param>
         /// <param name="quantity"></param>
-        internal static void DropItem(Item item, int quantity = 1)
+        public static void DropItem(Item item, int quantity = 1)
         {
             GameObject prefab;
 
@@ -848,5 +844,3 @@ namespace PlayerInventorySystem
 
     }
 }
-
-

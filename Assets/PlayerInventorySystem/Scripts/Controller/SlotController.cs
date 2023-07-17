@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using UnityEngine.EventSystems;
+using System.Diagnostics;
 
 namespace PlayerInventorySystem
 {
@@ -89,7 +90,7 @@ namespace PlayerInventorySystem
                     }
                     catch (Exception e)
                     {
-                        Debug.LogError(e.Message + " " + e.StackTrace);
+                        UnityEngine.Debug.LogError(e.Message + " " + e.StackTrace);
                         return null;
 
                     }
@@ -113,7 +114,17 @@ namespace PlayerInventorySystem
         /// <summary>
         /// Accessor for the inventory system's Held Item
         /// </summary>
-        public Item HeldItem { get { return InventoryController.HeldItem; } set { InventoryController.HeldItem = value; } }
+        public Item HeldItem
+        {
+            get
+            {
+                return InventoryController.HeldItem;
+            }
+            set
+            {
+                InventoryController.HeldItem = value;
+            }
+        }
 
         /// <summary>
         /// The delay between mouse over and the Item Informaion Box being diaplayed.
@@ -122,7 +133,7 @@ namespace PlayerInventorySystem
 
         Animation ImageAnimator;
 
-        void OnEnable ()
+        void OnEnable()
         {
             if (ImageAnimator == null)
             {
@@ -130,12 +141,12 @@ namespace PlayerInventorySystem
             }
         }
 
-        void Awake ()
+        void Awake()
         {
             unselectedColor = GetComponent<Image>().color;
         }
 
-        public virtual void Update ()
+        public virtual void Update()
         {
             // what to do if the mouse pointer is over this slot
             if (mouseOver)
@@ -184,7 +195,7 @@ namespace PlayerInventorySystem
             }
         }
 
-        void OnDisable ()
+        void OnDisable()
         {
             mouseOver = false;
         }
@@ -193,7 +204,7 @@ namespace PlayerInventorySystem
         /// Method to set the slot that this controller will control.
         /// </summary>
         /// <param name="slot"></param>
-        internal void SetSlot (Slot slot)
+        internal void SetSlot(Slot slot)
         {
             this.slotID = slot.slotID;
             slot.RegisterSlotChangedCallback(OnSlotChanged);
@@ -204,7 +215,7 @@ namespace PlayerInventorySystem
         /// called whenever this slot or its item have changed in any way
         /// </summary>
         /// <param name="slot"></param>
-        internal void OnSlotChanged (Slot slot)
+        internal void OnSlotChanged(Slot slot)
         {
             UpdateSlotUI();
         }
@@ -212,7 +223,7 @@ namespace PlayerInventorySystem
         /// <summary>
         /// method calledto update the slots UI
         /// </summary>
-        internal void UpdateSlotUI ()
+        internal void UpdateSlotUI()
         {
             counter = 0;
             InventoryController.Instance.ItemHolder.itemInfoBox.Show(null);
@@ -280,8 +291,9 @@ namespace PlayerInventorySystem
         /// method to handel the moue pointer entering the slot
         /// </summary>
         /// <param name="eventData"></param>
-        public virtual void OnPointerEnter (PointerEventData eventData)
+        public virtual void OnPointerEnter(PointerEventData eventData)
         {
+            UnityEngine.Debug.Log("OnPointerEnter");
             SetOutLineColor();
 
             if (Slot.Item != null)
@@ -295,7 +307,7 @@ namespace PlayerInventorySystem
         /// method to handel the pointer exiting the slot
         /// </summary>
         /// <param name="eventData"></param>
-        public virtual void OnPointerExit (PointerEventData eventData)
+        public virtual void OnPointerExit(PointerEventData eventData)
         {
             outline.effectColor = HighlightColor;
             outline.enabled = false;
@@ -307,9 +319,9 @@ namespace PlayerInventorySystem
         /// Method to handle mouse pointer down on this slot
         /// </summary>
         /// <param name="eventData"></param>
-        public virtual void OnPointerDown (PointerEventData eventData)
+        public virtual void OnPointerDown(PointerEventData eventData)
         {
-
+            UnityEngine.Debug.Log("OnPointerDown");
             if (InventoryController.Instance.AnyWindowOpen == false)
             {
                 return;
@@ -427,12 +439,12 @@ namespace PlayerInventorySystem
         /// method to handel mouse poiter up on this slot.
         /// </summary>
         /// <param name="eventData"></param>
-        public void OnPointerUp (PointerEventData eventData)
+        public void OnPointerUp(PointerEventData eventData)
         {
 
         }
 
-        void SetOutLineColor ()
+        void SetOutLineColor()
         {
             if (HeldItem != null)
             {
@@ -452,7 +464,7 @@ namespace PlayerInventorySystem
             outline.enabled = true;
         }
 
-        bool MoveStack ()
+        bool MoveStack()
         {
             // if no windows are open do nothing
             if (!InventoryController.Instance.AnyWindowOpen)
@@ -611,7 +623,7 @@ namespace PlayerInventorySystem
 
         }
 
-        bool MoveStackToCharacter ()
+        bool MoveStackToCharacter()
         {
             // is there a slot for this item free on the character panel?
             if (this.Slot.Item.data.itemType == ITEMTYPE.WEARABLE)
@@ -737,7 +749,7 @@ namespace PlayerInventorySystem
             return false;
         }
 
-        bool MoveStackToChest ()
+        bool MoveStackToChest()
         {
             ChestController Chest = InventoryController.Instance.ChestPanel.Chest;
             if (Chest != null)
@@ -751,7 +763,7 @@ namespace PlayerInventorySystem
             return false;
         }
 
-        void PickUpHalfStack ()
+        void PickUpHalfStack()
         {
             if (this.Slot.Item.StackCount == 1)
             {
@@ -771,13 +783,13 @@ namespace PlayerInventorySystem
             }
         }
 
-        void PickUpStack ()
+        void PickUpStack()
         {
             HeldItem = this.Slot.Item;
             Slot.SetItem(null);
         }
 
-        void SwapItems ()
+        void SwapItems()
         {
             Item i = HeldItem;
             HeldItem = this.Slot.Item;
@@ -788,7 +800,7 @@ namespace PlayerInventorySystem
         /// method to swap the item in this slot with the item in the item bar slot with the given ID
         /// </summary>
         /// <param name="ItemBarSlotID"></param>
-        public virtual void SwapWithItemBarSlot (int ItemBarSlotID)
+        public virtual void SwapWithItemBarSlot(int ItemBarSlotID)
         {
             Item i = InventoryController.ItemBarInventory[ItemBarSlotID].Item;
             InventoryController.ItemBarInventory[ItemBarSlotID].SetItem(null);
