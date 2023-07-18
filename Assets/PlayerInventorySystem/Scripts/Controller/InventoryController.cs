@@ -133,33 +133,8 @@ namespace PlayerInventorySystem
                 InventoryList[4][0].SetItem(value);
 
             }
-        } // index 4
+        }
 
-        /*        /// <summary>
-                /// Key binding 1 to display the inventory panel
-                /// </summary>
-                public KeyCode inventoryKey1 = KeyCode.Tab;
-
-                /// <summary>
-                /// Key binding 2 to display the inventory panel
-                /// </summary>
-                public KeyCode inventoryKey2 = KeyCode.E;
-
-                /// <summary>
-                /// Key binding to display the character panel
-                /// </summary>
-                public KeyCode characterKey = KeyCode.C;
-
-                /// <summary>
-                /// Key binding to display the crafting panel
-                /// </summary>
-                public KeyCode craftingKey = KeyCode.V;
-
-                /// <summary>
-                /// Key binding to display throw away an item
-                /// </summary>
-                public KeyCode throwawayKey = KeyCode.Q; // key to throw away cuttently selected item
-        */
         /// <summary>
         /// The player game object that this inventory is connected to.
         /// </summary>
@@ -220,6 +195,7 @@ namespace PlayerInventorySystem
                 return InventoryPanel.gameObject.activeSelf ||
                     CraftingPanel.gameObject.activeSelf ||
                     CharacterPanel.gameObject.activeSelf ||
+                   ItemBar.gameObject.activeSelf ||
                     ChestPanel.gameObject.activeSelf;
             }
         }
@@ -296,22 +272,6 @@ namespace PlayerInventorySystem
 
         void Update()
         {
-            // check for user input to display the panels
-            /*   if (Input.GetKeyDown(inventoryKey1) || Input.GetKeyDown(inventoryKey2))
-               {
-                   ToggleInventoryPanel();
-               }
-
-               if (Input.GetKeyDown(characterKey))
-               {
-                   ToggleCharacterPanel();
-               }
-
-               if (Input.GetKeyDown(craftingKey))
-               {
-                   ToggleCraftingPanel();
-               }*/
-
             // close all windows
             if (Input.GetKeyDown(KeyCode.Escape))
             {

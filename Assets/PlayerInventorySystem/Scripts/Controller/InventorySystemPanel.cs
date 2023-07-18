@@ -11,6 +11,36 @@ namespace PlayerInventorySystem
     public class InventorySystemPanel : MonoBehaviour
     {
 
+        internal int selectedSlotID;// the slot that is currently selected in this panel
+
+        /// <summary>
+        /// ID of the slot the player has currently selected.
+        /// </summary>
+        public int SelectedSlotID
+        {
+            get
+            {
+                return selectedSlotID;
+            }
+            set
+            {
+                SlotList[selectedSlotID].Selected = false;
+                selectedSlotID = (int)Mathf.Clamp(value, 0, 9);
+                SlotList[selectedSlotID].Selected = true;
+                InventoryController.Instance.OnSelectedItemChangeCallBack?.Invoke(SelectedSlotController.Slot.Item);
+            }
+        }
+
+        /// <summary>
+        /// The Slotcontroller of the currently selected slot.
+        /// </summary>
+        public SlotController SelectedSlotController
+        {
+            get { return SlotList[SelectedSlotID]; }
+        }
+
+
+
         /// <summary>
         /// Holds the GridLayoutGroup component, read only 
         /// </summary>
@@ -29,17 +59,18 @@ namespace PlayerInventorySystem
         /// <summary>
         /// The index of the invnetory for this panel
         /// </summary>
+        [HideInInspector]
         public int Index;
 
-        public virtual void Update () { }
+        public virtual void Update() { }
 
-        public virtual void OnEnable ()
+        public virtual void OnEnable()
         {
             InventoryController.Instance.OnWindowOpenCallback(this);
             transform.SetAsLastSibling();
         }
 
-        public virtual void OnDisable ()
+        public virtual void OnDisable()
         {
             // make sure all highlighting is turned off
             foreach (SlotController sc in SlotList)
@@ -52,7 +83,7 @@ namespace PlayerInventorySystem
         /// Called to generate the panels slots and arrnge them on start.
         /// </summary>
         /// <param name="InventoryIndex"></param>
-        public virtual void Build (int InventoryIndex = 0)
+        public virtual void Build(int InventoryIndex = 0)
         {
             this.Index = InventoryIndex;
         }

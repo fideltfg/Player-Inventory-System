@@ -3,11 +3,6 @@ using UnityEngine.UI;
 
 namespace PlayerInventorySystem
 {
-
-
-
-
-
     /// <summary>
     /// Controller for the player inventory panel.
     /// </summary>
@@ -47,8 +42,10 @@ namespace PlayerInventorySystem
                 sc.slotLocation = SLOTLOCATION.INVENTORY;
                 sc.SetSlot(slot);
                 SlotList.Add(sc);
-
             }
+
+            SlotList[0].Selected = true;
+
         }
     }
 }

@@ -10,49 +10,39 @@ namespace PlayerInventorySystem
     /// </summary>
     public class ItemBar : InventorySystemPanel
     {
-        private int selectedSlotID;
+        /*       public int selectedSlotID;
 
-        /// <summary>
-        /// ID of the slot the player hass currently selected.
-        /// </summary>
-        public int SelectedSlotID
+               /// <summary>
+               /// ID of the slot the player hass currently selected.
+               /// </summary>
+               public int SelectedSlotID
+               {
+                   get
+                   {
+                       return selectedSlotID;
+                   }
+                   set
+                   {
+                       SlotList[selectedSlotID].Selected = false;
+                       selectedSlotID = (int)Mathf.Clamp(value, 0, 9);
+                       SlotList[selectedSlotID].Selected = true;
+                       InventoryController.Instance.OnSelectedItemChangeCallBack?.Invoke(SelectedSlotController.Slot.Item);
+                   }
+               }
+
+               /// <summary>
+               /// The Slotcontroller of the currently selected slot.
+               /// </summary>
+               public SlotController SelectedSlotController
+               {
+                   get { return SlotList[SelectedSlotID]; }
+               }*/
+
+        public override void OnEnable() { }
+
+        public override void Update()
         {
-            get
-            {
-                return selectedSlotID;
-            }
-            set
-            {
-                SlotList[selectedSlotID].Selected = false;
-                selectedSlotID = (int)Mathf.Clamp(value, 0, 9); ;
-                SlotList[selectedSlotID].Selected = true;
-            }
-        }
 
-        /// <summary>
-        /// The Slotcontroller of the currently selected slot.
-        /// </summary>
-        public SlotController SelectedSlotController
-        {
-            get { return SlotList[SelectedSlotID]; }
-        }
-
-        public override void OnEnable () { }
-
-        public override void Update ()
-        {
-            if (InventoryController.Instance.AnyWindowOpen)
-            {// if any windows are open
-                SlotList[selectedSlotID].Selected = false;
-            }
-            else
-            {
-                SelectSlot();
-            }
-        }
-
-        internal void SelectSlot ()
-        {
             // check if the user is scrolling the mouse wheel
             float s = Input.GetAxisRaw("Mouse ScrollWheel");
             if (s != 0)
@@ -82,16 +72,13 @@ namespace PlayerInventorySystem
                 else if (Input.GetKeyDown(KeyCode.Alpha0)) { SelectedSlotID = 9; }
                 else
                 {
-                    SelectedSlotID = selectedSlotID;
+                    //  SelectedSlotID = selectedSlotID;
                     return;
                 }
             }
-            if (InventoryController.Instance.OnSelectedItemChangeCallBack != null)
-            {
-                InventoryController.Instance.OnSelectedItemChangeCallBack(SelectedSlotController.Slot.Item);
-            }
+
         }
-        public override void Build (int InventoryIndex)
+        public override void Build(int InventoryIndex)
         {
             base.Build(InventoryIndex);
 
@@ -109,12 +96,13 @@ namespace PlayerInventorySystem
                 SlotList.Add(sc);
 
             }
+            SlotList[0].Selected = true;
         }
 
         /// <summary>
         /// method to drop the item in the currently selected slot
         /// </summary>
-        public void DropSelectedItem ()
+        public void DropSelectedItem()
         {
             if (SelectedSlotController.Slot.Item != null)
             {
@@ -126,8 +114,47 @@ namespace PlayerInventorySystem
                 }
 
             }
-
-
         }
+
+
+        public void SelectNextSlot()
+        {
+            SelectedSlotID++;
+        }
+
+        public void SelectPreviousSlot()
+        {
+            SelectedSlotID--;
+        }
+
+
+
+        public void UseSelectedItem()
+        {
+            if (SelectedSlotController.Slot.Item != null)
+            {
+                switch (SelectedSlotController.Slot.Item.data.itemType)
+                {
+                    case ITEMTYPE.CONSUMABLE: // food water healt packs ect
+                        Slot sS = SelectedSlotController.Slot;
+
+                        if (sS.ItemStackCount <= 0)
+                        {
+                            sS.SetItem(null);
+                        }
+                        break;
+
+                    case ITEMTYPE.WEARABLE: // aka equipable... armor, tools and weapons
+                        break;
+
+                    case ITEMTYPE.USABLE: // keys and other items that can be used in predefind ways
+
+                        break;
+                }
+
+
+            }
+        }
+
     }
 }
