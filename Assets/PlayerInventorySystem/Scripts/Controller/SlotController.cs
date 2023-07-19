@@ -370,11 +370,21 @@ namespace PlayerInventorySystem
                         }
                         if (eventData.button == PointerEventData.InputButton.Right)
                         {
+                            Debug.Log("Right Click");
                             // place one copy of the item in to this slot
                             Item CloneItem = HeldItem.Clone();
                             CloneItem.SetStackCount(1);
                             Slot.SetItem(CloneItem);
-                            HeldItem.AddToStack(-1);
+
+                            // FIX STACKING BUG
+                            if (HeldItem.StackCount > 1)
+                            {
+                                HeldItem.AddToStack(-1);
+                            }
+                            else
+                            {
+                                HeldItem = null;
+                            }
                         }
                     }
                 }
