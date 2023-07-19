@@ -91,6 +91,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnInteract()
     {
+        // do what you want here 
+        // trigger interact animation ect
     }
 
     public void OnAimSwitch()

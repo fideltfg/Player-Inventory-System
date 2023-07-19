@@ -281,13 +281,13 @@ namespace PlayerInventorySystem
         {
             counter = 0;
             mouseOver = false;
-            // if not holding an item but there is an item in this slot
+            // if NOT holding an item and there is an item in this slot
             if (HeldItem == null && Slot.Item != null)
             {
-                // if the player is holding down shift
+                // if the player is holding down shift place the item( or stack of items) in the slot
                 if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
                 {
-                    MoveStack();
+                    MoveStack(); // to the next available slot in the open window.
                 }
                 else // if no shift on left click
                 {
@@ -730,8 +730,11 @@ namespace PlayerInventorySystem
             else
             {
                 HeldItem = this.Slot.Item.Clone();
-                HeldItem.SetStackCount(Mathf.CeilToInt(Slot.Item.StackCount * .5f));
-                Slot.IncermentStackCount(-Mathf.FloorToInt(Slot.Item.StackCount * .5f));
+
+                Vector2Int v = SplitIntVectorInt(Slot.Item.StackCount);
+                Slot.SetItemStackCount(v.x);
+                HeldItem.SetStackCount(v.y);
+
                 // if the stack is now empty  clear the slot
                 if (Slot.Item.StackCount <= 0)
                 {
@@ -739,6 +742,23 @@ namespace PlayerInventorySystem
                 }
             }
         }
+
+
+        private Vector2Int SplitIntVectorInt(int number)
+        {
+            int firstNumber = number / 2;
+            int secondNumber = number - firstNumber;
+
+            if (firstNumber < secondNumber)
+            {
+                int temp = firstNumber;
+                firstNumber = secondNumber;
+                secondNumber = temp;
+            }
+
+            return new Vector2Int(firstNumber, secondNumber);
+        }
+
 
         void PickUpStack()
         {

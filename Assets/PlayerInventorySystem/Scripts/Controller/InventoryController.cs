@@ -3,6 +3,7 @@ using System.Collections;
 using System;
 using System.Collections.Generic;
 using PlayerInventorySystem.Serial;
+using Unity.VisualScripting;
 
 namespace PlayerInventorySystem
 {
@@ -125,10 +126,12 @@ namespace PlayerInventorySystem
                 if (value != null)
                 {
                     Cursor.visible = false;
+                    Instance.dropPanel.gameObject.SetActive(true);
                 }
                 else
                 {
                     Cursor.visible = true;
+                    Instance.dropPanel.gameObject.SetActive(false);
                 }
                 InventoryList[4][0].SetItem(value);
 
@@ -195,7 +198,7 @@ namespace PlayerInventorySystem
                 return InventoryPanel.gameObject.activeSelf ||
                     CraftingPanel.gameObject.activeSelf ||
                     CharacterPanel.gameObject.activeSelf ||
-                   ItemBar.gameObject.activeSelf ||
+                    ItemBar.gameObject.activeSelf ||
                     ChestPanel.gameObject.activeSelf;
             }
         }
@@ -290,15 +293,15 @@ namespace PlayerInventorySystem
             }
 
             // if there are no windows open
-            if (!AnyWindowOpen)
+            if (AnyWindowOpen == false)
             {
                 // if the player hits the throwAway button (q) while no windows are open then throw away one of the selected Item
                 //if (Input.GetKeyDown(throwawayKey))
-                if (throwAway)
-                {
-                    ItemBar.DropSelectedItem();
-                    throwAway = false;
-                }
+                /*  if (throwAway)
+                  {
+                      ItemBar.DropSelectedItem();
+                      throwAway = false;
+                  }*/
 
                 if (HeldItem != null)
                 {
@@ -311,47 +314,69 @@ namespace PlayerInventorySystem
                     }
                     HeldItem = null;
                 }
+            }
 
-                EnablePlayerMovent(true); // enable the player
-                dropPanel.gameObject.SetActive(false); // disable the drop panel
-                // watch for player interactions with chests
-                if (Input.GetMouseButtonDown(1))
+            EnablePlayerMovent(true); // enable the player
+            dropPanel.gameObject.SetActive(false); // disable the drop panel
+
+            // watch for player interactions with chests and items in the world
+            if (Input.GetMouseButtonDown(1))
+            {
+                Ray ray = Camera.main.ViewportPointToRay(new Vector3(.5f, .5f, 0));
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, 5))
                 {
-                    Ray ray = Camera.main.ViewportPointToRay(new Vector3(.5f, .5f, 0));
-                    RaycastHit hit;
-                    if (Physics.Raycast(ray, out hit, 5))
+                    // if the player right clicks on a chest then open the chest
+                    if (hit.transform.tag == "Chest")
                     {
-                        if (hit.transform.tag == "Chest")
+                        OpenChest(hit.transform.gameObject.GetComponent<ChestController>());
+                    }
+
+                    else if (hit.transform.tag != "Item")
+                    {
+                        // if the player right clicks on the ground then place the selected item in the world
+                        if (ItemBar.SelectedSlotController.Slot.Item != null)
                         {
-                            OpenChest(hit.transform.gameObject.GetComponent<ChestController>());
-                        }
-                        else if (hit.transform.tag != "Item")
-                        {
-                            if (ItemBar.SelectedSlotController.Slot.Item != null)
-                            {
-                                // place the item at hit point
-                                Item item = ItemBar.SelectedSlotController.Slot.Item;
-                                if (item.data.worldPrefab != null)
-                                {
-                                    if (Player.GetComponent<InventoryPlayerController>().PlaceItemInWorld(item, hit))
-                                    {
-                                        ItemBar.SelectedSlotController.Slot.IncermentStackCount(-1);
-                                        if (ItemBar.SelectedSlotController.Slot.Item.StackCount <= 0)
-                                        {
-                                            ItemBar.SelectedSlotController.Slot.SetItem(null);
-                                        }
-                                    }
-                                }
-                            }
+                            // get the selected item from the item bar
+                            Item item = ItemBar.SelectedSlotController.Slot.Item;
+
+                            // place the selected item from the item bar in the world and the hit point.
+                            PlaceItem(item, hit);
                         }
                     }
                 }
-                else if (Input.GetMouseButtonDown(0))
+            }
+            else if (Input.GetMouseButtonDown(0))
+            {
+                // destroy item
+            }
+            //  }
+        }
+
+        private void PlaceItem(Item item, RaycastHit hit)
+        {
+            // if the item has a world prefab then place it in the world
+            if (item.data.worldPrefab != null)
+            {
+                // place the item in the world
+                if (Player.GetComponent<InventoryPlayerController>().PlaceItemInWorld(item, hit))
                 {
-                    // destroy item
+                    // remove the item from the players inventory
+                    ItemBar.SelectedSlotController.Slot.IncermentStackCount(-1);
+
+                    // if the item stack count is 0 then remove the item from the slot
+                    if (ItemBar.SelectedSlotController.Slot.Item.StackCount <= 0)
+                    {
+                        // remove the item from the slot
+                        ItemBar.SelectedSlotController.Slot.SetItem(null);
+                    }
                 }
             }
         }
+
+
+
+
 
         /// <summary>
         /// method used to create an empty player inventory
@@ -438,7 +463,7 @@ namespace PlayerInventorySystem
         }
 
         /// <summary>
-        /// method calle whenever an inventory panel is opened.
+        /// method called whenever an inventory panel is opened.
         /// </summary>
         /// <param name="window"></param>
         private void WindowOpenCallback(InventorySystemPanel window)

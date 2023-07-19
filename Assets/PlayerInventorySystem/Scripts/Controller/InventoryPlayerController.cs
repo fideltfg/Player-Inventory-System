@@ -50,8 +50,8 @@ namespace PlayerInventorySystem
         /// <returns></returns>
         public bool PlaceItemInWorld (Item item, RaycastHit hit)
         {
-            GameObject go = GameObject.Instantiate(item.data.worldPrefab, hit.point, Quaternion.identity);
-            InventoryController.ItemPlaced(item, go);
+/*            GameObject go = GameObject.Instantiate(item.data.worldPrefab, hit.point, Quaternion.identity);
+            InventoryController.ItemPlaced(item, go);*/
             return true;
         }
     }
