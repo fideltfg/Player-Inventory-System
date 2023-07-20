@@ -751,9 +751,11 @@ namespace PlayerInventorySystem
 
             if (firstNumber < secondNumber)
             {
-                int temp = firstNumber;
+                (secondNumber, firstNumber) = (firstNumber, secondNumber);
+
+                /*int temp = firstNumber;
                 firstNumber = secondNumber;
-                secondNumber = temp;
+                secondNumber = temp;*/
             }
 
             return new Vector2Int(firstNumber, secondNumber);
@@ -782,10 +784,11 @@ namespace PlayerInventorySystem
             Item i = InventoryController.ItemBarInventory[ItemBarSlotID].Item;
             InventoryController.ItemBarInventory[ItemBarSlotID].SetItem(null);
             InventoryController.ItemBarInventory[ItemBarSlotID].SetItem(Slot.Item);
-            if (InventoryController.Instance.OnSelectedItemChangeCallBack != null)
+            InventoryController.Instance.OnSelectedItemChangeCallBack?.Invoke(InventoryController.Instance.ItemBar.SelectedSlotController.Slot.Item);
+            /*if (InventoryController.Instance.OnSelectedItemChangeCallBack != null)
             {
                 InventoryController.Instance.OnSelectedItemChangeCallBack(InventoryController.Instance.ItemBar.SelectedSlotController.Slot.Item);
-            }
+            }*/
             Slot.SetItem(i);
         }
 

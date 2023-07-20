@@ -204,7 +204,7 @@ namespace PlayerInventorySystem
             }
         }
 
-        bool throwAway;
+/*        bool throwAway;
 
         /// <summary>
         /// when called the currently selectedc slots' item will be thrown away
@@ -213,7 +213,7 @@ namespace PlayerInventorySystem
         internal void DroppedItem()
         {
             throwAway = true;
-        }
+        }*/
 
         /// <summary>
         /// Default time to live of items dropped by the player into the game world in seconds
@@ -232,8 +232,7 @@ namespace PlayerInventorySystem
                 }
             }
 
-            InventoryPlayerController inventoryPlayerController = Player.GetComponent<InventoryPlayerController>();
-            if (inventoryPlayerController == null)
+            if (!Player.TryGetComponent<InventoryPlayerController>(out var inventoryPlayerController))
             {
                 Player.AddComponent<InventoryPlayerController>();
             }
@@ -320,6 +319,9 @@ namespace PlayerInventorySystem
             EnablePlayerMovent(true); // enable the player
             dropPanel.gameObject.SetActive(false); // disable the drop panel
 
+
+            // TODO change this to use the new input system
+
             // watch for player interactions with chests and items in the world
             if (Input.GetMouseButtonDown(1))
             {
@@ -337,12 +339,12 @@ namespace PlayerInventorySystem
                 {
                     Debug.Log(hit.transform.name);
                     // if the player right clicks on a chest then open the chest
-                    if (hit.transform.tag == "Chest")
+                    if (hit.transform.CompareTag("Chest"))
                     {
                         OpenChest(hit.transform.gameObject.GetComponent<ChestController>());
                     }
 
-                    else if (hit.transform.tag != "Item")
+                    else if (!hit.transform.CompareTag("Item"))
                     {
                         // if the player right clicks on the ground then place the selected item in the world
                         if (ItemBar.SelectedSlotController.Slot.Item != null)
@@ -388,10 +390,6 @@ namespace PlayerInventorySystem
             }
         }
 
-
-
-
-
         /// <summary>
         /// method used to create an empty player inventory
         /// </summary>
@@ -417,7 +415,7 @@ namespace PlayerInventorySystem
         /// <param name="callbacK"></param>
         public static void RegisterOnSlectedItemChangeCallback(Action<Item> callbacK)
         {
-            InventoryController.Instance.OnSelectedItemChangeCallBack += callbacK;
+            Instance.OnSelectedItemChangeCallBack += callbacK;
         }
 
         /// <summary>
@@ -426,9 +424,9 @@ namespace PlayerInventorySystem
         /// <param name="callbacK"></param>
         public static void UnregisterOnSelectedItemChangeCallback(Action<Item> callbacK)
         {
-            if (InventoryController.Instance.OnSelectedItemChangeCallBack != null)
+            if (Instance.OnSelectedItemChangeCallBack != null)
             {
-                InventoryController.Instance.OnSelectedItemChangeCallBack -= callbacK;
+                Instance.OnSelectedItemChangeCallBack -= callbacK;
             }
         }
 
@@ -533,8 +531,7 @@ namespace PlayerInventorySystem
                 return false;
             }
             GameObject g = Instantiate(prefab, position, Quaternion.identity);
-            DroppedItem di = g.GetComponent<DroppedItem>();
-            if (di != null)
+            if (g.TryGetComponent<DroppedItem>(out var di))
             {
                 di.ItemID = itemData.id;
                 di.stackCount = stackCount;
@@ -579,23 +576,32 @@ namespace PlayerInventorySystem
         }
 
         /// <summary>
-        /// method called when player places an item to register item to be saved.
+        /// method called when player places an item to register item to be saved. This method also set the objects world position and other values
         /// </summary>
         /// <param name="item"></param>
         /// <param name="go"></param>
         internal static void ItemPlaced(Item item, GameObject go)
         {
-            /// if this item ius a chest then we need to map it corretly to be able to save it
+            /// if this item is a chest then we need to map it corretly to be able to save it
             if (item.data.itemType == ITEMTYPE.CHEST)
             {
                 int id = GetNewChestID();
-                ChestController cc = go.GetComponent<ChestController>() ?? go.AddComponent<ChestController>();
+                // fix Null-Coalescing issue
+                //ChestController cc = go.GetComponent<ChestController>() ?? go.AddComponent<ChestController>();
+                if (go.TryGetComponent(out ChestController cc) == false)
+                {
+                    cc = go.AddComponent<ChestController>();
+                }
+
                 cc.ChestID = id;
+
                 cc.ItemCatalogID = item.data.id;
+
                 MapChest(cc);
 
                 // adjust chest position so it aligns to closest unit
                 Vector3 cPos = go.transform.position;
+
                 go.transform.position = new Vector3(Mathf.Round(cPos.x), Mathf.Round(cPos.y), Mathf.Round(cPos.z));
 
                 // rotate chest to point the towards the player (nearest 90)
@@ -606,7 +612,13 @@ namespace PlayerInventorySystem
             else
             {
                 // register item in the world items list
-                PlacedItem pi = go.GetComponent<PlacedItem>() ?? go.AddComponent<PlacedItem>();
+
+                if (go.TryGetComponent(out PlacedItem pi) == false)
+                {
+                   pi = go.AddComponent<PlacedItem>();
+                }
+                
+                // PlacedItem pi = go.GetComponent<PlacedItem>() ?? go.AddComponent<PlacedItem>();
                 pi.ItemID = item.data.id;
                 PlacedItems.Add(pi);
             }
@@ -637,8 +649,7 @@ namespace PlayerInventorySystem
                 Vector3 dropPoint = Instance.Player.transform.position + Instance.Player.transform.forward + Instance.Player.transform.up; // TODO make this more acurate, and show setting on the editor
                 GameObject g = Instantiate(prefab, dropPoint, Quaternion.identity);
                 g.GetComponent<Rigidbody>().AddForceAtPosition(Instance.Player.transform.forward * 2 + Instance.Player.transform.up, g.transform.position, ForceMode.Impulse);
-                DroppedItem ip = g.GetComponent<DroppedItem>();
-                if (ip != null)
+                if (g.TryGetComponent<DroppedItem>(out var ip))
                 {
                     ip.ItemID = item.data.id;
                     ip.stackCount = quantity;
@@ -647,7 +658,7 @@ namespace PlayerInventorySystem
                 }
                 else
                 {
-                    Debug.LogWarning("ItemPickup component missing from dropped item prefab. Droped item can not be picked up without it.");
+                    Debug.LogWarning("ItemPickup component missing from dropped item prefab. Dropped item can not be picked up without it.");
                 }
             }
             else
@@ -691,12 +702,11 @@ namespace PlayerInventorySystem
         internal static bool PickUpItem(GameObject collectedObject)
         {
 
-            if (collectedObject.tag != "Item")
+            if (!collectedObject.CompareTag("Item"))
             {
                 return false;
             }
-            DroppedItem ip = collectedObject.GetComponent<DroppedItem>();
-            if (ip == null)
+            if (!collectedObject.TryGetComponent<DroppedItem>(out var ip))
             {
                 return false;
             }
@@ -725,7 +735,7 @@ namespace PlayerInventorySystem
         /// </summary>
         public void ToggleInventoryPanel()
         {
-            InventoryPanel.gameObject.SetActive(InventoryPanel.gameObject.activeInHierarchy ? false : true);
+            InventoryPanel.gameObject.SetActive(!InventoryPanel.gameObject.activeInHierarchy);
         }
 
         /// <summary>
@@ -733,7 +743,7 @@ namespace PlayerInventorySystem
         /// </summary> 
         public void ToggleCharacterPanel()
         {
-            CharacterPanel.gameObject.SetActive(CharacterPanel.gameObject.activeInHierarchy ? false : true);
+            CharacterPanel.gameObject.SetActive(!CharacterPanel.gameObject.activeInHierarchy);
         }
 
         /// <summary>
@@ -741,7 +751,7 @@ namespace PlayerInventorySystem
         /// </summary>
         public void ToggleCraftingPanel()
         {
-            CraftingPanel.gameObject.SetActive(CraftingPanel.gameObject.activeInHierarchy ? false : true);
+            CraftingPanel.gameObject.SetActive(!CraftingPanel.gameObject.activeInHierarchy);
         }
 
         /// <summary>
@@ -749,7 +759,7 @@ namespace PlayerInventorySystem
         /// </summary>
         public void ToggleItemBar()
         {
-            ItemBar.gameObject.SetActive(CraftingPanel.gameObject.activeInHierarchy ? false : true);
+            ItemBar.gameObject.SetActive(!CraftingPanel.gameObject.activeInHierarchy);
         }
 
         /// <summary>
