@@ -582,7 +582,7 @@ namespace PlayerInventorySystem
 
         bool MoveStackToCharacter()
         {
-            // is there a slot for this item free on the character panel?
+            // is there a slot of the correct type for this item free on the character panel?
             if (this.Slot.Item.data.itemType == ITEMTYPE.WEARABLE)
             {
                 switch (this.Slot.Item.data.slotType)
@@ -765,13 +765,13 @@ namespace PlayerInventorySystem
             HeldItem = this.Slot.Item;
             Slot.SetItem(null);
         }
-
+/*
         void SwapItems()
         {
             Item i = HeldItem;
             HeldItem = this.Slot.Item;
             Slot.SetItem(i);
-        }
+        }*/
 
         /// <summary>
         /// method to swap the item in this slot with the item in the item bar slot with the given ID

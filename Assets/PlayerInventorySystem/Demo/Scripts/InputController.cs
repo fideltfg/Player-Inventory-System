@@ -99,8 +99,7 @@ public class InputController : MonoBehaviour
                 // Place the selected item from the item bar into the world
                 Debug.Log("Place or consume Item");
 
-                // call to interact method in the inventory controller
-                //  PlayerInventorySystem.InventoryController.Instance.Interact();
+
 
                 // call to method in PlayerController
                 PlayerController.instance.OnInteract();

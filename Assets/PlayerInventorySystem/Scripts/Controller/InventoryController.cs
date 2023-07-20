@@ -157,6 +157,7 @@ namespace PlayerInventorySystem
         /// the controller for the drop panel
         /// </summary>
         public DropPanel dropPanel;
+        public LayerMask dropPanelLayerask;
 
         /// <summary>
         /// the controller for the item holder
@@ -322,10 +323,19 @@ namespace PlayerInventorySystem
             // watch for player interactions with chests and items in the world
             if (Input.GetMouseButtonDown(1))
             {
-                Ray ray = Camera.main.ViewportPointToRay(new Vector3(.5f, .5f, 0));
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, 5))
+                /* Ray ray = Camera.main.ViewportPointToRay(new Vector3(.5f, .5f, 0));
+                 RaycastHit hit;
+                 if (Physics.Raycast(ray, out hit, 5))
+                 {*/
+
+
+                // Cast a ray from the mouse position into the scene
+                Ray ray = Camera.main.ScreenPointToRay(new Vector3(0.5f, 0.5f, 0f));
+
+                // Perform a raycast with the layer mask ignoring the drop panel layer and the player layer
+                if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, dropPanelLayerask))
                 {
+                    Debug.Log(hit.transform.name);
                     // if the player right clicks on a chest then open the chest
                     if (hit.transform.tag == "Chest")
                     {
@@ -359,17 +369,21 @@ namespace PlayerInventorySystem
             if (item.data.worldPrefab != null)
             {
                 // place the item in the world
-                if (Player.GetComponent<InventoryPlayerController>().PlaceItemInWorld(item, hit))
-                {
-                    // remove the item from the players inventory
-                    ItemBar.SelectedSlotController.Slot.IncermentStackCount(-1);
 
-                    // if the item stack count is 0 then remove the item from the slot
-                    if (ItemBar.SelectedSlotController.Slot.Item.StackCount <= 0)
-                    {
-                        // remove the item from the slot
-                        ItemBar.SelectedSlotController.Slot.SetItem(null);
-                    }
+                // TODO Add pooling
+                GameObject go = Instantiate(item.data.worldPrefab, hit.point, Quaternion.identity);
+
+                // register the item with the inventory controller
+                ItemPlaced(item, go);
+
+                // remove the item from the players inventory
+                ItemBar.SelectedSlotController.Slot.IncermentStackCount(-1);
+
+                // if the item stack count is 0 then remove the item from the slot
+                if (ItemBar.SelectedSlotController.Slot.Item.StackCount <= 0)
+                {
+                    // remove the item from the slot
+                    ItemBar.SelectedSlotController.Slot.SetItem(null);
                 }
             }
         }
