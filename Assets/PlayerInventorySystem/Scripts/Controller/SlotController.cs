@@ -11,7 +11,6 @@ namespace PlayerInventorySystem
     /// </summary>
     public class SlotController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
     {
-
         int slotID;
         private float counter = 0;
         private Color unselectedColor;
@@ -100,7 +99,7 @@ namespace PlayerInventorySystem
         /// <summary>
         /// Indicates true if this slot is selected else false
         /// </summary>
-        public bool Selected
+        internal bool Selected
         {
             get { return Slot.selected; }
             set

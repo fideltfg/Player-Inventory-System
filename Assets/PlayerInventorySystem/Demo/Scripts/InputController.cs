@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -72,6 +73,7 @@ public class InputController : MonoBehaviour
             PlayerController.instance.OnRight(0);
         }
     }
+
     public void OnLeftBumper(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
@@ -172,6 +174,19 @@ public class InputController : MonoBehaviour
 
     public void OnNumberSelect(InputAction.CallbackContext ctx)
     {
-        Debug.Log(1);
+        Debug.Log("t => " + ctx.action.activeControl.ToString());
+        if (ctx.performed)
+        {
+            string s = ctx.action.activeControl.ToString();
+            // get the number from the string
+            int slotNum = int.Parse(s.Substring(s.Length - 1));
+            if (slotNum == 0)
+            {
+                slotNum = 9;
+            }
+            else { slotNum--; }
+
+            PlayerInventorySystem.InventoryController.Instance.ItemBar.SelectedSlotID = slotNum;
+        }
     }
 }

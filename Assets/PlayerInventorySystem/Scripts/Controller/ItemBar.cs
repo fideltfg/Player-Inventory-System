@@ -57,25 +57,6 @@ namespace PlayerInventorySystem
                     SelectedSlotID++;
                 }
             }
-            else // if the wheel is not scrolling check for keyboard input
-            {
-
-                if (Input.GetKeyDown(KeyCode.Alpha1)) { SelectedSlotID = 0; }
-                else if (Input.GetKeyDown(KeyCode.Alpha2)) { SelectedSlotID = 1; }
-                else if (Input.GetKeyDown(KeyCode.Alpha3)) { SelectedSlotID = 2; }
-                else if (Input.GetKeyDown(KeyCode.Alpha4)) { SelectedSlotID = 3; }
-                else if (Input.GetKeyDown(KeyCode.Alpha5)) { SelectedSlotID = 4; }
-                else if (Input.GetKeyDown(KeyCode.Alpha6)) { SelectedSlotID = 5; }
-                else if (Input.GetKeyDown(KeyCode.Alpha7)) { SelectedSlotID = 6; }
-                else if (Input.GetKeyDown(KeyCode.Alpha8)) { SelectedSlotID = 7; }
-                else if (Input.GetKeyDown(KeyCode.Alpha9)) { SelectedSlotID = 8; }
-                else if (Input.GetKeyDown(KeyCode.Alpha0)) { SelectedSlotID = 9; }
-                else
-                {
-                    //  SelectedSlotID = selectedSlotID;
-                    return;
-                }
-            }
 
         }
         public override void Build(int InventoryIndex)

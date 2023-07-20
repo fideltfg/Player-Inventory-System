@@ -81,6 +81,13 @@ namespace PlayerInventorySystem.Serial
         private static void WriteToBinaryFile<T> (string filePath, T objectToWrite, bool append = false)
         {
             CheckGenFolder(SavePath);
+            TripleDESCryptoServiceProvider des = new();
+            using var fs = new FileStream(filePath, append ? FileMode.Append : FileMode.Create);
+            using CryptoStream s = new(fs, des.CreateEncryptor(kk, ii), CryptoStreamMode.Write);
+            BinaryFormatter formatter = new();
+            formatter.Serialize(s, objectToWrite);
+
+            /*
             TripleDESCryptoServiceProvider des = new TripleDESCryptoServiceProvider();
             using (var fs = new FileStream(filePath, append ? FileMode.Append : FileMode.Create))
             using (CryptoStream s = new CryptoStream(fs, des.CreateEncryptor(kk, ii), CryptoStreamMode.Write))
@@ -88,6 +95,9 @@ namespace PlayerInventorySystem.Serial
                 BinaryFormatter formatter = new BinaryFormatter();
                 formatter.Serialize(s, objectToWrite);
             }
+            
+             */
+
         }
 
         /// <summary>
@@ -98,15 +108,23 @@ namespace PlayerInventorySystem.Serial
         /// <returns>Returns a new instance of the object read from the binary file.</returns>
         private static T ReadFromBinaryFile<T> (string filePath) where T : class
         {
-            TripleDESCryptoServiceProvider des = new TripleDESCryptoServiceProvider();
-            using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
-            using (var s = new CryptoStream(fs, des.CreateDecryptor(kk, ii), CryptoStreamMode.Read))
-            {
-                BinaryFormatter f = new BinaryFormatter();
-                object o = f.Deserialize(s) as T;
-                s.Close();
-                return (T)o;
-            }
+
+            TripleDESCryptoServiceProvider des = new();
+            using var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+            using var s = new CryptoStream(fs, des.CreateDecryptor(kk, ii), CryptoStreamMode.Read);
+            BinaryFormatter f = new();
+            object o = f.Deserialize(s) as T;
+            s.Close();
+            return (T)o;
+            /*  TripleDESCryptoServiceProvider des = new TripleDESCryptoServiceProvider();
+              using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+              using (var s = new CryptoStream(fs, des.CreateDecryptor(kk, ii), CryptoStreamMode.Read))
+              {
+                  BinaryFormatter f = new BinaryFormatter();
+                  object o = f.Deserialize(s) as T;
+                  s.Close();
+                  return (T)o;
+              }*/
         }
 
         /// <summary>
@@ -191,7 +209,7 @@ namespace PlayerInventorySystem.Serial
             foreach (GameObject chestObject in InventoryController.ChestMap.Values)
             {
                 ChestController cc = chestObject.GetComponent<ChestController>();
-                SerialTransform st = new SerialTransform(cc.transform);
+                SerialTransform st = new(cc.transform);
                 sChests[cID] = new SerialChest()
                 {
                     ChestID = cc.ChestID,
@@ -207,8 +225,8 @@ namespace PlayerInventorySystem.Serial
             SerialRect[] sPanelLocations = new SerialRect[panels.Length];
             for (int i = 0; i < panels.Length; i++)
             {
-                RectTransform rt = panels[i].GetComponent<RectTransform>();
-                if (rt != null)
+
+                if (panels[i].TryGetComponent<RectTransform>(out var rt))
                 {
                     sPanelLocations[i] = new SerialRect(rt);
 
@@ -217,6 +235,17 @@ namespace PlayerInventorySystem.Serial
                 {
                     sPanelLocations[i] = null;
                 }
+
+                /*    RectTransform rt = panels[i].GetComponent<RectTransform>();
+                    if (rt != null)
+                    {
+                        sPanelLocations[i] = new SerialRect(rt);
+
+                    }
+                    else
+                    {
+                        sPanelLocations[i] = null;
+                    }*/
             }
 
             // collect data for dropped and spawned items
@@ -249,7 +278,7 @@ namespace PlayerInventorySystem.Serial
         private static Inventory ConvertFromSerialInventory (SerialInventory sInventory)
         {
 
-            Inventory newInventory = new Inventory(sInventory.Index, sInventory.slots.Length);
+            Inventory newInventory = new(sInventory.Index, sInventory.slots.Length);
 
 
             for (int i = 0; i < sInventory.slots.Length; i++)
@@ -280,7 +309,7 @@ namespace PlayerInventorySystem.Serial
                 };
             }
 
-            SerialInventory serialInventory = new SerialInventory()
+            SerialInventory serialInventory = new()
             {
                 Index = inventory.Index,
                 slots = new SerialSlot[inventory.Count]
