@@ -99,9 +99,10 @@ public class InputController : MonoBehaviour
             {
 
                 // Place the selected item from the item bar into the world
-                Debug.Log("Place or consume Item");
+               // Debug.Log("Place or consume Item");
 
-
+                // place the currently select item into the world
+                PlayerInventorySystem.InventoryController.Instance.PlaceItem();
 
                 // call to method in PlayerController
                 PlayerController.instance.OnInteract();
@@ -174,7 +175,6 @@ public class InputController : MonoBehaviour
 
     public void OnNumberSelect(InputAction.CallbackContext ctx)
     {
-        Debug.Log("t => " + ctx.action.activeControl.ToString());
         if (ctx.performed)
         {
             string s = ctx.action.activeControl.ToString();

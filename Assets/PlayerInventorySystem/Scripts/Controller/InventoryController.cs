@@ -204,16 +204,16 @@ namespace PlayerInventorySystem
             }
         }
 
-/*        bool throwAway;
+        /*        bool throwAway;
 
-        /// <summary>
-        /// when called the currently selectedc slots' item will be thrown away
-        /// if the player is holding an item it will be thrown away
-        /// </summary>
-        internal void DroppedItem()
-        {
-            throwAway = true;
-        }*/
+                /// <summary>
+                /// when called the currently selectedc slots' item will be thrown away
+                /// if the player is holding an item it will be thrown away
+                /// </summary>
+                internal void DroppedItem()
+                {
+                    throwAway = true;
+                }*/
 
         /// <summary>
         /// Default time to live of items dropped by the player into the game world in seconds
@@ -318,76 +318,63 @@ namespace PlayerInventorySystem
 
             EnablePlayerMovent(true); // enable the player
             dropPanel.gameObject.SetActive(false); // disable the drop panel
+ 
+        }
 
+        /// <summary>
+        /// method to place the currently selected item from the itembar in the world
+        /// </summary>
+        public void PlaceItem()
+        {
+            RaycastHit hit = Player.GetComponent<InventoryPlayerController>().GetPlacePos();
 
-            // TODO change this to use the new input system
-
-            // watch for player interactions with chests and items in the world
-            if (Input.GetMouseButtonDown(1))
+            if (hit.transform == null)
             {
-                /* Ray ray = Camera.main.ViewportPointToRay(new Vector3(.5f, .5f, 0));
-                 RaycastHit hit;
-                 if (Physics.Raycast(ray, out hit, 5))
-                 {*/
+                Debug.Log("No Hit");
+                return;
+            }
 
+            // if the player right clicks on a chest then open the chest
+            if (hit.transform.CompareTag("Chest"))
+            {
+                OpenChest(hit.transform.gameObject.GetComponent<ChestController>());
+            }
 
-                // Cast a ray from the mouse position into the scene
-                Ray ray = Camera.main.ScreenPointToRay(new Vector3(0.5f, 0.5f, 0f));
-
-                // Perform a raycast with the layer mask ignoring the drop panel layer and the player layer
-                if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, dropPanelLayerask))
+            else if (!hit.transform.CompareTag("Item"))
+            {
+                // if the player right clicks on the ground then place the selected item in the world
+                if (ItemBar.SelectedSlotController.Slot.Item != null)
                 {
-                    Debug.Log(hit.transform.name);
-                    // if the player right clicks on a chest then open the chest
-                    if (hit.transform.CompareTag("Chest"))
-                    {
-                        OpenChest(hit.transform.gameObject.GetComponent<ChestController>());
-                    }
+                    // get the selected item from the item bar
+                    Item item = ItemBar.SelectedSlotController.Slot.Item;
 
-                    else if (!hit.transform.CompareTag("Item"))
+                    // place the selected item from the item bar in the world and the hit point.
+                    // if the item has a world prefab then place it in the world
+                    if (item.data.worldPrefab != null)
                     {
-                        // if the player right clicks on the ground then place the selected item in the world
-                        if (ItemBar.SelectedSlotController.Slot.Item != null)
+                        // place the item in the world
+
+                        // TODO Add pooling
+                        GameObject go = Instantiate(item.data.worldPrefab, hit.point, Quaternion.identity);
+
+                        // register the item with the inventory controller
+                        ItemPlaced(item, go);
+
+                        // remove the item from the players inventory
+                        ItemBar.SelectedSlotController.Slot.IncermentStackCount(-1);
+
+                        // if the item stack count is 0 then remove the item from the slot
+                        if (ItemBar.SelectedSlotController.Slot.Item.StackCount <= 0)
                         {
-                            // get the selected item from the item bar
-                            Item item = ItemBar.SelectedSlotController.Slot.Item;
-
-                            // place the selected item from the item bar in the world and the hit point.
-                            PlaceItem(item, hit);
+                            // remove the item from the slot
+                            ItemBar.SelectedSlotController.Slot.SetItem(null);
                         }
                     }
                 }
             }
-            else if (Input.GetMouseButtonDown(0))
-            {
-                // destroy item
-            }
-            //  }
-        }
 
-        private void PlaceItem(Item item, RaycastHit hit)
-        {
-            // if the item has a world prefab then place it in the world
-            if (item.data.worldPrefab != null)
-            {
-                // place the item in the world
 
-                // TODO Add pooling
-                GameObject go = Instantiate(item.data.worldPrefab, hit.point, Quaternion.identity);
 
-                // register the item with the inventory controller
-                ItemPlaced(item, go);
-
-                // remove the item from the players inventory
-                ItemBar.SelectedSlotController.Slot.IncermentStackCount(-1);
-
-                // if the item stack count is 0 then remove the item from the slot
-                if (ItemBar.SelectedSlotController.Slot.Item.StackCount <= 0)
-                {
-                    // remove the item from the slot
-                    ItemBar.SelectedSlotController.Slot.SetItem(null);
-                }
-            }
         }
 
         /// <summary>
@@ -615,9 +602,9 @@ namespace PlayerInventorySystem
 
                 if (go.TryGetComponent(out PlacedItem pi) == false)
                 {
-                   pi = go.AddComponent<PlacedItem>();
+                    pi = go.AddComponent<PlacedItem>();
                 }
-                
+
                 // PlacedItem pi = go.GetComponent<PlacedItem>() ?? go.AddComponent<PlacedItem>();
                 pi.ItemID = item.data.id;
                 PlacedItems.Add(pi);

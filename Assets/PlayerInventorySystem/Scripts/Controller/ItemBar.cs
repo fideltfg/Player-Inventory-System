@@ -10,33 +10,6 @@ namespace PlayerInventorySystem
     /// </summary>
     public class ItemBar : InventorySystemPanel
     {
-        /*       public int selectedSlotID;
-
-               /// <summary>
-               /// ID of the slot the player hass currently selected.
-               /// </summary>
-               public int SelectedSlotID
-               {
-                   get
-                   {
-                       return selectedSlotID;
-                   }
-                   set
-                   {
-                       SlotList[selectedSlotID].Selected = false;
-                       selectedSlotID = (int)Mathf.Clamp(value, 0, 9);
-                       SlotList[selectedSlotID].Selected = true;
-                       InventoryController.Instance.OnSelectedItemChangeCallBack?.Invoke(SelectedSlotController.Slot.Item);
-                   }
-               }
-
-               /// <summary>
-               /// The Slotcontroller of the currently selected slot.
-               /// </summary>
-               public SlotController SelectedSlotController
-               {
-                   get { return SlotList[SelectedSlotID]; }
-               }*/
 
         public override void OnEnable() { }
 

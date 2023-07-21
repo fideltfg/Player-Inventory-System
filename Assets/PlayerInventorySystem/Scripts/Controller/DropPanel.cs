@@ -40,7 +40,6 @@ namespace PlayerInventorySystem
 
         void OnDisable()
         {
-            Debug.Log("DropPanel Disabled");
         }
 
     }
