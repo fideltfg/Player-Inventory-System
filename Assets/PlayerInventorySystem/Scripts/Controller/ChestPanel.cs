@@ -63,11 +63,11 @@ namespace PlayerInventorySystem
             {
                 InventoryController.ChestInventories[this.Index] = new Inventory(this.Index, chest.Capacity);
             }
-
+            Inventory inv = InventoryController.GetChestInventory(Index);
             for (int i = 0; i < chest.Capacity; i++)
             {
                 SlotList[i].Index = this.Index; // set the SlotControllers new index
-                SlotList[i].SetSlot(InventoryController.GetChestInventory(Index)[i]); // get the slot from the chest inventory
+                SlotList[i].SetSlot(inv[i]); // get the slot from the chest inventory
                 SlotList[i].gameObject.SetActive(true); // display the slot game object in the panel
             }
         }

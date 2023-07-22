@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rBody;                              // Reference to the player's rigidbody.
     private int groundedBool;                             // Animator variable related to whether or not the player is on the ground.
     private Vector3 colExtents;                           // Collider extents for ground test. 
-    public bool aiming = false;
+   // public bool aiming = false;
 
     /*    // Get current horizontal and vertical axes.
         public float GetH { get { return H; } }
@@ -119,8 +119,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
-
         // Set the input axes on the Animator Controller.
         anim.SetFloat(hFloat, H, 0.1f, Time.deltaTime);
         anim.SetFloat(vFloat, V, 0.1f, Time.deltaTime);
@@ -154,7 +152,7 @@ public class PlayerController : MonoBehaviour
     {
         AimBehaviourBasic abb = GetComponent<AimBehaviourBasic>();
 
-        if (aim)
+        if (aim && !abb.currentlyAiming)
         {
             StartCoroutine(abb.ToggleAimOn());
         }

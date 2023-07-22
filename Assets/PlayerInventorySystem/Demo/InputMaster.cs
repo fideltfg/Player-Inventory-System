@@ -100,7 +100,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""LeftBumper"",
+                    ""name"": ""Select Previous Item"",
                     ""type"": ""Button"",
                     ""id"": ""4d2e4640-f032-49ff-b0dc-09e8f4661bf3"",
                     ""expectedControlType"": ""Button"",
@@ -109,7 +109,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""RightBumper"",
+                    ""name"": ""Select Next Item"",
                     ""type"": ""Button"",
                     ""id"": ""1fd91579-a024-4ebe-86b2-13d0d51231a3"",
                     ""expectedControlType"": ""Button"",
@@ -121,6 +121,15 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""name"": ""Open Inventory Panel"",
                     ""type"": ""Button"",
                     ""id"": ""2cfae31e-26ee-40c7-9671-b729d1932787"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Open Character Panel"",
+                    ""type"": ""Button"",
+                    ""id"": ""c7aa5543-f712-4bd5-8718-68811b58127d"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -345,7 +354,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""LeftBumper"",
+                    ""action"": ""Select Previous Item"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -356,7 +365,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""LeftBumper"",
+                    ""action"": ""Select Previous Item"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -367,7 +376,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""RightBumper"",
+                    ""action"": ""Select Next Item"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -378,7 +387,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""RightBumper"",
+                    ""action"": ""Select Next Item"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -621,6 +630,28 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""NumberSelect"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""93583121-95e5-4483-9a6f-9d9701d47561"",
+                    ""path"": ""<XInputController>/dpad/right"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Open Character Panel"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b01cc15a-905a-4822-adca-79436c0410a8"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Open Character Panel"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1155,9 +1186,10 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         m_Player_Interactuse = m_Player.FindAction("Interact/use", throwIfNotFound: true);
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
         m_Player_Escape = m_Player.FindAction("Escape", throwIfNotFound: true);
-        m_Player_LeftBumper = m_Player.FindAction("LeftBumper", throwIfNotFound: true);
-        m_Player_RightBumper = m_Player.FindAction("RightBumper", throwIfNotFound: true);
+        m_Player_SelectPreviousItem = m_Player.FindAction("Select Previous Item", throwIfNotFound: true);
+        m_Player_SelectNextItem = m_Player.FindAction("Select Next Item", throwIfNotFound: true);
         m_Player_OpenInventoryPanel = m_Player.FindAction("Open Inventory Panel", throwIfNotFound: true);
+        m_Player_OpenCharacterPanel = m_Player.FindAction("Open Character Panel", throwIfNotFound: true);
         m_Player_Drop = m_Player.FindAction("Drop", throwIfNotFound: true);
         m_Player_RotationX = m_Player.FindAction("Rotation X", throwIfNotFound: true);
         m_Player_RotationY = m_Player.FindAction("Rotation Y", throwIfNotFound: true);
@@ -1244,9 +1276,10 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Interactuse;
     private readonly InputAction m_Player_Aim;
     private readonly InputAction m_Player_Escape;
-    private readonly InputAction m_Player_LeftBumper;
-    private readonly InputAction m_Player_RightBumper;
+    private readonly InputAction m_Player_SelectPreviousItem;
+    private readonly InputAction m_Player_SelectNextItem;
     private readonly InputAction m_Player_OpenInventoryPanel;
+    private readonly InputAction m_Player_OpenCharacterPanel;
     private readonly InputAction m_Player_Drop;
     private readonly InputAction m_Player_RotationX;
     private readonly InputAction m_Player_RotationY;
@@ -1264,9 +1297,10 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         public InputAction @Interactuse => m_Wrapper.m_Player_Interactuse;
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
         public InputAction @Escape => m_Wrapper.m_Player_Escape;
-        public InputAction @LeftBumper => m_Wrapper.m_Player_LeftBumper;
-        public InputAction @RightBumper => m_Wrapper.m_Player_RightBumper;
+        public InputAction @SelectPreviousItem => m_Wrapper.m_Player_SelectPreviousItem;
+        public InputAction @SelectNextItem => m_Wrapper.m_Player_SelectNextItem;
         public InputAction @OpenInventoryPanel => m_Wrapper.m_Player_OpenInventoryPanel;
+        public InputAction @OpenCharacterPanel => m_Wrapper.m_Player_OpenCharacterPanel;
         public InputAction @Drop => m_Wrapper.m_Player_Drop;
         public InputAction @RotationX => m_Wrapper.m_Player_RotationX;
         public InputAction @RotationY => m_Wrapper.m_Player_RotationY;
@@ -1305,15 +1339,18 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @Escape.started += instance.OnEscape;
             @Escape.performed += instance.OnEscape;
             @Escape.canceled += instance.OnEscape;
-            @LeftBumper.started += instance.OnLeftBumper;
-            @LeftBumper.performed += instance.OnLeftBumper;
-            @LeftBumper.canceled += instance.OnLeftBumper;
-            @RightBumper.started += instance.OnRightBumper;
-            @RightBumper.performed += instance.OnRightBumper;
-            @RightBumper.canceled += instance.OnRightBumper;
+            @SelectPreviousItem.started += instance.OnSelectPreviousItem;
+            @SelectPreviousItem.performed += instance.OnSelectPreviousItem;
+            @SelectPreviousItem.canceled += instance.OnSelectPreviousItem;
+            @SelectNextItem.started += instance.OnSelectNextItem;
+            @SelectNextItem.performed += instance.OnSelectNextItem;
+            @SelectNextItem.canceled += instance.OnSelectNextItem;
             @OpenInventoryPanel.started += instance.OnOpenInventoryPanel;
             @OpenInventoryPanel.performed += instance.OnOpenInventoryPanel;
             @OpenInventoryPanel.canceled += instance.OnOpenInventoryPanel;
+            @OpenCharacterPanel.started += instance.OnOpenCharacterPanel;
+            @OpenCharacterPanel.performed += instance.OnOpenCharacterPanel;
+            @OpenCharacterPanel.canceled += instance.OnOpenCharacterPanel;
             @Drop.started += instance.OnDrop;
             @Drop.performed += instance.OnDrop;
             @Drop.canceled += instance.OnDrop;
@@ -1357,15 +1394,18 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @Escape.started -= instance.OnEscape;
             @Escape.performed -= instance.OnEscape;
             @Escape.canceled -= instance.OnEscape;
-            @LeftBumper.started -= instance.OnLeftBumper;
-            @LeftBumper.performed -= instance.OnLeftBumper;
-            @LeftBumper.canceled -= instance.OnLeftBumper;
-            @RightBumper.started -= instance.OnRightBumper;
-            @RightBumper.performed -= instance.OnRightBumper;
-            @RightBumper.canceled -= instance.OnRightBumper;
+            @SelectPreviousItem.started -= instance.OnSelectPreviousItem;
+            @SelectPreviousItem.performed -= instance.OnSelectPreviousItem;
+            @SelectPreviousItem.canceled -= instance.OnSelectPreviousItem;
+            @SelectNextItem.started -= instance.OnSelectNextItem;
+            @SelectNextItem.performed -= instance.OnSelectNextItem;
+            @SelectNextItem.canceled -= instance.OnSelectNextItem;
             @OpenInventoryPanel.started -= instance.OnOpenInventoryPanel;
             @OpenInventoryPanel.performed -= instance.OnOpenInventoryPanel;
             @OpenInventoryPanel.canceled -= instance.OnOpenInventoryPanel;
+            @OpenCharacterPanel.started -= instance.OnOpenCharacterPanel;
+            @OpenCharacterPanel.performed -= instance.OnOpenCharacterPanel;
+            @OpenCharacterPanel.canceled -= instance.OnOpenCharacterPanel;
             @Drop.started -= instance.OnDrop;
             @Drop.performed -= instance.OnDrop;
             @Drop.canceled -= instance.OnDrop;
@@ -1526,9 +1566,10 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         void OnInteractuse(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnEscape(InputAction.CallbackContext context);
-        void OnLeftBumper(InputAction.CallbackContext context);
-        void OnRightBumper(InputAction.CallbackContext context);
+        void OnSelectPreviousItem(InputAction.CallbackContext context);
+        void OnSelectNextItem(InputAction.CallbackContext context);
         void OnOpenInventoryPanel(InputAction.CallbackContext context);
+        void OnOpenCharacterPanel(InputAction.CallbackContext context);
         void OnDrop(InputAction.CallbackContext context);
         void OnRotationX(InputAction.CallbackContext context);
         void OnRotationY(InputAction.CallbackContext context);

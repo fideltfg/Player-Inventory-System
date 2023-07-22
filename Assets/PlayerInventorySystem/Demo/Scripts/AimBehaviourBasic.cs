@@ -4,7 +4,7 @@ using System.Collections;
 // AimBehaviour inherits from GenericBehaviour. This class corresponds to aim and strafe behaviour.
 public class AimBehaviourBasic : GenericBehaviour
 {
-    public string aimButton = "Aim", shoulderButton = "Aim Shoulder";     // Default aim and switch shoulders buttons.
+    //public string aimButton = "Aim", shoulderButton = "Aim Shoulder";     // Default aim and switch shoulders buttons.
     public Texture2D crosshair;                                           // Crosshair texture.
     public float aimTurnSmoothing = 0.15f;                                // Speed of turn response when aiming to match camera facing.
     public Vector3 aimPivotOffset = new Vector3(0.5f, 1.2f, 0f);         // Offset to repoint the camera when aiming.
@@ -23,23 +23,13 @@ public class AimBehaviourBasic : GenericBehaviour
     // Update is used to set features regardless the active behaviour.
     void Update()
     {
-        /*    // Activate/deactivate aim by input.
-            if (GameController.instance.InputController.Aim == true && currentlyAiming == false)
-            {
-                StartCoroutine(ToggleAimOn());
-            }
-            else// if (currentlyAiming == true && GameController.instance.InputController.Aim == false)
-            {
-                StartCoroutine(ToggleAimOff());
-            }*/
-
         // No sprinting while aiming.
         canSprint = !currentlyAiming;
-
     }
 
 
-    public void SwitchShoulder() { 
+    public void SwitchShoulder()
+    {
 
         // Toggle camera aim position left or right, switching shoulders.
         if (currentlyAiming)
@@ -55,16 +45,17 @@ public class AimBehaviourBasic : GenericBehaviour
     // Co-rountine to start aiming mode with delay.
     public IEnumerator ToggleAimOn()
     {
-        if (currentlyAiming)
+        /*if (currentlyAiming)
         {
             yield return null;
-        }
+        }*/
 
         yield return new WaitForSeconds(0.05f);
         // Aiming is not possible.
         if (behaviourManager.GetTempLockStatus(this.behaviourCode) || behaviourManager.IsOverriding(this))
+        {
             yield return false;
-
+        }
         // Start aiming.
         else
         {
@@ -82,10 +73,10 @@ public class AimBehaviourBasic : GenericBehaviour
     // Co-rountine to end aiming mode with delay.
     public IEnumerator ToggleAimOff()
     {
-        if (!currentlyAiming)
+       /* if (!currentlyAiming)
         {
             yield return null;
-        }
+        }*/
         currentlyAiming = false;
         yield return new WaitForSeconds(0.3f);
         behaviourManager.GetCamScript.ResetTargetOffsets();
@@ -107,15 +98,12 @@ public class AimBehaviourBasic : GenericBehaviour
     // LocalLateUpdate: manager is called here to set player rotation after camera rotates, avoiding flickering.
     public override void LocalLateUpdate()
     {
-        AimManagement();
-    }
 
-    // Handle aim parameters when aiming is active.
-    void AimManagement()
-    {
         // Deal with the player orientation when aiming.
         Rotating();
     }
+
+
 
     // Rotate the player to match correct orientation, according to camera.
     void Rotating()

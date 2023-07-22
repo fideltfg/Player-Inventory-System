@@ -98,9 +98,6 @@ public class InputController : MonoBehaviour
             if (aiming)
             {
 
-                // Place the selected item from the item bar into the world
-               // Debug.Log("Place or consume Item");
-
                 // place the currently select item into the world
                 PlayerInventorySystem.InventoryController.Instance.PlaceItem();
 
@@ -152,6 +149,14 @@ public class InputController : MonoBehaviour
         if (ctx.performed)
         {
             PlayerInventorySystem.InventoryController.Instance.ToggleInventoryPanel();
+        }
+    }
+
+    public void OnCharacterPanel(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            PlayerInventorySystem.InventoryController.Instance.ToggleCharacterPanel();
         }
     }
 

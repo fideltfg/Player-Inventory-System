@@ -78,7 +78,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "LeftBumper",
+                    "name": "Select Previous Item",
                     "type": "Button",
                     "id": "4d2e4640-f032-49ff-b0dc-09e8f4661bf3",
                     "expectedControlType": "Button",
@@ -87,7 +87,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "RightBumper",
+                    "name": "Select Next Item",
                     "type": "Button",
                     "id": "1fd91579-a024-4ebe-86b2-13d0d51231a3",
                     "expectedControlType": "Button",
@@ -99,6 +99,15 @@
                     "name": "Open Inventory Panel",
                     "type": "Button",
                     "id": "2cfae31e-26ee-40c7-9671-b729d1932787",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Open Character Panel",
+                    "type": "Button",
+                    "id": "c7aa5543-f712-4bd5-8718-68811b58127d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -323,7 +332,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LeftBumper",
+                    "action": "Select Previous Item",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -334,7 +343,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "LeftBumper",
+                    "action": "Select Previous Item",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -345,7 +354,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RightBumper",
+                    "action": "Select Next Item",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -356,7 +365,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "RightBumper",
+                    "action": "Select Next Item",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -599,6 +608,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "NumberSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "93583121-95e5-4483-9a6f-9d9701d47561",
+                    "path": "<XInputController>/dpad/right",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Open Character Panel",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b01cc15a-905a-4822-adca-79436c0410a8",
+                    "path": "<Keyboard>/c",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Open Character Panel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

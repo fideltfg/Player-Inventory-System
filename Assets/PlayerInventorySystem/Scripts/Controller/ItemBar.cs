@@ -60,7 +60,7 @@ namespace PlayerInventorySystem
         {
             if (SelectedSlotController.Slot.Item != null)
             {
-                InventoryController.DropItem(SelectedSlotController.Slot.Item, 1);
+                InventoryController.Instance.PlayerInventoryController.DropItem(SelectedSlotController.Slot.Item, 1);
                 SelectedSlotController.Slot.IncermentStackCount(-1);
                 if (SelectedSlotController.Slot.Item.StackCount <= 0)
                 {

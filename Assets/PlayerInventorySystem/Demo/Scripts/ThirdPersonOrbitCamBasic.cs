@@ -56,6 +56,7 @@ public class ThirdPersonOrbitCamBasic : MonoBehaviour
 
     void Update()
     {
+
         // Get mouse movement to orbit the camera.
         // Mouse:
         // angleH += Mathf.Clamp(Input.GetAxis("Mouse X"), -1, 1) * horizontalAimingSpeed;

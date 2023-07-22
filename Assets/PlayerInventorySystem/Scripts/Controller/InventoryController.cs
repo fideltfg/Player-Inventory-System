@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using PlayerInventorySystem.Serial;
 using Unity.VisualScripting;
+using static UnityEditor.Progress;
 
 namespace PlayerInventorySystem
 {
@@ -68,7 +69,7 @@ namespace PlayerInventorySystem
         public bool LoadInventory = false;
 
         /// <summary>
-        /// Method to generate a new id for chests
+        /// Method to generate a new id for chests.
         /// </summary>
         /// <returns></returns>
         internal static int GetNewChestID()
@@ -143,6 +144,8 @@ namespace PlayerInventorySystem
         /// </summary>
         public GameObject Player;
 
+        public PlayerInventoryController PlayerInventoryController;
+
         /// <summary>
         /// The controller for the inventory panel
         /// </summary>
@@ -204,16 +207,6 @@ namespace PlayerInventorySystem
             }
         }
 
-        /*        bool throwAway;
-
-                /// <summary>
-                /// when called the currently selectedc slots' item will be thrown away
-                /// if the player is holding an item it will be thrown away
-                /// </summary>
-                internal void DroppedItem()
-                {
-                    throwAway = true;
-                }*/
 
         /// <summary>
         /// Default time to live of items dropped by the player into the game world in seconds
@@ -232,9 +225,9 @@ namespace PlayerInventorySystem
                 }
             }
 
-            if (!Player.TryGetComponent<InventoryPlayerController>(out var inventoryPlayerController))
+            if (!Player.TryGetComponent<PlayerInventoryController>(out var inventoryPlayerController))
             {
-                Player.AddComponent<InventoryPlayerController>();
+                PlayerInventoryController = Player.AddComponent<PlayerInventoryController>();
             }
 
             Application.targetFrameRate = -1;
@@ -280,7 +273,6 @@ namespace PlayerInventorySystem
             {
                 if (AnyWindowOpen)
                 {
-                    EnablePlayerMovent(true);
                     dropPanel.gameObject.SetActive(false);
                 }
 
@@ -292,16 +284,11 @@ namespace PlayerInventorySystem
 
             }
 
+
+            // this bit test to see if the player is holding an item and if they are it will drop it
             // if there are no windows open
             if (AnyWindowOpen == false)
             {
-                // if the player hits the throwAway button (q) while no windows are open then throw away one of the selected Item
-                //if (Input.GetKeyDown(throwawayKey))
-                /*  if (throwAway)
-                  {
-                      ItemBar.DropSelectedItem();
-                      throwAway = false;
-                  }*/
 
                 if (HeldItem != null)
                 {
@@ -309,16 +296,16 @@ namespace PlayerInventorySystem
                     {
                         if (PlayerInventory.AddItem(HeldItem) == false)
                         {
-                            DropItem(HeldItem, HeldItem.StackCount);
+                            PlayerInventoryController.DropItem(HeldItem, HeldItem.StackCount);
                         }
                     }
                     HeldItem = null;
                 }
             }
 
-            EnablePlayerMovent(true); // enable the player
+            //EnablePlayerMovent(true); // enable the player
             dropPanel.gameObject.SetActive(false); // disable the drop panel
- 
+
         }
 
         /// <summary>
@@ -326,55 +313,62 @@ namespace PlayerInventorySystem
         /// </summary>
         public void PlaceItem()
         {
-            RaycastHit hit = Player.GetComponent<InventoryPlayerController>().GetPlacePos();
-
-            if (hit.transform == null)
+            // get the player inventory controller
+            PlayerInventoryController ipc = Player.GetComponent<PlayerInventoryController>();
+            if (ipc != null && ipc.CanPlaceItem == true)
             {
-                Debug.Log("No Hit");
-                return;
-            }
 
-            // if the player right clicks on a chest then open the chest
-            if (hit.transform.CompareTag("Chest"))
-            {
-                OpenChest(hit.transform.gameObject.GetComponent<ChestController>());
-            }
+                // get the point to place the item
 
-            else if (!hit.transform.CompareTag("Item"))
-            {
-                // if the player right clicks on the ground then place the selected item in the world
-                if (ItemBar.SelectedSlotController.Slot.Item != null)
+                if (ipc.hit.transform == null || ipc.hit.transform == null)
                 {
-                    // get the selected item from the item bar
-                    Item item = ItemBar.SelectedSlotController.Slot.Item;
+                    Debug.Log("No Hit");
+                    return;
+                }
 
-                    // place the selected item from the item bar in the world and the hit point.
-                    // if the item has a world prefab then place it in the world
-                    if (item.data.worldPrefab != null)
+                // get the hit point from the player inventory controller
+                RaycastHit hit = ipc.hit;
+
+                // if the player right clicks on a chest then open the chest
+                if (hit.transform.CompareTag("Chest"))
+                {
+                    OpenChest(hit.transform.gameObject.GetComponent<ChestController>());
+                }
+
+                // if the ray did not hit an item
+                else if (!hit.transform.CompareTag("Item"))
+                {
+                    // if the player right clicks on the ground then place the selected item in the world
+                    if (ItemBar.SelectedSlotController.Slot.Item != null)
                     {
-                        // place the item in the world
+                        // get the selected item from the item bar
+                        Item item = ItemBar.SelectedSlotController.Slot.Item;
 
-                        // TODO Add pooling
-                        GameObject go = Instantiate(item.data.worldPrefab, hit.point, Quaternion.identity);
-
-                        // register the item with the inventory controller
-                        ItemPlaced(item, go);
-
-                        // remove the item from the players inventory
-                        ItemBar.SelectedSlotController.Slot.IncermentStackCount(-1);
-
-                        // if the item stack count is 0 then remove the item from the slot
-                        if (ItemBar.SelectedSlotController.Slot.Item.StackCount <= 0)
+                        // place the selected item from the item bar in the world and the hit point.
+                        // if the item has a world prefab then place it in the world
+                        if (item.data.worldPrefab != null)
                         {
-                            // remove the item from the slot
-                            ItemBar.SelectedSlotController.Slot.SetItem(null);
+                            // place the item in the world
+                            Debug.Log("CanPlaceItem @ " + hit.point.ToString());
+                            // TODO Add pooling
+                            GameObject go = Instantiate(item.data.worldPrefab, hit.point, Quaternion.identity);
+
+                            // register the item with the inventory controller
+                            OnItemPlaced(item, go);
+
+                            // remove the item from the players inventory
+                            ItemBar.SelectedSlotController.Slot.IncermentStackCount(-1);
+
+                            // if the item stack count is 0 then remove the item from the slot
+                            if (ItemBar.SelectedSlotController.Slot.Item.StackCount <= 0)
+                            {
+                                // remove the item from the slot
+                                ItemBar.SelectedSlotController.Slot.SetItem(null);
+                            }
                         }
                     }
                 }
             }
-
-
-
         }
 
         /// <summary>
@@ -438,7 +432,7 @@ namespace PlayerInventorySystem
                     if (!newInv.AddItem(s.Item))
                     {
                         // drop it
-                        DropItem(s.Item, s.Item.StackCount);
+                        InventoryController.Instance.PlayerInventoryController.DropItem(s.Item, s.Item.StackCount);
                     }
                 }
             }
@@ -450,15 +444,6 @@ namespace PlayerInventorySystem
                 }
             }
             return newInv;
-        }
-
-        /// <summary>
-        /// method to enable or diable the players ablity to move.
-        /// </summary>
-        /// <param name="b"></param>
-        private void EnablePlayerMovent(bool b)
-        {
-
         }
 
         /// <summary>
@@ -534,7 +519,7 @@ namespace PlayerInventorySystem
         }
 
         /// <summary>
-        /// Method to spawn a chest item that was previously saved.
+        /// Method to spawn a chest that was previously saved.
         /// </summary>
         /// <param name="chestID"></param>
         /// <param name="itemCatalogID"></param>
@@ -542,8 +527,8 @@ namespace PlayerInventorySystem
         /// <param name="sTransform"></param>
         internal static void SpawnChest(int chestID, int itemCatalogID, Inventory inventory, SerialTransform sTransform)
         {
-            Quaternion q = Quaternion.Euler(sTransform.Rotation);
-            GameObject go = Instantiate(Instance.ItemCatalog.list[itemCatalogID].worldPrefab, sTransform.Position, q);
+            Quaternion rotation = Quaternion.Euler(sTransform.Rotation);
+            GameObject go = Instantiate(Instance.ItemCatalog.list[itemCatalogID].worldPrefab, sTransform.Position, rotation);
             go.transform.localScale = sTransform.Scale;
             ChestController cc = go.GetComponent<ChestController>();
             cc.ChestID = chestID;
@@ -551,6 +536,31 @@ namespace PlayerInventorySystem
             MapChest(cc);
             cc.Inventory = inventory;
         }
+
+
+        /// <summary>
+        /// method to spawn a new chest into the world.
+        /// </summary>
+        /// <param name="chestID"></param>
+        /// <param name="itemCatalogID"></param>
+        /// <param name="inventory"></param>
+        /// <param name="position"></param>
+        /// <param name="rotation"></param>
+        /// <param name="scale"></param>
+        internal static void SpawnChest(int chestID, int itemCatalogID, Inventory inventory, Vector3 position, Quaternion rotation, Vector3 scale)
+        {
+            // create and scale the chest
+            GameObject go = Instantiate(Instance.ItemCatalog.list[itemCatalogID].worldPrefab, position, rotation);
+            go.transform.localScale = scale;
+
+            // set the chest properties
+            ChestController cc = go.GetComponent<ChestController>();
+            cc.ChestID = chestID;
+            cc.ItemCatalogID = itemCatalogID;
+            MapChest(cc);
+            cc.Inventory = inventory;
+        }
+
 
         /// <summary>
         /// method to store a chest for saving
@@ -567,34 +577,16 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="item"></param>
         /// <param name="go"></param>
-        internal static void ItemPlaced(Item item, GameObject go)
+        internal static void OnItemPlaced(Item item, GameObject go)
         {
             /// if this item is a chest then we need to map it corretly to be able to save it
             if (item.data.itemType == ITEMTYPE.CHEST)
             {
+                // get a new chest id.
                 int id = GetNewChestID();
-                // fix Null-Coalescing issue
-                //ChestController cc = go.GetComponent<ChestController>() ?? go.AddComponent<ChestController>();
-                if (go.TryGetComponent(out ChestController cc) == false)
-                {
-                    cc = go.AddComponent<ChestController>();
-                }
 
-                cc.ChestID = id;
-
-                cc.ItemCatalogID = item.data.id;
-
-                MapChest(cc);
-
-                // adjust chest position so it aligns to closest unit
-                Vector3 cPos = go.transform.position;
-
-                go.transform.position = new Vector3(Mathf.Round(cPos.x), Mathf.Round(cPos.y), Mathf.Round(cPos.z));
-
-                // rotate chest to point the towards the player (nearest 90)
-                Vector3 cRot = go.transform.rotation.eulerAngles;
-                go.transform.rotation = Quaternion.Euler(cRot.x, Mathf.Round(InventoryController.Instance.Player.transform.localRotation.eulerAngles.y / 90) * 90, cRot.z);
-
+                // spawn the chest
+                SpawnChest(id, item.data.id, null, go.transform.position, go.transform.rotation, go.transform.localScale);
             }
             else
             {
@@ -611,55 +603,13 @@ namespace PlayerInventorySystem
             }
         }
 
-        /// <summary>
-        /// method for player to drop an item
-        /// </summary>
-        /// <param name="item"></param>
-        /// <param name="quantity"></param>
-        internal static void DropItem(Item item, int quantity = 1)
-        {
-            GameObject prefab;
-
-            if (quantity > 1)
-            {
-                prefab = item.data.worldPrefabMultiple; // get the multiple prefab
-            }
-            else
-            {
-                prefab = item.data.worldPrefabSingle; // get the default drop prefab for the selected item
-            }
-
-            if (prefab != null) //  make sure we have a prefabe
-            {
-
-                // instatiate teh prefabe and 'toss' it our infront of the player
-                Vector3 dropPoint = Instance.Player.transform.position + Instance.Player.transform.forward + Instance.Player.transform.up; // TODO make this more acurate, and show setting on the editor
-                GameObject g = Instantiate(prefab, dropPoint, Quaternion.identity);
-                g.GetComponent<Rigidbody>().AddForceAtPosition(Instance.Player.transform.forward * 2 + Instance.Player.transform.up, g.transform.position, ForceMode.Impulse);
-                if (g.TryGetComponent<DroppedItem>(out var ip))
-                {
-                    ip.ItemID = item.data.id;
-                    ip.stackCount = quantity;
-                    ip.TTL = Instance.DroppedItemTTL;
-                    DroppedItems.Add(ip);
-                }
-                else
-                {
-                    Debug.LogWarning("ItemPickup component missing from dropped item prefab. Dropped item can not be picked up without it.");
-                }
-            }
-            else
-            {
-                Debug.LogWarning("Missing drop prefab on item " + item.data.name);
-            }
-        }
 
         /// <summary>
         /// method to add a single item directly in to the players itemBar or inventory
         /// </summary>
         /// <param name="itemID">The ID of the item to be added</param>
         /// <returns>Returns true on success else false</returns>
-        public static bool GivePlayerItem(int itemID, int stackCount = 1)
+        public static bool GiveItem(int itemID, int stackCount = 1)
         {
             if (itemID <= 0)
             {
@@ -678,44 +628,6 @@ namespace PlayerInventorySystem
             return true;
         }
 
-        /// <summary>
-        /// method to allow player to pick up an Item and place it in the inventory
-        /// This method will try and place the item in the  ItemBar if there is space
-        /// if no space there it will try the players inventory. Either way will return true
-        /// if both fail it will return false
-        /// </summary>
-        /// <param name="collectedObject">The GameObject that is to be picked up</param>
-        /// <returns></returns>
-        internal static bool PickUpItem(GameObject collectedObject)
-        {
-
-            if (!collectedObject.CompareTag("Item"))
-            {
-                return false;
-            }
-            if (!collectedObject.TryGetComponent<DroppedItem>(out var ip))
-            {
-                return false;
-            }
-            Item newItem = new Item(ip.ItemID, ip.stackCount);
-
-            if (ItemBarInventory.AddItem(newItem) == false)
-            {
-                if (PlayerInventory.AddItem(newItem) == false)
-                {
-                    return false;
-                }
-            }
-
-            if (DroppedItems.Contains(ip))
-            {
-                DroppedItems.Remove(ip);
-            }
-            Instance.Player.GetComponent<AudioSource>().PlayOneShot(Instance.Player.GetComponent<InventoryPlayerController>().pickupSound);
-            GameObject.Destroy(collectedObject);
-            return true;
-
-        }
 
         /// <summary>
         /// method to toggle the inventory panel
@@ -844,5 +756,3 @@ namespace PlayerInventorySystem
 
     }
 }
-
-

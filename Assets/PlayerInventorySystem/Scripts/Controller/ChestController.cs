@@ -47,19 +47,19 @@ namespace PlayerInventorySystem
             }
         }
 
-        private void OnEnable ()
+        private void OnEnable()
         {
             gameObject.tag = "Chest";
         }
 
 
-        public void DestroyChest ()
+        public void DestroyChest()
         {
             foreach (Slot s in Inventory)
             {
                 if (s.Item != null)
                 {
-                    InventoryController.DropItem(s.Item, s.ItemStackCount);
+                    InventoryController.SpawnDroppedItem(s.Item.data.id, transform.position, s.ItemStackCount);
                     s.SetItem(null);
                 }
             }
