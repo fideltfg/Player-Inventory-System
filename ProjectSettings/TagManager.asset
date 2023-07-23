@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Item
   - Chest
+  - CraftingTable
   layers:
   - Default
   - TransparentFX
