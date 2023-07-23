@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System;
 using System.Collections.Generic;
 using PlayerInventorySystem.Serial;
-using Unity.VisualScripting;
-using static UnityEditor.Progress;
 
 namespace PlayerInventorySystem
 {
@@ -530,7 +527,6 @@ namespace PlayerInventorySystem
 
             // map the chest so it can be saved
             MapChest(cc);
-
 
             OnPlaceItem(item, cc);
 

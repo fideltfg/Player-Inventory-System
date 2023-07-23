@@ -11,7 +11,8 @@ public class PlayerController : MonoBehaviour
 
 
     public Transform playerCamera;                        // Reference to the camera that focus the player.
-    public float turnSmoothing = 0.06f;                   // Speed of turn when moving to match camera facing.
+    [HideInInspector]
+    public float turnSmoothing = 0.6f;                   // Speed of turn when moving to match camera facing.
     public float sprintFOV = 100f;                        // the FOV to use on the camera when player is sprinting.
     public string sprintButton = "Sprint";                // Default sprint button input name.
 
@@ -47,11 +48,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rBody;                              // Reference to the player's rigidbody.
     private int groundedBool;                             // Animator variable related to whether or not the player is on the ground.
     private Vector3 colExtents;                           // Collider extents for ground test. 
-   // public bool aiming = false;
 
-    /*    // Get current horizontal and vertical axes.
-        public float GetH { get { return H; } }
-        public float GetV { get { return V; } }*/
 
     // Get the player camera script.
     public ThirdPersonOrbitCamBasic GetCamScript { get { return camScript; } }
