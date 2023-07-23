@@ -4,7 +4,7 @@ The Player Inventory System is designed to make implementing an inventory system
 The Player Inventory System  was developed to replicate yet improve upon the functionality of the inventory system in an existing and very popular game.<br/> 
 The Player Inventory System  will allow you to add this functionality to you game with ease.
 
-![Inventory Window](https://img.itch.zone/aW1hZ2UvMjA3NzA1NS8xMjg1NDM5MS5wbmc=/original/jFg+Gd.png)
+![Inventory Window](Assets/PlayerInventorySystem/Docs/images/CS9raV.png)
 
 ## Features
 - Item Bar to store items for quick access,
