@@ -6,7 +6,7 @@ namespace PlayerInventorySystem
     /// <summary>
     /// Controller for chest objects. Place this compentent of object you wish to set up as a chest.
     /// </summary>
-    public class ChestController : MonoBehaviour
+    public class ChestController : PlacedItem
     {
 
         /// <summary>

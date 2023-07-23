@@ -16,22 +16,17 @@ public class CameraInteraction : MonoBehaviour
 
     void Update()
     {
-
-        /* if (Input.GetMouseButtonDown(0)) // Check for left mouse button click
-         {*/
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out hit, Mathf.Infinity, terrainLayer))
         {
             // Get the position where the ray hits the terrain
             position = hit.point;
-            Debug.Log(hit.transform.gameObject.name + " " + hit.transform.tag);
+           // Debug.Log(hit.transform.gameObject.name + " " + hit.transform.tag);
 
             // Place the decal or wire sphere at the hit position
             go.transform.position = position;
 
 
         }
-        //}
-       // go.transform.position = position;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace PlayerInventorySystem
 {
     /// <summary>
-    /// Component to handel the durabilit sliders on slot.
+    /// Component to handel the durability sliders on slot.
     /// </summary>
     public class dSlider : MonoBehaviour
     {

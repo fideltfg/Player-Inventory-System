@@ -39,7 +39,7 @@ namespace PlayerInventorySystem
         /// <param name="data">The Items data</param>
         /// <param name="count">the stack count</param>
         /// <returns>An Item or null</returns>
-        public static Item New (ItemData data, int count = 1)
+        public static Item New(ItemData data, int count = 1)
         {
             if (data != null)
             {
@@ -54,7 +54,7 @@ namespace PlayerInventorySystem
         /// <param name="itemID">The ID of the Item to return</param>
         /// <param name="count">The stack count</param>
         /// <returns>An Item or null</returns>
-        public static Item New (int itemID, int count = 1)
+        public static Item New(int itemID, int count = 1)
         {
             if (itemID > 0 && itemID < InventoryController.Instance.ItemCatalog.list.Count)
             {
@@ -68,7 +68,7 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="data"></param>
         /// <param name="count"></param>
-        public Item (ItemData data, int count)
+        public Item(ItemData data, int count)
         {
             this.data = data;
             StackCount = Mathf.Clamp(count, 1, data.maxStackSize);
@@ -80,7 +80,7 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="itemID"></param>
         /// <param name="count"></param>
-        public Item (int itemID, int count)
+        public Item(int itemID, int count)
         {
             this.data = InventoryController.Instance.ItemCatalog.list[itemID];
             StackCount = Mathf.Clamp(count, 1, data.maxStackSize);
@@ -92,7 +92,7 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="quantity"></param>
         /// <returns></returns>
-        public bool AddToStack (int quantity)
+        public bool AddToStack(int quantity)
         {
             if (quantity <= (data.maxStackSize - StackCount))
             {
@@ -107,7 +107,7 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="val">The value to set</param>
         /// <returns>True if the value was succesfuly set. Else false</returns>
-        public bool SetStackCount (int val)
+        public bool SetStackCount(int val)
         {
             if (data.maxStackSize >= val)
             {
@@ -122,10 +122,11 @@ namespace PlayerInventorySystem
         /// method to clone this Item
         /// </summary>
         /// <returns>Memberwise clone of this Item</returns>
-        public Item Clone ()
+        public Item Clone()
         {
             return (Item)this.MemberwiseClone();
         }
+
 
         /// <summary>
         /// Contains a list of items that need this item to be crafted
@@ -148,5 +149,18 @@ namespace PlayerInventorySystem
                 return used.ToArray();
             }
         }
+
+        internal static void Spawn(Item item, Vector3 position, Quaternion rotation, Vector3 scale)
+        {
+            if (item.data.worldPrefab.CompareTag("Chest"))
+            {
+                _ = InventoryController.SpawnNewChest(item, null, position, rotation, scale);
+                return;
+            }
+
+
+            throw new NotImplementedException();
+        }
+
     }
 }

@@ -18,13 +18,13 @@ namespace PlayerInventorySystem
             {
                 if (eventData.button == PointerEventData.InputButton.Left)
                 {
-                    InventoryController.Instance.PlayerInventoryController.DropItem(InventoryController.HeldItem, InventoryController.HeldItem.StackCount);
+                    InventoryController.Instance.PlayerIC.DropItem(InventoryController.HeldItem, InventoryController.HeldItem.StackCount);
                     InventoryController.HeldItem = null;
                 }
                 // if no shift on right click
                 else if (eventData.button == PointerEventData.InputButton.Right)
                 {
-                    InventoryController.Instance.PlayerInventoryController.DropItem(InventoryController.HeldItem);
+                    InventoryController.Instance.PlayerIC.DropItem(InventoryController.HeldItem);
                     if (InventoryController.HeldItem.StackCount == 1)
                     {
                         InventoryController.HeldItem = null;

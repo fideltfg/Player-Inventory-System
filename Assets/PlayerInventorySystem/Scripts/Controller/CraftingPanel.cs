@@ -24,7 +24,7 @@ namespace PlayerInventorySystem
                 {
                     if (InventoryController.PlayerInventory.AddItem(slotController.Slot.Item) == false)
                     {
-                        InventoryController.Instance.PlayerInventoryController.DropItem(slotController.Slot.Item, slotController.Slot.Item.StackCount);
+                        InventoryController.Instance.PlayerIC.DropItem(slotController.Slot.Item, slotController.Slot.Item.StackCount);
                     }
                     slotController.Slot.SetItem(null);
                 }

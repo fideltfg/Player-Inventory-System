@@ -48,7 +48,7 @@ namespace PlayerInventorySystem.Serial
             }
         }
 
-        private static bool CheckGenFolder (string path)
+        private static bool CheckGenFolder(string path)
         {
             if (Directory.Exists(path))
             {
@@ -78,7 +78,7 @@ namespace PlayerInventorySystem.Serial
         /// <param name="filePath">The file path to write the object instance to.</param>
         /// <param name="objectToWrite">The object instance to write to the XML file.</param>
         /// <param name="append">If false the file will be overwritten if it already exists. If true the contents will be appended to the file.</param>
-        private static void WriteToBinaryFile<T> (string filePath, T objectToWrite, bool append = false)
+        private static void WriteToBinaryFile<T>(string filePath, T objectToWrite, bool append = false)
         {
             CheckGenFolder(SavePath);
             TripleDESCryptoServiceProvider des = new();
@@ -106,7 +106,7 @@ namespace PlayerInventorySystem.Serial
         /// <typeparam name="T">The type of object to read from the XML.</typeparam>
         /// <param name="filePath">The file path to read the object instance from.</param>
         /// <returns>Returns a new instance of the object read from the binary file.</returns>
-        private static T ReadFromBinaryFile<T> (string filePath) where T : class
+        private static T ReadFromBinaryFile<T>(string filePath) where T : class
         {
 
             TripleDESCryptoServiceProvider des = new();
@@ -130,19 +130,19 @@ namespace PlayerInventorySystem.Serial
         /// <summary>
         /// method used by inventory controller ti save the inventory data
         /// </summary>
-        internal static void Save ()
+        internal static void Save()
         {
-            Serializer.WriteToBinaryFile<SerialSaveDataObject>(InventorySaveLocation, GetInventoryData());
+            WriteToBinaryFile<SerialSaveDataObject>(InventorySaveLocation, GetInventoryData());
         }
 
         /// <summary>
         /// method used by inventory controller to load the save data file
         /// </summary>
-        internal static void Load ()
+        internal static void Load()
         {
             if (File.Exists(InventorySaveLocation))
             {
-                LoadSerialInventoryData(Serializer.ReadFromBinaryFile<SerialSaveDataObject>(InventorySaveLocation));
+                LoadSerialInventoryData(ReadFromBinaryFile<SerialSaveDataObject>(InventorySaveLocation));
             }
             else
             {
@@ -150,7 +150,7 @@ namespace PlayerInventorySystem.Serial
             }
         }
 
-        private static void LoadSerialInventoryData (SerialSaveDataObject saveData)
+        private static void LoadSerialInventoryData(SerialSaveDataObject saveData)
         {
             // load all inventories
             SerialInventory[] sInventories = saveData.inventories;
@@ -162,14 +162,14 @@ namespace PlayerInventorySystem.Serial
             InventoryController.Instance.PlayerInventoryCapacity = sInventories[0].slots.Length;
             for (int i = 0; i < sInventories.Length; i++)
             {
-                Inventory inventory = Serializer.ConvertFromSerialInventory(sInventories[i]);
+                Inventory inventory = ConvertFromSerialInventory(sInventories[i]);
                 InventoryController.InventoryList[inventory.Index] = inventory;
             }
 
             // unpack chests
             foreach (SerialChest sc in sChests)
             {
-                InventoryController.SpawnChest(sc.ChestID, sc.itemCatalogID, ConvertFromSerialInventory(sc.inventory), sc.transform);
+                InventoryController.SpawnSavedChest(sc.ChestID, sc.itemCatalogID, ConvertFromSerialInventory(sc.inventory), sc.transform);
             }
 
 
@@ -191,7 +191,7 @@ namespace PlayerInventorySystem.Serial
             }
         }
 
-        private static SerialSaveDataObject GetInventoryData ()
+        private static SerialSaveDataObject GetInventoryData()
         {
             // get an array of all the inventories to be saved
             Inventory[] inventories = { InventoryController.PlayerInventory, InventoryController.ItemBarInventory, InventoryController.CraftingInventory, InventoryController.CharacterInventory };
@@ -235,17 +235,6 @@ namespace PlayerInventorySystem.Serial
                 {
                     sPanelLocations[i] = null;
                 }
-
-                /*    RectTransform rt = panels[i].GetComponent<RectTransform>();
-                    if (rt != null)
-                    {
-                        sPanelLocations[i] = new SerialRect(rt);
-
-                    }
-                    else
-                    {
-                        sPanelLocations[i] = null;
-                    }*/
             }
 
             // collect data for dropped and spawned items
@@ -275,7 +264,7 @@ namespace PlayerInventorySystem.Serial
             };
         }
 
-        private static Inventory ConvertFromSerialInventory (SerialInventory sInventory)
+        private static Inventory ConvertFromSerialInventory(SerialInventory sInventory)
         {
 
             Inventory newInventory = new(sInventory.Index, sInventory.slots.Length);
@@ -298,7 +287,7 @@ namespace PlayerInventorySystem.Serial
             return newInventory;
         }
 
-        private static SerialInventory ConvertToSerialInventory (Inventory inventory)
+        private static SerialInventory ConvertToSerialInventory(Inventory inventory)
         {
             if (inventory == null)
             {
@@ -416,7 +405,7 @@ namespace PlayerInventorySystem.Serial
         public SerialTransform transform;
         public SerialInventory inventory;
     }
-  
+
     /// <summary>
     /// Class to hold data about dropped or spawned items when saving
     /// </summary>
@@ -473,7 +462,7 @@ namespace PlayerInventorySystem.Serial
         /// Pass in the RectTransform you wish to serialize
         /// </summary>
         /// <param name="rt"></param>
-        public SerialRect (RectTransform rt)
+        public SerialRect(RectTransform rt)
         {
             width = rt.sizeDelta.x;
             height = rt.sizeDelta.y;
@@ -488,7 +477,7 @@ namespace PlayerInventorySystem.Serial
             scaleZ = rt.localScale.z;
         }
     }
- 
+
     /// <summary>
     /// Class to hold the details of a transform when saving.
     /// </summary>
@@ -525,7 +514,7 @@ namespace PlayerInventorySystem.Serial
         /// Construst. Pass in the transform you wish to serailize
         /// </summary>
         /// <param name="t"></param>
-        public SerialTransform (Transform t)
+        public SerialTransform(Transform t)
         {
             positionX = t.position.x;
             positionY = t.position.y;

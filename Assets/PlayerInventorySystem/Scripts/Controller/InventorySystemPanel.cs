@@ -10,7 +10,6 @@ namespace PlayerInventorySystem
     /// </summary>
     public class InventorySystemPanel : MonoBehaviour
     {
-
         internal int selectedSlotID;// the slot that is currently selected in this panel
 
         /// <summary>
@@ -57,10 +56,20 @@ namespace PlayerInventorySystem
         public List<SlotController> SlotList = new List<SlotController>();
 
         /// <summary>
-        /// The index of the invnetory for this panel
+        /// The index of the inventory this panel is displaying
         /// </summary>
-        [HideInInspector]
-        public int Index;
+        public virtual int Index
+        {
+            get { return index; }
+            set
+            {
+                if (index != value)
+                {
+                    index = value;
+                }
+            }
+        }
+        private int index;
 
         public virtual void Update() { }
 
@@ -85,7 +94,7 @@ namespace PlayerInventorySystem
         /// <param name="InventoryIndex"></param>
         public virtual void Build(int InventoryIndex = 0)
         {
-            this.Index = InventoryIndex;
+            Index = InventoryIndex;
         }
 
     }

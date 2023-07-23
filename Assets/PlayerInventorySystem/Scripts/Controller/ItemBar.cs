@@ -60,8 +60,18 @@ namespace PlayerInventorySystem
         {
             if (SelectedSlotController.Slot.Item != null)
             {
-                InventoryController.Instance.PlayerInventoryController.DropItem(SelectedSlotController.Slot.Item, 1);
+                PlayerInventoryController pic = InventoryController.Instance.PlayerIC;
+
+                if(pic == null)
+                {
+                    Debug.LogError("PlayerInventoryController is null");
+                    return;
+                }
+
+                pic.DropItem(SelectedSlotController.Slot.Item);
+
                 SelectedSlotController.Slot.IncermentStackCount(-1);
+
                 if (SelectedSlotController.Slot.Item.StackCount <= 0)
                 {
                     SelectedSlotController.Slot.SetItem(null);

@@ -14,20 +14,30 @@ namespace PlayerInventorySystem
 
         ChestController chest;
 
+
+
+
         public ChestController Chest
         {
             get { return chest; }
             set
             {
-                chest = value; // save the chest locally
-                if (chest != null)
+                if (chest != value)
                 {
-                    Populate(); // populate the chest panel
+                    chest = value; // save the chest locally
+                    if (chest != null)
+                    {
+                        Populate(chest); // populate the chest panel
+                    }
+                    else
+                    {
+                        Debug.LogError("Chest is null");
+                    }
                 }
             }
         }
 
-        public override void OnEnable ()
+        public override void OnEnable()
         {
 
             GridLayoutGroup.cellSize = SlotPrefab.GetComponent<RectTransform>().sizeDelta;
@@ -37,9 +47,9 @@ namespace PlayerInventorySystem
 
         }
 
-        public override void Build (int InventoryIndex = 0)
+        public override void Build(int InventoryIndex = 0)
         {
-            this.Index = InventoryIndex;
+            Index = InventoryIndex;
 
 
             // add 24 (the max slot count for chests ) slots to the panel
@@ -48,47 +58,71 @@ namespace PlayerInventorySystem
             {
                 GameObject go = GameObject.Instantiate(SlotPrefab, Vector3.zero, Quaternion.identity, transform);
                 SlotController sc = go.GetComponent<SlotController>();
-                sc.Index = this.Index;
+                sc.Index = Index;
                 sc.slotLocation = SLOTLOCATION.CHEST;
                 SlotList.Add(sc);
                 sc.gameObject.SetActive(false);
             }
         }
 
-        private void Populate ()
+        private void Populate(ChestController chest)
         {
-            this.Index = chest.ChestID;
+            Index = chest.ChestID;
 
-            if (InventoryController.ChestInventories.ContainsKey(this.Index) == false)
+            // if the chest inventory has not been created yet, create it
+            if (InventoryController.ChestInventories.ContainsKey(Index) == false)
             {
-                InventoryController.ChestInventories[this.Index] = new Inventory(this.Index, chest.Capacity);
+                InventoryController.ChestInventories[Index] = new Inventory(Index, chest.Capacity);
             }
-            Inventory inv = InventoryController.GetChestInventory(Index);
+
+            // Inventory inv = InventoryController.GetChestInventory(Index);
+            Inventory inv = chest.Inventory;
+
+            if (inv == null)
+            {
+                Debug.LogError("Inventory is null");
+                return;
+            }
+
             for (int i = 0; i < chest.Capacity; i++)
             {
-                SlotList[i].Index = this.Index; // set the SlotControllers new index
-                SlotList[i].SetSlot(inv[i]); // get the slot from the chest inventory
+                SlotList[i].Index = Index; // set the SlotControllers new index
+                SlotList[i].SetSlot(inv[i]); // set the slot from the chest inventory
                 SlotList[i].gameObject.SetActive(true); // display the slot game object in the panel
             }
         }
 
-        public override void OnDisable ()
+        public override void OnDisable()
         {
+            // base.OnDisable();
+
             // disable all slots in prep for next time the panel is displayed
             foreach (SlotController sc in SlotList)
             {
                 sc.outline.enabled = false;
                 sc.gameObject.SetActive(false);
             }
+            // close the chest lid
             OpenChest(false);
+
+            // discard the chest
+            chest = null;
 
         }
 
-        public void OpenChest (bool v)
+        /// <summary>
+        /// method to open or close the chest lid
+        /// </summary>
+        /// <param name="v"></param>
+        public void OpenChest(bool v)
         {
             if (chest != null)
             {
                 chest.transform.Find("Lid").GetComponent<Animator>().SetBool("Open", v);
+            }
+            else
+            {
+                Debug.LogError("Chest is null");
             }
         }
     }

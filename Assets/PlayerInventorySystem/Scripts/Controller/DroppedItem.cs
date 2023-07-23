@@ -53,7 +53,7 @@ namespace PlayerInventorySystem
             if (timer >= TTL)
             {
                 InventoryController.DroppedItems.Remove(this);
-                Object.Destroy(gameObject);
+                Destroy(gameObject);
             }
             else
             {

@@ -97,13 +97,11 @@ public class InputController : MonoBehaviour
             // if aiming
             if (aiming)
             {
-
+                PlayerInventorySystem.InventoryController.Instance.PlayerIC.Interact();
                 // place the currently select item into the world
-                PlayerInventorySystem.InventoryController.Instance.PlaceItem();
 
                 // call to method in PlayerController
                 PlayerController.instance.OnInteract();
-
             }
             else
             {

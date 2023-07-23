@@ -34,70 +34,32 @@ namespace PlayerInventorySystem
 
         public AudioClip pickupSound;
 
-        public RaycastHit hit;
+        RaycastHit hit;
 
-        Ray ray;
-
-        public bool CanPlaceItem
+        /// <summary>
+        /// method to test if the player is looking at an interactable object
+        /// or at the ground where an item can be placed.
+        /// </summary>
+        public bool CanInteract
         {
             get
             {
-                Camera mainCamera = Camera.main;
                 Vector3 cameraCenter = new Vector3(Screen.width / 2f, Screen.height / 2f, 0f); // Center of the screen
 
-                ray = mainCamera.ScreenPointToRay(cameraCenter);
+                Ray ray = Camera.main.ScreenPointToRay(cameraCenter);
 
-                // draw a debug ray
-                Debug.DrawRay(ray.origin, ray.direction * 10, Color.red);
-
-                bool b = Physics.Raycast(ray, out hit, Mathf.Infinity, layermask);
-
-                // add a debug sphere at the hit point (if hit something)
-                if (b)
-                {
-                    GameObject go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    go.transform.position = hit.point;
-                    go.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-                }
-
-                return b;
-            }
-        }
-
-
-
-
-        public bool CanPlaceItemX
-        {
-            get
-            {
-
-                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-                // draw a debug ray
-                Debug.DrawRay(ray.origin, ray.direction * 10, Color.red);
-                // add a debug sphere at the hit point
-                GameObject go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-
-                go.transform.position = hit.point;
-
-                go.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-
-
-
-
-                bool b = Physics.Raycast(ray, out hit, Mathf.Infinity, layermask);
-
-                return b;
-
+                return Physics.Raycast(ray, out hit, Mathf.Infinity, layermask);
             }
         }
 
         void OnEnable()
         {
             BoxCollider bc = GetComponent<BoxCollider>();
+
             bc.isTrigger = true;
+
             bc.center = center;
+
             bc.size = size;
         }
 
@@ -105,6 +67,31 @@ namespace PlayerInventorySystem
         {
             PickUpItem(other.gameObject);
         }
+
+        /// <summary>
+        /// method to add a single item directly in to the players itemBar or inventory
+        /// </summary>
+        /// <param name="itemID">The ID of the item to be added</param>
+        /// <returns>Returns true on success else false</returns>
+        public static bool GiveItem(int itemID, int stackCount = 1)
+        {
+            if (itemID <= 0)
+            {
+                return false;
+            }
+
+            Item newItem = new Item(itemID, stackCount);
+
+            if (InventoryController.ItemBarInventory.AddItem(newItem) == false)
+            {
+                if (InventoryController.PlayerInventory.AddItem(newItem) == false)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
 
         /// <summary>
         /// method to allow player to pick up an Item and place it in the inventory
@@ -116,23 +103,22 @@ namespace PlayerInventorySystem
         /// <returns></returns>
         internal bool PickUpItem(GameObject collectedObject)
         {
-
             if (!collectedObject.CompareTag("Item"))
             {
                 return false;
             }
 
-            if (!collectedObject.TryGetComponent<DroppedItem>(out var ip))
+            if (!collectedObject.TryGetComponent(out DroppedItem dorppedItem))
             {
                 return false;
             }
 
-            if (ip.ItemID <= 0)
+            if (dorppedItem.ItemID <= 0)
             {
                 return false;
             }
 
-            Item newItem = new Item(ip.ItemID, ip.stackCount);
+            Item newItem = new Item(dorppedItem.ItemID, dorppedItem.stackCount);
 
             if (InventoryController.ItemBarInventory.AddItem(newItem) == false)
             {
@@ -142,9 +128,9 @@ namespace PlayerInventorySystem
                 }
             }
 
-            if (InventoryController.DroppedItems.Contains(ip))
+            if (InventoryController.DroppedItems.Contains(dorppedItem))
             {
-                InventoryController.DroppedItems.Remove(ip);
+                InventoryController.DroppedItems.Remove(dorppedItem);
             }
 
             GetComponent<AudioSource>().PlayOneShot(pickupSound);
@@ -160,7 +146,7 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="item"></param>
         /// <param name="quantity"></param>
-        internal void DropItem(Item item, int quantity = 1)
+        public void DropItem(Item item, int quantity = 1)
         {
             GameObject prefab;
 
@@ -175,11 +161,13 @@ namespace PlayerInventorySystem
 
             if (prefab != null) //  make sure we have a prefabe
             {
-
-                // instatiate teh prefabe and 'toss' it our infront of the player
+                // instatiate the prefabe and 'toss' it our in front of the player
                 Vector3 dropPoint = InventoryController.Instance.Player.transform.position + InventoryController.Instance.Player.transform.forward + InventoryController.Instance.Player.transform.up; // TODO make this more acurate, and show setting on the editor
+
                 GameObject g = Instantiate(prefab, dropPoint, Quaternion.identity);
+
                 g.GetComponent<Rigidbody>().AddForceAtPosition(InventoryController.Instance.Player.transform.forward * 2 + InventoryController.Instance.Player.transform.up, g.transform.position, ForceMode.Impulse);
+
                 if (g.TryGetComponent<DroppedItem>(out var ip))
                 {
                     ip.ItemID = item.data.id;
@@ -198,5 +186,54 @@ namespace PlayerInventorySystem
             }
         }
 
+        /// <summary>
+        /// method to place the currently selected item from the itembar in the world
+        /// </summary>
+        private void PlaceItem(Vector3 pos, Quaternion rot, Vector3 scale)
+        {
+            // if the player right clicks on the ground then place the selected item in the world
+            if (InventoryController.Instance.ItemBar.SelectedSlotController.Slot.Item != null)
+            {
+                // Get the selected item from the item bar
+                Item item = InventoryController.Instance.ItemBar.SelectedSlotController.Slot.Item;
+
+                // If the item has a world prefab then place it in the world
+                if (item.data.worldPrefab != null)
+                {
+                    Item.Spawn(item, pos, rot, scale);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Method for the player to interact with the world and items in it
+        /// </summary>
+        internal void Interact()
+        {
+
+            if (CanInteract == true && hit.transform != null)
+            {
+                Debug.Log("Interact");
+                switch (hit.transform.tag.ToLower())
+                {
+                    case "chest":
+                        Debug.Log("Open Chest");
+                        InventoryController.Instance.OpenChest(hit.transform.gameObject.GetComponent<ChestController>());
+                        break;
+                    case "craftingtable":
+                        break;
+                    default:
+                        Debug.Log("Place Item");
+                        PlaceItem(hit.point, Quaternion.identity, Vector3.one);
+                        break;
+
+                }
+            }
+            else
+            {
+                Debug.Log("Can Not Interact Here!");
+                return;
+            }
+        }
     }
 }
