@@ -3,6 +3,20 @@ using System;
 using System.Collections.Generic;
 using PlayerInventorySystem.Serial;
 
+///*********************************************************************************
+/// Player Inventorty System
+/// version: 0.0.5 alpha
+/// 
+/// 
+///*********************************************************************************
+
+
+
+
+
+
+
+
 namespace PlayerInventorySystem
 {
 
