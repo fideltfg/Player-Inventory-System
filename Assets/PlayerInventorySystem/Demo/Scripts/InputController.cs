@@ -1,13 +1,9 @@
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using PlayerInventorySystem;
 
 public class InputController : MonoBehaviour
 {
-
-
-
-    // holders for ration value values used for orbit cam calculation
     [HideInInspector]
     public float XRotation = 0;
     [HideInInspector]
@@ -57,7 +53,6 @@ public class InputController : MonoBehaviour
         }
         else
         {
-
             PlayerController.instance.OnLeft(0);
         }
     }
@@ -78,7 +73,7 @@ public class InputController : MonoBehaviour
     {
         if (ctx.performed)
         {
-            PlayerInventorySystem.InventoryController.Instance.ItemBar.SelectPreviousSlot();
+            InventoryController.Instance.ItemBar.SelectPreviousSlot();
         }
     }
 
@@ -86,7 +81,7 @@ public class InputController : MonoBehaviour
     {
         if (ctx.performed)
         {
-            PlayerInventorySystem.InventoryController.Instance.ItemBar.SelectNextSlot();
+            InventoryController.Instance.ItemBar.SelectNextSlot();
         }
     }
 
@@ -97,7 +92,7 @@ public class InputController : MonoBehaviour
             // if aiming
             if (aiming)
             {
-                PlayerInventorySystem.InventoryController.Instance.PlayerIC.Interact();
+                InventoryController.Instance.PlayerIC.Interact();
                 // place the currently select item into the world
 
                 // call to method in PlayerController
@@ -146,7 +141,7 @@ public class InputController : MonoBehaviour
     {
         if (ctx.performed)
         {
-            PlayerInventorySystem.InventoryController.Instance.ToggleInventoryPanel();
+            InventoryController.Instance.ToggleInventoryPanel();
         }
     }
 
@@ -154,7 +149,7 @@ public class InputController : MonoBehaviour
     {
         if (ctx.performed)
         {
-            PlayerInventorySystem.InventoryController.Instance.ToggleCharacterPanel();
+            InventoryController.Instance.ToggleCharacterPanel();
         }
     }
 
@@ -162,7 +157,7 @@ public class InputController : MonoBehaviour
     {
         if (ctx.performed)
         {
-            PlayerInventorySystem.InventoryController.Instance.ItemBar.DropSelectedItem();
+            InventoryController.Instance.ItemBar.DropSelectedItem();
         }
     }
 
@@ -182,14 +177,15 @@ public class InputController : MonoBehaviour
         {
             string s = ctx.action.activeControl.ToString();
             // get the number from the string
-            int slotNum = int.Parse(s.Substring(s.Length - 1));
+            // int slotNum = int.Parse(s.Substring(s.Length - 1));
+            int slotNum = int.Parse(s[^1..]);
             if (slotNum == 0)
             {
                 slotNum = 9;
             }
             else { slotNum--; }
 
-            PlayerInventorySystem.InventoryController.Instance.ItemBar.SelectedSlotID = slotNum;
+            InventoryController.Instance.ItemBar.SelectedSlotID = slotNum;
         }
     }
 }

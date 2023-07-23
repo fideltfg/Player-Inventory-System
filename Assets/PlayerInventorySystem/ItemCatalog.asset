@@ -469,9 +469,9 @@ MonoBehaviour:
     maxStackSize: 1
     recipe:
       rows:
-      - cells: 
-      - cells: 
-      - cells: 
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
     craftCount: 1
     maxDurability: 25
     damage: 0
@@ -496,9 +496,9 @@ MonoBehaviour:
     maxStackSize: 1
     recipe:
       rows:
-      - cells: 
-      - cells: 
-      - cells: 
+      - cells: 060000002c00000006000000
+      - cells: 2c0000002c0000002c000000
+      - cells: 2c000000060000002c000000
     craftCount: 1
     maxDurability: 25
     damage: 0
@@ -523,9 +523,9 @@ MonoBehaviour:
     maxStackSize: 1
     recipe:
       rows:
-      - cells: 
-      - cells: 
-      - cells: 
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
     craftCount: 1
     maxDurability: 25
     damage: 0
@@ -577,9 +577,9 @@ MonoBehaviour:
     maxStackSize: 1
     recipe:
       rows:
-      - cells: 
-      - cells: 
-      - cells: 
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
     craftCount: 1
     maxDurability: 25
     damage: 0
@@ -604,9 +604,9 @@ MonoBehaviour:
     maxStackSize: 1
     recipe:
       rows:
-      - cells: 
-      - cells: 
-      - cells: 
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
     craftCount: 1
     maxDurability: 25
     damage: 0
@@ -631,9 +631,9 @@ MonoBehaviour:
     maxStackSize: 1
     recipe:
       rows:
-      - cells: 
-      - cells: 
-      - cells: 
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
     craftCount: 1
     maxDurability: 25
     damage: 0

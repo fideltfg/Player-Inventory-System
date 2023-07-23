@@ -1,21 +1,11 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
-using PlayerInventorySystem.Serial;
 
 ///*********************************************************************************
 /// Player Inventorty System
 /// version: 0.0.5 alpha
-/// 
-/// 
 ///*********************************************************************************
-
-
-
-
-
-
-
 
 namespace PlayerInventorySystem
 {
@@ -36,39 +26,6 @@ namespace PlayerInventorySystem
         public SO_ItemList ItemCatalog;
 
         /// <summary>
-        /// Static Accessor for the item catalog list.
-        /// </summary>
-        public static List<ItemData> Catalog { get { return Instance.ItemCatalog.list; } }
-
-        /// <summary>
-        /// Holder for all inventories in the system.
-        /// Does not include chest inventories.
-        /// </summary>
-        public static Dictionary<int, Inventory> InventoryList = new Dictionary<int, Inventory>();
-
-        /// <summary>
-        /// Holder for all chest inventories in the system.
-        /// </summary>
-        public static Dictionary<int, Inventory> ChestInventories = new Dictionary<int, Inventory>();
-
-        /// <summary>
-        /// map of chest game objects to chest ID's
-        /// </summary>
-        public static Dictionary<int, GameObject> ChestMap = new Dictionary<int, GameObject>();
-
-        /// <summary>
-        /// List of items dropped by the player or spawned from mob/destroyed object ect..
-        /// that currently exist in the game world.
-        /// Items remove themselves from this list when they despawn or are picked up.
-        /// </summary>
-        public static List<DroppedItem> DroppedItems = new List<DroppedItem>();
-
-        /// <summary>
-        /// List of items that the player has placed in the game world.
-        /// </summary>
-        public static List<PlacedItem> PlacedItems = new List<PlacedItem>();
-
-        /// <summary>
         /// The default capacity of the players inventory.
         /// must  have a  multiple of four slots (4, 8, 12, 16, 20 24....)
         /// </summary>
@@ -78,6 +35,40 @@ namespace PlayerInventorySystem
         /// Set true to load saved inventory data on start
         /// </summary>
         public bool LoadInventory = false;
+
+        /// <summary>
+        /// Set true to save data to Application.persistentDataPath + "/Data/data.dat"
+        /// Only use this when you have configured your Unity Player settings  for publication
+        /// </summary>
+        public bool UsePersistentDataPath = false;
+
+        /// <summary>
+        /// Holder for all inventories in the system.
+        /// Does not include chest inventories.
+        /// </summary>
+        internal static Dictionary<int, Inventory> InventoryList = new Dictionary<int, Inventory>();
+
+        /// <summary>
+        /// Holder for all chest inventories in the system.
+        /// </summary>
+        internal static Dictionary<int, Inventory> ChestInventories = new Dictionary<int, Inventory>();
+
+        /// <summary>
+        /// map of chest game objects to chest ID's
+        /// </summary>
+        internal static Dictionary<int, GameObject> ChestMap = new Dictionary<int, GameObject>();
+
+        /// <summary>
+        /// List of items dropped by the player or spawned from mob/destroyed object ect..
+        /// that currently exist in the game world.
+        /// Items remove themselves from this list when they despawn or are picked up.
+        /// </summary>
+        internal List<DroppedItem> DroppedItems = new List<DroppedItem>();
+
+        /// <summary>
+        /// List of items that the player has placed in the game world.
+        /// </summary>
+        internal static List<PlacedItem> PlacedItems = new List<PlacedItem>();
 
         /// <summary>
         /// Method to generate a new id for chests.
@@ -97,35 +88,29 @@ namespace PlayerInventorySystem
         }
 
         /// <summary>
-        /// Set true to save data to Application.persistentDataPath + "/Data/data.dat"
-        /// Only use this when you have configured your Unity Player settings  for publication
-        /// </summary>
-        public bool UsePersistentDataPath = false;
-
-        /// <summary>
         /// Static accessor for the players inventory
         /// </summary>
-        public static Inventory PlayerInventory { get { return InventoryList[0]; } } // index 0
+        internal static Inventory PlayerInventory { get { return InventoryList[0]; } } // index 0
 
         /// <summary>
         /// Static accessor for the Item Bar inventory
         /// </summary>
-        public static Inventory ItemBarInventory { get { return InventoryList[1]; } } // index 1
+        internal static Inventory ItemBarInventory { get { return InventoryList[1]; } } // index 1
 
         /// <summary>
         /// Static accessor for the crafting panel inventory
         /// </summary>
-        public static Inventory CraftingInventory { get { return InventoryList[2]; } } // index 2
+        internal static Inventory CraftingInventory { get { return InventoryList[2]; } } // index 2
 
         /// <summary>
         /// Static accessor for the character panel inventory
         /// </summary>
-        public static Inventory CharacterInventory { get { return InventoryList[3]; } } // index 3.... slot order// 0: Head//1: Left Hand// 2: Right Hand//3: Body// 4: Legs// 5: feet
+        internal static Inventory CharacterInventory { get { return InventoryList[3]; } } // index 3.... slot order// 0: Head//1: Left Hand// 2: Right Hand//3: Body// 4: Legs// 5: feet
 
         /// <summary>
         /// Static accessor for the crafting panel output slot
         /// </summary>
-        public static Inventory CraftingOutputInventory { get { return InventoryList[5]; } } // index 5
+        internal static Inventory CraftingOutputInventory { get { return InventoryList[5]; } } // index 5
 
         /// <summary>
         /// Accessor for the held item
@@ -174,7 +159,6 @@ namespace PlayerInventorySystem
         /// the controller for the drop panel
         /// </summary>
         public DropPanel dropPanel;
-        public LayerMask dropPanelLayerask;
 
         /// <summary>
         /// the controller for the item holder
@@ -198,13 +182,23 @@ namespace PlayerInventorySystem
 
         /// <summary>
         /// Action called whenever an inventory System panel is opened
+        /// Register for this callback to trigger actions outside the inventory system when a panel is opened.
+        /// This callback passes the panel that was opened.
         /// </summary>
-        public Action<InventorySystemPanel> OnWindowOpenCallback;
+        internal Action<InventorySystemPanel> OnWindowOpenCallback;
 
         /// <summary>
-        /// action called Whenever the player slected a new item on the item bar
+        /// Action called whenever the player selects a new item on the item bar
+        /// Register for this callback to trigger actions outside the inventory system when the player changes their selected item.
+        /// This callback passes the item that was selected.
         /// </summary>
-        public Action<Item> OnSelectedItemChangeCallBack;
+        internal Action<Item> OnSelectedItemChangeCallBack;
+
+        /// <summary>
+        /// Action called whenever the player drops an item into the game world
+        /// This callback passes the item that was dropped.
+        /// </summary>
+        public Action<Item> OnItemDroppedCallBack;
 
         /// <summary>
         /// Indicates if any of the inventory system Panels are currently being displayed.
@@ -225,7 +219,7 @@ namespace PlayerInventorySystem
         /// <summary>
         /// Default time to live of items dropped by the player into the game world in seconds
         /// </summary>
-        public float DroppedItemTTL = 30;
+        public float DroppedItemTTL = 300;
 
         void OnEnable()
         {
@@ -328,7 +322,7 @@ namespace PlayerInventorySystem
         }
 
         /// <summary>
-        /// method used to create an empty player inventory
+        /// Method used to create an empty player inventory
         /// </summary>
         private void CreatePlayerInventory()
         {
@@ -347,7 +341,7 @@ namespace PlayerInventorySystem
         }
 
         /// <summary>
-        /// method to register a callback for when the selected item changes
+        /// Method to register a callback for when the selected item changes
         /// </summary>
         /// <param name="callbacK"></param>
         public static void RegisterOnSlectedItemChangeCallback(Action<Item> callbacK)
@@ -356,7 +350,7 @@ namespace PlayerInventorySystem
         }
 
         /// <summary>
-        /// methdo to unregister a callback for when the selected item changes
+        /// Method to unregister a callback for when the selected item changes
         /// </summary>
         /// <param name="callbacK"></param>
         public static void UnregisterOnSelectedItemChangeCallback(Action<Item> callbacK)
@@ -368,7 +362,7 @@ namespace PlayerInventorySystem
         }
 
         /// <summary>
-        /// method to resize a given inventory to the given size.
+        /// Method to resize a given inventory to the given size.
         /// If the new size is smaller then the origonal, the inventory will be repacked.
         /// meaning aitems will be moved to the begining of the new inventory.
         /// Items that do not fit in to the new inventory will be discarded.
@@ -421,34 +415,15 @@ namespace PlayerInventorySystem
         }
 
         /// <summary>
-        /// method to display the chest Panel and the selected chest inventory
-        /// </summary>
-        internal void OpenChest(ChestController chestController)
-        {
-            if (chestController != null)
-            {
-                ChestPanel.Chest = chestController; // pass the selected chest to the chest panel
-
-                ChestPanel.OpenChest(true);
-
-                ChestPanel.gameObject.SetActive(true); // display the chest panel
-            }
-            else
-            {
-                Debug.LogError("ChestController is null");
-            }
-        }
-
-        /// <summary>
         /// Method to spawn a dropped item in to the world.
         /// Use this when you want an item to be dropped by a NPC or spawned when the player destroys an object but not from the player.
         /// </summary>
         /// <param name="itemID">The id of the item to spawn</param>
         /// <param name="position">the location to spawn the item</param>
-        /// <param name="stackCount">the size of the stack to spawn</param>
+        /// <param name="quantity">the size of the stack to spawn</param>
         /// <param name="TTL">The time the item will reamin in the world</param>
         /// <returns>Returns true on success else false</returns>
-        public static bool SpawnDroppedItem(int itemID, Vector3 position, int stackCount = 1, float TTL = 30, float Durability = 0)
+        public bool SpawnDroppedItem(int itemID, Vector3 position, int quantity = 1, float TTL = 30, float Durability = 0)
         {
             if (itemID <= 0)
             {
@@ -459,7 +434,7 @@ namespace PlayerInventorySystem
 
             GameObject prefab = itemData.worldPrefabSingle;
 
-            if (stackCount > 1)
+            if (quantity > 1)
             {
                 prefab = itemData.worldPrefabMultiple;
             }
@@ -475,7 +450,7 @@ namespace PlayerInventorySystem
             {
                 di.ItemID = itemData.id;
 
-                di.stackCount = stackCount;
+                di.stackCount = quantity;
 
                 di.TTL = TTL;
 
@@ -513,7 +488,6 @@ namespace PlayerInventorySystem
             MapChest(cc);
         }
 
-
         /// <summary>
         /// Method to spawn a new chest into the world.
         /// </summary>
@@ -547,7 +521,6 @@ namespace PlayerInventorySystem
             return cc;
         }
 
-
         /// <summary>
         /// method to store a chest for saving
         /// </summary>
@@ -560,7 +533,6 @@ namespace PlayerInventorySystem
 
         /// <summary>
         /// Method called when player places an item to register item to be saved. 
-        /// This method also set the objects world position and other values
         /// </summary>
         /// <param name="item"></param>
         /// <param name="pi"></param>
@@ -593,9 +565,11 @@ namespace PlayerInventorySystem
             return null;
         }
 
-
         /// <summary>
-        /// method to add a single item directly in to the players itemBar or inventory
+        /// Method to add an item (or stack of) directly in to the players itemBar or inventory
+        /// 
+        /// Use this method when you want to add an item to the players inventory but not from the world.
+        /// 
         /// </summary>
         /// <param name="itemID">The ID of the item to be added</param>
         /// <returns>Returns true on success else false</returns>
@@ -643,6 +617,10 @@ namespace PlayerInventorySystem
             CraftingPanel.gameObject.SetActive(!CraftingPanel.gameObject.activeInHierarchy);
         }
 
+        public void ToggleChestPanel()
+        {
+            ChestPanel.gameObject.SetActive(!ChestPanel.gameObject.activeInHierarchy);
+        }
         /// <summary>
         /// method to toggle the item bar
         /// </summary>
@@ -680,33 +658,6 @@ namespace PlayerInventorySystem
             }
         }
 
-        /// <summary>
-        /// method to return a slot from an inventory
-        /// </summary>
-        /// <param name="index">the index of the inventory in the inventory list</param>
-        /// <param name="slotID">the ID of the slot in the inventory</param>
-        /// <returns></returns>
-        internal static Slot GetInventorySlot(int index, int slotID)
-        {
-
-            if ((InventoryList[index].Count - 1) >= slotID)
-            {
-                try
-                {
-                    return GetInventory(index)[slotID];
-                }
-                catch (Exception e)
-                {
-
-                    throw e;
-                }
-            }
-            else
-            {
-                throw new Exception("Inventory slot does not exist.");
-            }
-
-        }
 
         /// <summary>
         /// method to return the inventory of the chest with the given id
@@ -720,7 +671,45 @@ namespace PlayerInventorySystem
                 return ChestInventories[chestID];
             }
             return null;
+        }
 
+        /// <summary>
+        /// method to display the chest Panel and the selected chest inventory
+        /// </summary>
+       internal void OpenChest(ChestController chestController)
+        {
+            if (chestController != null)
+            {
+                ChestPanel.Chest = chestController; // pass the selected chest to the chest panel
+
+                ChestPanel.OpenChest(true);
+
+                ToggleChestPanel();
+            }
+            else
+            {
+                Debug.LogError("ChestController is null");
+            }
+        }
+
+
+        /// <summary>
+        /// Method to place the currently selected item from the itembar in the world
+        /// </summary>
+        internal void PlaceItem(Vector3 pos, Quaternion rot, Vector3 scale)
+        {
+            // if the player right clicks on the ground then place the selected item in the world
+            if (ItemBar.SelectedSlotController.Slot.Item != null)
+            {
+                // Get the selected item from the item bar
+                Item item = ItemBar.SelectedSlotController.Slot.Item;
+
+                // If the item has a world prefab then place it in the world
+                if (item.data.worldPrefab != null)
+                {
+                    Item.Place(item, pos, rot, scale);
+                }
+            }
         }
 
         /// <summary>
@@ -743,6 +732,6 @@ namespace PlayerInventorySystem
         {
             Save();
         }
- 
+
     }
 }

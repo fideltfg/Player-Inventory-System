@@ -84,7 +84,7 @@ namespace PlayerInventorySystem
                 {
                     try
                     {
-                        return InventoryController.GetInventorySlot(Index, slotID);
+                        return GetInventorySlot(Index, slotID);
                     }
                     catch (Exception e)
                     {
@@ -95,6 +95,35 @@ namespace PlayerInventorySystem
                 }
             }
         }
+
+        /// <summary>
+        /// method to return a slot from an inventory
+        /// </summary>
+        /// <param name="index">the index of the inventory in the inventory list</param>
+        /// <param name="slotID">the ID of the slot in the inventory</param>
+        /// <returns></returns>
+        private Slot GetInventorySlot(int index, int slotID)
+        {
+
+            if ((InventoryController.InventoryList[index].Count - 1) >= slotID)
+            {
+                try
+                {
+                    return InventoryController.GetInventory(index)[slotID];
+                }
+                catch (Exception e)
+                {
+
+                    throw e;
+                }
+            }
+            else
+            {
+                throw new Exception("Inventory slot does not exist.");
+            }
+
+        }
+
 
         /// <summary>
         /// Indicates true if this slot is selected else false
@@ -766,13 +795,13 @@ namespace PlayerInventorySystem
             HeldItem = this.Slot.Item;
             Slot.SetItem(null);
         }
-/*
-        void SwapItems()
-        {
-            Item i = HeldItem;
-            HeldItem = this.Slot.Item;
-            Slot.SetItem(i);
-        }*/
+        /*
+                void SwapItems()
+                {
+                    Item i = HeldItem;
+                    HeldItem = this.Slot.Item;
+                    Slot.SetItem(i);
+                }*/
 
         /// <summary>
         /// method to swap the item in this slot with the item in the item bar slot with the given ID

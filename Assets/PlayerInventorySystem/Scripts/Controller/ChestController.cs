@@ -52,14 +52,13 @@ namespace PlayerInventorySystem
             gameObject.tag = "Chest";
         }
 
-
         public void DestroyChest()
         {
             foreach (Slot s in Inventory)
             {
                 if (s.Item != null)
                 {
-                    InventoryController.SpawnDroppedItem(s.Item.data.id, transform.position, s.ItemStackCount);
+                    InventoryController.Instance.SpawnDroppedItem(s.Item.data.id, transform.position, s.ItemStackCount);
                     s.SetItem(null);
                 }
             }

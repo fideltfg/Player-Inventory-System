@@ -7,7 +7,7 @@ using System.Security.Cryptography;
 /// <summary>
 /// Classes and methods to serialize and save invnetories and other data
 /// </summary>
-namespace PlayerInventorySystem.Serial
+namespace PlayerInventorySystem
 {
     public class Serializer
     {
@@ -186,7 +186,7 @@ namespace PlayerInventorySystem.Serial
             {
                 if (sWi.itemID > 0)
                 {
-                    InventoryController.SpawnDroppedItem(sWi.itemID, new Vector3(sWi.x, sWi.y + .25f, sWi.z), sWi.stackCount, sWi.TTL);
+                    InventoryController.Instance.SpawnDroppedItem(sWi.itemID, new Vector3(sWi.x, sWi.y + .25f, sWi.z), sWi.stackCount, sWi.TTL);
                 }
             }
         }
@@ -238,9 +238,9 @@ namespace PlayerInventorySystem.Serial
             }
 
             // collect data for dropped and spawned items
-            SerialDroppedItem[] sWorldItems = new SerialDroppedItem[InventoryController.DroppedItems.Count];
+            SerialDroppedItem[] sWorldItems = new SerialDroppedItem[InventoryController.Instance.DroppedItems.Count];
             int x = 0;
-            foreach (DroppedItem di in InventoryController.DroppedItems)
+            foreach (DroppedItem di in InventoryController.Instance.DroppedItems)
             {
                 sWorldItems[x] = new SerialDroppedItem()
                 {

@@ -52,7 +52,7 @@ namespace PlayerInventorySystem
         {
             if (timer >= TTL)
             {
-                InventoryController.DroppedItems.Remove(this);
+                InventoryController.Instance.DroppedItems.Remove(this);
                 Destroy(gameObject);
             }
             else
@@ -61,8 +61,5 @@ namespace PlayerInventorySystem
             }
             loadSpawnPoint = transform.position;
         }
-
-
-
     }
 }

@@ -150,7 +150,15 @@ namespace PlayerInventorySystem
             }
         }
 
-        internal static void Spawn(Item item, Vector3 position, Quaternion rotation, Vector3 scale)
+        /// <summary>
+        /// Method to place AN item in the world
+        /// </summary>
+        /// <param name="item"></param>
+        /// <param name="position"></param>
+        /// <param name="rotation"></param>
+        /// <param name="scale"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        internal static void Place(Item item, Vector3 position, Quaternion rotation, Vector3 scale)
         {
             switch (item.data.worldPrefab.tag.ToLower())
             {
@@ -160,7 +168,8 @@ namespace PlayerInventorySystem
                 default:
                     GameObject go = GameObject.Instantiate(item.data.worldPrefab, position, rotation);
                     PlacedItem pi = go.AddComponent<PlacedItem>();
-                    InventoryController.PlacedItems.Add(pi);
+                   // InventoryController.PlacedItems.Add(pi);
+                    InventoryController.OnPlaceItem(item, pi);
                     return;
             }
 

@@ -10,7 +10,7 @@ namespace PlayerInventorySystem
     /// </summary>
     public class InventorySystemPanel : MonoBehaviour
     {
-        internal int selectedSlotID;// the slot that is currently selected in this panel
+        private int selectedSlotID;// the slot that is currently selected in THIS panel
 
         /// <summary>
         /// ID of the slot the player has currently selected.
@@ -31,14 +31,12 @@ namespace PlayerInventorySystem
         }
 
         /// <summary>
-        /// The Slotcontroller of the currently selected slot.
+        /// The slot controller of the currently selected slot.
         /// </summary>
         public SlotController SelectedSlotController
         {
             get { return SlotList[SelectedSlotID]; }
         }
-
-
 
         /// <summary>
         /// Holds the GridLayoutGroup component, read only 
@@ -53,12 +51,12 @@ namespace PlayerInventorySystem
         /// <summary>
         /// Provides a list of all SlotController components of the slots on this panel
         /// </summary>
-        public List<SlotController> SlotList = new List<SlotController>();
+        internal List<SlotController> SlotList = new List<SlotController>();
 
         /// <summary>
         /// The index of the inventory this panel is displaying
         /// </summary>
-        public virtual int Index
+        internal virtual int Index
         {
             get { return index; }
             set
@@ -69,6 +67,7 @@ namespace PlayerInventorySystem
                 }
             }
         }
+
         private int index;
 
         public virtual void Update() { }
