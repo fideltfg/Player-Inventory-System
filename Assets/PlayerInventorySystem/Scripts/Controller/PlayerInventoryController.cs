@@ -221,6 +221,7 @@ namespace PlayerInventorySystem
                         InventoryController.Instance.OpenChest(hit.transform.gameObject.GetComponent<ChestController>());
                         break;
                     case "craftingtable":
+                        InventoryController.Instance.ToggleCraftingPanel();
                         break;
                     default:
                         Debug.Log("Place Item");

@@ -152,12 +152,17 @@ namespace PlayerInventorySystem
 
         internal static void Spawn(Item item, Vector3 position, Quaternion rotation, Vector3 scale)
         {
-            if (item.data.worldPrefab.CompareTag("Chest"))
+            switch (item.data.worldPrefab.tag.ToLower())
             {
-                _ = InventoryController.SpawnNewChest(item, null, position, rotation, scale);
-                return;
+                case "chest":
+                    _ = InventoryController.SpawnNewChest(item, null, position, rotation, scale);
+                    return;
+                default:
+                    GameObject go = GameObject.Instantiate(item.data.worldPrefab, position, rotation);
+                    PlacedItem pi = go.AddComponent<PlacedItem>();
+                    InventoryController.PlacedItems.Add(pi);
+                    return;
             }
-
 
             throw new NotImplementedException();
         }
