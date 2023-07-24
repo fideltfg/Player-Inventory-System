@@ -17,7 +17,7 @@ namespace PlayerInventorySystem
         /// <summary>
         /// The catalog ID of this item
         /// </summary>
-        public int id;
+        public int ID;
 
         /// <summary>
         /// A brife description of this item

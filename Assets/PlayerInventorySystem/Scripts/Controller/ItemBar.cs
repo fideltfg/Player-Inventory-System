@@ -97,12 +97,12 @@ namespace PlayerInventorySystem
         {
             if (SelectedSlotController.Slot.Item != null)
             {
-                switch (SelectedSlotController.Slot.Item.data.itemType)
+                switch (SelectedSlotController.Slot.Item.Data.itemType)
                 {
                     case ITEMTYPE.CONSUMABLE: // food water healt packs ect
                         Slot sS = SelectedSlotController.Slot;
 
-                        if (sS.ItemStackCount <= 0)
+                        if (sS.StackCount <= 0)
                         {
                             sS.SetItem(null);
                         }

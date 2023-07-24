@@ -17,21 +17,22 @@ namespace PlayerInventorySystem
         /// <summary>
         /// The stack count for the item
         /// </summary>
-        public int stackCount = 1;
+        public int StackCount = 1;
 
         /// <summary>
         /// The current durabilty value for this item.
         /// Does not apply if the stack count > 1
         /// </summary>
-        public float durabilty = 0;
+        public float Durability = 0;
 
 
         /// <summary>
         /// The amount of time this object will remain after being dropped befor despawning.
         /// </summary>
-        public float TTL = 30;
+        /// 
+        public float TimeToLive = 30;
 
-        public float timer = 0;
+        public float Timer = 0;
 
 
 
@@ -39,27 +40,27 @@ namespace PlayerInventorySystem
         /// holder for position data.
         /// used only when game loads saved inventory data. should be null otherwise.
         /// </summary>
-        public Vector3 loadSpawnPoint;
+        public Vector3 Position;
 
 
         private void OnEnable ()
         {
             gameObject.tag = "Item";
-            timer = 0;
+            Timer = 0;
         }
 
         private void Update ()
         {
-            if (timer >= TTL)
+            if (Timer >= TimeToLive)
             {
                 InventoryController.Instance.DroppedItems.Remove(this);
                 Destroy(gameObject);
             }
             else
             {
-                timer += Time.deltaTime;
+                Timer += Time.deltaTime;
             }
-            loadSpawnPoint = transform.position;
+            Position = transform.position;
         }
     }
 }

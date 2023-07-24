@@ -30,7 +30,7 @@ namespace PlayerInventorySystem
                 }
                 else
                 {
-                    image.sprite = heldItem.data.sprite;
+                    image.sprite = heldItem.Data.sprite;
                     text.text = heldItem.StackCount.ToString();
                     image.enabled = true;
                     if (heldItem.StackCount < 2)

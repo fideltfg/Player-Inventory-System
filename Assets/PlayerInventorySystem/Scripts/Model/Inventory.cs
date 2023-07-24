@@ -36,7 +36,7 @@ namespace PlayerInventorySystem
             {
                 return false;
             }
-            if (searchItem.data.id == slot.Item.data.id)
+            if (searchItem.Data.ID == slot.Item.Data.ID)
             {
                 return true;
             }
@@ -115,7 +115,7 @@ namespace PlayerInventorySystem
                 {
 
                     // move one item from the item stack in to the found stack with space until the stack is full or new item stack is empty
-                    while (slot.ItemStackCount < slot.Item.data.maxStackSize && item.StackCount > 0)
+                    while (slot.StackCount < slot.Item.Data.maxStackSize && item.StackCount > 0)
                     {
                         slot.IncermentStackCount(1);
                         item.AddToStack(-1);
@@ -185,7 +185,7 @@ namespace PlayerInventorySystem
                     {
                         if (s.Item != null)
                         {
-                            if (s.Item.data.id == slot.Item.data.id)
+                            if (s.Item.Data.ID == slot.Item.Data.ID)
                             {
                                 slots.Add(s);
                             }
@@ -196,7 +196,7 @@ namespace PlayerInventorySystem
                 if (slots.Count > 0)
                 {
                     Slot[] sA = slots.ToArray();
-                    Array.Sort(sA, delegate (Slot x, Slot y) { return x.ItemStackCount.CompareTo(y.ItemStackCount); });
+                    Array.Sort(sA, delegate (Slot x, Slot y) { return x.StackCount.CompareTo(y.StackCount); });
                     return sA;
                 }
                 else

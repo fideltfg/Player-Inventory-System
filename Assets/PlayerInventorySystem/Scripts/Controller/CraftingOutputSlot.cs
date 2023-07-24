@@ -13,10 +13,13 @@ namespace PlayerInventorySystem
     /// </summary>
     public class CraftingOutputSlot : SlotController, IPointerDownHandler
     {
-        public override void Update ()
+        public override void Update()
         {
+            GetComponentInParent<CraftingPanel>();
+
+
             base.Update();
-            Item craftedItem = GetItemByIngredients(GivenitemsAsIngredients());
+            Item craftedItem = GetItemByIngredients(GivenItemsAsRecipe(InventoryController.Instance.CraftingPanel.SlotList));
             Slot.SetItem(craftedItem);
         }
 
@@ -25,7 +28,7 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="ingredients"></param>
         /// <returns></returns>
-        private Item GetItemByIngredients (string ingredients)
+        private Item GetItemByIngredients(string ingredients)
         {
             if (ingredients.Length <= 0)
             {
@@ -45,48 +48,51 @@ namespace PlayerInventorySystem
 
 
         /// <summary>
-        /// Method to return the crafting code( aka ingredients ) for the items provided in the crafting slots
+        /// method to take the ingredients from the crafting panel and return them as a string 
+        /// that represents the recipe for the item the player is trying to craft.
         /// </summary>
-        /// <returns>returns the sting crafting code generated from the items provided</returns>
-        private string GivenitemsAsIngredients ()
+        /// 
+        private string GivenItemsAsRecipe(List<SlotController> ingredients)
         {
-            string r = "";
-            foreach (SlotController sc in InventoryController.Instance.CraftingPanel.SlotList)
+            string recipe = "";
+            //foreach (SlotController sc in InventoryController.Instance.CraftingPanel.SlotList)
+
+            foreach (SlotController sc in ingredients)
             {
                 if (sc.Slot.Item == null)
                 {
-                    r += "X";
+                    recipe += "X";
                 }
                 else
                 {
-                    string x = sc.Slot.Item.data.id.ToString();
+                    string x = sc.Slot.Item.Data.ID.ToString();
                     if ((x.Length & 1) != 0)
                     {
                         string c = x.PadLeft(2, '0');
-                        r += c;
+                        recipe += c;
                     }
                     else
                     {
-                        r += x;
+                        recipe += x;
                     }
                 }
             }
             char[] t = { 'X' };
-            return r.Trim(t);
+            return recipe.Trim(t);
         }
 
         /// <summary>
         /// consumes the items needed to craft the item in the output slot when the user picks it up.
         /// </summary>
         /// <param name="count">The number of consumptions</param>
-        private void Consume ()
+        private void Consume()
         {
             foreach (SlotController sc in InventoryController.Instance.CraftingPanel.SlotList)
             {
                 if (sc.Slot.Item != null)
                 {
                     sc.Slot.IncermentStackCount(-1);
-                    if (sc.Slot.ItemStackCount <= 0)
+                    if (sc.Slot.StackCount <= 0)
                     {
                         sc.Slot.SetItem(null);
                     }
@@ -95,7 +101,7 @@ namespace PlayerInventorySystem
             }
         }
 
-        public override void OnPointerDown (PointerEventData eventData)
+        public override void OnPointerDown(PointerEventData eventData)
         {
             // if there is an item in the output slot
             if (!Slot.IsEmpty && Slot.Item != null)
@@ -109,8 +115,8 @@ namespace PlayerInventorySystem
                         int craftCount = MaxCraftCount();
 
                         // calculate how many items can be fit in to the inventory
-                        int ItemBarSpaces = InventoryController.ItemBarInventory.EmptySlotCount * Slot.Item.data.maxStackSize;
-                        int inventorySpaces = InventoryController.PlayerInventory.EmptySlotCount * Slot.Item.data.maxStackSize;
+                        int ItemBarSpaces = InventoryController.ItemBarInventory.EmptySlotCount * Slot.Item.Data.maxStackSize;
+                        int inventorySpaces = InventoryController.PlayerInventory.EmptySlotCount * Slot.Item.Data.maxStackSize;
 
                         // limit the craft amount so they fit in the inventory spaces availiable
                         craftCount = Mathf.Clamp(craftCount, 0, inventorySpaces + ItemBarSpaces);
@@ -118,9 +124,9 @@ namespace PlayerInventorySystem
 
                         if (craftCount <= ItemBarSpaces)
                         {
-                            for (int i = 0; i < craftCount; i += Slot.Item.data.craftCount)
+                            for (int i = 0; i < craftCount; i += Slot.Item.Data.craftCount)
                             {
-                                if (InventoryController.ItemBarInventory.AddItem(Item.New(Slot.Item.data, Slot.Item.data.craftCount)))
+                                if (InventoryController.ItemBarInventory.AddItem(Item.New(Slot.Item.Data, Slot.Item.Data.craftCount)))
                                 {
                                     Consume();
                                 }
@@ -128,16 +134,16 @@ namespace PlayerInventorySystem
                         }
                         else
                         {
-                            for (int i = 0; i < ItemBarSpaces; i += Slot.Item.data.craftCount)
+                            for (int i = 0; i < ItemBarSpaces; i += Slot.Item.Data.craftCount)
                             {
-                                if (InventoryController.ItemBarInventory.AddItem(Item.New(Slot.Item.data, Slot.Item.data.craftCount)))
+                                if (InventoryController.ItemBarInventory.AddItem(Item.New(Slot.Item.Data, Slot.Item.Data.craftCount)))
                                 {
                                     Consume();
                                 }
                             }
-                            for (int i = 0; i < (craftCount - ItemBarSpaces); i += Slot.Item.data.craftCount)
+                            for (int i = 0; i < (craftCount - ItemBarSpaces); i += Slot.Item.Data.craftCount)
                             {
-                                if (InventoryController.PlayerInventory.AddItem(Item.New(Slot.Item.data, Slot.Item.data.craftCount)))
+                                if (InventoryController.PlayerInventory.AddItem(Item.New(Slot.Item.Data, Slot.Item.Data.craftCount)))
                                 {
                                     Consume();
                                 }
@@ -159,15 +165,15 @@ namespace PlayerInventorySystem
                 else
                 {
 
-                    if (HeldItem.data.id == Slot.Item.data.id)
+                    if (HeldItem.Data.ID == Slot.Item.Data.ID)
                     {
                         // and held stack is not full
-                        if (HeldItem.StackCount <= HeldItem.data.maxStackSize - Slot.Item.data.craftCount)
+                        if (HeldItem.StackCount <= HeldItem.Data.maxStackSize - Slot.Item.Data.craftCount)
                         {
                             // pick up more
                             Consume();
                             // heldItem.stackCount += Item.data.craftCount;
-                            HeldItem.AddToStack(Slot.Item.data.craftCount);
+                            HeldItem.AddToStack(Slot.Item.Data.craftCount);
                         }
                     }
                 }
@@ -178,7 +184,7 @@ namespace PlayerInventorySystem
         /// <summary>
         /// method to return the max number of items that can be crafted with the contents of the crafting array
         /// </summary>
-        private int MaxCraftCount ()
+        private int MaxCraftCount()
         {
             int c = 123456;
             foreach (SlotController slotController in InventoryController.Instance.CraftingPanel.SlotList)
@@ -196,14 +202,14 @@ namespace PlayerInventorySystem
             {
                 return 0;
             }
-            return c * this.Slot.Item.data.craftCount;
+            return c * this.Slot.Item.Data.craftCount;
         }
 
         /// <summary>
         /// Method to swap the item in the crafting slot with a slot on the itemBar
         /// </summary>
         /// <param name="ItemBarSlotID">The ID of the slot on the ItemBar t which this item is to be sent/swapped</param>
-        public override void SwapWithItemBarSlot (int ItemBarSlotID)
+        public override void SwapWithItemBarSlot(int ItemBarSlotID)
         {
 
             // if the target slot is empty
@@ -214,13 +220,13 @@ namespace PlayerInventorySystem
                 Consume();
             }
             // if the target slot has an item the same as this
-            else if (InventoryController.Instance.ItemBar.SlotList[ItemBarSlotID].Slot.Item.data.id == Slot.Item.data.id)
+            else if (InventoryController.Instance.ItemBar.SlotList[ItemBarSlotID].Slot.Item.Data.ID == Slot.Item.Data.ID)
             {
-                InventoryController.Instance.ItemBar.SlotList[ItemBarSlotID].Slot.Item.AddToStack(Slot.Item.data.craftCount);
+                InventoryController.Instance.ItemBar.SlotList[ItemBarSlotID].Slot.Item.AddToStack(Slot.Item.Data.craftCount);
                 InventoryController.Instance.ItemBar.SlotList[ItemBarSlotID].UpdateSlotUI();
                 Consume();
             }
-           
+
         }
 
     }

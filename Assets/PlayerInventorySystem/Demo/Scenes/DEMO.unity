@@ -738,12 +738,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1377618737}
   m_PrefabAsset: {fileID: 0}
---- !u!224 &499370914 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 224085299210073112, guid: c7b17ef35fcef6f4896787415cf3be2d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1872240497}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &503258199 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4329479000622866, guid: ccfa39634bf73e048bea743a18f8a1aa,
@@ -955,7 +949,7 @@ Transform:
   - {fileID: 755434008}
   - {fileID: 1155260009}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &638400984
 PrefabInstance:
@@ -1556,7 +1550,6 @@ Transform:
   - {fileID: 1159651259}
   - {fileID: 938015543}
   - {fileID: 521540775}
-  - {fileID: 499370914}
   - {fileID: 1606484451}
   m_Father: {fileID: 616512497}
   m_RootOrder: -1
@@ -1605,7 +1598,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1185678746
 MonoBehaviour:
@@ -3524,7 +3517,7 @@ PrefabInstance:
     - target: {fileID: 5580264832027028602, guid: 637a93bfc6def4b4aa67eb80f2be6c3a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5580264832027028602, guid: 637a93bfc6def4b4aa67eb80f2be6c3a,
         type: 3}
@@ -3613,7 +3606,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1155260009}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1080624122900734, guid: c7b17ef35fcef6f4896787415cf3be2d, type: 3}
       propertyPath: m_IsActive
@@ -3709,7 +3702,7 @@ PrefabInstance:
     - target: {fileID: 224085299210073112, guid: c7b17ef35fcef6f4896787415cf3be2d,
         type: 3}
       propertyPath: m_RootOrder
-      value: -1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224085299210073112, guid: c7b17ef35fcef6f4896787415cf3be2d,
         type: 3}
@@ -4838,5 +4831,5 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

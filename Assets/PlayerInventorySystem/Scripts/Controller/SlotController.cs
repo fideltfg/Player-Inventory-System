@@ -19,6 +19,7 @@ namespace PlayerInventorySystem
         /// <summary>
         /// The index of this slots inventory
         /// </summary>
+        [HideInInspector]
         public int Index = 0;
 
         /// <summary>
@@ -193,7 +194,7 @@ namespace PlayerInventorySystem
         /// <param name="slot"></param>
         internal void SetSlot(Slot slot)
         {
-            this.slotID = slot.slotID;
+            this.slotID = slot.SlotID;
             slot.RegisterSlotChangedCallback(OnSlotChanged);
             UpdateSlotUI();
         }
@@ -216,10 +217,10 @@ namespace PlayerInventorySystem
             InventoryController.Instance.ItemHolder.itemInfoBox.Show(null);
             if (Slot.Item != null)
             {
-                image.sprite = Slot.Item.data.sprite;
+                image.sprite = Slot.Item.Data.sprite;
                 image.enabled = true;
 
-                if (Slot.Item.data.maxStackSize > 1)
+                if (Slot.Item.Data.maxStackSize > 1)
                 {
                     // stackable items to NOT have durability so hide the dSlider
 
@@ -238,10 +239,10 @@ namespace PlayerInventorySystem
                 {
                     if (dSlider != null)
                     {
-                        if (Slot.Item.data.maxDurability > 0)
+                        if (Slot.Item.Data.maxDurability > 0)
                         {
-                            dSlider.maxValue = Slot.Item.data.maxDurability;
-                            dSlider.value = Slot.Item.durability;
+                            dSlider.maxValue = Slot.Item.Data.maxDurability;
+                            dSlider.value = Slot.Item.Durability;
                             dSlider.gameObject.SetActive(true);
                         }
                         else
@@ -340,10 +341,10 @@ namespace PlayerInventorySystem
                 if (Slot.Item != null)
                 {
                     // and the held Item is the same as the item in this slot
-                    if (HeldItem.data.id == Slot.Item.data.id)
+                    if (HeldItem.Data.ID == Slot.Item.Data.ID)
                     {
                         // if this stack is full
-                        if (Slot.Item.StackCount >= Slot.Item.data.maxStackSize)
+                        if (Slot.Item.StackCount >= Slot.Item.Data.maxStackSize)
                         {
                             // swap Items
                             Item i = HeldItem;
@@ -355,7 +356,7 @@ namespace PlayerInventorySystem
 
                             if (eventData.button == PointerEventData.InputButton.Left)
                             {
-                                while (HeldItem.StackCount > 0 && Slot.Item.StackCount < Slot.Item.data.maxStackSize)
+                                while (HeldItem.StackCount > 0 && Slot.Item.StackCount < Slot.Item.Data.maxStackSize)
                                 {
                                     HeldItem.AddToStack(-1);
                                     Slot.IncermentStackCount(1);
@@ -376,7 +377,7 @@ namespace PlayerInventorySystem
                     }
                     else
                     {
-                        if (HeldItem.data.slotType == Slot.SlotType || Slot.SlotType == SLOTTYPE.INVENTORY)
+                        if (HeldItem.Data.slotType == Slot.SlotType || Slot.SlotType == SLOTTYPE.INVENTORY)
                         {
                             // swap Items
                             Item i = HeldItem;
@@ -387,7 +388,7 @@ namespace PlayerInventorySystem
                 }
                 else if (Slot.Item == null) //  this slot has no item (empty)
                 {
-                    if (Slot.SlotType == HeldItem.data.slotType || Slot.SlotType == SLOTTYPE.INVENTORY)
+                    if (Slot.SlotType == HeldItem.Data.slotType || Slot.SlotType == SLOTTYPE.INVENTORY)
                     {
 
                         if (eventData.button == PointerEventData.InputButton.Left)
@@ -433,7 +434,7 @@ namespace PlayerInventorySystem
         {
             if (HeldItem != null)
             {
-                if (HeldItem.data.slotType == Slot.SlotType || Slot.SlotType == SLOTTYPE.INVENTORY)
+                if (HeldItem.Data.slotType == Slot.SlotType || Slot.SlotType == SLOTTYPE.INVENTORY)
                 {
                     outline.effectColor = ValidColor;
                 }
@@ -611,9 +612,9 @@ namespace PlayerInventorySystem
         bool MoveStackToCharacter()
         {
             // is there a slot of the correct type for this item free on the character panel?
-            if (this.Slot.Item.data.itemType == ITEMTYPE.WEARABLE)
+            if (this.Slot.Item.Data.itemType == ITEMTYPE.WEARABLE)
             {
-                switch (this.Slot.Item.data.slotType)
+                switch (this.Slot.Item.Data.slotType)
                 {
                     case SLOTTYPE.BODY:
                         if (InventoryController.Instance.CharacterPanel.BodySlot.Slot.Item == null)

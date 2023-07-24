@@ -82,14 +82,14 @@ namespace PlayerInventorySystem
             {
                 if (SlotController.Slot.Item != null)
                 {
-                    health += SlotController.Slot.Item.data.health;
-                    stamina += SlotController.Slot.Item.data.stamina;
-                    dexterity += SlotController.Slot.Item.data.dexterity;
-                    armor += SlotController.Slot.Item.data.armor;
-                    mana += SlotController.Slot.Item.data.mana;
-                    intelligence += SlotController.Slot.Item.data.intelligence;
-                    speed += SlotController.Slot.Item.data.speed;
-                    luck += SlotController.Slot.Item.data.luck;
+                    health += SlotController.Slot.Item.Data.health;
+                    stamina += SlotController.Slot.Item.Data.stamina;
+                    dexterity += SlotController.Slot.Item.Data.dexterity;
+                    armor += SlotController.Slot.Item.Data.armor;
+                    mana += SlotController.Slot.Item.Data.mana;
+                    intelligence += SlotController.Slot.Item.Data.intelligence;
+                    speed += SlotController.Slot.Item.Data.speed;
+                    luck += SlotController.Slot.Item.Data.luck;
                 }
             }
 

@@ -34,8 +34,8 @@ namespace PlayerInventorySystem
             if (item != null)
             {
                 gameObject.SetActive(true);
-                this.itemName.text = item.data.name;
-                this.description.text = item.data.description;
+                this.itemName.text = item.Data.name;
+                this.description.text = item.Data.description;
 
                 // add a list of item names that use this item in crafting
                 string[] uses = item.Uses;
@@ -53,33 +53,33 @@ namespace PlayerInventorySystem
                     }
                 }
 
-                this.image.sprite = item.data.sprite;
+                this.image.sprite = item.Data.sprite;
 
-                if (item.data.itemType == ITEMTYPE.CONSUMABLE)
+                if (item.Data.itemType == ITEMTYPE.CONSUMABLE)
                 {
                     this.dSlider.enabled = false;
                     gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(120, 110);
                     statsPanel.SetActive(false);
                 }
-                else if (item.data.itemType == ITEMTYPE.USABLE || item.data.itemType == ITEMTYPE.WEARABLE)
+                else if (item.Data.itemType == ITEMTYPE.USABLE || item.Data.itemType == ITEMTYPE.WEARABLE)
                 {
                     statsPanel.SetActive(true);
 
                     gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(120, 135);
-                    this.damage.text = item.data.damage.ToString();
+                    this.damage.text = item.Data.damage.ToString();
 
-                    this.speed.text = item.data.speed.ToString();
-                    this.health.text = item.data.health.ToString();
-                    this.stamina.text = item.data.stamina.ToString();
-                    this.mana.text = item.data.mana.ToString();
-                    this.armor.text = item.data.armor.ToString();
-                    this.intelligencs.text = item.data.intelligence.ToString();
-                    this.dexterity.text = item.data.dexterity.ToString();
+                    this.speed.text = item.Data.speed.ToString();
+                    this.health.text = item.Data.health.ToString();
+                    this.stamina.text = item.Data.stamina.ToString();
+                    this.mana.text = item.Data.mana.ToString();
+                    this.armor.text = item.Data.armor.ToString();
+                    this.intelligencs.text = item.Data.intelligence.ToString();
+                    this.dexterity.text = item.Data.dexterity.ToString();
 
                     this.dSlider.enabled = true;
-                    this.durability.text = item.durability.ToString() + "/" + item.data.maxDurability.ToString();
-                    this.dSlider.maxValue = item.data.maxDurability;
-                    this.dSlider.value = item.durability;
+                    this.durability.text = item.Durability.ToString() + "/" + item.Data.maxDurability.ToString();
+                    this.dSlider.maxValue = item.Data.maxDurability;
+                    this.dSlider.value = item.Durability;
 
                 }
             }

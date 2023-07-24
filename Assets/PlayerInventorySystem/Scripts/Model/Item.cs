@@ -13,7 +13,7 @@ namespace PlayerInventorySystem
         /// <summary>
         /// This items catalog entry is stored here
         /// </summary>
-        public ItemData data;
+        public ItemData Data;
 
         /// <summary>
         /// How many copies of this item are currently stacked here
@@ -23,14 +23,14 @@ namespace PlayerInventorySystem
         /// <summary>
         /// The current durability value of this item
         /// </summary>
-        public float durability = 0;
+        public float Durability = 0;
 
         /// <summary>
         /// indicates if the item can be stacked. 
         /// </summary>
         public bool Stackable
         {
-            get { return data.maxStackSize > 1; }
+            get { return Data.maxStackSize > 1; }
         }
 
         /// <summary>
@@ -70,9 +70,9 @@ namespace PlayerInventorySystem
         /// <param name="count"></param>
         public Item(ItemData data, int count)
         {
-            this.data = data;
+            this.Data = data;
             StackCount = Mathf.Clamp(count, 1, data.maxStackSize);
-            this.durability = this.data.maxDurability;
+            this.Durability = this.Data.maxDurability;
         }
 
         /// <summary>
@@ -82,9 +82,9 @@ namespace PlayerInventorySystem
         /// <param name="count"></param>
         public Item(int itemID, int count)
         {
-            this.data = InventoryController.Instance.ItemCatalog.list[itemID];
-            StackCount = Mathf.Clamp(count, 1, data.maxStackSize);
-            this.durability = this.data.maxDurability;
+            this.Data = InventoryController.Instance.ItemCatalog.list[itemID];
+            StackCount = Mathf.Clamp(count, 1, Data.maxStackSize);
+            this.Durability = this.Data.maxDurability;
         }
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace PlayerInventorySystem
         /// <returns></returns>
         public bool AddToStack(int quantity)
         {
-            if (quantity <= (data.maxStackSize - StackCount))
+            if (quantity <= (Data.maxStackSize - StackCount))
             {
                 StackCount += quantity;
                 return true;
@@ -109,9 +109,9 @@ namespace PlayerInventorySystem
         /// <returns>True if the value was succesfuly set. Else false</returns>
         public bool SetStackCount(int val)
         {
-            if (data.maxStackSize >= val)
+            if (Data.maxStackSize >= val)
             {
-                StackCount = Mathf.Clamp(val, 0, data.maxStackSize);
+                StackCount = Mathf.Clamp(val, 0, Data.maxStackSize);
                 return true;
             }
             Debug.LogWarning("SetStackCount value exceeds MaxStackSize!");
@@ -138,9 +138,9 @@ namespace PlayerInventorySystem
                 List<string> used = new List<string>();
                 foreach (ItemData data in InventoryController.Instance.ItemCatalog.list)
                 {
-                    if (data.id != this.data.id)
+                    if (data.ID != this.Data.ID)
                     {
-                        if (data.recipe.InRecipe(this.data.id))
+                        if (data.recipe.InRecipe(this.Data.ID))
                         {
                             used.Add(data.name);
                         }
@@ -160,13 +160,13 @@ namespace PlayerInventorySystem
         /// <exception cref="NotImplementedException"></exception>
         internal static void Place(Item item, Vector3 position, Quaternion rotation, Vector3 scale)
         {
-            switch (item.data.worldPrefab.tag.ToLower())
+            switch (item.Data.worldPrefab.tag.ToLower())
             {
                 case "chest":
                     _ = InventoryController.SpawnNewChest(item, null, position, rotation, scale);
                     return;
                 default:
-                    GameObject go = GameObject.Instantiate(item.data.worldPrefab, position, rotation);
+                    GameObject go = GameObject.Instantiate(item.Data.worldPrefab, position, rotation);
                     PlacedItem pi = go.AddComponent<PlacedItem>();
                    // InventoryController.PlacedItems.Add(pi);
                     InventoryController.OnPlaceItem(item, pi);

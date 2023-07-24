@@ -390,7 +390,7 @@ namespace PlayerInventorySystem
             {
                 foreach (Slot s in oldInventory)
                 {
-                    newInv[s.slotID] = s;
+                    newInv[s.SlotID] = s;
                 }
             }
             return newInv;
@@ -448,11 +448,11 @@ namespace PlayerInventorySystem
 
             if (g.TryGetComponent<DroppedItem>(out var di))
             {
-                di.ItemID = itemData.id;
+                di.ItemID = itemData.ID;
 
-                di.stackCount = quantity;
+                di.StackCount = quantity;
 
-                di.TTL = TTL;
+                di.TimeToLive = TTL;
 
                 DroppedItems.Add(di);
             }
@@ -500,7 +500,7 @@ namespace PlayerInventorySystem
         internal static ChestController SpawnNewChest(Item item, Inventory inventory, Vector3 position, Quaternion rotation, Vector3 scale)
         {
             // create and scale the chest
-            GameObject go = Instantiate(Instance.ItemCatalog.list[item.data.id].worldPrefab, position, rotation);
+            GameObject go = Instantiate(Instance.ItemCatalog.list[item.Data.ID].worldPrefab, position, rotation);
 
             go.transform.localScale = scale;
 
@@ -511,7 +511,7 @@ namespace PlayerInventorySystem
             cc.ChestID = GetNewChestID();
 
             // set the item catalog id
-            cc.ItemCatalogID = item.data.id;
+            cc.ItemCatalogID = item.Data.ID;
 
             // map the chest so it can be saved
             MapChest(cc);
@@ -551,7 +551,7 @@ namespace PlayerInventorySystem
             // register item in the world items list
             if (pi != null)
             {
-                pi.ItemID = item.data.id;
+                pi.ItemID = item.Data.ID;
 
                 PlacedItems.Add(pi);
 
@@ -705,7 +705,7 @@ namespace PlayerInventorySystem
                 Item item = ItemBar.SelectedSlotController.Slot.Item;
 
                 // If the item has a world prefab then place it in the world
-                if (item.data.worldPrefab != null)
+                if (item.Data.worldPrefab != null)
                 {
                     Item.Place(item, pos, rot, scale);
                 }

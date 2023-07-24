@@ -13,7 +13,7 @@ namespace PlayerInventorySystem
         /// <summary>
         /// The id or index of this slot in the inventory for the panel inwhic it exits.
         /// </summary>
-        public int slotID;
+        public int SlotID;
 
         /// <summary>
         /// the index of the panel inventory
@@ -41,7 +41,7 @@ namespace PlayerInventorySystem
         /// <summary>
         /// contains the stack count of the item in this slot. 0 if slot is empty
         /// </summary>
-        public int ItemStackCount
+        public int StackCount
         {
             get
             {
@@ -62,7 +62,7 @@ namespace PlayerInventorySystem
         /// <summary>
         /// True if the stack count of the item in this slot id >= the max stack count of the item contained in this slot.
         /// </summary>
-        public bool Isfull { get { return Item.StackCount >= Item.data.maxStackSize; } }
+        public bool Isfull { get { return Item.StackCount >= Item.Data.maxStackSize; } }
 
         /// <summary>
         /// construct take the id of the slot.
@@ -70,7 +70,7 @@ namespace PlayerInventorySystem
         /// <param name="slotID"></param>
         public Slot (int slotID)
         {
-            this.slotID = slotID;
+            this.SlotID = slotID;
             SlotType = SLOTTYPE.INVENTORY;
         }
 
@@ -85,7 +85,7 @@ namespace PlayerInventorySystem
             {
                 this.Item = null;
             }
-            else if (newItem.data.slotType == this.SlotType || this.SlotType == SLOTTYPE.INVENTORY)
+            else if (newItem.Data.slotType == this.SlotType || this.SlotType == SLOTTYPE.INVENTORY)
             {
                 this.Item = newItem;
             }
@@ -132,7 +132,7 @@ namespace PlayerInventorySystem
         /// <returns>true on success else false</returns>
         public bool IncermentStackCount (int val)
         {
-            return SetItemStackCount(ItemStackCount + val);
+            return SetItemStackCount(StackCount + val);
         }
 
         /// <summary>

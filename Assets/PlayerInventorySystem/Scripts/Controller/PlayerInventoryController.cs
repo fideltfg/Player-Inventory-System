@@ -92,7 +92,7 @@ namespace PlayerInventorySystem
                 return false;
             }
 
-            GiveItem(dorppedItem.ItemID, dorppedItem.stackCount);
+            GiveItem(dorppedItem.ItemID, dorppedItem.StackCount);
 
             GetComponent<AudioSource>().PlayOneShot(pickupSound);
 
@@ -130,7 +130,7 @@ namespace PlayerInventorySystem
         /// <param name="quantity"></param>
         internal void DropItem(Item item, int quantity = 1)
         {
-            InventoryController.Instance.SpawnDroppedItem(item.data.id, transform.position + new Vector3(0, 2, 2), quantity);
+            InventoryController.Instance.SpawnDroppedItem(item.Data.ID, transform.position + new Vector3(0, 2, 2), quantity);
         }
 
         /// <summary>
