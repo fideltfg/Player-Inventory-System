@@ -58,7 +58,7 @@ namespace PlayerInventorySystem
             {
                 if (s.Item != null)
                 {
-                    InventoryController.Instance.SpawnDroppedItem(s.Item.Data.ID, transform.position, s.StackCount);
+                    InventoryController.Instance.SpawnDroppedItem(s.Item.Data.id, transform.position, s.StackCount);
                     s.SetItem(null);
                 }
             }

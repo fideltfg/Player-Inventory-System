@@ -138,9 +138,9 @@ namespace PlayerInventorySystem
                 List<string> used = new List<string>();
                 foreach (ItemData data in InventoryController.Instance.ItemCatalog.list)
                 {
-                    if (data.ID != this.Data.ID)
+                    if (data.id != this.Data.id)
                     {
-                        if (data.recipe.InRecipe(this.Data.ID))
+                        if (data.recipe.InRecipe(this.Data.id))
                         {
                             used.Add(data.name);
                         }

@@ -1,4 +1,4 @@
-﻿namespace PlayerInventorySystem
+﻿namespace PlayerInventorySystem.Serial
 {
     using System;
     using UnityEngine;

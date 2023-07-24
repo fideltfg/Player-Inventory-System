@@ -65,7 +65,7 @@ namespace PlayerInventorySystem
                 }
                 else
                 {
-                    string x = sc.Slot.Item.Data.ID.ToString();
+                    string x = sc.Slot.Item.Data.id.ToString();
                     if ((x.Length & 1) != 0)
                     {
                         string c = x.PadLeft(2, '0');
@@ -165,7 +165,7 @@ namespace PlayerInventorySystem
                 else
                 {
 
-                    if (HeldItem.Data.ID == Slot.Item.Data.ID)
+                    if (HeldItem.Data.id == Slot.Item.Data.id)
                     {
                         // and held stack is not full
                         if (HeldItem.StackCount <= HeldItem.Data.maxStackSize - Slot.Item.Data.craftCount)
@@ -220,7 +220,7 @@ namespace PlayerInventorySystem
                 Consume();
             }
             // if the target slot has an item the same as this
-            else if (InventoryController.Instance.ItemBar.SlotList[ItemBarSlotID].Slot.Item.Data.ID == Slot.Item.Data.ID)
+            else if (InventoryController.Instance.ItemBar.SlotList[ItemBarSlotID].Slot.Item.Data.id == Slot.Item.Data.id)
             {
                 InventoryController.Instance.ItemBar.SlotList[ItemBarSlotID].Slot.Item.AddToStack(Slot.Item.Data.craftCount);
                 InventoryController.Instance.ItemBar.SlotList[ItemBarSlotID].UpdateSlotUI();

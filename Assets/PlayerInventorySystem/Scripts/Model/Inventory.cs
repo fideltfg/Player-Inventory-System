@@ -36,7 +36,7 @@ namespace PlayerInventorySystem
             {
                 return false;
             }
-            if (searchItem.Data.ID == slot.Item.Data.ID)
+            if (searchItem.Data.id == slot.Item.Data.id)
             {
                 return true;
             }
@@ -185,7 +185,7 @@ namespace PlayerInventorySystem
                     {
                         if (s.Item != null)
                         {
-                            if (s.Item.Data.ID == slot.Item.Data.ID)
+                            if (s.Item.Data.id == slot.Item.Data.id)
                             {
                                 slots.Add(s);
                             }

@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace PlayerInventorySystem
+namespace PlayerInventorySystem.Serial
 {
     /// <summary>
     /// Class to hold the details of a transform when saving.

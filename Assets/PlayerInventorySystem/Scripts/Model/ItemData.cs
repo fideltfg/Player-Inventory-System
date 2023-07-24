@@ -5,6 +5,10 @@ namespace PlayerInventorySystem
 
     /// <summary>
     /// Class to define an item's stats in the Item catalog
+    /// 
+    /// Becarful as changing these values will affect all items in the catalog and may cause data loss!
+    /// Unity or Visual Studio do not pass refacrtoring changes to the contents of the ItemCatalog.asset file.
+    /// You will need to update the contents of Assets/PlayerInventorySystem/ItemCatalog.asset manualy to reflect the change.
     /// </summary>
     [System.Serializable]
     public class ItemData
@@ -17,7 +21,7 @@ namespace PlayerInventorySystem
         /// <summary>
         /// The catalog ID of this item
         /// </summary>
-        public int ID;
+        public int id;
 
         /// <summary>
         /// A brife description of this item

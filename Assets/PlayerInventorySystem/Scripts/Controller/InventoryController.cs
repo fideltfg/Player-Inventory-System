@@ -448,7 +448,7 @@ namespace PlayerInventorySystem
 
             if (g.TryGetComponent<DroppedItem>(out var di))
             {
-                di.ItemID = itemData.ID;
+                di.ItemID = itemData.id;
 
                 di.StackCount = quantity;
 
@@ -471,7 +471,7 @@ namespace PlayerInventorySystem
         /// <param name="itemCatalogID"></param>
         /// <param name="inventory"></param>
         /// <param name="sTransform"></param>
-        internal static void SpawnSavedChest(int chestID, int itemCatalogID, Inventory inventory, SerialTransform sTransform)
+        internal static void SpawnSavedChest(int chestID, int itemCatalogID, Inventory inventory, Serial.SerialTransform sTransform)
         {
             Quaternion rotation = Quaternion.Euler(sTransform.Rotation);
 
@@ -484,6 +484,8 @@ namespace PlayerInventorySystem
             cc.ChestID = chestID;
 
             cc.ItemCatalogID = itemCatalogID;
+
+            cc.Inventory = inventory;
 
             MapChest(cc);
         }
@@ -500,7 +502,7 @@ namespace PlayerInventorySystem
         internal static ChestController SpawnNewChest(Item item, Inventory inventory, Vector3 position, Quaternion rotation, Vector3 scale)
         {
             // create and scale the chest
-            GameObject go = Instantiate(Instance.ItemCatalog.list[item.Data.ID].worldPrefab, position, rotation);
+            GameObject go = Instantiate(Instance.ItemCatalog.list[item.Data.id].worldPrefab, position, rotation);
 
             go.transform.localScale = scale;
 
@@ -511,7 +513,7 @@ namespace PlayerInventorySystem
             cc.ChestID = GetNewChestID();
 
             // set the item catalog id
-            cc.ItemCatalogID = item.Data.ID;
+            cc.ItemCatalogID = item.Data.id;
 
             // map the chest so it can be saved
             MapChest(cc);
@@ -551,7 +553,7 @@ namespace PlayerInventorySystem
             // register item in the world items list
             if (pi != null)
             {
-                pi.ItemID = item.Data.ID;
+                pi.ItemID = item.Data.id;
 
                 PlacedItems.Add(pi);
 
@@ -676,7 +678,7 @@ namespace PlayerInventorySystem
         /// <summary>
         /// method to display the chest Panel and the selected chest inventory
         /// </summary>
-       internal void OpenChest(ChestController chestController)
+        internal void OpenChest(ChestController chestController)
         {
             if (chestController != null)
             {
@@ -717,7 +719,7 @@ namespace PlayerInventorySystem
         /// </summary>
         public static void Save()
         {
-            Serializer.Save();
+            Serial.Serializer.Save();
         }
 
         /// <summary>
@@ -725,7 +727,7 @@ namespace PlayerInventorySystem
         /// </summary>
         public static void Load()
         {
-            Serializer.Load();
+            Serial.Serializer.Load();
         }
 
         private void OnApplicationQuit()

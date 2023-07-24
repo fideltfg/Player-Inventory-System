@@ -341,7 +341,7 @@ namespace PlayerInventorySystem
                 if (Slot.Item != null)
                 {
                     // and the held Item is the same as the item in this slot
-                    if (HeldItem.Data.ID == Slot.Item.Data.ID)
+                    if (HeldItem.Data.id == Slot.Item.Data.id)
                     {
                         // if this stack is full
                         if (Slot.Item.StackCount >= Slot.Item.Data.maxStackSize)
