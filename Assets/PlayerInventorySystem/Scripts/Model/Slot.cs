@@ -83,11 +83,11 @@ namespace PlayerInventorySystem
         {
             if (newItem == null)
             {
-                this.Item = null;
+                Item = null;
             }
             else if (newItem.Data.slotType == this.SlotType || this.SlotType == SLOTTYPE.INVENTORY)
             {
-                this.Item = newItem;
+                Item = newItem;
             }
 
             if (SlotChanged != null)
@@ -95,16 +95,16 @@ namespace PlayerInventorySystem
                 SlotChanged(this);
             }
 
-            if (this.selected)
+            if (selected)
             {
                 if (InventoryController.Instance.OnSelectedItemChangeCallBack != null)
                 {
-                    InventoryController.Instance.OnSelectedItemChangeCallBack(this.Item);
+                    InventoryController.Instance.OnSelectedItemChangeCallBack(Item);
                 }
                 
             }
 
-            return this.Item;
+            return Item;
         }
 
         /// <summary>

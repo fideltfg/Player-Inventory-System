@@ -163,18 +163,14 @@ namespace PlayerInventorySystem
             switch (item.Data.worldPrefab.tag.ToLower())
             {
                 case "chest":
-                    _ = InventoryController.SpawnNewChest(item, null, position, rotation, scale);
+                    _ = InventoryController.SpawnChest(InventoryController.GetNewChestID(), item.Data.id, position, rotation, scale);
                     return;
                 default:
                     GameObject go = GameObject.Instantiate(item.Data.worldPrefab, position, rotation);
                     PlacedItem pi = go.AddComponent<PlacedItem>();
-                   // InventoryController.PlacedItems.Add(pi);
                     InventoryController.OnPlaceItem(item, pi);
                     return;
             }
-
-            throw new NotImplementedException();
         }
-
     }
 }

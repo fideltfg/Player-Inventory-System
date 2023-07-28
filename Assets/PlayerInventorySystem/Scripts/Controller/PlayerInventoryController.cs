@@ -143,13 +143,14 @@ namespace PlayerInventorySystem
                 switch (hit.transform.tag.ToLower())
                 {
                     case "chest":
-                        InventoryController.Instance.OpenChest(hit.transform.gameObject.GetComponent<ChestController>());
+                        ChestController cc = hit.transform.GetComponent<ChestController>();
+                        InventoryController.Instance.OpenChest(cc);
                         break;
                     case "craftingtable":
                         InventoryController.Instance.ToggleCraftingPanel();
                         break;
                     default:
-                        Debug.Log("Place Item");
+                       // Debug.Log("Place Item");
                         InventoryController.Instance.PlaceItem(hit.point, Quaternion.identity, Vector3.one);
                         break;
                 }

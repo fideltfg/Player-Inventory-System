@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
-using System;
+
 
 namespace PlayerInventorySystem
 {
@@ -69,20 +68,7 @@ namespace PlayerInventorySystem
         {
             Index = chest.ChestID;
 
-            // if the chest inventory has not been created yet, create it
-            if (InventoryController.ChestInventories.ContainsKey(Index) == false)
-            {
-                InventoryController.ChestInventories[Index] = new Inventory(Index, chest.Capacity);
-            }
-
-            // Inventory inv = InventoryController.GetChestInventory(Index);
             Inventory inv = chest.Inventory;
-
-            if (inv == null)
-            {
-                Debug.LogError("Inventory is null");
-                return;
-            }
 
             for (int i = 0; i < chest.Capacity; i++)
             {
@@ -103,7 +89,7 @@ namespace PlayerInventorySystem
                 sc.gameObject.SetActive(false);
             }
             // close the chest lid
-            OpenChest(false);
+            OpenCloseChestLid(false);
 
             // discard the chest
             chest = null;
@@ -114,7 +100,7 @@ namespace PlayerInventorySystem
         /// method to open or close the chest lid
         /// </summary>
         /// <param name="v"></param>
-        public void OpenChest(bool v)
+        public void OpenCloseChestLid(bool v)
         {
             if (chest != null)
             {

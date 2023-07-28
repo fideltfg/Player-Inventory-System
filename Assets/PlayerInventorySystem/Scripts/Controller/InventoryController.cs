@@ -29,7 +29,7 @@ namespace PlayerInventorySystem
         /// The default capacity of the players inventory.
         /// must  have a  multiple of four slots (4, 8, 12, 16, 20 24....)
         /// </summary>
-        public int PlayerInventoryCapacity = 24;
+        public static int PlayerInventoryCapacity = 24;
 
         /// <summary>
         /// Set true to load saved inventory data on start
@@ -38,13 +38,13 @@ namespace PlayerInventorySystem
 
         /// <summary>
         /// Set true to save data to Application.persistentDataPath + "/Data/data.dat"
-        /// Only use this when you have configured your Unity Player settings  for publication
+        /// Only use this when you have configured your Unity Player settings for publication
+        /// keep false for testing in the editor.
         /// </summary>
         public bool UsePersistentDataPath = false;
 
         /// <summary>
-        /// Holder for all inventories in the system.
-        /// Does not include chest inventories.
+        /// Holder for all inventories in the system eccept for chests.
         /// </summary>
         internal static Dictionary<int, Inventory> InventoryList = new Dictionary<int, Inventory>();
 
@@ -464,6 +464,8 @@ namespace PlayerInventorySystem
             return true;
         }
 
+
+
         /// <summary>
         /// Method to spawn a chest that was previously saved.
         /// </summary>
@@ -471,66 +473,77 @@ namespace PlayerInventorySystem
         /// <param name="itemCatalogID"></param>
         /// <param name="inventory"></param>
         /// <param name="sTransform"></param>
-        internal static void SpawnSavedChest(int chestID, int itemCatalogID, Inventory inventory, Serial.SerialTransform sTransform)
+        internal static ChestController SpawnChest(int chestID, int itemCatalogID, Vector3 position, Quaternion rotation, Vector3 scale, Inventory inventory = null)
         {
-            Quaternion rotation = Quaternion.Euler(sTransform.Rotation);
+            //  Debug.Log("Spawning chest");
 
-            GameObject go = Instantiate(Instance.ItemCatalog.list[itemCatalogID].worldPrefab, sTransform.Position, rotation);
-
-            go.transform.localScale = sTransform.Scale;
-
-            ChestController cc = go.GetComponent<ChestController>();
-
-            cc.ChestID = chestID;
-
-            cc.ItemCatalogID = itemCatalogID;
-
-            cc.Inventory = inventory;
-
-            MapChest(cc);
-        }
-
-        /// <summary>
-        /// Method to spawn a new chest into the world.
-        /// </summary>
-        /// <param name="chestID"></param>
-        /// <param name="itemCatalogID"></param>
-        /// <param name="inventory"></param>
-        /// <param name="position"></param>
-        /// <param name="rotation"></param>
-        /// <param name="scale"></param>
-        internal static ChestController SpawnNewChest(Item item, Inventory inventory, Vector3 position, Quaternion rotation, Vector3 scale)
-        {
-            // create and scale the chest
-            GameObject go = Instantiate(Instance.ItemCatalog.list[item.Data.id].worldPrefab, position, rotation);
-
+            GameObject go = Instantiate(Instance.ItemCatalog.list[itemCatalogID].worldPrefab, position, rotation);
             go.transform.localScale = scale;
 
-            // set the chest properties
-            ChestController cc = go.GetComponent<ChestController>();
+            ChestController cc = go.AddComponent<ChestController>();
+            cc.ChestID = chestID;
+            cc.ItemCatalogID = itemCatalogID;
+            if (inventory != null)
+            {
+                cc.Inventory = inventory;
+            }
 
-            // generate a new chest id
-            cc.ChestID = GetNewChestID();
-
-            // set the item catalog id
-            cc.ItemCatalogID = item.Data.id;
-
-            // map the chest so it can be saved
             MapChest(cc);
-
-            OnPlaceItem(item, cc);
-
             return cc;
+
         }
 
+        /*        /// <summary>
+                /// Method to spawn a new chest into the world.
+                /// </summary>
+                /// <param name="chestID"></param>
+                /// <param name="itemCatalogID"></param>
+                /// <param name="inventory"></param>
+                /// <param name="position"></param>
+                /// <param name="rotation"></param>
+                /// <param name="scale"></param>
+                internal static ChestController SpawnNewChest(Item item, Inventory inventory, Vector3 position, Quaternion rotation, Vector3 scale)
+                {
+                    // create and scale the chest
+                    GameObject go = Instantiate(Instance.ItemCatalog.list[item.Data.id].worldPrefab, position, rotation);
+
+                    go.transform.localScale = scale;
+
+                    // set the chest properties
+                    ChestController cc = go.GetComponent<ChestController>();
+
+                    // generate a new chest id
+                    cc.ChestID = GetNewChestID();
+
+                    // set the item catalog id
+                    cc.ItemCatalogID = item.Data.id;
+
+                    cc.Inventory = inventory ?? new Inventory(cc.ChestID, cc.Capacity);
+
+                    // map the chest so it can be saved
+                    MapChest(cc);
+
+                    OnPlaceItem(item, cc);
+
+                    return cc;
+                }
+        */
         /// <summary>
         /// method to store a chest for saving
         /// </summary>
         /// <param name="cc"></param>
         internal static void MapChest(ChestController cc)
         {
-            ChestInventories.Add(cc.ChestID, cc.Inventory ?? new Inventory(cc.ChestID, cc.Capacity));
-            ChestMap.Add(cc.ChestID, cc.gameObject);
+            if (ChestInventories.ContainsKey(cc.ChestID) == false)
+            {
+                ChestInventories.Add(cc.ChestID, cc.Inventory);
+            }
+
+            if(ChestMap.ContainsKey(cc.ChestID) == false)
+            {
+                ChestMap.Add(cc.ChestID, cc.gameObject);
+            }   
+
         }
 
         /// <summary>
@@ -660,7 +673,6 @@ namespace PlayerInventorySystem
             }
         }
 
-
         /// <summary>
         /// method to return the inventory of the chest with the given id
         /// </summary>
@@ -684,7 +696,7 @@ namespace PlayerInventorySystem
             {
                 ChestPanel.Chest = chestController; // pass the selected chest to the chest panel
 
-                ChestPanel.OpenChest(true);
+                ChestPanel.OpenCloseChestLid(true);
 
                 ToggleChestPanel();
             }
@@ -734,6 +746,7 @@ namespace PlayerInventorySystem
         {
             Save();
         }
+
 
     }
 }

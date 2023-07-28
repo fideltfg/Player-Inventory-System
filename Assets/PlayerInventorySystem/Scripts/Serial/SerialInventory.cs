@@ -21,7 +21,7 @@
         /// <summary>
         /// An array of the slots that make up this inventory.
         /// </summary>
-        public SerialSlot[] Slots
+        public SerialSlot[] SerialSlots
         {
             get { return slots; }
             set { slots = value; }
@@ -32,15 +32,38 @@
         /// </summary>
         /// <param name="index">The index/ID of the inventory.</param>
         /// <param name="slots">An array of SerialSlot objects representing the slots in the inventory.</param>
-        public SerialInventory(int index, SerialSlot[] slots)
+        public SerialInventory(int index, SerialSlot[] slots = null)
         {
             Index = index;
-            Slots = slots;
+            if (slots != null)
+            {
+                SerialSlots = slots;
+            }
+            else
+            {
+                SerialSlots = new SerialSlot[InventoryController.PlayerInventoryCapacity];
+            }
         }
 
-        public SerialInventory()
+        public SerialInventory(Inventory inventory)
         {
+            if (inventory == null)
+            {
+                inventory = new Inventory(InventoryController.InventoryList.Count, InventoryController.PlayerInventoryCapacity);
+            }
+            
+            SerialSlots = new SerialSlot[inventory.Count];
+            for (int s = 0; s < SerialSlots.Length; s++)
+            {
+                if (inventory[s].Item != null)
+                {
+                    SerialSlots[s] = new SerialSlot(inventory[s].SlotID, inventory[s].Item.Data.id, inventory[s].StackCount, inventory[s].Item.Durability);
+                }
+                else
+                {
+                    SerialSlots[s] = new SerialSlot(inventory[s].SlotID, 0, 0, 0);
+                }
+            }
         }
     }
-
 }

@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System;
+using PlayerInventorySystem.Serial;
+using static UnityEditor.Experimental.GraphView.Port;
 
 namespace PlayerInventorySystem
 {
@@ -16,21 +18,57 @@ namespace PlayerInventorySystem
         public int Index { get; protected set; }
 
         /// <summary>
-        /// Inventory Constructor.
+        /// New Inventory Constructor.
         /// </summary>
         /// <param name="index">The index that this inventory will reside in the InventoryList of InventoryController</param>
         /// <param name="capacity">The number of slots availabile in this inventory.</param>
-        public Inventory (int index, int capacity)
+        internal Inventory(int index, int capacity)
         {
-            this.Index = index;
+            Index = index;
             for (int i = 0; i < capacity; i++)
             {
                 Add(new Slot(i) { index = this.Index });
             }
         }
 
+        /// <summary>
+        /// Inventory Constructor from Serial Inventory
+        /// </summary>
+        /// <param name="sInventory"></param>
+        internal Inventory(SerialInventory sInventory)
+        {
+            Debug.Log("Creating Inventory from SerialInventory");
+            if (sInventory == null)
+            {
+                Debug.Log("SerialInventory was null, creating new SerialInventory");
+                sInventory = new SerialInventory(InventoryController.InventoryList.Count, new SerialSlot[InventoryController.PlayerInventoryCapacity]);
+            }
+
+            // Set the index of this inventory to the index of the SerialInventory
+            Index = sInventory.Index;
+
+            // Create a new slot for each slot in the SerialInventory
+
+            for (int i = 0; i < sInventory.SerialSlots.Length; i++)
+            {
+                // Create a new slot for each slot in the SerialInventory
+                Add(new Slot(i) { index = this.Index });
+
+                // Set the items in the slots of this inventory to the items in the SerialInventory
+                SerialSlot sSlot = sInventory.SerialSlots[i];
+                if (sSlot.ItemID > 0)
+                {
+                    this[sSlot.SlotID].SetItem(new Item(sSlot.ItemID, sSlot.StackCount) { Durability = sSlot.Durability });
+                }
+                else
+                {
+                    this[sSlot.SlotID].SetItem(null);
+                }
+            }
+        }
+
         // Deligate to find stack of searchItem
-        bool FindItemStack (Slot slot)
+        bool FindItemStack(Slot slot)
         {
             if (slot.Item == null)
             {
@@ -43,12 +81,14 @@ namespace PlayerInventorySystem
             return false;
         }
         // Deligate to check if slot item's stack has space
-        bool SlotIsnotFull (Slot slot)
+
+        bool SlotIsnotFull(Slot slot)
         {
             return !slot.Isfull;
         }
         // Deligate to check if given slot is empty
-        bool SlotIsEmpty (Slot slot)
+
+        bool SlotIsEmpty(Slot slot)
         {
             return slot.IsEmpty;
         }
@@ -58,7 +98,7 @@ namespace PlayerInventorySystem
         /// If there are no empty slots this method will throw an exception.
         /// </summary>
         /// <param name="item">The Item to be placed in the inventory.</param>
-        public bool PlaceItemInNewSlot (Item item)
+        public bool PlaceItemInNewSlot(Item item)
         {
             Slot slot = Find(SlotIsEmpty);
             if (slot != null)
@@ -85,7 +125,7 @@ namespace PlayerInventorySystem
         /// Or if none exist it will be placed in an empty slot. If there are no empty slots this method will throw an exception.
         /// </summary>
         /// <param name="item">The item to be added.</param>
-        public bool AddItem (Item item)
+        public bool AddItem(Item item)
         {
 
             // if null item given return false
@@ -170,11 +210,11 @@ namespace PlayerInventorySystem
 
         /// <summary>
         /// Method to return an array of all the slots in this inventory that contain the item held in the given slot.
-        /// If the given slot is from this invnetory it will be excluded fromt he array.
+        /// If the given slot is from this invnetory it will be excluded from the array.
         /// </summary>
         /// <param name="slot">The slot containing the item to seach for.</param>
         /// <returns>Slot[]</returns>
-        public Slot[] GetSlotsWithItem (Slot slot)
+        public Slot[] GetSlotsWithItem(Slot slot)
         {
             if (slot.Item != null)
             {
@@ -210,6 +250,9 @@ namespace PlayerInventorySystem
             }
 
         }
+
+
+
 
     }
 }

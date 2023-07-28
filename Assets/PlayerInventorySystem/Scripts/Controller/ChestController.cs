@@ -19,13 +19,10 @@ namespace PlayerInventorySystem
         /// </summary>
         public int ItemCatalogID = 0;
 
-
         /// <summary>
         /// The number of slots in this chest
         /// </summary>
         public int Capacity = 24;
-
-
 
         /// <summary>
         /// points to InventoryController.ChestList entry for this chest.
@@ -39,17 +36,23 @@ namespace PlayerInventorySystem
                 {
                     InventoryController.ChestInventories[ChestID] = value;
                 }
-                else
-                {
-                    InventoryController.ChestInventories.Add(ChestID, value);
-                }
-
             }
         }
 
-        private void OnEnable()
+        private void Start()
         {
             gameObject.tag = "Chest";
+        }
+
+
+        private void OnEnable()
+        {
+            // initialize chest inventory
+            if (!InventoryController.ChestInventories.ContainsKey(ChestID))
+            {
+                InventoryController.ChestInventories.Add(ChestID, new Inventory(ChestID, 24));
+                InventoryController.ChestMap.Add(ChestID, gameObject);
+            }
         }
 
         public void DestroyChest()

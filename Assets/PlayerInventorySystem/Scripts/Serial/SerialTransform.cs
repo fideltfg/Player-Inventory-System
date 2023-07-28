@@ -9,31 +9,21 @@ namespace PlayerInventorySystem.Serial
     [Serializable]
     internal class SerialTransform
     {
-        [SerializeField]
-        public float positionX;
-        public float positionY;
-        public float positionZ;
-        public float rotationX;
-        public float rotationY;
-        public float rotationZ;
-        public float scaleX;
-        public float scaleY;
-        public float scaleZ;
+        [SerializeField] public float px;
+        [SerializeField] public float py;
+        [SerializeField] public float pz;
 
-        public Vector3 Position
-        {
-            get { return new Vector3(positionX, positionY, positionZ); }
-        }
+        [SerializeField] public float rx;
+        [SerializeField] public float ry;
+        [SerializeField] public float rz;
 
-        public Vector3 Rotation
-        {
-            get { return new Vector3(rotationX, rotationY, rotationZ); }
-        }
+        [SerializeField] public float sx;
+        [SerializeField] public float sy;
+        [SerializeField] public float sz;
 
-        public Vector3 Scale
-        {
-            get { return new Vector3(scaleX, scaleY, scaleZ); }
-        }
+        public Vector3 Position => new(px, py, pz);
+        public Vector3 Rotation => new(rx, ry, rz);
+        public Vector3 Scale => new(sx, sy, sz);
 
         /// <summary>
         /// Construst. Pass in the transform you wish to serailize
@@ -41,18 +31,19 @@ namespace PlayerInventorySystem.Serial
         /// <param name="t"></param>
         public SerialTransform(Transform t)
         {
-            positionX = t.position.x;
-            positionY = t.position.y;
-            positionZ = t.position.z;
+            px = t.position.x;
+            py = t.position.y;
+            pz = t.position.z;
 
-            rotationX = t.localRotation.eulerAngles.x;
-            rotationY = t.localRotation.eulerAngles.y;
-            rotationZ = t.localRotation.eulerAngles.z;
+            rx = t.localRotation.eulerAngles.x;
+            ry = t.localRotation.eulerAngles.y;
+            rz = t.localRotation.eulerAngles.z;
 
-            scaleX = t.localScale.x;
-            scaleY = t.localScale.y;
-            scaleZ = t.localScale.z;
+            sx = t.localScale.x;
+            sy = t.localScale.y;
+            sz = t.localScale.z;
         }
 
+        public SerialTransform() { }
     }
 }
