@@ -141,6 +141,7 @@ public class InputController : MonoBehaviour
     {
         if (ctx.performed)
         {
+            Debug.Log("Inventory Panel");
             InventoryController.Instance.ToggleInventoryPanel();
         }
     }

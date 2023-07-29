@@ -1,58 +1,65 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-
 namespace PlayerInventorySystem
 {
-
-    /// <summary>
-    /// Controller for Chest panel.
-    /// </summary>
+    // This class is responsible for controlling the chest panel in the game
     public class ChestPanel : InventorySystemPanel
     {
-
+        // Variable to store the reference to the chest
         ChestController chest;
 
-
-
-
+        // Property to get or set the Chest object
         public ChestController Chest
         {
             get { return chest; }
             set
             {
+                // If the chest is a new one
                 if (chest != value)
                 {
-                    chest = value; // save the chest locally
+                    // If we previously had a chest, close its lid
                     if (chest != null)
                     {
-                        Populate(chest); // populate the chest panel
+                        OpenCloseChestLid(false);
+                    }
+
+                    // Reference the new chest
+                    chest = value;
+
+                    // If the new chest is valid
+                    if (chest != null)
+                    {
+                        // Populate the panel with the chest's items
+                        Populate(chest);
+                        // Open the chest's lid
+                        OpenCloseChestLid(true);
                     }
                     else
                     {
+                        // Log an error if the chest is null
                         Debug.LogError("Chest is null");
                     }
                 }
             }
         }
 
+        // Method that runs when this object is enabled
         public override void OnEnable()
         {
-
+            // Setup the UI
             GridLayoutGroup.cellSize = SlotPrefab.GetComponent<RectTransform>().sizeDelta;
             GetComponent<ContentSizeFitter>().enabled = true;
 
             base.OnEnable();
-
         }
 
+        // Method to build the panel UI
         public override void Build(int InventoryIndex = 0)
         {
             Index = InventoryIndex;
 
-
-            // add 24 (the max slot count for chests ) slots to the panel
-            // these will be reused  for all chests displayed
+            // Create slots for the items in the chest
             for (int i = 0; i < 24; i++)
             {
                 GameObject go = GameObject.Instantiate(SlotPrefab, Vector3.zero, Quaternion.identity, transform);
@@ -64,51 +71,48 @@ namespace PlayerInventorySystem
             }
         }
 
+        // Method to populate the chest with items
         private void Populate(ChestController chest)
         {
             Index = chest.ChestID;
 
             Inventory inv = chest.Inventory;
 
+            // Iterate over each item in the chest and add it to a slot
             for (int i = 0; i < chest.Capacity; i++)
             {
-                SlotList[i].Index = Index; // set the SlotControllers new index
-                SlotList[i].SetSlot(inv[i]); // set the slot from the chest inventory
-                SlotList[i].gameObject.SetActive(true); // display the slot game object in the panel
+                SlotList[i].Index = Index;
+                SlotList[i].SetSlot(inv[i]);
+                SlotList[i].gameObject.SetActive(true);
             }
         }
 
+        // Method that runs when this object is disabled
         public override void OnDisable()
         {
-            // base.OnDisable();
-
-            // disable all slots in prep for next time the panel is displayed
+            // Disable all slots in preparation for the next time the panel is displayed
             foreach (SlotController sc in SlotList)
             {
                 sc.outline.enabled = false;
                 sc.gameObject.SetActive(false);
             }
-            // close the chest lid
+
+            // Close the chest lid
             OpenCloseChestLid(false);
 
-            // discard the chest
+            // Discard the chest
             chest = null;
-
         }
 
-        /// <summary>
-        /// method to open or close the chest lid
-        /// </summary>
-        /// <param name="v"></param>
+        // Method to open or close the chest lid
         public void OpenCloseChestLid(bool v)
         {
+            // If we have a valid chest
             if (chest != null)
             {
+                // Find the "Lid" child of the chest and set its "Open" state
                 chest.transform.Find("Lid").GetComponent<Animator>().SetBool("Open", v);
-            }
-            else
-            {
-                Debug.LogError("Chest is null");
+                chest.Open = v;
             }
         }
     }

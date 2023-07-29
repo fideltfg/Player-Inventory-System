@@ -164,6 +164,7 @@ namespace PlayerInventorySystem
             {
                 case "chest":
                     _ = InventoryController.SpawnChest(InventoryController.GetNewChestID(), item.Data.id, position, rotation, scale);
+                    InventoryController.OnPlaceItem(item);
                     return;
                 default:
                     GameObject go = GameObject.Instantiate(item.Data.worldPrefab, position, rotation);

@@ -6,10 +6,13 @@
     [Serializable]
     internal class SerialSaveDataObject
     {
+        [SerializeField] internal int PlayerInventoryCapacity;
         [SerializeField] private SerialInventory[] inventories;
         [SerializeField] private SerialChest[] chests;
         [SerializeField] private SerialRect[] panelLocations;
         [SerializeField] private SerialDroppedItem[] worldItems;
+
+        
 
         /// <summary>
         /// An array of all the inventories in the system serialized.

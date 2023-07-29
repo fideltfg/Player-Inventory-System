@@ -216,6 +216,9 @@ namespace PlayerInventorySystem
         }
 
 
+        
+
+
         /// <summary>
         /// Default time to live of items dropped by the player into the game world in seconds
         /// </summary>
@@ -487,47 +490,17 @@ namespace PlayerInventorySystem
             {
                 cc.Inventory = inventory;
             }
+            else
+            {
+                cc.Inventory = new Inventory(0, 24);
+            }
 
             MapChest(cc);
             return cc;
 
         }
 
-        /*        /// <summary>
-                /// Method to spawn a new chest into the world.
-                /// </summary>
-                /// <param name="chestID"></param>
-                /// <param name="itemCatalogID"></param>
-                /// <param name="inventory"></param>
-                /// <param name="position"></param>
-                /// <param name="rotation"></param>
-                /// <param name="scale"></param>
-                internal static ChestController SpawnNewChest(Item item, Inventory inventory, Vector3 position, Quaternion rotation, Vector3 scale)
-                {
-                    // create and scale the chest
-                    GameObject go = Instantiate(Instance.ItemCatalog.list[item.Data.id].worldPrefab, position, rotation);
 
-                    go.transform.localScale = scale;
-
-                    // set the chest properties
-                    ChestController cc = go.GetComponent<ChestController>();
-
-                    // generate a new chest id
-                    cc.ChestID = GetNewChestID();
-
-                    // set the item catalog id
-                    cc.ItemCatalogID = item.Data.id;
-
-                    cc.Inventory = inventory ?? new Inventory(cc.ChestID, cc.Capacity);
-
-                    // map the chest so it can be saved
-                    MapChest(cc);
-
-                    OnPlaceItem(item, cc);
-
-                    return cc;
-                }
-        */
         /// <summary>
         /// method to store a chest for saving
         /// </summary>
@@ -551,7 +524,7 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="item"></param>
         /// <param name="pi"></param>
-        internal static PlacedItem OnPlaceItem(Item item, PlacedItem pi)
+        internal static void OnPlaceItem(Item item, PlacedItem pi = null)
         {
             // remove the item from the players inventory
             Instance.ItemBar.SelectedSlotController.Slot.IncermentStackCount(-1);
@@ -569,15 +542,7 @@ namespace PlayerInventorySystem
                 pi.ItemID = item.Data.id;
 
                 PlacedItems.Add(pi);
-
-                return pi;
             }
-            else
-            {
-                Debug.LogError("Placed Item is null");
-            }
-
-            return null;
         }
 
         /// <summary>
@@ -613,6 +578,7 @@ namespace PlayerInventorySystem
         /// </summary>
         public void ToggleInventoryPanel()
         {
+            Debug.Log("Toggling Inventory Panel");
             InventoryPanel.gameObject.SetActive(!InventoryPanel.gameObject.activeInHierarchy);
         }
 
@@ -712,7 +678,7 @@ namespace PlayerInventorySystem
         /// </summary>
         internal void PlaceItem(Vector3 pos, Quaternion rot, Vector3 scale)
         {
-            // if the player right clicks on the ground then place the selected item in the world
+            // Check if the selected slot has an item
             if (ItemBar.SelectedSlotController.Slot.Item != null)
             {
                 // Get the selected item from the item bar

@@ -5,6 +5,7 @@ using System;
 using System.Security.Cryptography;
 using System.Linq;
 
+
 namespace PlayerInventorySystem.Serial
 {
     public class Serializer
@@ -44,7 +45,8 @@ namespace PlayerInventorySystem.Serial
         // Method used by InventoryController to save the inventory data
         internal static void Save()
         {
-            WriteToBinaryFile(InventorySaveLocation, GetSerializeGameData());
+            SerialSaveDataObject ssdo = GetSerializeGameData();
+            WriteToBinaryFile(InventorySaveLocation, ssdo);
         }
 
         // Method used by InventoryController to load the saved data file
@@ -107,22 +109,14 @@ namespace PlayerInventorySystem.Serial
             BinaryFormatter formatter = new();
             formatter.Serialize(s, objectToWrite);
 
-            // Close the file
+
+            // Serialize the object to JSON
+            string json = JsonUtility.ToJson(objectToWrite, true);
+
+            // Write the JSON to the file
+            File.WriteAllText(SavePath + "/data.json", json);
+
             s.Close();
-
-            // Close the file stream
-            fs.Close();
-
-            // Dispose of the crypto service provider
-            des.Dispose();
-
-            // Dispose of the crypto stream
-            s.Dispose();
-
-            // Dispose of the file stream
-            fs.Dispose();
-
-
 
         }
 
@@ -141,27 +135,23 @@ namespace PlayerInventorySystem.Serial
         // Helper method to load the serialized inventory data
         private static void LoadSerialInventoryData(SerialSaveDataObject data)
         {
-            SerialSaveDataObject ssdo = data;
-
             SerialInventory[] sInventories = data.Inventories;
             SerialChest[] sChests = data.Chests;
             SerialRect[] sPanels = data.PanelLocations;
             SerialDroppedItem[] sWorldItems = data.WorldItems;
 
-            Debug.Log("Loading Inventory Data");
+            // Debug.Log("Loading Inventory Data");
             // Load all inventories
 
             if (sInventories[0] != null)
             {
-                Debug.Log("ok 1");
                 if (sInventories[0].SerialSlots != null)
                 {
-                    Debug.Log("ok 2");
                     InventoryController.PlayerInventoryCapacity = sInventories[0].SerialSlots.Length;
                 }
                 else
                 {
-                    Debug.Log("ok 3");
+                    // REDUNDANT??
                     InventoryController.PlayerInventoryCapacity = 24;
                 }
             }
@@ -171,30 +161,30 @@ namespace PlayerInventorySystem.Serial
                 InventoryController.InventoryList[sInv.Index] = new Inventory(sInv);
             }
 
-            Debug.Log("Inventories Loaded");
+            //  Debug.Log("Inventories Loaded");
 
             Debug.Log("Loading Chest Data");
             // Load saved chests
             foreach (SerialChest sc in sChests)
             {
-                _ = InventoryController.SpawnChest(sc.ChestID, sc.ItemCatalogID, sc.Transform.Position, Quaternion.Euler(sc.Transform.Rotation), sc.Transform.Scale);
+                _ = InventoryController.SpawnChest(sc.ChestID, sc.ItemCatalogID, sc.Transform.Position, Quaternion.Euler(sc.Transform.Rotation), sc.Transform.Scale, new Inventory(sc.Inventory));
             }
             Debug.Log("Chests Loaded");
 
-            Debug.Log("Loading Panel Data");
+            //Debug.Log("Loading Panel Data");
             // Load panel locations
-
             for (int i = 0; i < panels.Length; i++)
             {
                 if (panels[i].TryGetComponent<RectTransform>(out RectTransform rt))
                 {
-                    rt.sizeDelta = sPanels[i].Size;
-                    rt.position = sPanels[i].Position;
+                    // DISABLED FOR NOW
+                    // rt.sizeDelta = sPanels[i].Size;
+                    // rt.position = sPanels[i].Position;
                 }
             }
-            Debug.Log("Panels Loaded");
+            // Debug.Log("Panels Loaded");
 
-            Debug.Log("Loading World Item Data");
+            // Debug.Log("Loading World Item Data");
             // Load and spawn dropped items
             foreach (SerialDroppedItem sWi in sWorldItems)
             {
@@ -203,19 +193,22 @@ namespace PlayerInventorySystem.Serial
                     InventoryController.Instance.SpawnDroppedItem(sWi.ItemID, sWi.Position, sWi.StackCount, sWi.TimeToLive);
                 }
             }
-          //  Debug.Log("World Items Loaded");
-         //   Debug.Log("Inventory Data Loaded *************************************************************");
+            //  Debug.Log("World Items Loaded");
+            //   Debug.Log("Inventory Data Loaded *************************************************************");
         }
 
         // Helper method to get the serialized inventory data
         private static SerialSaveDataObject GetSerializeGameData()
         {
-         //   Debug.Log("Collecting Data to Save");
+            //   Debug.Log("Collecting Data to Save");
+
+            //   Debug.Log("Collecting Inventories");
             Inventory[] inventories = InventoryController.InventoryList.Values.ToArray();
+            int playerInventoryCapacity = InventoryController.PlayerInventoryCapacity;
             SerialInventory[] sInventories = new SerialInventory[inventories.Length];
 
             // Convert each inventory to SerialInventory
-         //   Debug.Log("Collecting Inventories");
+
             foreach (Inventory inventory in inventories)
             {
                 sInventories[inventory.Index] = new SerialInventory(inventory);
@@ -263,7 +256,9 @@ namespace PlayerInventorySystem.Serial
                 x++;
             }
 
-            return new SerialSaveDataObject(sInventories, sChests, sPanelLocations, sWorldItems);
+            SerialSaveDataObject ssdo = new SerialSaveDataObject(sInventories, sChests, sPanelLocations, sWorldItems);
+            ssdo.PlayerInventoryCapacity = playerInventoryCapacity;
+            return ssdo;
         }
 
     }

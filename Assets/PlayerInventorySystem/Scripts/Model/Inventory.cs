@@ -37,7 +37,7 @@ namespace PlayerInventorySystem
         /// <param name="sInventory"></param>
         internal Inventory(SerialInventory sInventory)
         {
-            Debug.Log("Creating Inventory from SerialInventory");
+            Debug.Log("Creating Inventory from SerialInventory " + sInventory.Index);
             if (sInventory == null)
             {
                 Debug.Log("SerialInventory was null, creating new SerialInventory");
@@ -48,7 +48,6 @@ namespace PlayerInventorySystem
             Index = sInventory.Index;
 
             // Create a new slot for each slot in the SerialInventory
-
             for (int i = 0; i < sInventory.SerialSlots.Length; i++)
             {
                 // Create a new slot for each slot in the SerialInventory
