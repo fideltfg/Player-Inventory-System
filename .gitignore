@@ -59,3 +59,10 @@ sysinfo.txt
 crashlytics-build.properties
 
 /UserSettings/Layouts/default-2022.dwlt
+/Assets/TextMesh Pro
+*.meta
+/Data/data.dat
+/UserSettings/Layouts/CurrentMaximizeLayout.dwlt
+/UserSettings/EditorUserSettings.asset
+/Assets/WindowsBeLike/Fonts
+/Assets/WindowsBeLike
