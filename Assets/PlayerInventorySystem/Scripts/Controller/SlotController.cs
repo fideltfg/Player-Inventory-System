@@ -796,13 +796,13 @@ namespace PlayerInventorySystem
             HeldItem = this.Slot.Item;
             Slot.SetItem(null);
         }
-        /*
-                void SwapItems()
-                {
-                    Item i = HeldItem;
-                    HeldItem = this.Slot.Item;
-                    Slot.SetItem(i);
-                }*/
+
+        void SwapItems()
+        {
+            Item i = HeldItem;
+            HeldItem = this.Slot.Item;
+            Slot.SetItem(i);
+        }
 
         /// <summary>
         /// method to swap the item in this slot with the item in the item bar slot with the given ID
@@ -814,10 +814,6 @@ namespace PlayerInventorySystem
             InventoryController.ItemBarInventory[ItemBarSlotID].SetItem(null);
             InventoryController.ItemBarInventory[ItemBarSlotID].SetItem(Slot.Item);
             InventoryController.Instance.OnSelectedItemChangeCallBack?.Invoke(InventoryController.Instance.ItemBar.SelectedSlotController.Slot.Item);
-            /*if (InventoryController.Instance.OnSelectedItemChangeCallBack != null)
-            {
-                InventoryController.Instance.OnSelectedItemChangeCallBack(InventoryController.Instance.ItemBar.SelectedSlotController.Slot.Item);
-            }*/
             Slot.SetItem(i);
         }
 

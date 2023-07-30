@@ -82,7 +82,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Aim"",
+                    ""name"": ""Focus"",
                     ""type"": ""Button"",
                     ""id"": ""97275a99-1a0d-457f-b1e4-67d2165c965a"",
                     ""expectedControlType"": ""Button"",
@@ -136,7 +136,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Drop"",
+                    ""name"": ""Alt Interact"",
                     ""type"": ""Button"",
                     ""id"": ""6b9cae38-35c2-46dc-b21a-837c2544fdb2"",
                     ""expectedControlType"": ""Button"",
@@ -420,7 +420,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Drop"",
+                    ""action"": ""Alt Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -431,7 +431,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Drop"",
+                    ""action"": ""Alt Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -486,7 +486,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Aim"",
+                    ""action"": ""Focus"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -497,7 +497,7 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Aim"",
+                    ""action"": ""Focus"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -1184,13 +1184,13 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         m_Player_TurnRight = m_Player.FindAction("TurnRight", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Interactuse = m_Player.FindAction("Interact/use", throwIfNotFound: true);
-        m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
+        m_Player_Focus = m_Player.FindAction("Focus", throwIfNotFound: true);
         m_Player_Escape = m_Player.FindAction("Escape", throwIfNotFound: true);
         m_Player_SelectPreviousItem = m_Player.FindAction("Select Previous Item", throwIfNotFound: true);
         m_Player_SelectNextItem = m_Player.FindAction("Select Next Item", throwIfNotFound: true);
         m_Player_OpenInventoryPanel = m_Player.FindAction("Open Inventory Panel", throwIfNotFound: true);
         m_Player_OpenCharacterPanel = m_Player.FindAction("Open Character Panel", throwIfNotFound: true);
-        m_Player_Drop = m_Player.FindAction("Drop", throwIfNotFound: true);
+        m_Player_AltInteract = m_Player.FindAction("Alt Interact", throwIfNotFound: true);
         m_Player_RotationX = m_Player.FindAction("Rotation X", throwIfNotFound: true);
         m_Player_RotationY = m_Player.FindAction("Rotation Y", throwIfNotFound: true);
         m_Player_SwitchAim = m_Player.FindAction("SwitchAim", throwIfNotFound: true);
@@ -1274,13 +1274,13 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_TurnRight;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Interactuse;
-    private readonly InputAction m_Player_Aim;
+    private readonly InputAction m_Player_Focus;
     private readonly InputAction m_Player_Escape;
     private readonly InputAction m_Player_SelectPreviousItem;
     private readonly InputAction m_Player_SelectNextItem;
     private readonly InputAction m_Player_OpenInventoryPanel;
     private readonly InputAction m_Player_OpenCharacterPanel;
-    private readonly InputAction m_Player_Drop;
+    private readonly InputAction m_Player_AltInteract;
     private readonly InputAction m_Player_RotationX;
     private readonly InputAction m_Player_RotationY;
     private readonly InputAction m_Player_SwitchAim;
@@ -1295,13 +1295,13 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         public InputAction @TurnRight => m_Wrapper.m_Player_TurnRight;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Interactuse => m_Wrapper.m_Player_Interactuse;
-        public InputAction @Aim => m_Wrapper.m_Player_Aim;
+        public InputAction @Focus => m_Wrapper.m_Player_Focus;
         public InputAction @Escape => m_Wrapper.m_Player_Escape;
         public InputAction @SelectPreviousItem => m_Wrapper.m_Player_SelectPreviousItem;
         public InputAction @SelectNextItem => m_Wrapper.m_Player_SelectNextItem;
         public InputAction @OpenInventoryPanel => m_Wrapper.m_Player_OpenInventoryPanel;
         public InputAction @OpenCharacterPanel => m_Wrapper.m_Player_OpenCharacterPanel;
-        public InputAction @Drop => m_Wrapper.m_Player_Drop;
+        public InputAction @AltInteract => m_Wrapper.m_Player_AltInteract;
         public InputAction @RotationX => m_Wrapper.m_Player_RotationX;
         public InputAction @RotationY => m_Wrapper.m_Player_RotationY;
         public InputAction @SwitchAim => m_Wrapper.m_Player_SwitchAim;
@@ -1333,9 +1333,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @Interactuse.started += instance.OnInteractuse;
             @Interactuse.performed += instance.OnInteractuse;
             @Interactuse.canceled += instance.OnInteractuse;
-            @Aim.started += instance.OnAim;
-            @Aim.performed += instance.OnAim;
-            @Aim.canceled += instance.OnAim;
+            @Focus.started += instance.OnFocus;
+            @Focus.performed += instance.OnFocus;
+            @Focus.canceled += instance.OnFocus;
             @Escape.started += instance.OnEscape;
             @Escape.performed += instance.OnEscape;
             @Escape.canceled += instance.OnEscape;
@@ -1351,9 +1351,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @OpenCharacterPanel.started += instance.OnOpenCharacterPanel;
             @OpenCharacterPanel.performed += instance.OnOpenCharacterPanel;
             @OpenCharacterPanel.canceled += instance.OnOpenCharacterPanel;
-            @Drop.started += instance.OnDrop;
-            @Drop.performed += instance.OnDrop;
-            @Drop.canceled += instance.OnDrop;
+            @AltInteract.started += instance.OnAltInteract;
+            @AltInteract.performed += instance.OnAltInteract;
+            @AltInteract.canceled += instance.OnAltInteract;
             @RotationX.started += instance.OnRotationX;
             @RotationX.performed += instance.OnRotationX;
             @RotationX.canceled += instance.OnRotationX;
@@ -1388,9 +1388,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @Interactuse.started -= instance.OnInteractuse;
             @Interactuse.performed -= instance.OnInteractuse;
             @Interactuse.canceled -= instance.OnInteractuse;
-            @Aim.started -= instance.OnAim;
-            @Aim.performed -= instance.OnAim;
-            @Aim.canceled -= instance.OnAim;
+            @Focus.started -= instance.OnFocus;
+            @Focus.performed -= instance.OnFocus;
+            @Focus.canceled -= instance.OnFocus;
             @Escape.started -= instance.OnEscape;
             @Escape.performed -= instance.OnEscape;
             @Escape.canceled -= instance.OnEscape;
@@ -1406,9 +1406,9 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
             @OpenCharacterPanel.started -= instance.OnOpenCharacterPanel;
             @OpenCharacterPanel.performed -= instance.OnOpenCharacterPanel;
             @OpenCharacterPanel.canceled -= instance.OnOpenCharacterPanel;
-            @Drop.started -= instance.OnDrop;
-            @Drop.performed -= instance.OnDrop;
-            @Drop.canceled -= instance.OnDrop;
+            @AltInteract.started -= instance.OnAltInteract;
+            @AltInteract.performed -= instance.OnAltInteract;
+            @AltInteract.canceled -= instance.OnAltInteract;
             @RotationX.started -= instance.OnRotationX;
             @RotationX.performed -= instance.OnRotationX;
             @RotationX.canceled -= instance.OnRotationX;
@@ -1564,13 +1564,13 @@ public partial class @InputMaster: IInputActionCollection2, IDisposable
         void OnTurnRight(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnInteractuse(InputAction.CallbackContext context);
-        void OnAim(InputAction.CallbackContext context);
+        void OnFocus(InputAction.CallbackContext context);
         void OnEscape(InputAction.CallbackContext context);
         void OnSelectPreviousItem(InputAction.CallbackContext context);
         void OnSelectNextItem(InputAction.CallbackContext context);
         void OnOpenInventoryPanel(InputAction.CallbackContext context);
         void OnOpenCharacterPanel(InputAction.CallbackContext context);
-        void OnDrop(InputAction.CallbackContext context);
+        void OnAltInteract(InputAction.CallbackContext context);
         void OnRotationX(InputAction.CallbackContext context);
         void OnRotationY(InputAction.CallbackContext context);
         void OnSwitchAim(InputAction.CallbackContext context);

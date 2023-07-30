@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
+using UnityEngine.UIElements;
+using PlayerInventorySystem.Serial;
+using static UnityEditor.PlayerSettings;
+using static UnityEditor.Progress;
 
 ///*********************************************************************************
 /// Player Inventorty System
@@ -122,12 +126,12 @@ namespace PlayerInventorySystem
             {
                 if (value != null)
                 {
-                    Cursor.visible = false;
+                    UnityEngine.Cursor.visible = false;
                     Instance.dropPanel.gameObject.SetActive(true);
                 }
                 else
                 {
-                    Cursor.visible = true;
+                    UnityEngine.Cursor.visible = true;
                     Instance.dropPanel.gameObject.SetActive(false);
                 }
                 InventoryList[4][0].SetItem(value);
@@ -216,7 +220,7 @@ namespace PlayerInventorySystem
         }
 
 
-        
+
 
 
         /// <summary>
@@ -409,11 +413,11 @@ namespace PlayerInventorySystem
 
             dropPanel.gameObject.SetActive(true); // turn on the drop panel
 
-            Cursor.lockState = CursorLockMode.None; // unlock the mouse
+            UnityEngine.Cursor.lockState = CursorLockMode.None; // unlock the mouse
 
             if (HeldItem == null)
             {
-                Cursor.visible = true; // show the mouse
+                UnityEngine.Cursor.visible = true; // show the mouse
             }
         }
 
@@ -467,8 +471,6 @@ namespace PlayerInventorySystem
             return true;
         }
 
-
-
         /// <summary>
         /// Method to spawn a chest that was previously saved.
         /// </summary>
@@ -485,7 +487,8 @@ namespace PlayerInventorySystem
 
             ChestController cc = go.AddComponent<ChestController>();
             cc.ChestID = chestID;
-            cc.ItemCatalogID = itemCatalogID;
+            cc.ItemID = itemCatalogID;
+            //   cc.Panel = Instance.ChestPanel;
             if (inventory != null)
             {
                 cc.Inventory = inventory;
@@ -500,6 +503,16 @@ namespace PlayerInventorySystem
 
         }
 
+        internal static CraftingTableController SpawnCraftingTable(int itemID, Vector3 position, Quaternion rotation, Vector3 scale)
+        {
+            GameObject go = Instantiate(Instance.ItemCatalog.list[itemID].worldPrefab, position, rotation);
+            go.transform.localScale = scale;
+            CraftingTableController cTc = go.AddComponent<CraftingTableController>();
+            cTc.ItemID = itemID;
+            //   cTc.Panel = Instance.CraftingPanel;
+            return cTc;
+
+        }
 
         /// <summary>
         /// method to store a chest for saving
@@ -512,10 +525,10 @@ namespace PlayerInventorySystem
                 ChestInventories.Add(cc.ChestID, cc.Inventory);
             }
 
-            if(ChestMap.ContainsKey(cc.ChestID) == false)
+            if (ChestMap.ContainsKey(cc.ChestID) == false)
             {
                 ChestMap.Add(cc.ChestID, cc.gameObject);
-            }   
+            }
 
         }
 
@@ -523,25 +536,31 @@ namespace PlayerInventorySystem
         /// Method called when player places an item to register item to be saved. 
         /// </summary>
         /// <param name="item"></param>
-        /// <param name="pi"></param>
-        internal static void OnPlaceItem(Item item, PlacedItem pi = null)
+        /// <param name="placedItem"></param>
+        internal static void OnPlaceItem(Item item, PlacedItem placedItem = null, bool consume = true)
         {
-            // remove the item from the players inventory
-            Instance.ItemBar.SelectedSlotController.Slot.IncermentStackCount(-1);
-
-            // if the item stack count is 0 then remove the item from the slot
-            if (Instance.ItemBar.SelectedSlotController.Slot.Item.StackCount <= 0)
+            if (consume)
             {
-                // remove the item from the slot
-                Instance.ItemBar.SelectedSlotController.Slot.SetItem(null);
+                // remove the item from the players inventory
+                Instance.ItemBar.SelectedSlotController.Slot.IncermentStackCount(-1);
+
+                // if the item stack count is 0 then remove the item from the slot
+                if (Instance.ItemBar.SelectedSlotController.Slot.Item.StackCount <= 0)
+                {
+                    // remove the item from the slot
+                    Instance.ItemBar.SelectedSlotController.Slot.SetItem(null);
+                }
             }
 
-            // register item in the world items list
-            if (pi != null)
+            // if the placed item is not null then add it to the placed items list
+            if (placedItem != null)
             {
-                pi.ItemID = item.Data.id;
+                placedItem.ItemID = item.Data.id;
 
-                PlacedItems.Add(pi);
+                // if the plased item is craftingtable then set its pan
+
+
+                PlacedItems.Add(placedItem);
             }
         }
 
@@ -572,7 +591,6 @@ namespace PlayerInventorySystem
             return true;
         }
 
-
         /// <summary>
         /// method to toggle the inventory panel
         /// </summary>
@@ -590,17 +608,14 @@ namespace PlayerInventorySystem
             CharacterPanel.gameObject.SetActive(!CharacterPanel.gameObject.activeInHierarchy);
         }
 
-        /// <summary>
-        /// method to toggle the crafting panel
-        /// </summary>
-        public void ToggleCraftingPanel()
-        {
-            CraftingPanel.gameObject.SetActive(!CraftingPanel.gameObject.activeInHierarchy);
-        }
-
         public void ToggleChestPanel()
         {
             ChestPanel.gameObject.SetActive(!ChestPanel.gameObject.activeInHierarchy);
+        }
+
+        public void ToggleCraftingPanel()
+        {
+            CraftingPanel.gameObject.SetActive(!CraftingPanel.gameObject.activeInHierarchy);
         }
         /// <summary>
         /// method to toggle the item bar
@@ -661,10 +676,8 @@ namespace PlayerInventorySystem
             if (chestController != null)
             {
                 ChestPanel.Chest = chestController; // pass the selected chest to the chest panel
-
                 ChestPanel.OpenCloseChestLid(true);
-
-                ToggleChestPanel();
+                ChestPanel.gameObject.SetActive(true);
             }
             else
             {
@@ -672,6 +685,24 @@ namespace PlayerInventorySystem
             }
         }
 
+
+        /// <summary>
+        /// method to toggle the crafting panel
+        /// </summary>
+        public void OpenCraftingTable(CraftingTableController cTc)
+        {
+            if (cTc != null)
+            {
+                CraftingPanel.CraftingTable = cTc; // pass the selected chest to the chest panel
+                CraftingPanel.gameObject.SetActive(true);
+
+                 
+            }
+            else
+            {
+                Debug.LogError("CraftingTableController is null");
+            }
+        }
 
         /// <summary>
         /// Method to place the currently selected item from the itembar in the world

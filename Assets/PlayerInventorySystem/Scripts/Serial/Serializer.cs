@@ -4,6 +4,8 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System;
 using System.Security.Cryptography;
 using System.Linq;
+using static UnityEditor.Progress;
+using UnityEngine.UIElements;
 
 
 namespace PlayerInventorySystem.Serial
@@ -138,7 +140,8 @@ namespace PlayerInventorySystem.Serial
             SerialInventory[] sInventories = data.Inventories;
             SerialChest[] sChests = data.Chests;
             SerialRect[] sPanels = data.PanelLocations;
-            SerialDroppedItem[] sWorldItems = data.WorldItems;
+            SerialDroppedItem[] sDroppedItems = data.DroppedItems;
+            SerialPlacedItem[] sPlacedItems = data.PlacedItems;
 
             // Debug.Log("Loading Inventory Data");
             // Load all inventories
@@ -161,17 +164,12 @@ namespace PlayerInventorySystem.Serial
                 InventoryController.InventoryList[sInv.Index] = new Inventory(sInv);
             }
 
-            //  Debug.Log("Inventories Loaded");
-
-            Debug.Log("Loading Chest Data");
             // Load saved chests
             foreach (SerialChest sc in sChests)
             {
-                _ = InventoryController.SpawnChest(sc.ChestID, sc.ItemCatalogID, sc.Transform.Position, Quaternion.Euler(sc.Transform.Rotation), sc.Transform.Scale, new Inventory(sc.Inventory));
+                _ = InventoryController.SpawnChest(sc.ChestID, sc.ItemID, sc.Transform.Position, Quaternion.Euler(sc.Transform.Rotation), sc.Transform.Scale, new Inventory(sc.Inventory));
             }
-            Debug.Log("Chests Loaded");
 
-            //Debug.Log("Loading Panel Data");
             // Load panel locations
             for (int i = 0; i < panels.Length; i++)
             {
@@ -182,19 +180,40 @@ namespace PlayerInventorySystem.Serial
                     // rt.position = sPanels[i].Position;
                 }
             }
-            // Debug.Log("Panels Loaded");
 
-            // Debug.Log("Loading World Item Data");
             // Load and spawn dropped items
-            foreach (SerialDroppedItem sWi in sWorldItems)
+            foreach (SerialDroppedItem sdi in sDroppedItems)
             {
-                if (sWi.ItemID > 0)
+                if (sdi.ItemID > 0)
                 {
-                    InventoryController.Instance.SpawnDroppedItem(sWi.ItemID, sWi.Position, sWi.StackCount, sWi.TimeToLive);
+                    InventoryController.Instance.SpawnDroppedItem(sdi.ItemID, sdi.Position, sdi.StackCount, sdi.TimeToLive);
                 }
             }
-            //  Debug.Log("World Items Loaded");
-            //   Debug.Log("Inventory Data Loaded *************************************************************");
+
+            // load and spawn placed items
+            foreach (SerialPlacedItem spi in sPlacedItems)
+            {
+                Item item = Item.New(spi.ItemID);
+                if (item.Data.worldPrefab != null)
+                {
+                    switch (item.Data.worldPrefab.tag.ToLower())
+                    {
+                        case "chest":
+                            _ = InventoryController.SpawnChest(InventoryController.GetNewChestID(), spi.ItemID, spi.Transform.Position, Quaternion.Euler(spi.Transform.Rotation), spi.Transform.Scale);
+                            InventoryController.OnPlaceItem(item, null, false);
+                            break;
+                        case "craftingtable":
+                            CraftingTableController cTc = InventoryController.SpawnCraftingTable(spi.ItemID, spi.Transform.Position, Quaternion.Euler(spi.Transform.Rotation), spi.Transform.Scale);
+                            InventoryController.OnPlaceItem(item, cTc, false);
+                            break;
+                        default:
+                            Item.Place(item, spi.Transform.Position, Quaternion.Euler(spi.Transform.Rotation), spi.Transform.Scale);
+                            break;
+                    }
+
+                }
+
+            }
         }
 
         // Helper method to get the serialized inventory data
@@ -206,6 +225,7 @@ namespace PlayerInventorySystem.Serial
             Inventory[] inventories = InventoryController.InventoryList.Values.ToArray();
             int playerInventoryCapacity = InventoryController.PlayerInventoryCapacity;
             SerialInventory[] sInventories = new SerialInventory[inventories.Length];
+
 
             // Convert each inventory to SerialInventory
 
@@ -220,12 +240,12 @@ namespace PlayerInventorySystem.Serial
             int ii = 0;
             foreach (GameObject chestObject in InventoryController.ChestMap.Values)
             {
-                //  Debug.Log("Converting Chest " + ii + " to SerialChest");
                 ChestController cc = chestObject.GetComponent<ChestController>();
-                SerialTransform st = new(cc.transform);
-                SerialInventory si = new(cc.Inventory);
-
-                sChests[ii] = new SerialChest(cc.ChestID, cc.ItemCatalogID, st, si);
+                sChests[ii] = new SerialChest(cc.ItemID, new(cc.transform))
+                {
+                    Inventory = new(cc.Inventory),
+                    ChestID = cc.ChestID
+                };
                 ii++;
             }
 
@@ -247,16 +267,27 @@ namespace PlayerInventorySystem.Serial
 
             // Collect data for dropped and spawned items
             // Debug.Log("Collecting Dropped Items");
-            SerialDroppedItem[] sWorldItems = new SerialDroppedItem[InventoryController.Instance.DroppedItems.Count];
+            SerialDroppedItem[] sDroppedItems = new SerialDroppedItem[InventoryController.Instance.DroppedItems.Count];
             int x = 0;
             foreach (DroppedItem di in InventoryController.Instance.DroppedItems)
             {
                 //  Debug.Log("Converting Dropped Item " + di.name + " to SerialDroppedItem");
-                sWorldItems[x] = new SerialDroppedItem(di.ItemID, di.StackCount, di.Durability, di.TimeToLive - di.Timer, di.transform.position);
+                sDroppedItems[x] = new SerialDroppedItem(di.ItemID, di.StackCount, di.Durability, di.TimeToLive - di.Timer, di.transform.position);
                 x++;
             }
 
-            SerialSaveDataObject ssdo = new SerialSaveDataObject(sInventories, sChests, sPanelLocations, sWorldItems);
+            // Collect data for placed items
+            SerialPlacedItem[] sPlacedItems = new SerialPlacedItem[InventoryController.PlacedItems.Count];
+            int p = 0;
+            foreach (PlacedItem pi in InventoryController.PlacedItems)
+            {
+                //  Debug.Log("Converting Placed Item " + pi.name + " to SerialPlacedItem");
+                sPlacedItems[p] = new SerialPlacedItem(pi.ItemID, new SerialTransform(pi.transform));
+                p++;
+            }
+
+            SerialSaveDataObject ssdo = new SerialSaveDataObject(sInventories, sChests, sPanelLocations, sDroppedItems, sPlacedItems);
+
             ssdo.PlayerInventoryCapacity = playerInventoryCapacity;
             return ssdo;
         }

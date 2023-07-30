@@ -9,7 +9,7 @@ public class InputController : MonoBehaviour
     [HideInInspector]
     public float YRotation = 0;
 
-    private bool aiming = false;
+    private bool focus = false;
 
     public void OnEscape(InputAction.CallbackContext ctx)
     {
@@ -90,7 +90,7 @@ public class InputController : MonoBehaviour
         if (ctx.performed)
         {
             // if aiming
-            if (aiming)
+            if (focus)
             {
                 InventoryController.Instance.PlayerIC.Interact();
                 // place the currently select item into the world
@@ -107,17 +107,25 @@ public class InputController : MonoBehaviour
         }
     }
 
-    public void OnAim(InputAction.CallbackContext ctx)
+    public void OnAltInteract(InputAction.CallbackContext ctx)
     {
         if (ctx.performed)
         {
-            PlayerController.instance.OnAim(true);
-            aiming = true;
+            InventoryController.Instance.ItemBar.DropSelectedItem();
+        }
+    }
+
+    public void OnFocus(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed)
+        {
+            PlayerController.instance.OnFocus(true);
+            focus = true;
         }
         else if (ctx.canceled)
         {
-            PlayerController.instance.OnAim(false);
-            aiming = false;
+            PlayerController.instance.OnFocus(false);
+            focus = false;
         }
     }
 
@@ -154,13 +162,7 @@ public class InputController : MonoBehaviour
         }
     }
 
-    public void OnPressDrop(InputAction.CallbackContext ctx)
-    {
-        if (ctx.performed)
-        {
-            InventoryController.Instance.ItemBar.DropSelectedItem();
-        }
-    }
+
 
     public void OnRotationX(InputAction.CallbackContext ctx)
     {

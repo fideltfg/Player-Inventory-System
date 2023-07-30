@@ -60,7 +60,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Aim",
+                    "name": "Focus",
                     "type": "Button",
                     "id": "97275a99-1a0d-457f-b1e4-67d2165c965a",
                     "expectedControlType": "Button",
@@ -114,7 +114,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Drop",
+                    "name": "Alt Interact",
                     "type": "Button",
                     "id": "6b9cae38-35c2-46dc-b21a-837c2544fdb2",
                     "expectedControlType": "Button",
@@ -398,7 +398,7 @@
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
-                    "action": "Drop",
+                    "action": "Alt Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -409,7 +409,7 @@
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
-                    "action": "Drop",
+                    "action": "Alt Interact",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -464,7 +464,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Aim",
+                    "action": "Focus",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -475,7 +475,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Aim",
+                    "action": "Focus",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

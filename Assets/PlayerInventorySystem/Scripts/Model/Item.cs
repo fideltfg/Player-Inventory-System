@@ -151,7 +151,9 @@ namespace PlayerInventorySystem
         }
 
         /// <summary>
-        /// Method to place AN item in the world
+        /// Method to place AN item in the world and consume it from the inventory
+        /// 
+        /// dont use this for loading from serial data
         /// </summary>
         /// <param name="item"></param>
         /// <param name="position"></param>
@@ -165,12 +167,18 @@ namespace PlayerInventorySystem
                 case "chest":
                     _ = InventoryController.SpawnChest(InventoryController.GetNewChestID(), item.Data.id, position, rotation, scale);
                     InventoryController.OnPlaceItem(item);
-                    return;
+                    break;
+
+                case "craftingtable":
+                    CraftingTableController cTc = InventoryController.SpawnCraftingTable(item.Data.id, position, rotation, scale);
+                    InventoryController.OnPlaceItem(item, cTc);
+                    break;
+
                 default:
                     GameObject go = GameObject.Instantiate(item.Data.worldPrefab, position, rotation);
                     PlacedItem pi = go.AddComponent<PlacedItem>();
-                    InventoryController.OnPlaceItem(item, pi);
-                    return;
+                    InventoryController.OnPlaceItem(item, pi, false);
+                    break;
             }
         }
     }

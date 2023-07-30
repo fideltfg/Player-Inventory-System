@@ -11,9 +11,6 @@
         [SerializeField] private float durability;
         [SerializeField] private float timeToLive;
         [SerializeField] private Vector3 position;
-        [SerializeField] private float x;
-        [SerializeField] private float y;
-        [SerializeField] private float z;
 
         /// <summary>
         /// The ID of the dropped item.

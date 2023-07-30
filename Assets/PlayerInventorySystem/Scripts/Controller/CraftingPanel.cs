@@ -14,6 +14,8 @@ namespace PlayerInventorySystem
     {
         public SlotController outputSlot;
 
+        public CraftingTableController CraftingTable;
+
         public override void OnDisable ()
         {
             // move remaining items back to the inventory

@@ -147,10 +147,13 @@ namespace PlayerInventorySystem
                         InventoryController.Instance.OpenChest(cc);
                         break;
                     case "craftingtable":
-                        InventoryController.Instance.ToggleCraftingPanel();
+                        Debug.Log("Crafting Table");
+                        CraftingTableController cTc = hit.transform.GetComponent<CraftingTableController>();
+                        cTc.Panel = InventoryController.Instance.CraftingPanel;
+                        InventoryController.Instance.OpenCraftingTable(cTc);
                         break;
                     default:
-                       // Debug.Log("Place Item");
+                        // Debug.Log("Place Item");
                         InventoryController.Instance.PlaceItem(hit.point, Quaternion.identity, Vector3.one);
                         break;
                 }

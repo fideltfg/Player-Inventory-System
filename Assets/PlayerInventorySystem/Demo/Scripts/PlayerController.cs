@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    public void OnAim(bool aim)
+    public void OnFocus(bool aim)
     {
         AimBehaviourBasic abb = GetComponent<AimBehaviourBasic>();
 

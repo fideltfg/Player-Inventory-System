@@ -37,10 +37,10 @@ namespace PlayerInventorySystem
         /// <param name="sInventory"></param>
         internal Inventory(SerialInventory sInventory)
         {
-            Debug.Log("Creating Inventory from SerialInventory " + sInventory.Index);
+           // Debug.Log("Creating Inventory from SerialInventory " + sInventory.Index);
             if (sInventory == null)
             {
-                Debug.Log("SerialInventory was null, creating new SerialInventory");
+              //  Debug.Log("SerialInventory was null, creating new SerialInventory");
                 sInventory = new SerialInventory(InventoryController.InventoryList.Count, new SerialSlot[InventoryController.PlayerInventoryCapacity]);
             }
 

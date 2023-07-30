@@ -93,6 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4692186590314166}
   - component: {fileID: 65959899307049580}
+  - component: {fileID: 747690732497083783}
   m_Layer: 6
   m_Name: Small Chest
   m_TagString: Chest
@@ -137,6 +138,27 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: -0.5, y: 0.5, z: -0.5}
+--- !u!135 &747690732497083783
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1199596462942388}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 2
   m_Center: {x: -0.5, y: 0.5, z: -0.5}
 --- !u!1 &1301318133671958
 GameObject:

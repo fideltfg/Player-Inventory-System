@@ -10,9 +10,10 @@
         [SerializeField] private SerialInventory[] inventories;
         [SerializeField] private SerialChest[] chests;
         [SerializeField] private SerialRect[] panelLocations;
-        [SerializeField] private SerialDroppedItem[] worldItems;
+        [SerializeField] private SerialDroppedItem[] droppedItems;
+        [SerializeField] private SerialPlacedItem[] placedItems;
 
-        
+
 
         /// <summary>
         /// An array of all the inventories in the system serialized.
@@ -44,10 +45,16 @@
         /// <summary>
         /// An array of all the dropped or spawned items in the game world at save time serialized.
         /// </summary>
-        public SerialDroppedItem[] WorldItems
+        public SerialDroppedItem[] DroppedItems
         {
-            get { return worldItems; }
-            set { worldItems = value; }
+            get { return droppedItems; }
+            set { droppedItems = value; }
+        }
+
+        public SerialPlacedItem[] PlacedItems
+        {
+            get { return placedItems; }
+            set { placedItems = value; }
         }
 
         /// <summary>
@@ -56,13 +63,14 @@
         /// <param name="inventories">An array of SerialInventory objects representing the inventories in the system.</param>
         /// <param name="chests">An array of SerialChest objects representing the chests in the system.</param>
         /// <param name="panelLocations">An array of SerialRect objects representing the panel locations in the system.</param>
-        /// <param name="worldItems">An array of SerialDroppedItem objects representing the dropped or spawned items in the game world.</param>
-        public SerialSaveDataObject(SerialInventory[] inventories, SerialChest[] chests, SerialRect[] panelLocations, SerialDroppedItem[] worldItems)
+        /// <param name="droppedItems">An array of SerialDroppedItem objects representing the dropped or spawned items in the game world.</param>
+        public SerialSaveDataObject(SerialInventory[] inventories, SerialChest[] chests, SerialRect[] panelLocations, SerialDroppedItem[] droppedItems, SerialPlacedItem[] placedItems)
         {
             Inventories = inventories;
             Chests = chests;
             PanelLocations = panelLocations;
-            WorldItems = worldItems;
+            DroppedItems = droppedItems;
+            PlacedItems = placedItems;
         }
     }
 

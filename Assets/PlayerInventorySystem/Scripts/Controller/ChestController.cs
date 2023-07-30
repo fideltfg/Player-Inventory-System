@@ -6,7 +6,7 @@ namespace PlayerInventorySystem
     /// <summary>
     /// Controller for chest objects. Place this compentent of object you wish to set up as a chest.
     /// </summary>
-    public class ChestController : PlacedItem
+    public class ChestController : Interactive
     {
 
         /// <summary>
@@ -15,16 +15,9 @@ namespace PlayerInventorySystem
         public int ChestID = 0;
 
         /// <summary>
-        /// this is the item ID for this chest in the item catalog.
-        /// </summary>
-        public int ItemCatalogID = 0;
-
-        /// <summary>
         /// The number of slots in this chest
         /// </summary>
         public int Capacity = 24;
-
-        public int ChestRange = 3;
 
         public bool Open = false;
 
@@ -45,16 +38,26 @@ namespace PlayerInventorySystem
         }
 
 
-        private void Update()
+        public override void Update()
         {
             // if the chest is open test if the player is winthin range and if not close the chest
-            if (Open && Vector3.Distance(transform.position, InventoryController.Instance.Player.transform.position) > ChestRange)
+            if (Open && Vector3.Distance(transform.position, InventoryController.Instance.Player.transform.position) > Radius)
             {
+                // trigger the lid closing animation
                 transform.Find("Lid").GetComponent<Animator>().SetBool("Open", false);
-                InventoryController.Instance.ChestPanel.gameObject.SetActive(false);
+
+                // close the chest panel
+                ClosePanel();
             }
         }
 
+        internal override void ClosePanel()
+        {
+            if (InventoryController.Instance.ChestPanel != null)
+            {
+                InventoryController.Instance.ChestPanel.gameObject.SetActive(false);
+            }
+        }
 
 
         private void OnEnable()
@@ -62,7 +65,6 @@ namespace PlayerInventorySystem
             // initialize chest inventory
             if (!InventoryController.ChestInventories.ContainsKey(ChestID))
             {
-                Debug.Log("ChestController: ChestID " + ChestID + " not found in ChestInventories, creating new inventory");
                 InventoryController.ChestInventories.Add(ChestID, new Inventory(ChestID, 24));
                 InventoryController.ChestMap.Add(ChestID, gameObject);
             }
