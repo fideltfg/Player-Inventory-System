@@ -59,13 +59,13 @@ namespace PlayerInventorySystem
 
         public Dictionary<string, float> buffValues = new Dictionary<string, float>();
 
- 
+
 
         /// <summary>
         /// method to update both the UI stats and the buffValues list
         /// </summary>
         /// <param name="slot">Can be null required only because this is used as a call backon the slots to update the stats</param>
-        public void UpdateStats (Slot slot)
+        public void UpdateStats(Slot slot)
         {
             // get default values
             float health = baseHealth;
@@ -113,13 +113,16 @@ namespace PlayerInventorySystem
             buffValues["Speed"] = baseSpeed;
             buffValues["Luck"] = baseLuck;
 
+            // invloke callback to let other scripts know the stats have changed
+            InventoryController.Instance.OnCharacterItemChangeCallBack?.Invoke();
+
 
         }
 
-        public override void Build (int InventoryIndex)
+        public override void Build(int InventoryIndex)
         {
             base.Build(InventoryIndex);
-           
+
             Inventory CharacterInventory = InventoryController.CharacterInventory;
 
             buffValues.Add("Health", baseHealth);
@@ -129,7 +132,7 @@ namespace PlayerInventorySystem
             buffValues.Add("Mana", baseArmor);
             buffValues.Add("Intelligance", baseIntelligence);
             buffValues.Add("Speed", baseSpeed);
-            buffValues.Add("Luck", baseLuck);   
+            buffValues.Add("Luck", baseLuck);
 
 
             HeadSlot.Index = this.Index;

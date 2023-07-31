@@ -205,6 +205,10 @@ namespace PlayerInventorySystem
         public Action<Item> OnItemDroppedCallBack;
 
         /// <summary>
+        /// callback for when an item on the character panel is changed
+        public Action OnCharacterItemChangeCallBack;
+
+        /// <summary>
         /// Indicates if any of the inventory system Panels are currently being displayed.
         /// </summary>
         public bool AnyWindowOpen
@@ -346,6 +350,21 @@ namespace PlayerInventorySystem
                 }
             }
         }
+
+        // add register callbacks for oncharacter item change
+        public static void RegisterOnCharacterItemChangeCallback(Action callback)
+        {
+            Instance.OnCharacterItemChangeCallBack += callback;
+        }
+
+        public static void UnregisterOnCharacterItemChangeCallback(Action callback)
+        {
+            if (Instance.OnCharacterItemChangeCallBack != null)
+            {
+                Instance.OnCharacterItemChangeCallBack -= callback;
+            }
+        }
+
 
         /// <summary>
         /// Method to register a callback for when the selected item changes
@@ -511,7 +530,6 @@ namespace PlayerInventorySystem
             cTc.ItemID = itemID;
             //   cTc.Panel = Instance.CraftingPanel;
             return cTc;
-
         }
 
         /// <summary>
@@ -696,7 +714,7 @@ namespace PlayerInventorySystem
                 CraftingPanel.CraftingTable = cTc; // pass the selected chest to the chest panel
                 CraftingPanel.gameObject.SetActive(true);
 
-                 
+
             }
             else
             {
