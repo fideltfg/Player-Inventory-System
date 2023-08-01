@@ -50,6 +50,5 @@ namespace PlayerInventorySystem
             outputSlot.SetSlot(InventoryController.CraftingOutputInventory[0]);
         }
 
-
     }
 }

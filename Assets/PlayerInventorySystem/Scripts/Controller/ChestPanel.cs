@@ -50,7 +50,6 @@ namespace PlayerInventorySystem
             // Setup the UI
             GridLayoutGroup.cellSize = SlotPrefab.GetComponent<RectTransform>().sizeDelta;
             GetComponent<ContentSizeFitter>().enabled = true;
-
             base.OnEnable();
         }
 

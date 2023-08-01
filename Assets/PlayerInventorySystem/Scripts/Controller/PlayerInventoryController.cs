@@ -17,11 +17,11 @@ namespace PlayerInventorySystem
         /// <summary>
         /// Ceter offset for collider
         /// </summary>
-        Vector3 center = new Vector3(0, -.5f, 0);
+        Vector3 center = new Vector3(0, .75f, 0);
         /// <summary>
         /// Size of the collider
         /// </summary>
-        Vector3 size = new Vector3(2, 1, 2);
+        Vector3 size = new Vector3(1, 1.5f, 1);
 
         public LayerMask layermask;
 
@@ -78,18 +78,22 @@ namespace PlayerInventorySystem
         /// <returns></returns>
         internal bool PickUpItem(GameObject collectedObject)
         {
+            Debug.Log("PickUpItem");
             if (!collectedObject.CompareTag("Item"))
             {
+                Debug.Log("Not an item");
                 return false;
             }
 
             if (!collectedObject.TryGetComponent(out DroppedItem droppedItem))
             {
+                Debug.Log("No DroppedItem component");
                 return false;
             }
 
             if (droppedItem.ItemID <= 0)
             {
+                Debug.Log("ItemID is 0");
                 return false;
             }
 
@@ -175,9 +179,9 @@ namespace PlayerInventorySystem
 
         private void ConsumeItem(Item item)
         {
-            if(item.Data.itemType == ITEMTYPE.CONSUMABLE)
+            if (item.Data.itemType == ITEMTYPE.CONSUMABLE)
             {
-                if(item.Data != null)
+                if (item.Data != null)
                 {
                 }
             }
