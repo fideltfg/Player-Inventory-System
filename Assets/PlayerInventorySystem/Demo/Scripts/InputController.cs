@@ -101,7 +101,7 @@ public class InputController : MonoBehaviour
             else
             {
                 // use the equiped item
-            //    Debug.Log("Use Item");
+                //    Debug.Log("Use Item");
             }
 
         }
@@ -141,7 +141,7 @@ public class InputController : MonoBehaviour
     {
         if (ctx.performed)
         {
-            //  PlayerController.instance.OnJump();
+            PlayerController.instance.OnJump();
         }
     }
 

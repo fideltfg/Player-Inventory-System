@@ -7,20 +7,24 @@ namespace PlayerInventorySystem
 {
     public class CraftingTableController : Interactive
     {
+        private void OnEnable()
+        {
+            Panel = InventoryController.Instance.CraftingPanel;
+        }
 
         internal override void ClosePanel()
         {
-            if (InventoryController.Instance.CraftingPanel != null)
+            if(Panel != null)
             {
-                InventoryController.Instance.CraftingPanel.gameObject.SetActive(false);
+                Panel.gameObject.SetActive(false);
             }
         }
 
         internal override void OpenPanel()
         {
-            if (InventoryController.Instance.CraftingPanel != null)
+            if(Panel != null)
             {
-                InventoryController.Instance.CraftingPanel.gameObject.SetActive(true);
+                  Panel.gameObject.SetActive(true);
             }
         }
     }

@@ -6,7 +6,7 @@ namespace PlayerInventorySystem
 
     public enum ITEMTYPE
     {
-        CONSUMABLE, // item usch as food, cloth, rock or other consumable items
+        CONSUMABLE, // item such as food, cloth, rock or other consumable items
         USABLE, // items such as tools,  weapons and other none consumables.
         WEARABLE, //  clothing
         QUESTITEM, // items that are required for a quest, non consumable or usable.

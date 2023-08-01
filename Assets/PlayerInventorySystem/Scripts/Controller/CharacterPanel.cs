@@ -12,30 +12,37 @@ namespace PlayerInventorySystem
         /// The starting health of your character
         /// </summary>
         public float baseHealth = 0;
+
         /// <summary>
         /// The starting stamina of your character
         /// </summary>
         public float baseStamina = 0;
+
         /// <summary>
         /// The starting dexterity of your character
         /// </summary>
         public float baseDexterity = 0;
+
         /// <summary>
         /// The starting armor of your character
         /// </summary>
         public float baseArmor = 0;
+
         /// <summary>
         /// The starting mana of your character
         /// </summary>
         public float baseMana = 0;
+
         /// <summary>
         /// The starting intelligence of your character
         /// </summary>
         public float baseIntelligence = 0;
+
         /// <summary>
         /// The starting speed of your character
         /// </summary>
         public float baseSpeed = 0;
+
         /// <summary>
         /// The starting lucj of your character
         /// </summary>
@@ -58,8 +65,6 @@ namespace PlayerInventorySystem
         public Text LuckText;
 
         public Dictionary<string, float> buffValues = new Dictionary<string, float>();
-
-
 
         /// <summary>
         /// method to update both the UI stats and the buffValues list
@@ -135,6 +140,12 @@ namespace PlayerInventorySystem
             buffValues.Add("Luck", baseLuck);
 
 
+            if(HeadSlot == null || LeftHandSlot == null || RightHandSlot == null || BodySlot == null || LegsSlot == null || FeetSlot == null)
+            {
+                Debug.LogError("One or more slots are not assigned to the character panel");
+                return;
+            }
+
             HeadSlot.Index = this.Index;
             HeadSlot.SetSlot(CharacterInventory[0]);
             HeadSlot.Slot.SlotType = SLOTTYPE.HEAD;
@@ -180,9 +191,5 @@ namespace PlayerInventorySystem
             UpdateStats(null);
         }
 
-
     }
-
-
-
 }

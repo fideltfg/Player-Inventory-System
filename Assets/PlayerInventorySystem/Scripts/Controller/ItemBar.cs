@@ -80,7 +80,6 @@ namespace PlayerInventorySystem
             }
         }
 
-
         public void SelectNextSlot()
         {
             SelectedSlotID++;
@@ -90,8 +89,6 @@ namespace PlayerInventorySystem
         {
             SelectedSlotID--;
         }
-
-
 
         public void UseSelectedItem()
         {

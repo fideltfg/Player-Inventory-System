@@ -25,7 +25,7 @@ namespace PlayerInventorySystem
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.tag == "Player")
+            if (other.gameObject.CompareTag("Player"))
             {
                 //  Panel.gameObject.SetActive(true);
             }
@@ -33,12 +33,11 @@ namespace PlayerInventorySystem
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.gameObject.tag == "Player")
+            if (other.gameObject.CompareTag("Player"))
             {
                 ClosePanel();
             }
         }
-
 
         private void OnEnable()
         {
@@ -46,7 +45,6 @@ namespace PlayerInventorySystem
             sc.isTrigger = true;
             sc.radius = Radius;
         }
-
 
         internal virtual void ClosePanel()
         {

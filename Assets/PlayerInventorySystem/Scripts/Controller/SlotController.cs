@@ -125,7 +125,6 @@ namespace PlayerInventorySystem
 
         }
 
-
         /// <summary>
         /// Indicates true if this slot is selected else false
         /// </summary>
@@ -421,10 +420,6 @@ namespace PlayerInventorySystem
             SetOutLineColor();
         }
 
-        /// <summary>
-        /// method to handel mouse poiter up on this slot.
-        /// </summary>
-        /// <param name="eventData"></param>
         public void OnPointerUp(PointerEventData eventData)
         {
 
@@ -494,8 +489,6 @@ namespace PlayerInventorySystem
 
                 // still here so no place to put this stack/item
                 // Do nothing ... DROP IT maybe???
-
-
             }
             // if this stack is in the Item bar
             if (this.slotLocation == SLOTLOCATION.ITEMBAR)
@@ -510,7 +503,6 @@ namespace PlayerInventorySystem
                     }
                 }
                 // still here so no valid charater slot..  
-
                 // if the inventory panel is open and not full, move there, return
                 if (InventoryController.Instance.InventoryPanel.gameObject.activeInHierarchy)
                 {
@@ -521,7 +513,6 @@ namespace PlayerInventorySystem
                     }
                 }
                 // still here so no valid Inventory slot..
-
                 // if the chest panel is open and not full, move there, return
                 if (InventoryController.Instance.ChestPanel.gameObject.activeInHierarchy)
                 {
@@ -547,7 +538,6 @@ namespace PlayerInventorySystem
                     }
                 }
                 // still here so no valid Inventory slot..
-
                 // if the chest panel is open and not full, move there, return
                 if (InventoryController.Instance.ChestPanel.gameObject.activeInHierarchy)
                 {
@@ -557,7 +547,6 @@ namespace PlayerInventorySystem
                     }
                 }
                 // still here so no valid chest panel
-
                 // try putting it on the Item bar
 
                 if (InventoryController.ItemBarInventory.AddItem(this.Slot.Item))
@@ -593,7 +582,6 @@ namespace PlayerInventorySystem
 
                 }
                 // still here so no valid Inventory slot..
-
                 // try putting it on the Item bar
 
                 if (InventoryController.ItemBarInventory.AddItem(this.Slot.Item))
@@ -601,12 +589,8 @@ namespace PlayerInventorySystem
                     Slot.SetItem(null);
                     return true;
                 }
-
-
             }
             return false;
-            // else do nothing
-
         }
 
         bool MoveStackToCharacter()
@@ -772,7 +756,6 @@ namespace PlayerInventorySystem
             }
         }
 
-
         private Vector2Int SplitIntVectorInt(int number)
         {
             int firstNumber = number / 2;
@@ -789,7 +772,6 @@ namespace PlayerInventorySystem
 
             return new Vector2Int(firstNumber, secondNumber);
         }
-
 
         void PickUpStack()
         {

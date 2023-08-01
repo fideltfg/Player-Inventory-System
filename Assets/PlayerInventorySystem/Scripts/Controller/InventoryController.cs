@@ -1,14 +1,10 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
-using UnityEngine.UIElements;
-using PlayerInventorySystem.Serial;
-using static UnityEditor.PlayerSettings;
-using static UnityEditor.Progress;
 
 ///*********************************************************************************
 /// Player Inventorty System
-/// version: 0.0.5 alpha
+/// version: 0.0.6 alpha
 ///*********************************************************************************
 
 namespace PlayerInventorySystem
@@ -75,23 +71,6 @@ namespace PlayerInventorySystem
         internal static List<PlacedItem> PlacedItems = new List<PlacedItem>();
 
         /// <summary>
-        /// Method to generate a new id for chests.
-        /// </summary>
-        /// <returns></returns>
-        internal static int GetNewChestID()
-        {
-            int newID = 0;
-            foreach (int k in ChestInventories.Keys)
-            {
-                if (k >= newID)
-                {
-                    newID = k + 1;
-                }
-            }
-            return newID;
-        }
-
-        /// <summary>
         /// Static accessor for the players inventory
         /// </summary>
         internal static Inventory PlayerInventory { get { return InventoryList[0]; } } // index 0
@@ -149,6 +128,8 @@ namespace PlayerInventorySystem
         /// </summary>
         public PlayerInventoryController PlayerIC;
 
+        #region UI Elements
+
         /// <summary>
         /// The controller for the inventory panel
         /// </summary>
@@ -184,6 +165,9 @@ namespace PlayerInventorySystem
         /// </summary>
         public ChestPanel ChestPanel;
 
+        #endregion UI Elements
+        #region callbacks
+
         /// <summary>
         /// Action called whenever an inventory System panel is opened
         /// Register for this callback to trigger actions outside the inventory system when a panel is opened.
@@ -208,6 +192,8 @@ namespace PlayerInventorySystem
         /// callback for when an item on the character panel is changed
         public Action OnCharacterItemChangeCallBack;
 
+        #endregion callbacks
+
         /// <summary>
         /// Indicates if any of the inventory system Panels are currently being displayed.
         /// </summary>
@@ -222,10 +208,6 @@ namespace PlayerInventorySystem
                     ChestPanel.gameObject.activeSelf;
             }
         }
-
-
-
-
 
         /// <summary>
         /// Default time to live of items dropped by the player into the game world in seconds
@@ -364,7 +346,6 @@ namespace PlayerInventorySystem
                 Instance.OnCharacterItemChangeCallBack -= callback;
             }
         }
-
 
         /// <summary>
         /// Method to register a callback for when the selected item changes
@@ -522,6 +503,13 @@ namespace PlayerInventorySystem
 
         }
 
+        /// <summary>
+        /// method to spawn a crafting table
+        /// </summary>
+        /// <param name="itemID"></param>
+        /// <param name="position"></param>
+        /// <param name="rotation"></param>
+        /// <param name="scale"></param>
         internal static CraftingTableController SpawnCraftingTable(int itemID, Vector3 position, Quaternion rotation, Vector3 scale)
         {
             GameObject go = Instantiate(Instance.ItemCatalog.list[itemID].worldPrefab, position, rotation);
@@ -557,8 +545,10 @@ namespace PlayerInventorySystem
         /// <param name="placedItem"></param>
         internal static void OnPlaceItem(Item item, PlacedItem placedItem = null, bool consume = true)
         {
+            Debug.Log("OnPlaceItem");
             if (consume)
             {
+                Debug.Log("Consume");
                 // remove the item from the players inventory
                 Instance.ItemBar.SelectedSlotController.Slot.IncermentStackCount(-1);
 
@@ -626,15 +616,22 @@ namespace PlayerInventorySystem
             CharacterPanel.gameObject.SetActive(!CharacterPanel.gameObject.activeInHierarchy);
         }
 
+        /// <summary>
+        /// method to toggle the chest panel
+        /// </summary>
         public void ToggleChestPanel()
         {
             ChestPanel.gameObject.SetActive(!ChestPanel.gameObject.activeInHierarchy);
         }
 
+        /// <summary>
+        /// method to toggle the crafting panel
+        /// </summary>
         public void ToggleCraftingPanel()
         {
             CraftingPanel.gameObject.SetActive(!CraftingPanel.gameObject.activeInHierarchy);
         }
+
         /// <summary>
         /// method to toggle the item bar
         /// </summary>
@@ -703,7 +700,6 @@ namespace PlayerInventorySystem
             }
         }
 
-
         /// <summary>
         /// method to toggle the crafting panel
         /// </summary>
@@ -732,13 +728,32 @@ namespace PlayerInventorySystem
             {
                 // Get the selected item from the item bar
                 Item item = ItemBar.SelectedSlotController.Slot.Item;
-
-                // If the item has a world prefab then place it in the world
-                if (item.Data.worldPrefab != null)
+                if (item.StackCount >= 1)
                 {
-                    Item.Place(item, pos, rot, scale);
+                    // If the item has a world prefab then place it in the world
+                    if (item.Data.worldPrefab != null)
+                    {
+                        Item.Place(item, pos, rot, scale);
+                    }
                 }
             }
+        }
+
+        /// <summary>
+        /// Method to generate a new id for chests.
+        /// </summary>
+        /// <returns></returns>
+        internal static int GetNewChestID()
+        {
+            int newID = 0;
+            foreach (int k in ChestInventories.Keys)
+            {
+                if (k >= newID)
+                {
+                    newID = k + 1;
+                }
+            }
+            return newID;
         }
 
         /// <summary>

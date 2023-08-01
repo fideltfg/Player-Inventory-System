@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine.UIElements;
 using Unity.VisualScripting;
+using static UnityEditor.Progress;
 
 namespace PlayerInventorySystem
 {
@@ -82,20 +83,30 @@ namespace PlayerInventorySystem
                 return false;
             }
 
-            if (!collectedObject.TryGetComponent(out DroppedItem dorppedItem))
+            if (!collectedObject.TryGetComponent(out DroppedItem droppedItem))
             {
                 return false;
             }
 
-            if (dorppedItem.ItemID <= 0)
+            if (droppedItem.ItemID <= 0)
             {
                 return false;
             }
 
-            GiveItem(dorppedItem.ItemID, dorppedItem.StackCount);
 
-            GetComponent<AudioSource>().PlayOneShot(pickupSound);
+            Item newItem = new Item(droppedItem.ItemID, droppedItem.StackCount);
 
+            if (newItem.Data.consumeOnPickup)
+            {
+                ConsumeItem(newItem);
+                // TODO change this to play conumptioon sound
+                GetComponent<AudioSource>().PlayOneShot(pickupSound);
+            }
+            else
+            {
+                GiveItem(newItem);
+                GetComponent<AudioSource>().PlayOneShot(pickupSound);
+            }
             Destroy(collectedObject);
 
             return true;
@@ -107,18 +118,15 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="itemID">The ID of the item to be added</param>
         /// <returns>Returns true on success else false</returns>
-        public static bool GiveItem(int itemID, int stackCount = 1)
+        public static bool GiveItem(Item item)
         {
-            if (itemID <= 0)
+            if (InventoryController.ItemBarInventory.AddItem(item) == false)
             {
-                return false;
-            }
+                return InventoryController.PlayerInventory.AddItem(item);
 
-            Item newItem = new Item(itemID, stackCount);
+                // TODO: If both inventories are full then drop the item on the ground
 
-            if (InventoryController.ItemBarInventory.AddItem(newItem) == false)
-            {
-                return InventoryController.PlayerInventory.AddItem(newItem);
+
             }
             return true;
         }
@@ -165,6 +173,14 @@ namespace PlayerInventorySystem
             }
         }
 
-
+        private void ConsumeItem(Item item)
+        {
+            if(item.Data.itemType == ITEMTYPE.CONSUMABLE)
+            {
+                if(item.Data != null)
+                {
+                }
+            }
+        }
     }
 }

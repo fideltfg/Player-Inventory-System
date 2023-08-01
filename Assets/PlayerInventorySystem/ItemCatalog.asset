@@ -15,6 +15,7 @@ MonoBehaviour:
   list:
   - name: NULL
     id: 0
+    consumeOnPickup: 0
     description: blank
     sprite: {fileID: 0}
     worldPrefabSingle: {fileID: 0}
@@ -41,6 +42,7 @@ MonoBehaviour:
     luck: 0
   - name: Wood Block
     id: 1
+    consumeOnPickup: 0
     description: Raw timber from a tree.
     sprite: {fileID: 21300356, guid: ff58a1725e26e464c8e562413502c6db, type: 3}
     worldPrefabSingle: {fileID: 1733709345621532, guid: f1a6321d44b6c3841985f6e326ea9a4e,
@@ -69,6 +71,7 @@ MonoBehaviour:
     luck: 0
   - name: Stone Block
     id: 2
+    consumeOnPickup: 0
     description: Raw Stone
     sprite: {fileID: 21300368, guid: ff58a1725e26e464c8e562413502c6db, type: 3}
     worldPrefabSingle: {fileID: 1955232198895700, guid: a8e389a28c473da489b7d1a3b4bcc680,
@@ -97,6 +100,7 @@ MonoBehaviour:
     luck: 0
   - name: Dirt Block
     id: 3
+    consumeOnPickup: 0
     description: Dirty mud like stuff
     sprite: {fileID: 21300354, guid: ff58a1725e26e464c8e562413502c6db, type: 3}
     worldPrefabSingle: {fileID: 1979212913295896, guid: 3b94f29cedf1d4042971bf914725bcf9,
@@ -125,6 +129,7 @@ MonoBehaviour:
     luck: 0
   - name: Iron Ore
     id: 4
+    consumeOnPickup: 0
     description: Raw Iron
     sprite: {fileID: 21300376, guid: ff58a1725e26e464c8e562413502c6db, type: 3}
     worldPrefabSingle: {fileID: 1660967605425422, guid: 4b6540d96fefacc4397b45405bb2cbba,
@@ -153,6 +158,7 @@ MonoBehaviour:
     luck: 0
   - name: Gold Ord
     id: 5
+    consumeOnPickup: 0
     description: Gold!!
     sprite: {fileID: 21300366, guid: ff58a1725e26e464c8e562413502c6db, type: 3}
     worldPrefabSingle: {fileID: 1647275919505572, guid: ccfa39634bf73e048bea743a18f8a1aa,
@@ -181,6 +187,7 @@ MonoBehaviour:
     luck: 0
   - name: Leather
     id: 6
+    consumeOnPickup: 0
     description: Leather Cloth
     sprite: {fileID: 21300404, guid: ff58a1725e26e464c8e562413502c6db, type: 3}
     worldPrefabSingle: {fileID: 1236609775932374, guid: 0da1d1167e0a83344b519e7f9f8505fb,
@@ -209,6 +216,7 @@ MonoBehaviour:
     luck: 0
   - name: Diamond
     id: 7
+    consumeOnPickup: 0
     description: Diamond
     sprite: {fileID: 21300380, guid: ff58a1725e26e464c8e562413502c6db, type: 3}
     worldPrefabSingle: {fileID: 1465131383416514, guid: d5a790955aede4b4597f288a8da7a62a,
@@ -237,6 +245,7 @@ MonoBehaviour:
     luck: 0
   - name: Wooden Planks
     id: 8
+    consumeOnPickup: 0
     description: Basic wood planks.
     sprite: {fileID: 21300364, guid: ff58a1725e26e464c8e562413502c6db, type: 3}
     worldPrefabSingle: {fileID: 1733709345621532, guid: f1a6321d44b6c3841985f6e326ea9a4e,
@@ -265,6 +274,7 @@ MonoBehaviour:
     luck: 0
   - name: Wooden Sticks
     id: 9
+    consumeOnPickup: 0
     description: 
     sprite: {fileID: 21300422, guid: ff58a1725e26e464c8e562413502c6db, type: 3}
     worldPrefabSingle: {fileID: 1520493659561722, guid: 9dc520f13acc2db4cb9678d66150db72,
@@ -293,6 +303,7 @@ MonoBehaviour:
     luck: 0
   - name: Coal
     id: 10
+    consumeOnPickup: 0
     description: Source of heat and light.
     sprite: {fileID: 21300378, guid: ff58a1725e26e464c8e562413502c6db, type: 3}
     worldPrefabSingle: {fileID: 1354892342653322, guid: b8acd0254c663c844bb3f40a41486c80,
@@ -319,8 +330,9 @@ MonoBehaviour:
     intelligence: 0
     dexterity: 0
     luck: 0
-  - name: Tourch
+  - name: Torch
     id: 11
+    consumeOnPickup: 0
     description: Basic light source.
     sprite: {fileID: 21300420, guid: ff58a1725e26e464c8e562413502c6db, type: 3}
     worldPrefabSingle: {fileID: 1151371225988902, guid: 817872457d7e9f84181a35a76134f6b3,
@@ -350,6 +362,7 @@ MonoBehaviour:
     luck: 0
   - name: Leather Helm
     id: 12
+    consumeOnPickup: 0
     description: A Simple leather cap to protect your head from the rain.
     sprite: {fileID: 21300000, guid: a3aaaa7575216614ba5b323594a8c36a, type: 3}
     worldPrefabSingle: {fileID: 1096513988907748, guid: 4b181b367348d074d9027c58627636bf,
@@ -377,6 +390,7 @@ MonoBehaviour:
     luck: 4
   - name: Iron Helm
     id: 13
+    consumeOnPickup: 0
     description: A Simple leather cap to protect your head from the rain.
     sprite: {fileID: 21300002, guid: a3aaaa7575216614ba5b323594a8c36a, type: 3}
     worldPrefabSingle: {fileID: 1436166722986596, guid: c20ef3dac3ad29c4fb07440e623105e2,
@@ -404,6 +418,7 @@ MonoBehaviour:
     luck: 4
   - name: Gold Helm
     id: 14
+    consumeOnPickup: 0
     description: A Simple leather cap to protect your head from the rain.
     sprite: {fileID: 21300004, guid: a3aaaa7575216614ba5b323594a8c36a, type: 3}
     worldPrefabSingle: {fileID: 1282080836107312, guid: f4d911c56769f604fb2a9592f627f7e5,
@@ -431,6 +446,7 @@ MonoBehaviour:
     luck: 4
   - name: Diamond Helm
     id: 15
+    consumeOnPickup: 0
     description: A Simple leather cap to protect your head from the rain.
     sprite: {fileID: 21300006, guid: a3aaaa7575216614ba5b323594a8c36a, type: 3}
     worldPrefabSingle: {fileID: 1851252382864820, guid: bc7f45ea3da04d54c81c016d9c4383e9,
@@ -458,6 +474,7 @@ MonoBehaviour:
     luck: 4
   - name: Leather Tunic
     id: 16
+    consumeOnPickup: 0
     description: A Simple leather tunic to protect you from the rain.
     sprite: {fileID: 21300008, guid: a3aaaa7575216614ba5b323594a8c36a, type: 3}
     worldPrefabSingle: {fileID: 1994142178005934, guid: 75e3a5c4ccc67014babdaf0f0dbdcd3f,
@@ -469,9 +486,9 @@ MonoBehaviour:
     maxStackSize: 1
     recipe:
       rows:
-      - cells: 
-      - cells: 
-      - cells: 
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
     craftCount: 1
     maxDurability: 25
     damage: 0
@@ -485,6 +502,7 @@ MonoBehaviour:
     luck: 4
   - name: Iron Tunic
     id: 17
+    consumeOnPickup: 0
     description: A Simple leather tunic to protect you from the rain.
     sprite: {fileID: 21300010, guid: a3aaaa7575216614ba5b323594a8c36a, type: 3}
     worldPrefabSingle: {fileID: 1617573061036268, guid: 19bd9b8867732b74f85391c4676826f4,
@@ -496,9 +514,9 @@ MonoBehaviour:
     maxStackSize: 1
     recipe:
       rows:
-      - cells: 
-      - cells: 
-      - cells: 
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
     craftCount: 1
     maxDurability: 25
     damage: 0
@@ -512,6 +530,7 @@ MonoBehaviour:
     luck: 4
   - name: Gold Tunic
     id: 18
+    consumeOnPickup: 0
     description: A Simple leather tunic to protect you from the rain.
     sprite: {fileID: 21300012, guid: a3aaaa7575216614ba5b323594a8c36a, type: 3}
     worldPrefabSingle: {fileID: 1878296870883508, guid: e39bc528016c33d448ab5be0c3f1bb98,
@@ -523,9 +542,9 @@ MonoBehaviour:
     maxStackSize: 1
     recipe:
       rows:
-      - cells: 
-      - cells: 
-      - cells: 
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
     craftCount: 1
     maxDurability: 25
     damage: 0
@@ -539,6 +558,7 @@ MonoBehaviour:
     luck: 4
   - name: Diamond Tunic
     id: 19
+    consumeOnPickup: 0
     description: A Simple leather tunic to protect you from the rain.
     sprite: {fileID: 21300014, guid: a3aaaa7575216614ba5b323594a8c36a, type: 3}
     worldPrefabSingle: {fileID: 1158172535552396, guid: 7134df575a6b01c4fb45f33694b83976,
@@ -566,6 +586,7 @@ MonoBehaviour:
     luck: 4
   - name: Leather Pants
     id: 20
+    consumeOnPickup: 0
     description: Simple leather pants to keep your legs warm and dry.
     sprite: {fileID: 21300016, guid: a3aaaa7575216614ba5b323594a8c36a, type: 3}
     worldPrefabSingle: {fileID: 1779994874982526, guid: 02808cca555a65b49a0d920a6e5fc94f,
@@ -577,9 +598,9 @@ MonoBehaviour:
     maxStackSize: 1
     recipe:
       rows:
-      - cells: 
-      - cells: 
-      - cells: 
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
     craftCount: 1
     maxDurability: 25
     damage: 0
@@ -593,6 +614,7 @@ MonoBehaviour:
     luck: 4
   - name: Iron Pants
     id: 21
+    consumeOnPickup: 0
     description: Simple leather pants to keep your legs warm and dry.
     sprite: {fileID: 21300018, guid: a3aaaa7575216614ba5b323594a8c36a, type: 3}
     worldPrefabSingle: {fileID: 1960838220018798, guid: 373c9d3a55e1c034caa52c302e14a7e4,
@@ -604,9 +626,9 @@ MonoBehaviour:
     maxStackSize: 1
     recipe:
       rows:
-      - cells: 
-      - cells: 
-      - cells: 
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
     craftCount: 1
     maxDurability: 25
     damage: 0
@@ -620,6 +642,7 @@ MonoBehaviour:
     luck: 4
   - name: Gold Pants
     id: 22
+    consumeOnPickup: 0
     description: Simple leather pants to keep your legs warm and dry.
     sprite: {fileID: 21300020, guid: a3aaaa7575216614ba5b323594a8c36a, type: 3}
     worldPrefabSingle: {fileID: 1115817494101134, guid: fba6b3ca6603a924ba8fb893252ae359,
@@ -631,9 +654,9 @@ MonoBehaviour:
     maxStackSize: 1
     recipe:
       rows:
-      - cells: 
-      - cells: 
-      - cells: 
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
     craftCount: 1
     maxDurability: 25
     damage: 0
@@ -647,6 +670,7 @@ MonoBehaviour:
     luck: 4
   - name: Diamond Pants
     id: 23
+    consumeOnPickup: 0
     description: Simple leather pants to keep your legs warm and dry.
     sprite: {fileID: 21300022, guid: a3aaaa7575216614ba5b323594a8c36a, type: 3}
     worldPrefabSingle: {fileID: 1863329283365134, guid: d1693bbde3bb89c47a283ef86a513f55,
@@ -674,6 +698,7 @@ MonoBehaviour:
     luck: 4
   - name: Leather Boots
     id: 24
+    consumeOnPickup: 0
     description: A Simple leather boots to keep your feet dry.
     sprite: {fileID: 21300024, guid: a3aaaa7575216614ba5b323594a8c36a, type: 3}
     worldPrefabSingle: {fileID: 1055637614562422, guid: 94fbe0e8f65e32c488503a7c9b59dc65,
@@ -701,6 +726,7 @@ MonoBehaviour:
     luck: 4
   - name: Iron Boots
     id: 25
+    consumeOnPickup: 0
     description: A Simple leather boots to keep your feet dry.
     sprite: {fileID: 21300026, guid: a3aaaa7575216614ba5b323594a8c36a, type: 3}
     worldPrefabSingle: {fileID: 1774655076062038, guid: c852de6915a10e14e8c1bfa6ab8f81b5,
@@ -728,6 +754,7 @@ MonoBehaviour:
     luck: 4
   - name: Gold Boots
     id: 26
+    consumeOnPickup: 0
     description: A Simple leather boots to keep your feet dry.
     sprite: {fileID: 21300028, guid: a3aaaa7575216614ba5b323594a8c36a, type: 3}
     worldPrefabSingle: {fileID: 1696535691283772, guid: dd1a45f73ebd323478aa4b43628a7dba,
@@ -755,6 +782,7 @@ MonoBehaviour:
     luck: 4
   - name: Diamond Boots
     id: 27
+    consumeOnPickup: 0
     description: A Simple leather boots to keep your feet dry.
     sprite: {fileID: 21300030, guid: a3aaaa7575216614ba5b323594a8c36a, type: 3}
     worldPrefabSingle: {fileID: 1412045384999160, guid: 3b7b4ff73d07fbe4c91944ae05eea0a3,
@@ -782,6 +810,7 @@ MonoBehaviour:
     luck: 4
   - name: Woodern Sword
     id: 28
+    consumeOnPickup: 0
     description: A Simple leather boots to keep your feet dry.
     sprite: {fileID: 21300000, guid: 664043d3e32f86c4bab6ae0cf4999869, type: 3}
     worldPrefabSingle: {fileID: 1194693943372998, guid: 747bd4e245c07d641a49edf1025fd4cc,
@@ -809,6 +838,7 @@ MonoBehaviour:
     luck: 4
   - name: Iron Sword
     id: 29
+    consumeOnPickup: 0
     description: A sword made of iron. Better then wood.
     sprite: {fileID: 21300002, guid: 664043d3e32f86c4bab6ae0cf4999869, type: 3}
     worldPrefabSingle: {fileID: 1519653747884236, guid: 8bc8752363946b3428603e80e3480788,
@@ -836,6 +866,7 @@ MonoBehaviour:
     luck: 4
   - name: Gold Sword
     id: 30
+    consumeOnPickup: 0
     description: A Simple leather boots to keep your feet dry.
     sprite: {fileID: 21300004, guid: 664043d3e32f86c4bab6ae0cf4999869, type: 3}
     worldPrefabSingle: {fileID: 1405604433722088, guid: 95000d6f9a0b74b4dab4d771594a4ccd,
@@ -863,6 +894,7 @@ MonoBehaviour:
     luck: 4
   - name: Diamond Sword
     id: 31
+    consumeOnPickup: 0
     description: A Simple leather boots to keep your feet dry.
     sprite: {fileID: 21300006, guid: 664043d3e32f86c4bab6ae0cf4999869, type: 3}
     worldPrefabSingle: {fileID: 1573513301558736, guid: b95d3f35d0a079341883fe2be62395e3,
@@ -890,6 +922,7 @@ MonoBehaviour:
     luck: 4
   - name: Woodern Axe
     id: 32
+    consumeOnPickup: 0
     description: A Simple leather boots to keep your feet dry.
     sprite: {fileID: 21300008, guid: 664043d3e32f86c4bab6ae0cf4999869, type: 3}
     worldPrefabSingle: {fileID: 1174454239711962, guid: feb26000e8625054dad86f0994e1dd4c,
@@ -917,6 +950,7 @@ MonoBehaviour:
     luck: 4
   - name: Iron Axe
     id: 33
+    consumeOnPickup: 0
     description: A Simple leather boots to keep your feet dry.
     sprite: {fileID: 21300010, guid: 664043d3e32f86c4bab6ae0cf4999869, type: 3}
     worldPrefabSingle: {fileID: 1564220894873904, guid: 92a0e1ab362f106418a8adf0b17d994f,
@@ -944,6 +978,7 @@ MonoBehaviour:
     luck: 4
   - name: Gold Axe
     id: 34
+    consumeOnPickup: 0
     description: A Simple leather boots to keep your feet dry.
     sprite: {fileID: 21300012, guid: 664043d3e32f86c4bab6ae0cf4999869, type: 3}
     worldPrefabSingle: {fileID: 1516738547417350, guid: 696966ac1d9b8724e8b4df64d9761933,
@@ -971,6 +1006,7 @@ MonoBehaviour:
     luck: 4
   - name: Diamond Axe
     id: 35
+    consumeOnPickup: 0
     description: A Simple leather boots to keep your feet dry.
     sprite: {fileID: 21300014, guid: 664043d3e32f86c4bab6ae0cf4999869, type: 3}
     worldPrefabSingle: {fileID: 1424062225844696, guid: 7592161ec2d32934ca05948f8a29edc5,
@@ -998,6 +1034,7 @@ MonoBehaviour:
     luck: 4
   - name: Woodern Pick Axe
     id: 36
+    consumeOnPickup: 0
     description: A Simple leather boots to keep your feet dry.
     sprite: {fileID: 21300016, guid: 664043d3e32f86c4bab6ae0cf4999869, type: 3}
     worldPrefabSingle: {fileID: 1237985067873628, guid: 90aaab65a4e24ea458c2fb3e496feb52,
@@ -1025,6 +1062,7 @@ MonoBehaviour:
     luck: 4
   - name: Iron Pick Axe
     id: 37
+    consumeOnPickup: 0
     description: A Simple leather boots to keep your feet dry.
     sprite: {fileID: 21300018, guid: 664043d3e32f86c4bab6ae0cf4999869, type: 3}
     worldPrefabSingle: {fileID: 1333145138104358, guid: a5b0da46506821948aeafb8ea5ed3d10,
@@ -1052,6 +1090,7 @@ MonoBehaviour:
     luck: 4
   - name: Gold Pick Axe
     id: 38
+    consumeOnPickup: 0
     description: A Simple leather boots to keep your feet dry.
     sprite: {fileID: 21300020, guid: 664043d3e32f86c4bab6ae0cf4999869, type: 3}
     worldPrefabSingle: {fileID: 1351802185289268, guid: 66e3d4b5a543a42438ae4196b5ef8eaa,
@@ -1079,6 +1118,7 @@ MonoBehaviour:
     luck: 4
   - name: Diamond Pick Axe
     id: 39
+    consumeOnPickup: 0
     description: A Simple leather boots to keep your feet dry.
     sprite: {fileID: 21300022, guid: 664043d3e32f86c4bab6ae0cf4999869, type: 3}
     worldPrefabSingle: {fileID: 1259001375031720, guid: 24b7721ddc8932c4eb22fd9a6149d697,
@@ -1106,6 +1146,7 @@ MonoBehaviour:
     luck: 4
   - name: Woodern Shovel
     id: 40
+    consumeOnPickup: 0
     description: A Simple leather boots to keep your feet dry.
     sprite: {fileID: 21300024, guid: 664043d3e32f86c4bab6ae0cf4999869, type: 3}
     worldPrefabSingle: {fileID: 1810739955066698, guid: 6a015881d8618274994cd58476ee974f,
@@ -1133,6 +1174,7 @@ MonoBehaviour:
     luck: 4
   - name: Iron Shovel
     id: 41
+    consumeOnPickup: 0
     description: A Simple leather boots to keep your feet dry.
     sprite: {fileID: 21300026, guid: 664043d3e32f86c4bab6ae0cf4999869, type: 3}
     worldPrefabSingle: {fileID: 1747932926496544, guid: 6ed7eddaf49338d4c9ce387745613c61,
@@ -1160,6 +1202,7 @@ MonoBehaviour:
     luck: 4
   - name: Gold Shovel
     id: 42
+    consumeOnPickup: 0
     description: A Simple leather boots to keep your feet dry.
     sprite: {fileID: 21300028, guid: 664043d3e32f86c4bab6ae0cf4999869, type: 3}
     worldPrefabSingle: {fileID: 1716871190195642, guid: bfda190c21fe148498edbd199afbc77a,
@@ -1187,6 +1230,7 @@ MonoBehaviour:
     luck: 4
   - name: Diamond Shovel
     id: 43
+    consumeOnPickup: 0
     description: A Diamond tipd shovel. Bling!
     sprite: {fileID: 21300030, guid: 664043d3e32f86c4bab6ae0cf4999869, type: 3}
     worldPrefabSingle: {fileID: 1780393907514722, guid: e628ff27c155459499d4ca7e18b64d68,
@@ -1214,6 +1258,7 @@ MonoBehaviour:
     luck: 0
   - name: Iron Bar
     id: 44
+    consumeOnPickup: 0
     description: Bars made of iron. Used in many cafting recipes
     sprite: {fileID: 21300408, guid: ff58a1725e26e464c8e562413502c6db, type: 3}
     worldPrefabSingle: {fileID: 1520493659561722, guid: 5fc9634834230ad478c408385c62c3b2,
@@ -1242,6 +1287,7 @@ MonoBehaviour:
     luck: 0
   - name: Chest
     id: 45
+    consumeOnPickup: 0
     description: A basic chest for storing your items
     sprite: {fileID: 21300426, guid: ff58a1725e26e464c8e562413502c6db, type: 3}
     worldPrefabSingle: {fileID: 1700630183180908, guid: 4f907e96a669d7346bdde51000c5f840,
@@ -1270,6 +1316,7 @@ MonoBehaviour:
     luck: 0
   - name: Crafting Table
     id: 46
+    consumeOnPickup: 0
     description: Used to craft new items
     sprite: {fileID: 21300356, guid: ff58a1725e26e464c8e562413502c6db, type: 3}
     worldPrefabSingle: {fileID: 1700630183180908, guid: 8c774e720c5047a4dab4f1774c64cc1f,

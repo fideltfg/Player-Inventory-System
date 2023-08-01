@@ -180,7 +180,6 @@ namespace PlayerInventorySystem
             }
         }
 
-
         /// <summary>
         /// method to return the max number of items that can be crafted with the contents of the crafting array
         /// </summary>

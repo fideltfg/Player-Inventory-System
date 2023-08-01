@@ -177,7 +177,7 @@ namespace PlayerInventorySystem
                 default:
                     GameObject go = GameObject.Instantiate(item.Data.worldPrefab, position, rotation);
                     PlacedItem pi = go.AddComponent<PlacedItem>();
-                    InventoryController.OnPlaceItem(item, pi, false);
+                    InventoryController.OnPlaceItem(item, pi);
                     break;
             }
         }

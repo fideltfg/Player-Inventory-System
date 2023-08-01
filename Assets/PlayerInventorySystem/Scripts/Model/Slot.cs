@@ -118,6 +118,7 @@ namespace PlayerInventorySystem
             {
                 if (Item.SetStackCount(val))
                 {
+                    Debug.Log("Item stack count changed");
                     SlotChanged(this);
                     return true;
                 }

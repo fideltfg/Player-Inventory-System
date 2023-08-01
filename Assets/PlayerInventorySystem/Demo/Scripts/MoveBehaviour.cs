@@ -37,13 +37,14 @@ public class MoveBehaviour : GenericBehaviour
     void Update()
     {
         // Get jump input.
-        //if (!jumping && Input.GetButtonDown(jumpButton) && behaviourManager.IsCurrentBehaviour(this.behaviourCode) && !behaviourManager.IsOverriding())
-        if (!jumping && startJump && !behaviourManager.IsOverriding())
-        {
-            Debug.Log("Jump!");
+        if (!jumping && Input.GetButtonDown(jumpButton) && behaviourManager.IsCurrentBehaviour(this.behaviourCode) && !behaviourManager.IsOverriding())
 
-            jumping = true;
-        }
+          //  if (!jumping && startJump && !behaviourManager.IsOverriding())
+            {
+                Debug.Log("Jump!");
+
+                jumping = true;
+            }
 
     }
 
@@ -66,7 +67,7 @@ public class MoveBehaviour : GenericBehaviour
         Debug.DrawRay(transform.position + new Vector3(0, v1, 0), new Vector3(0, -v1, 0), Color.red);
         if (Physics.Raycast(transform.position + new Vector3(0, v1, 0), Vector3.down, out hit))
         {
-         //   Debug.Log("Walking on " + hit.transform.name);
+            //   Debug.Log("Walking on " + hit.transform.name);
             return hit.point;
         }
         else
@@ -110,7 +111,7 @@ public class MoveBehaviour : GenericBehaviour
                 GetComponent<CapsuleCollider>().material.dynamicFriction = 0f;
                 GetComponent<CapsuleCollider>().material.staticFriction = 0f;
                 // Remove vertical velocity to avoid "super jumps" on slope ends.
-               // RemoveVerticalVelocity();
+                // RemoveVerticalVelocity();
                 // Set jump vertical impulse velocity.
                 float velocity = 2f * Mathf.Abs(Physics.gravity.y) * jumpHeight;
                 velocity = Mathf.Sqrt(velocity);
@@ -161,7 +162,7 @@ public class MoveBehaviour : GenericBehaviour
         // Avoid takeoff when reached a slope end.
         else if (!behaviourManager.GetAnim.GetBool(jumpBool) && behaviourManager.GetRigidBody.velocity.y != 0)
         {
-           RemoveVerticalVelocity();
+            RemoveVerticalVelocity();
         }
 
         // Call function that deals with player orientation.
@@ -174,7 +175,7 @@ public class MoveBehaviour : GenericBehaviour
         speedSeeker = Mathf.Clamp(speedSeeker, walkSpeed, runSpeed);
 
         speed *= speedSeeker;
-      
+
 
         if (behaviourManager.IsSprinting())
         {
