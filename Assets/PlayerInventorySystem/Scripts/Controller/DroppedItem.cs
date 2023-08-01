@@ -62,5 +62,10 @@ namespace PlayerInventorySystem
             }
             Position = transform.position;
         }
+
+        private void OnDestroy()
+        {
+            InventoryController.Instance.DroppedItems.Remove(this);
+        }
     }
 }

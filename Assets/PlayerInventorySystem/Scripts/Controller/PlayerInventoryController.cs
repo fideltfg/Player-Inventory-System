@@ -159,7 +159,6 @@ namespace PlayerInventorySystem
                         InventoryController.Instance.OpenChest(cc);
                         break;
                     case "craftingtable":
-                        Debug.Log("Crafting Table");
                         CraftingTableController cTc = hit.transform.GetComponent<CraftingTableController>();
                         cTc.Panel = InventoryController.Instance.CraftingPanel;
                         InventoryController.Instance.OpenCraftingTable(cTc);
