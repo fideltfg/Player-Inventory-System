@@ -33,10 +33,24 @@ namespace PlayerInventorySystem
         /// </summary>
         public SLOTTYPE SlotType = SLOTTYPE.INVENTORY;
 
+
+        private Item _item;
         /// <summary>
         /// The the item contained in this slot.
         /// </summary>
-        public Item Item { get; protected set; }
+        public Item Item
+        {
+            get
+            {
+                return _item;
+            }
+            protected set
+            {
+                _item = value;
+                SlotChanged?.Invoke(this);
+            }
+        }
+
 
         /// <summary>
         /// contains the stack count of the item in this slot. 0 if slot is empty
@@ -57,18 +71,18 @@ namespace PlayerInventorySystem
         /// <summary>
         /// True if the slot des not contain an item or the item stack is 0
         /// </summary>
-        public bool IsEmpty { get { return Item == null || Item.StackCount <= 0; } }
+        internal bool IsEmpty { get { return Item == null || Item.StackCount <= 0; } }
 
         /// <summary>
         /// True if the stack count of the item in this slot id >= the max stack count of the item contained in this slot.
         /// </summary>
-        public bool Isfull { get { return Item.StackCount >= Item.Data.maxStackSize; } }
+        internal bool Isfull { get { return Item.StackCount >= Item.Data.maxStackSize; } }
 
         /// <summary>
         /// construct take the id of the slot.
         /// </summary>
         /// <param name="slotID"></param>
-        public Slot (int slotID)
+        internal Slot(int slotID)
         {
             this.SlotID = slotID;
             SlotType = SLOTTYPE.INVENTORY;
@@ -79,7 +93,7 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="newItem">The item to be placed in this slot</param>
         /// <returns>The item placed in the slot</returns>
-        public virtual Item SetItem (Item newItem)
+        internal virtual Item SetItem(Item newItem)
         {
             if (newItem == null)
             {
@@ -90,20 +104,10 @@ namespace PlayerInventorySystem
                 Item = newItem;
             }
 
-            if (SlotChanged != null)
-            {
-                SlotChanged(this);
-            }
-
             if (selected)
             {
-                if (InventoryController.Instance.OnSelectedItemChangeCallBack != null)
-                {
-                    InventoryController.Instance.OnSelectedItemChangeCallBack(Item);
-                }
-                
+                InventoryController.Instance.OnSelectedItemChangeCallBack?.Invoke(Item);
             }
-
             return Item;
         }
 
@@ -112,13 +116,13 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="val"></param>
         /// <returns></returns>
-        public bool SetItemStackCount (int val)
+        internal bool SetItemStackCount(int val)
         {
             if (Item != null)
             {
                 if (Item.SetStackCount(val))
                 {
-                    Debug.Log("Item stack count changed");
+                    //  Debug.Log("Item stack count changed");
                     SlotChanged(this);
                     return true;
                 }
@@ -131,7 +135,7 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="val"></param>
         /// <returns>true on success else false</returns>
-        public bool IncermentStackCount (int val)
+        internal bool IncermentStackCount(int val)
         {
             return SetItemStackCount(StackCount + val);
         }
@@ -140,7 +144,7 @@ namespace PlayerInventorySystem
         /// method to register a callback for when this slot or the item in it changes in anyway
         /// </summary>
         /// <param name="callback"></param>
-        public void RegisterSlotChangedCallback (Action<Slot> callback)
+        internal void RegisterSlotChangedCallback(Action<Slot> callback)
         {
             SlotChanged += callback;
         }
@@ -149,7 +153,7 @@ namespace PlayerInventorySystem
         /// method to un register a slot change callback
         /// </summary>
         /// <param name="callback"></param>
-        public void UnregisterSlotChangeCallback (Action<Slot> callback)
+        internal void UnregisterSlotChangeCallback(Action<Slot> callback)
         {
             SlotChanged -= callback;
         }

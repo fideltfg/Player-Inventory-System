@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System;
 
 namespace PlayerInventorySystem
 {
@@ -61,7 +63,7 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="x">The item id to look for in this recipe</param>
         /// <returns>True if the item is required else false</returns>
-        public bool InRecipe (int x)
+        public bool InRecipe(int x)
         {
             foreach (Row row in rows)
             {
@@ -76,5 +78,22 @@ namespace PlayerInventorySystem
             return false;
         }
 
+        internal int[] GetRequiredItemIds()
+        {
+            List<int> ids = new List<int>();
+            foreach (Row row in rows)
+            {
+                foreach (int cv in row.cells)
+                {
+
+                    if (cv != 0)
+                    {
+                        ids.Add(cv);
+                    }
+
+                }
+            }
+            return ids.ToArray();
+        }
     }
 }

@@ -26,7 +26,7 @@ namespace PlayerInventorySystem
         public int id;
 
         [Tooltip("Indicates if this item will be consumed/used when picked up. Item will not be placed in inventory. Use this for things like food or health packs that automaticaly aply when picked up.")]
-        public bool consumeOnPickup = false;
+        public bool ConsumeOnPickup = false;
 
         /// <summary>
         /// A brife description of this item

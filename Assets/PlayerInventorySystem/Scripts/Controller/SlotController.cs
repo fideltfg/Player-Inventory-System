@@ -420,7 +420,7 @@ namespace PlayerInventorySystem
             SetOutLineColor();
         }
 
-        public void OnPointerUp(PointerEventData eventData)
+        public virtual void OnPointerUp(PointerEventData eventData)
         {
 
         }
@@ -779,7 +779,11 @@ namespace PlayerInventorySystem
             Slot.SetItem(null);
         }
 
-        void SwapItems()
+
+        /// <summary>
+        /// swaps the Held item with the item in the given slot
+        /// </summary>
+        public void SwapItems()
         {
             Item i = HeldItem;
             HeldItem = this.Slot.Item;

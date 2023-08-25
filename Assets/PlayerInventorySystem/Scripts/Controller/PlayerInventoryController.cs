@@ -73,34 +73,37 @@ namespace PlayerInventorySystem
         /// This method will try and place the item in the  ItemBar if there is space
         /// if no space there it will try the players inventory. Either way will return true
         /// if both fail it will return false
+        /// 
+        /// do not use this method to give the player an item.
+        /// 
         /// </summary>
         /// <param name="collectedObject">The GameObject that is to be picked up</param>
         /// <returns></returns>
         internal bool PickUpItem(GameObject collectedObject)
         {
-            Debug.Log("PickUpItem");
+           // Debug.Log("PickUpItem");
             if (!collectedObject.CompareTag("Item"))
             {
-                Debug.Log("Not an item");
+              //  Debug.Log("Not an item");
                 return false;
             }
 
             if (!collectedObject.TryGetComponent(out DroppedItem droppedItem))
             {
-                Debug.Log("No DroppedItem component");
+               // Debug.Log("No DroppedItem component");
                 return false;
             }
 
             if (droppedItem.ItemID <= 0)
             {
-                Debug.Log("ItemID is 0");
+              // Debug.Log("ItemID is 0");
                 return false;
             }
 
 
             Item newItem = new Item(droppedItem.ItemID, droppedItem.StackCount);
 
-            if (newItem.Data.consumeOnPickup)
+            if (newItem.Data.ConsumeOnPickup)
             {
                 ConsumeItem(newItem);
                 // TODO change this to play conumptioon sound
@@ -171,7 +174,7 @@ namespace PlayerInventorySystem
             }
             else
             {
-                Debug.Log("Can Not Interact Here!");
+                //Debug.Log("Can Not Interact Here!");
                 return;
             }
         }

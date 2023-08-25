@@ -95,8 +95,15 @@ namespace PlayerInventorySystem
         /// </summary>
         internal static Inventory CraftingOutputInventory { get { return InventoryList[5]; } } // index 5
 
+        internal static Inventory SalvageInputInventory { get { return InventoryList[6]; } } // index 6
+
+        internal static Inventory SalvageOutputInventory { get { return InventoryList[7]; } } // index 7
+
+
         /// <summary>
         /// Accessor for the held item
+        /// 
+        /// Inventory index 4
         /// </summary>
         public static Item HeldItem
         {
@@ -105,12 +112,12 @@ namespace PlayerInventorySystem
             {
                 if (value != null)
                 {
-                    UnityEngine.Cursor.visible = false;
+                    Cursor.visible = false;
                     Instance.dropPanel.gameObject.SetActive(true);
                 }
                 else
                 {
-                    UnityEngine.Cursor.visible = true;
+                    Cursor.visible = true;
                     Instance.dropPanel.gameObject.SetActive(false);
                 }
                 InventoryList[4][0].SetItem(value);
@@ -154,6 +161,8 @@ namespace PlayerInventorySystem
         /// The controller for the crafting panel
         /// </summary>
         public CraftingPanel CraftingPanel;
+
+        public SalvagePanel SalvagePanel;
 
         /// <summary>
         /// The controller for the character panel
@@ -245,6 +254,9 @@ namespace PlayerInventorySystem
             AddNewInventory(6); // add character panel inventory(3)
             AddNewInventory(1); // Inventory for the current held Item (4)
             AddNewInventory(1); // inventory for crafting output item (5)
+            AddNewInventory(1); // inventory for salvage input item (6)
+            AddNewInventory(9); // inventory for salvage output inventory (7)
+
 
             if (LoadInventory)
             {
@@ -254,11 +266,17 @@ namespace PlayerInventorySystem
             // set up and config the inventory panel
             InventoryPanel.gameObject.SetActive(false);
             InventoryPanel.Build(0);
+
             // setup and config the item bar
             ItemBar.Build(1);
+
             // set up and config crafting panel
             CraftingPanel.gameObject.SetActive(false);
             CraftingPanel.Build(2);
+
+            // setup and config salvage panel
+            SalvagePanel.gameObject.SetActive(false);
+            SalvagePanel.Build(6);
 
             //setup and config Character panel
             CharacterPanel.gameObject.SetActive(false);
@@ -545,10 +563,10 @@ namespace PlayerInventorySystem
         /// <param name="placedItem"></param>
         internal static void OnPlaceItem(Item item, PlacedItem placedItem = null, bool consume = true)
         {
-            Debug.Log("OnPlaceItem");
+            // Debug.Log("OnPlaceItem");
             if (consume)
             {
-                Debug.Log("Consume");
+                //   Debug.Log("Consume");
                 // remove the item from the players inventory
                 Instance.ItemBar.SelectedSlotController.Slot.IncermentStackCount(-1);
 

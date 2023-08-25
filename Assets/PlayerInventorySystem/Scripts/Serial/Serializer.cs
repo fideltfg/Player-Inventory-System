@@ -221,7 +221,7 @@ namespace PlayerInventorySystem.Serial
         {
             //   Debug.Log("Collecting Data to Save");
 
-            //   Debug.Log("Collecting Inventories");
+            Debug.Log("Collecting Inventories");
             Inventory[] inventories = InventoryController.InventoryList.Values.ToArray();
             int playerInventoryCapacity = InventoryController.PlayerInventoryCapacity;
             SerialInventory[] sInventories = new SerialInventory[inventories.Length];
@@ -235,7 +235,7 @@ namespace PlayerInventorySystem.Serial
             }
 
             // Convert chests to SerialChest
-            //  Debug.Log("Converting Chests to SerialChests");
+            Debug.Log("Converting Chests to SerialChests");
             SerialChest[] sChests = new SerialChest[InventoryController.ChestMap.Count];
             int ii = 0;
             foreach (GameObject chestObject in InventoryController.ChestMap.Values)

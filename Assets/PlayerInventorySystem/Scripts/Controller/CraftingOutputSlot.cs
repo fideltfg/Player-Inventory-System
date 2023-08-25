@@ -13,73 +13,6 @@ namespace PlayerInventorySystem
     /// </summary>
     public class CraftingOutputSlot : SlotController, IPointerDownHandler
     {
-        public override void Update()
-        {
-            GetComponentInParent<CraftingPanel>();
-
-
-            base.Update();
-            Item craftedItem = GetItemByIngredients(GivenItemsAsRecipe(InventoryController.Instance.CraftingPanel.SlotList));
-            Slot.SetItem(craftedItem);
-        }
-
-        /// <summary>
-        /// method to return an item based on the items provided by the player.
-        /// </summary>
-        /// <param name="ingredients"></param>
-        /// <returns></returns>
-        private Item GetItemByIngredients(string ingredients)
-        {
-            if (ingredients.Length <= 0)
-            {
-                return null;
-            }
-
-            foreach (ItemData itemData in InventoryController.Instance.ItemCatalog.list)
-            {
-                string i = itemData.recipe.Ingredients;
-                if (i.Equals(ingredients))
-                {
-                    return Item.New(itemData, itemData.craftCount);
-                }
-            }
-            return null;
-        }
-
-
-        /// <summary>
-        /// method to take the ingredients from the crafting panel and return them as a string 
-        /// that represents the recipe for the item the player is trying to craft.
-        /// </summary>
-        /// 
-        private string GivenItemsAsRecipe(List<SlotController> ingredients)
-        {
-            string recipe = "";
-            //foreach (SlotController sc in InventoryController.Instance.CraftingPanel.SlotList)
-
-            foreach (SlotController sc in ingredients)
-            {
-                if (sc.Slot.Item == null)
-                {
-                    recipe += "X";
-                }
-                else
-                {
-                    string x = sc.Slot.Item.Data.id.ToString();
-                    if ((x.Length & 1) != 0)
-                    {
-                        string c = x.PadLeft(2, '0');
-                        recipe += c;
-                    }
-                    else
-                    {
-                        recipe += x;
-                    }
-                }
-            }
-            char[] t = { 'X' };
-            return recipe.Trim(t);
-        }
 
         /// <summary>
         /// consumes the items needed to craft the item in the output slot when the user picks it up.
@@ -103,6 +36,7 @@ namespace PlayerInventorySystem
 
         public override void OnPointerDown(PointerEventData eventData)
         {
+
             // if there is an item in the output slot
             if (!Slot.IsEmpty && Slot.Item != null)
             {
