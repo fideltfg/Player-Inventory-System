@@ -38,9 +38,8 @@ namespace PlayerInventorySystem
         {
             Index = InventoryIndex;
             // set up th input slot
-            Transform InputArray = transform.Find("InputArray");
-            GameObject go = Instantiate(SlotPrefab, Vector3.zero, Quaternion.identity, InputArray);
-            inputSlotController = go.GetComponent<SlotController>();
+            Transform Inputslot = transform.Find("InputArray").Find("Slot");
+            inputSlotController = Inputslot.GetComponent<SlotController>();
             inputSlotController.Index = Index;
             inputSlotController.SetSlot(InventoryController.SalvageInputInventory[0]);
             inputSlotController.Slot.RegisterSlotChangedCallback(SlotChangeCallback);
@@ -48,18 +47,28 @@ namespace PlayerInventorySystem
 
         public void SlotChangeCallback(Slot slot)
         {
+            Debug.Log("Salvage slot changed");
             if (slot != null)
             {
                 if (slot.Item != null)
                 {
-
+                    Debug.Log("Salvage item " + slot.Item.Data.name);
                     // get the itme recipe
                     int[] salvagableItemIDs = slot.Item.Data.recipe.GetRequiredItemIds();
 
-                    foreach (int id in salvagableItemIDs)
-                    {
-                        Debug.Log("Salvage item id " + id);
+                    // set the items in the output slots
 
+                    if (salvagableItemIDs != null && salvagableItemIDs.Length > 0)
+                    {
+                        foreach (int id in salvagableItemIDs)
+                        {
+                            Debug.Log("Salvage item id " + id);
+
+                        }
+                    }
+                    else
+                    {
+                        Debug.Log("Salvage item recipe is null");
                     }
 
 

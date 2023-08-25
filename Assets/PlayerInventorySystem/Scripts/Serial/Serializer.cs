@@ -266,19 +266,19 @@ namespace PlayerInventorySystem.Serial
             }
 
             // Collect data for dropped and spawned items
-             Debug.Log("Collecting Dropped Items");
-              SerialDroppedItem[] sDroppedItems = new SerialDroppedItem[InventoryController.Instance.DroppedItems.Count];
-                int x = 0;
-               foreach (DroppedItem di in InventoryController.Instance.DroppedItems)
-               {
-                   //  Debug.Log("Converting Dropped Item " + di.name + " to SerialDroppedItem");
-                   sDroppedItems[x] = new SerialDroppedItem(di.ItemID, new SerialTransform(di.transform), di.StackCount, di.TimeToLive - di.Timer);
-                   x++;
-               }
+            //Debug.Log("Collecting Dropped Items");
+            SerialDroppedItem[] sDroppedItems = new SerialDroppedItem[InventoryController.Instance.DroppedItems.Count];
+            int x = 0;
+            foreach (DroppedItem di in InventoryController.Instance.DroppedItems)
+            {
+                //  Debug.Log("Converting Dropped Item " + di.name + " to SerialDroppedItem");
+                sDroppedItems[x] = new SerialDroppedItem(di.ItemID, new SerialTransform(di.transform), di.StackCount, di.TimeToLive - di.Timer);
+                x++;
+            }
 
 
             // Collect data for placed items
-            Debug.Log("Collecting Placed Items");
+            //Debug.Log("Collecting Placed Items");
             SerialPlacedItem[] sPlacedItems = new SerialPlacedItem[InventoryController.PlacedItems.Count];
             int p = 0;
             foreach (PlacedItem pi in InventoryController.PlacedItems)
