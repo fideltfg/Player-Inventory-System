@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
+using PlayerInventorySystem.Serial;
 
 ///*********************************************************************************
 /// Player Inventorty System
@@ -448,8 +449,10 @@ namespace PlayerInventorySystem
         /// <param name="quantity">the size of the stack to spawn</param>
         /// <param name="TTL">The time the item will reamin in the world</param>
         /// <returns>Returns true on success else false</returns>
-        public bool SpawnDroppedItem(int itemID, Vector3 position, int quantity = 1, float TTL = 30, float Durability = 0)
+        /// 
+        internal bool SpawnDroppedItem(int itemID, Vector3 position, int stackCount, float ttl = 30)
         {
+
             if (itemID <= 0)
             {
                 return false;
@@ -459,7 +462,7 @@ namespace PlayerInventorySystem
 
             GameObject prefab = itemData.worldPrefabSingle;
 
-            if (quantity > 1)
+            if (stackCount > 1)
             {
                 prefab = itemData.worldPrefabMultiple;
             }
@@ -469,25 +472,79 @@ namespace PlayerInventorySystem
                 return false;
             }
 
+            // Calculate a random direction for popping up
+            Vector3 popDirection = new Vector3(UnityEngine.Random.Range(-1f, 1f), 1f, UnityEngine.Random.Range(-1f, 1f)).normalized;
+
             GameObject g = Instantiate(prefab, position, Quaternion.identity);
 
             if (g.TryGetComponent<DroppedItem>(out var di))
             {
                 di.ItemID = itemData.id;
+                di.StackCount = stackCount;
+                di.TimeToLive = ttl;
 
-                di.StackCount = quantity;
-
-                di.TimeToLive = TTL;
+                // Apply the pop direction to the spawned item's rigidbody
+                if (di.TryGetComponent<Rigidbody>(out var rb))
+                {
+                    rb.AddForce(popDirection * 3, ForceMode.Impulse);
+                }
 
                 DroppedItems.Add(di);
             }
             else
             {
-                Debug.LogWarning("ItemPickup component missing from spawned item prefab. Item can not be picked up without it.");
+                Debug.LogWarning("ItemPickup component missing from spawned item prefab. Item cannot be picked up without it.");
             }
 
             return true;
         }
+
+        public bool SpawnDroppedItem(SerialDroppedItem sdi)
+        {
+            return SpawnDroppedItem(sdi.ItemID, sdi.Transform.Position, sdi.StackCount, sdi.TimeToLive);
+        }
+
+
+        /*        public bool SpawnDroppedItem(int itemID, Vector3 position, int quantity = 1, float TTL = 30, float Durability = 0)
+                {
+                    if (itemID <= 0)
+                    {
+                        return false;
+                    }
+
+                    ItemData itemData = Instance.ItemCatalog.list[itemID];
+
+                    GameObject prefab = itemData.worldPrefabSingle;
+
+                    if (quantity > 1)
+                    {
+                        prefab = itemData.worldPrefabMultiple;
+                    }
+
+                    if (prefab == null)
+                    {
+                        return false;
+                    }
+
+                    GameObject g = Instantiate(prefab, position, Quaternion.identity);
+
+                    if (g.TryGetComponent<DroppedItem>(out var di))
+                    {
+                        di.ItemID = itemData.id;
+
+                        di.StackCount = quantity;
+
+                        di.TimeToLive = TTL;
+
+                        DroppedItems.Add(di);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("ItemPickup component missing from spawned item prefab. Item can not be picked up without it.");
+                    }
+
+                    return true;
+                }*/
 
         /// <summary>
         /// Method to spawn a chest that was previously saved.

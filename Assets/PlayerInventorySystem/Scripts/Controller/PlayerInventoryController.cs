@@ -81,22 +81,22 @@ namespace PlayerInventorySystem
         /// <returns></returns>
         internal bool PickUpItem(GameObject collectedObject)
         {
-           // Debug.Log("PickUpItem");
+            // Debug.Log("PickUpItem");
             if (!collectedObject.CompareTag("Item"))
             {
-              //  Debug.Log("Not an item");
+                //  Debug.Log("Not an item");
                 return false;
             }
 
             if (!collectedObject.TryGetComponent(out DroppedItem droppedItem))
             {
-               // Debug.Log("No DroppedItem component");
+                // Debug.Log("No DroppedItem component");
                 return false;
             }
 
             if (droppedItem.ItemID <= 0)
             {
-              // Debug.Log("ItemID is 0");
+                // Debug.Log("ItemID is 0");
                 return false;
             }
 
@@ -145,7 +145,7 @@ namespace PlayerInventorySystem
         /// <param name="quantity"></param>
         internal void DropItem(Item item, int quantity = 1)
         {
-            InventoryController.Instance.SpawnDroppedItem(item.Data.id, transform.position + new Vector3(0, 2, 2), quantity);
+            InventoryController.Instance.SpawnDroppedItem(item.Data.id, transform.position + transform.forward * 1.5f, quantity);
         }
 
         /// <summary>
