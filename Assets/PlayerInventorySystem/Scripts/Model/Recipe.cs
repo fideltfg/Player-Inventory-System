@@ -86,10 +86,9 @@ namespace PlayerInventorySystem
                 foreach (int cv in row.cells)
                 {
 
-                    if (cv != 0)
-                    {
-                        ids.Add(cv);
-                    }
+
+                    ids.Add(cv);
+
 
                 }
             }

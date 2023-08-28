@@ -68,7 +68,7 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="data"></param>
         /// <param name="count"></param>
-        public Item(ItemData data, int count)
+        public Item(ItemData data, int count = 1)
         {
             this.Data = data;
             StackCount = Mathf.Clamp(count, 1, data.maxStackSize);

@@ -103,7 +103,6 @@ namespace PlayerInventorySystem
             {
                 Item = newItem;
             }
-
             if (selected)
             {
                 InventoryController.Instance.OnSelectedItemChangeCallBack?.Invoke(Item);

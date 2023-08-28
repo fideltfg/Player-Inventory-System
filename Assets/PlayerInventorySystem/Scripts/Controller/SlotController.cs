@@ -15,7 +15,9 @@ namespace PlayerInventorySystem
         private float counter = 0;
         private Color unselectedColor;
         private bool mouseOver;
-
+        public bool showInfoPanel;
+        public bool interactable = true;
+        private Transform infoPanel;
         /// <summary>
         /// The index of this slots inventory
         /// </summary>
@@ -133,8 +135,11 @@ namespace PlayerInventorySystem
             get { return Slot.selected; }
             set
             {
-                Slot.selected = value;
-                GetComponent<Image>().color = value ? HighlightColor : unselectedColor;
+                if (interactable)
+                {
+                    Slot.selected = value;
+                    GetComponent<Image>().color = value ? HighlightColor : unselectedColor;
+                }
             }
         }
 
@@ -156,6 +161,9 @@ namespace PlayerInventorySystem
             {
                 ImageAnimator = transform.Find("Image").GetComponent<Animation>();
             }
+
+            infoPanel = transform.Find("Info Panel");
+
         }
 
         void Awake()
@@ -165,6 +173,9 @@ namespace PlayerInventorySystem
 
         public virtual void Update()
         {
+
+            infoPanel.gameObject.SetActive(showInfoPanel);
+
             // what to do if the mouse pointer is over this slot
             if (mouseOver)
             {
@@ -214,7 +225,7 @@ namespace PlayerInventorySystem
         {
             counter = 0;
             InventoryController.Instance.ItemHolder.itemInfoBox.Show(null);
-            if (Slot.Item != null)
+            if (Slot != null && Slot.Item != null)
             {
                 image.sprite = Slot.Item.Data.sprite;
                 image.enabled = true;
@@ -307,10 +318,15 @@ namespace PlayerInventorySystem
         /// <param name="eventData"></param>
         public virtual void OnPointerDown(PointerEventData eventData)
         {
+            if(!interactable)
+            {
+                return;
+            }
+
             counter = 0;
             mouseOver = false;
             // if NOT holding an item and there is an item in this slot
-            if (HeldItem == null && Slot.Item != null)
+            if (HeldItem == null && Slot.Item != null )
             {
                 // if the player is holding down shift place the item( or stack of items) in the slot
                 if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
@@ -422,7 +438,10 @@ namespace PlayerInventorySystem
 
         public virtual void OnPointerUp(PointerEventData eventData)
         {
+            if (interactable)
+            {
 
+            }
         }
 
         void SetOutLineColor()
