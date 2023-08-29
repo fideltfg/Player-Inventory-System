@@ -85,11 +85,7 @@ namespace PlayerInventorySystem
             {
                 foreach (int cv in row.cells)
                 {
-
-
                     ids.Add(cv);
-
-
                 }
             }
             return ids.ToArray();

@@ -155,32 +155,32 @@
             "slots": [
                 {
                     "slotID": 0,
-                    "itemID": 6,
+                    "itemID": 4,
                     "stackCount": 1,
                     "durability": 0.0
                 },
                 {
                     "slotID": 1,
-                    "itemID": 33,
+                    "itemID": 46,
                     "stackCount": 1,
-                    "durability": 25.0
+                    "durability": 0.0
                 },
                 {
                     "slotID": 2,
-                    "itemID": 8,
-                    "stackCount": 3,
+                    "itemID": 0,
+                    "stackCount": 0,
                     "durability": 0.0
                 },
                 {
                     "slotID": 3,
-                    "itemID": 44,
-                    "stackCount": 4,
+                    "itemID": 8,
+                    "stackCount": 7,
                     "durability": 0.0
                 },
                 {
                     "slotID": 4,
-                    "itemID": 0,
-                    "stackCount": 0,
+                    "itemID": 46,
+                    "stackCount": 1,
                     "durability": 0.0
                 },
                 {
@@ -191,8 +191,8 @@
                 },
                 {
                     "slotID": 6,
-                    "itemID": 0,
-                    "stackCount": 0,
+                    "itemID": 6,
+                    "stackCount": 1,
                     "durability": 0.0
                 },
                 {
@@ -342,9 +342,9 @@
             "slots": [
                 {
                     "slotID": 0,
-                    "itemID": 0,
-                    "stackCount": 0,
-                    "durability": 0.0
+                    "itemID": 33,
+                    "stackCount": 1,
+                    "durability": 25.0
                 }
             ]
         },
@@ -353,14 +353,14 @@
             "slots": [
                 {
                     "slotID": 0,
-                    "itemID": 0,
-                    "stackCount": 0,
+                    "itemID": 44,
+                    "stackCount": 1,
                     "durability": 0.0
                 },
                 {
                     "slotID": 1,
-                    "itemID": 0,
-                    "stackCount": 0,
+                    "itemID": 44,
+                    "stackCount": 1,
                     "durability": 0.0
                 },
                 {
@@ -371,14 +371,14 @@
                 },
                 {
                     "slotID": 3,
-                    "itemID": 0,
-                    "stackCount": 0,
+                    "itemID": 44,
+                    "stackCount": 1,
                     "durability": 0.0
                 },
                 {
                     "slotID": 4,
-                    "itemID": 0,
-                    "stackCount": 0,
+                    "itemID": 9,
+                    "stackCount": 1,
                     "durability": 0.0
                 },
                 {
@@ -395,8 +395,8 @@
                 },
                 {
                     "slotID": 7,
-                    "itemID": 0,
-                    "stackCount": 0,
+                    "itemID": 9,
+                    "stackCount": 1,
                     "durability": 0.0
                 },
                 {
@@ -411,8 +411,8 @@
     "chests": [],
     "panelLocations": [
         {
-            "px": 524.0,
-            "py": 261.007568359375,
+            "px": 376.5,
+            "py": 307.507568359375,
             "pz": 0.0,
             "rx": 0.0,
             "ry": 0.0,
@@ -424,8 +424,8 @@
             "w": 275.0
         },
         {
-            "px": 279.0,
-            "py": 291.5,
+            "px": 131.5,
+            "py": 338.0,
             "pz": 0.0,
             "rx": 0.0,
             "ry": 0.0,
@@ -437,8 +437,8 @@
             "w": 200.0
         },
         {
-            "px": 769.0,
-            "py": 291.5,
+            "px": 621.5,
+            "py": 338.0,
             "pz": 0.0,
             "rx": 0.0,
             "ry": 0.0,
@@ -450,8 +450,8 @@
             "w": 200.0
         },
         {
-            "px": 746.0,
-            "py": 261.007568359375,
+            "px": 598.5,
+            "py": 307.507568359375,
             "pz": 0.0,
             "rx": 0.0,
             "ry": 0.0,
@@ -463,87 +463,6 @@
             "w": 275.0
         }
     ],
-    "droppedItems": [
-        {
-            "itemID": 8,
-            "stackCount": 1,
-            "timeToLive": 11.529176712036133,
-            "transform": {
-                "px": 67.17510986328125,
-                "py": 0.5000017285346985,
-                "pz": 48.32122802734375,
-                "rx": 0.9431367516517639,
-                "ry": 14.064827919006348,
-                "rz": 33.33348846435547,
-                "sx": 1.0,
-                "sy": 1.0,
-                "sz": 1.0
-            }
-        },
-        {
-            "itemID": 8,
-            "stackCount": 1,
-            "timeToLive": 11.529176712036133,
-            "transform": {
-                "px": 65.06092071533203,
-                "py": 0.5000001788139343,
-                "pz": 49.36138916015625,
-                "rx": 333.2701416015625,
-                "ry": 277.0751037597656,
-                "rz": 290.69366455078127,
-                "sx": 1.0,
-                "sy": 1.0,
-                "sz": 1.0
-            }
-        },
-        {
-            "itemID": 8,
-            "stackCount": 1,
-            "timeToLive": 11.529176712036133,
-            "transform": {
-                "px": 49.82564926147461,
-                "py": 0.5695977807044983,
-                "pz": 57.308658599853519,
-                "rx": 354.8616943359375,
-                "ry": 262.3167419433594,
-                "rz": 226.57078552246095,
-                "sx": 1.0,
-                "sy": 1.0,
-                "sz": 1.0
-            }
-        },
-        {
-            "itemID": 8,
-            "stackCount": 1,
-            "timeToLive": 11.529176712036133,
-            "transform": {
-                "px": 47.130794525146487,
-                "py": 0.5915606617927551,
-                "pz": 53.24200439453125,
-                "rx": 41.97233200073242,
-                "ry": 5.8556132316589359,
-                "rz": 34.146236419677737,
-                "sx": 1.0,
-                "sy": 1.0,
-                "sz": 1.0
-            }
-        },
-        {
-            "itemID": 8,
-            "stackCount": 1,
-            "timeToLive": 11.529176712036133,
-            "transform": {
-                "px": 37.363765716552737,
-                "py": 0.5915583372116089,
-                "pz": 50.210540771484378,
-                "rx": 36.165714263916019,
-                "ry": 272.0547180175781,
-                "rz": 349.2534484863281,
-                "sx": 1.0,
-                "sy": 1.0,
-                "sz": 1.0
-            }
-        }
-    ],
+    "droppedItems": [],
     "placedItems": []
 }

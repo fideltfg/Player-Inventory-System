@@ -12,7 +12,7 @@ namespace PlayerInventorySystem
     public class SlotController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
     {
         int slotID;
-        private float counter = 0;
+        protected float counter = 0;
         private Color unselectedColor;
         private bool mouseOver;
         public bool showInfoPanel;
@@ -153,7 +153,7 @@ namespace PlayerInventorySystem
         /// </summary>
         public float ItemInfoBoxDelay = .66f;
 
-        Animation ImageAnimator;
+        internal Animation ImageAnimator;
 
         void OnEnable()
         {
@@ -219,9 +219,9 @@ namespace PlayerInventorySystem
         }
 
         /// <summary>
-        /// method calledto update the slots UI
+        /// method called to update the slots UI
         /// </summary>
-        internal void UpdateSlotUI()
+        internal virtual void UpdateSlotUI()
         {
             counter = 0;
             InventoryController.Instance.ItemHolder.itemInfoBox.Show(null);
@@ -282,6 +282,7 @@ namespace PlayerInventorySystem
                 image.enabled = false;
                 text.enabled = false;
                 InventoryController.Instance.ItemHolder.itemInfoBox.gameObject.SetActive(false);
+                outline.enabled = false;
             }
         }
 
@@ -291,7 +292,12 @@ namespace PlayerInventorySystem
         /// <param name="eventData"></param>
         public virtual void OnPointerEnter(PointerEventData eventData)
         {
-            SetOutLineColor();
+            if (interactable)
+            {
+                SetOutLineColor();
+            }
+
+
 
             if (Slot.Item != null)
             {
@@ -306,8 +312,12 @@ namespace PlayerInventorySystem
         /// <param name="eventData"></param>
         public virtual void OnPointerExit(PointerEventData eventData)
         {
-            outline.effectColor = HighlightColor;
-            outline.enabled = false;
+            if (interactable)
+            {
+                outline.effectColor = HighlightColor;
+                outline.enabled = false;
+            }
+
             counter = 0;
             mouseOver = false;
         }
@@ -318,7 +328,7 @@ namespace PlayerInventorySystem
         /// <param name="eventData"></param>
         public virtual void OnPointerDown(PointerEventData eventData)
         {
-            if(!interactable)
+            if (!interactable)
             {
                 return;
             }
@@ -326,7 +336,7 @@ namespace PlayerInventorySystem
             counter = 0;
             mouseOver = false;
             // if NOT holding an item and there is an item in this slot
-            if (HeldItem == null && Slot.Item != null )
+            if (HeldItem == null && Slot.Item != null)
             {
                 // if the player is holding down shift place the item( or stack of items) in the slot
                 if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
@@ -444,7 +454,7 @@ namespace PlayerInventorySystem
             }
         }
 
-        void SetOutLineColor()
+        internal virtual void SetOutLineColor()
         {
             if (HeldItem != null)
             {
@@ -463,6 +473,13 @@ namespace PlayerInventorySystem
             }
             outline.enabled = true;
         }
+
+        public void SetOutLineColor(Color color)
+        {
+            outline.effectColor = color;
+            outline.enabled = true;
+        }
+
 
         bool MoveStack()
         {

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace PlayerInventorySystem
 {
@@ -10,14 +11,14 @@ namespace PlayerInventorySystem
     /// Unity or Visual Studio do not pass refacrtoring changes to the contents of the ItemCatalog.asset file.
     /// You will need to update the contents of Assets/PlayerInventorySystem/ItemCatalog.asset manualy to reflect the change.
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public class ItemData
     {
         /// <summary>
         /// The human readable name of this object
         /// </summary>
         [Tooltip("The human readable name of this object")]
-        public string name;
+        public new string name;
 
         /// <summary>
         /// The catalog ID of this item
@@ -91,6 +92,18 @@ namespace PlayerInventorySystem
         public int craftCount = 1; // the number of items that are crafted with the recipe
 
         /// <summary>
+        /// indicate if this item can be salvaged from other items
+        /// </summary>
+        [Tooltip("indicate if this item can be salvaged/reclaimed from other items")]
+        public bool salvageable = true;
+
+        /// <summary>
+        /// indicate if this item can be recycled into other items via the salvage process
+        /// </summary>
+        [Tooltip("indicate if this item can be recycled into other items via the salvage process")]
+        public bool recycable = true;
+
+        /// <summary>
         /// The durability of this item when new
         /// </summary>
         [Tooltip("The durability of this item when new")]
@@ -149,6 +162,9 @@ namespace PlayerInventorySystem
         /// </summary>
         [Tooltip("The luck bonus this item will bestow upon player when equiped")]
         public float luck;
+
+
+
     }
 
     /// <summary>

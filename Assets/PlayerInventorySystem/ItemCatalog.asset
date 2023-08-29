@@ -30,6 +30,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 0
+    salvageable: 1
+    recycable: 1
     maxDurability: 0
     damage: 0
     speed: 0
@@ -59,6 +61,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 0
+    salvageable: 1
+    recycable: 0
     maxDurability: 0
     damage: 0
     speed: 0
@@ -88,6 +92,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 0
+    salvageable: 1
+    recycable: 1
     maxDurability: 0
     damage: 0
     speed: 0
@@ -117,6 +123,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 0
+    salvageable: 1
+    recycable: 1
     maxDurability: 0
     damage: 0
     speed: 0
@@ -146,6 +154,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 0
+    salvageable: 1
+    recycable: 1
     maxDurability: 0
     damage: 0
     speed: 0
@@ -175,6 +185,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 0
+    salvageable: 1
+    recycable: 1
     maxDurability: 0
     damage: 0
     speed: 0
@@ -204,6 +216,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 0
+    salvageable: 0
+    recycable: 0
     maxDurability: 0
     damage: 0
     speed: 0
@@ -233,6 +247,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 0
+    salvageable: 1
+    recycable: 1
     maxDurability: 0
     damage: 0
     speed: 0
@@ -262,6 +278,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 4
+    salvageable: 1
+    recycable: 0
     maxDurability: 0
     damage: 0
     speed: 0
@@ -291,6 +309,8 @@ MonoBehaviour:
       - cells: 000000000100000000000000
       - cells: 000000000000000000000000
     craftCount: 10
+    salvageable: 0
+    recycable: 0
     maxDurability: 0
     damage: 0
     speed: 0
@@ -320,6 +340,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 0
+    salvageable: 1
+    recycable: 1
     maxDurability: 0
     damage: 0
     speed: 0
@@ -350,6 +372,8 @@ MonoBehaviour:
       - cells: 000000000a00000000000000
       - cells: 000000000900000000000000
     craftCount: 4
+    salvageable: 1
+    recycable: 1
     maxDurability: 0
     damage: 0
     speed: 0
@@ -378,6 +402,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -406,6 +432,8 @@ MonoBehaviour:
       - cells: 2c000000060000002c000000
       - cells: 2c000000000000002c000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -434,6 +462,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -462,6 +492,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -490,6 +522,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -518,6 +552,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -546,6 +582,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -574,6 +612,8 @@ MonoBehaviour:
       - cells: 060000000700000004000000
       - cells: 000000000700000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -602,6 +642,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -630,6 +672,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -658,6 +702,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -686,6 +732,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -714,6 +762,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -742,6 +792,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -770,6 +822,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -798,6 +852,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -826,6 +882,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -854,6 +912,8 @@ MonoBehaviour:
       - cells: 000000002c00000000000000
       - cells: 000000000900000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -882,6 +942,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -910,6 +972,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -938,6 +1002,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -962,10 +1028,12 @@ MonoBehaviour:
     maxStackSize: 1
     recipe:
       rows:
-      - cells: 000000000000000000000000
-      - cells: 000000000000000000000000
-      - cells: 000000000000000000000000
+      - cells: 2c0000002c00000000000000
+      - cells: 2c0000000900000000000000
+      - cells: 000000000900000000000000
     craftCount: 1
+    salvageable: 0
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -994,6 +1062,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -1022,6 +1092,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -1050,6 +1122,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -1078,6 +1152,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -1106,6 +1182,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -1134,6 +1212,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -1162,6 +1242,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -1190,6 +1272,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -1218,6 +1302,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 1
@@ -1246,6 +1332,8 @@ MonoBehaviour:
       - cells: 000000000900000000000000
       - cells: 000000000900000000000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 25
     damage: 0
     speed: 0
@@ -1259,7 +1347,7 @@ MonoBehaviour:
   - name: Iron Bar
     id: 44
     ConsumeOnPickup: 0
-    description: Bars made of iron. Used in many cafting recipes
+    description: Bars made of iron ore (4). Used in many cafting recipes
     sprite: {fileID: 21300408, guid: ff58a1725e26e464c8e562413502c6db, type: 3}
     worldPrefabSingle: {fileID: 1520493659561722, guid: 5fc9634834230ad478c408385c62c3b2,
       type: 3}
@@ -1272,9 +1360,11 @@ MonoBehaviour:
     recipe:
       rows:
       - cells: 000000000000000000000000
-      - cells: 000000000000000000000000
+      - cells: 000000000400000000000000
       - cells: 000000000000000000000000
     craftCount: 4
+    salvageable: 1
+    recycable: 1
     maxDurability: 0
     damage: 0
     speed: 0
@@ -1304,6 +1394,8 @@ MonoBehaviour:
       - cells: 080000000400000008000000
       - cells: 080000000800000008000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 0
     damage: 0
     speed: 0
@@ -1333,6 +1425,8 @@ MonoBehaviour:
       - cells: 080000000000000008000000
       - cells: 080000000800000008000000
     craftCount: 1
+    salvageable: 1
+    recycable: 1
     maxDurability: 0
     damage: 0
     speed: 0

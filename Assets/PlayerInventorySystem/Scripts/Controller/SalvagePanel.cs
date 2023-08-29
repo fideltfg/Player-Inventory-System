@@ -13,11 +13,13 @@ namespace PlayerInventorySystem
     /// </summary>
     public class SalvagePanel : InventorySystemPanel
     {
-        public SlotController inputSlotController;
+        public SalvageSlotController inputSlotController;
         public Text output;
-        public Button salvageButton;
         //   public CraftingTableController CraftingTable;
 
+        /// <summary>
+        /// indicates if the current recipe is valid for salvage
+        /// </summary>
         private bool validSalvage = false;
 
         public override void OnDisable()
@@ -54,6 +56,7 @@ namespace PlayerInventorySystem
             foreach (Slot slot in InventoryController.SalvageOutputInventory)
             {
                 GameObject go = Instantiate(SlotPrefab, Vector3.zero, Quaternion.identity, InputArry);
+                go.SetActive(true);
                 SlotController sc = go.GetComponent<SlotController>();
                 sc.interactable = false;
                 sc.Index = this.Index + 1; //assuming the inventory for salvage panel is the next index, not a goot thing to do but it works for now
@@ -66,40 +69,59 @@ namespace PlayerInventorySystem
 
         public void SlotChangeCallback(Slot slot)
         {
-            Debug.Log("Salvage slot changed");
+            foreach (SlotController sc in SlotList)
+            {
+                sc.outline.enabled = false;
+                sc.Slot.SetItem(null);
+            }
             if (slot != null)
             {
                 if (slot.Item != null)
                 {
-                    Debug.Log("Salvage item " + slot.Item.Data.name);
-                    // get the itme recipe
                     int[] salvagableItemIDs = slot.Item.Data.recipe.GetRequiredItemIds();
-
-                    // check the recipe is valid
-                    if (salvagableItemIDs.Length < 1 || salvagableItemIDs.Any(num => num != 0) == false)
+                  /*  string t = "";
+                    foreach (int y in salvagableItemIDs)
                     {
-                        validSalvage = false;
-                        return;
+                        t += y.ToString() + " ";
                     }
-
-                    validSalvage = true;
+                    Debug.Log("Salvage item ids: " + t);
+                  */
+                    validSalvage = salvagableItemIDs.Length >= 1 && !salvagableItemIDs.All(num => num == 0);
 
                     int i = 0;
                     foreach (SlotController sc in SlotList)
                     {
                         Item item = InventoryController.Instance.ItemCatalog.GetItemByID(salvagableItemIDs[i]);
-                        sc.Slot.SetItem(item);
                         i++;
+
+                        // set the put slot item
+                        sc.Slot.SetItem(item);
+
+                        // check if the item is not null
+                        if (item == null)
+                        {
+                            continue;
+                        }
+
+
+
+                        // check if the item is salvageable and set the outline color accordingly
+                        if (sc.Slot.Item.Data.salvageable)
+                        {
+                            sc.SetOutLineColor(sc.ValidColor);
+                        }
+                        else
+                        {
+                            sc.SetOutLineColor(sc.ErrorColor);
+                        }
+
                     }
                 }
                 else
                 {
                     validSalvage = false;
                     // clear the output slots
-                    foreach (SlotController sc in SlotList)
-                    {
-                        sc.Slot.SetItem(null);
-                    }
+                   
                 }
             }
         }
@@ -113,7 +135,10 @@ namespace PlayerInventorySystem
                 {
                     if (sc.Slot.Item != null)
                     {
-                        InventoryController.Instance.PlayerIC.DropItem(sc.Slot.Item, sc.Slot.Item.StackCount);
+                        if (sc.Slot.Item.Data.salvageable)
+                        {
+                            InventoryController.Instance.PlayerIC.DropItem(sc.Slot.Item, sc.Slot.Item.StackCount);
+                        }
                         sc.Slot.SetItem(null);
                     }
                 }

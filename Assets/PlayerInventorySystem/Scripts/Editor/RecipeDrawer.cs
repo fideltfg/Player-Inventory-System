@@ -8,8 +8,8 @@ namespace PlayerInventorySystem.Editor
     /// <summary>
     /// Custom editor class to display the Recipe grid in the Item Catalog.
     /// </summary>
-    [CustomPropertyDrawer(typeof(PlayerInventorySystem.Recipe))]
-    public class CustomTileData : PropertyDrawer
+    [CustomPropertyDrawer(typeof(Recipe))]
+    public class RecipeDrawer : PropertyDrawer
     {
         public override void OnGUI (Rect position, SerializedProperty property, GUIContent label)
         {
