@@ -26,6 +26,7 @@ The Player Inventory System will allow you to add this functionality to you game
 - Encrypted object serialization and saving to help prevent cheating,
 - Inventory/chest contents, placed and dropped items can be loaded and saved automatically,
 - Keyboard and partial controller support using the new input system. (Full support coming soon!)
+- Item recyceling/salvage allows players to reclaim the items used to craft an item.
 
 
 ## Getting Started
