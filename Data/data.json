@@ -167,20 +167,20 @@
                 },
                 {
                     "slotID": 2,
+                    "itemID": 6,
+                    "stackCount": 1,
+                    "durability": 0.0
+                },
+                {
+                    "slotID": 3,
                     "itemID": 0,
                     "stackCount": 0,
                     "durability": 0.0
                 },
                 {
-                    "slotID": 3,
-                    "itemID": 8,
-                    "stackCount": 7,
-                    "durability": 0.0
-                },
-                {
                     "slotID": 4,
-                    "itemID": 46,
-                    "stackCount": 1,
+                    "itemID": 0,
+                    "stackCount": 0,
                     "durability": 0.0
                 },
                 {
@@ -191,8 +191,8 @@
                 },
                 {
                     "slotID": 6,
-                    "itemID": 6,
-                    "stackCount": 1,
+                    "itemID": 0,
+                    "stackCount": 0,
                     "durability": 0.0
                 },
                 {
@@ -463,6 +463,39 @@
             "w": 275.0
         }
     ],
-    "droppedItems": [],
+    "droppedItems": [
+        {
+            "itemID": 8,
+            "stackCount": 7,
+            "timeToLive": 26.58636474609375,
+            "transform": {
+                "px": 62.451141357421878,
+                "py": 0.4999999403953552,
+                "pz": 51.613075256347659,
+                "rx": 6.868358612060547,
+                "ry": 211.5965576171875,
+                "rz": 89.18213653564453,
+                "sx": 1.0,
+                "sy": 1.0,
+                "sz": 1.0
+            }
+        },
+        {
+            "itemID": 46,
+            "stackCount": 1,
+            "timeToLive": 28.757495880126954,
+            "transform": {
+                "px": 60.9512939453125,
+                "py": 0.25,
+                "pz": 52.895538330078128,
+                "rx": 0.0,
+                "ry": 74.55028533935547,
+                "rz": 0.0,
+                "sx": 1.0,
+                "sy": 1.0,
+                "sz": 1.0
+            }
+        }
+    ],
     "placedItems": []
 }

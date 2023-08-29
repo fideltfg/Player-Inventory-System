@@ -293,27 +293,13 @@ namespace PlayerInventorySystem
 
         void Update()
         {
-            // close all windows
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                if (AnyWindowOpen)
-                {
-                    dropPanel.gameObject.SetActive(false);
-                }
-
                 InventoryPanel.gameObject.SetActive(false);
                 CharacterPanel.gameObject.SetActive(false);
                 CraftingPanel.gameObject.SetActive(false);
                 ChestPanel.gameObject.SetActive(false);
-
-
-            }
-
-
-            // this bit test to see if the player is holding an item and if they are it will drop it
-            // if there are no windows open
-            if (AnyWindowOpen == false)
-            {
+                dropPanel.gameObject.SetActive(false);
 
                 if (HeldItem != null)
                 {
@@ -326,11 +312,21 @@ namespace PlayerInventorySystem
                     }
                     HeldItem = null;
                 }
+
             }
+            else
+            {
+                if (HeldItem != null)
+                {
+                    dropPanel.gameObject.SetActive(true);
+                }
+                else
+                {
+                    dropPanel.gameObject.SetActive(false);
+                }
 
-            //EnablePlayerMovent(true); // enable the player
-            dropPanel.gameObject.SetActive(false); // disable the drop panel
 
+            }
         }
 
         /// <summary>
@@ -499,52 +495,10 @@ namespace PlayerInventorySystem
             return true;
         }
 
-        public bool SpawnDroppedItem(SerialDroppedItem sdi)
+        internal bool SpawnDroppedItem(SerialDroppedItem sdi)
         {
             return SpawnDroppedItem(sdi.ItemID, sdi.Transform.Position, sdi.StackCount, sdi.TimeToLive);
         }
-
-
-        /*        public bool SpawnDroppedItem(int itemID, Vector3 position, int quantity = 1, float TTL = 30, float Durability = 0)
-                {
-                    if (itemID <= 0)
-                    {
-                        return false;
-                    }
-
-                    ItemData itemData = Instance.ItemCatalog.list[itemID];
-
-                    GameObject prefab = itemData.worldPrefabSingle;
-
-                    if (quantity > 1)
-                    {
-                        prefab = itemData.worldPrefabMultiple;
-                    }
-
-                    if (prefab == null)
-                    {
-                        return false;
-                    }
-
-                    GameObject g = Instantiate(prefab, position, Quaternion.identity);
-
-                    if (g.TryGetComponent<DroppedItem>(out var di))
-                    {
-                        di.ItemID = itemData.id;
-
-                        di.StackCount = quantity;
-
-                        di.TimeToLive = TTL;
-
-                        DroppedItems.Add(di);
-                    }
-                    else
-                    {
-                        Debug.LogWarning("ItemPickup component missing from spawned item prefab. Item can not be picked up without it.");
-                    }
-
-                    return true;
-                }*/
 
         /// <summary>
         /// Method to spawn a chest that was previously saved.
@@ -655,7 +609,7 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="itemID">The ID of the item to be added</param>
         /// <returns>Returns true on success else false</returns>
-        public static bool GiveItem(int itemID, int stackCount = 1)
+        internal static bool GiveItem(int itemID, int stackCount = 1)
         {
             if (itemID <= 0)
             {
@@ -778,7 +732,7 @@ namespace PlayerInventorySystem
         /// <summary>
         /// method to toggle the crafting panel
         /// </summary>
-        public void OpenCraftingTable(CraftingTableController cTc)
+        internal void OpenCraftingTable(CraftingTableController cTc)
         {
             if (cTc != null)
             {

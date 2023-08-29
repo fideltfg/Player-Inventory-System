@@ -50,6 +50,7 @@ namespace PlayerInventorySystem
 
                 return Physics.Raycast(ray, out hit, Mathf.Infinity, layermask);
             }
+            private set { }
         }
 
         void OnEnable()
@@ -125,7 +126,7 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="itemID">The ID of the item to be added</param>
         /// <returns>Returns true on success else false</returns>
-        public static bool GiveItem(Item item)
+        internal static bool GiveItem(Item item)
         {
             if (InventoryController.ItemBarInventory.AddItem(item) == false)
             {
@@ -179,7 +180,7 @@ namespace PlayerInventorySystem
             }
         }
 
-        private void ConsumeItem(Item item)
+        internal void ConsumeItem(Item item)
         {
             if (item.Data.itemType == ITEMTYPE.CONSUMABLE)
             {
