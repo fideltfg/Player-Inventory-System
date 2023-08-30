@@ -49,7 +49,7 @@ namespace PlayerInventorySystem
             Transform InputArry = transform.Find("InputArray");
             foreach (Slot slot in InventoryController.CraftingInventory)
             {
-                GameObject go = GameObject.Instantiate(SlotPrefab, Vector3.zero, Quaternion.identity, InputArry);
+                GameObject go = Instantiate(SlotPrefab, Vector3.zero, Quaternion.identity, InputArry);
                 SlotController sc = go.GetComponent<SlotController>();
                 sc.Index = this.Index;
                 sc.SetSlot(slot);

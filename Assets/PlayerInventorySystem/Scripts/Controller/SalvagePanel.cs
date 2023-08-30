@@ -14,9 +14,7 @@ namespace PlayerInventorySystem
     public class SalvagePanel : InventorySystemPanel
     {
         public SalvageSlotController inputSlotController;
-        public Text output;
-        //   public CraftingTableController CraftingTable;
-
+        public Transform OutputArray;
         /// <summary>
         /// indicates if the current recipe is valid for salvage
         /// </summary>
@@ -52,10 +50,10 @@ namespace PlayerInventorySystem
             inputSlotController.SetSlot(InventoryController.SalvageInputInventory[0]);
             inputSlotController.Slot.RegisterSlotChangedCallback(SlotChangeCallback);
 
-            Transform InputArry = transform.Find("OutputArray");
+           // Transform InputArry = transform.Find("OutputArray");
             foreach (Slot slot in InventoryController.SalvageOutputInventory)
             {
-                GameObject go = Instantiate(SlotPrefab, Vector3.zero, Quaternion.identity, InputArry);
+                GameObject go = Instantiate(SlotPrefab, Vector3.zero, Quaternion.identity, OutputArray);
                 go.SetActive(true);
                 SlotController sc = go.GetComponent<SlotController>();
                 sc.interactable = false;

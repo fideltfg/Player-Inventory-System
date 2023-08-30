@@ -173,9 +173,10 @@ namespace PlayerInventorySystem
 
         public virtual void Update()
         {
-
-            infoPanel.gameObject.SetActive(showInfoPanel);
-
+            if (infoPanel != null)
+            {
+                infoPanel.gameObject.SetActive(showInfoPanel);
+            }
             // what to do if the mouse pointer is over this slot
             if (mouseOver)
             {

@@ -175,6 +175,9 @@ namespace PlayerInventorySystem
         /// </summary>
         public ChestPanel ChestPanel;
 
+        public AdvancedInventoryPanel AdvancedInventoryPanel;
+
+
         #endregion UI Elements
         #region callbacks
 
@@ -268,6 +271,9 @@ namespace PlayerInventorySystem
             InventoryPanel.gameObject.SetActive(false);
             InventoryPanel.Build(0);
 
+
+
+
             // setup and config the item bar
             ItemBar.Build(1);
 
@@ -285,6 +291,10 @@ namespace PlayerInventorySystem
 
             ChestPanel.gameObject.SetActive(false);
             ChestPanel.Build(); //chest panel get build when chest is opened!!!
+
+            AdvancedInventoryPanel.gameObject.SetActive(false);
+            AdvancedInventoryPanel.Build(0);
+
 
             // register callbacks for when a window opens
             OnWindowOpenCallback += WindowOpenCallback;
@@ -324,7 +334,6 @@ namespace PlayerInventorySystem
                 {
                     dropPanel.gameObject.SetActive(false);
                 }
-
 
             }
         }

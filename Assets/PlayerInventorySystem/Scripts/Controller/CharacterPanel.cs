@@ -130,17 +130,56 @@ namespace PlayerInventorySystem
 
             Inventory CharacterInventory = InventoryController.CharacterInventory;
 
-            buffValues.Add("Health", baseHealth);
-            buffValues.Add("Stamina", baseStamina);
-            buffValues.Add("Dexterity", baseDexterity);
-            buffValues.Add("Armor", baseArmor);
-            buffValues.Add("Mana", baseArmor);
-            buffValues.Add("Intelligance", baseIntelligence);
-            buffValues.Add("Speed", baseSpeed);
-            buffValues.Add("Luck", baseLuck);
+            // check if the health value is already in the buffValues dict if not add it
+            if (!buffValues.ContainsKey("Health"))
+            {
+                buffValues.Add("Health", baseHealth);
+            }
+
+            // check if the stamina value is already in the buffValues dict if not add it
+            if (!buffValues.ContainsKey("Stamina"))
+            {
+                buffValues.Add("Stamina", baseStamina);
+            }
+
+            // check if the dexterity value is already in the buffValues dict if not add it
+            if (!buffValues.ContainsKey("Dexterity"))
+            {
+                buffValues.Add("Dexterity", baseDexterity);
+            }
+
+            // check if the armor value is already in the buffValues dict if not add it
+            if (!buffValues.ContainsKey("Armor"))
+            {
+                buffValues.Add("Armor", baseArmor);
+            }
+
+            // check if the mana value is already in the buffValues dict if not add it
+            if (!buffValues.ContainsKey("Mana"))
+            {
+                buffValues.Add("Mana", baseMana);
+            }
+
+            // check if the intelligence value is already in the buffValues dict if not add it
+            if (!buffValues.ContainsKey("Intelligance"))
+            {
+                buffValues.Add("Intelligance", baseIntelligence);
+            }
+
+            // check if the speed value is already in the buffValues dict if not add it
+            if (!buffValues.ContainsKey("Speed"))
+            {
+                buffValues.Add("Speed", baseSpeed);
+            }
+
+            // check if the luck value is already in the buffValues dict if not add it
+            if (!buffValues.ContainsKey("Luck"))
+            {
+                buffValues.Add("Luck", baseLuck);
+            }
 
 
-            if(HeadSlot == null || LeftHandSlot == null || RightHandSlot == null || BodySlot == null || LegsSlot == null || FeetSlot == null)
+            if (HeadSlot == null || LeftHandSlot == null || RightHandSlot == null || BodySlot == null || LegsSlot == null || FeetSlot == null)
             {
                 Debug.LogError("One or more slots are not assigned to the character panel");
                 return;
