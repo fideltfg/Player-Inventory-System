@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemID: 5
-  StackCount: 1
+  StackCount: 25
   Durability: 0
   TimeToLive: 30
   Timer: 0

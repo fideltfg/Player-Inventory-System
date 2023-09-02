@@ -179,12 +179,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 990afc98698203c468996cea0fd72c42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemID: 9
-  stackCount: 10
-  durabilty: 0
-  TTL: 99999
-  timer: 0
-  loadSpawnPoint: {x: 0, y: 0, z: 0}
+  ItemID: 3
+  StackCount: 64
+  Durability: 0
+  TimeToLive: 30
+  Timer: 0
+  Position: {x: 0, y: 0, z: 0}
 --- !u!114 &114554786931858078
 MonoBehaviour:
   m_ObjectHideFlags: 0

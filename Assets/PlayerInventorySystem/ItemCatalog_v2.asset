@@ -19,8 +19,8 @@ MonoBehaviour:
     ConsumeOnPickup: 0
     description: blank
     sprite: {fileID: 0}
-    worldPrefabSingle: {fileID: 0}
-    worldPrefabMultiple: {fileID: 0}
+    prefabSingle: {fileID: 0}
+    prefabMultiple: {fileID: 0}
     worldPrefab: {fileID: 0}
     itemType: 1
     slotType: 0
@@ -44,17 +44,17 @@ MonoBehaviour:
     dexterity: 0
     luck: 0
   - name: Wood Block (1)
-    BaseMaterial: 0
+    BaseMaterial: 1
     id: 1
     ConsumeOnPickup: 0
-    description: Raw timber from a tree.
+    description: Block Of Wood.
     sprite: {fileID: 21300356, guid: ff58a1725e26e464c8e562413502c6db, type: 3}
-    worldPrefabSingle: {fileID: 1733709345621532, guid: f1a6321d44b6c3841985f6e326ea9a4e,
+    prefabSingle: {fileID: 1733709345621532, guid: f1a6321d44b6c3841985f6e326ea9a4e,
       type: 3}
-    worldPrefabMultiple: {fileID: 1636007887016790, guid: 7ccc858a2934d774a93577eb43f0ba80,
+    prefabMultiple: {fileID: 1636007887016790, guid: 7ccc858a2934d774a93577eb43f0ba80,
       type: 3}
     worldPrefab: {fileID: 0}
-    itemType: 0
+    itemType: 1
     slotType: 0
     maxStackSize: 64
     recipe:
@@ -63,7 +63,7 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
     craftCount: 0
-    salvageable: 1
+    salvageable: 0
     recycable: 0
     maxDurability: 0
     damage: 0
@@ -75,18 +75,18 @@ MonoBehaviour:
     intelligence: 0
     dexterity: 0
     luck: 0
-  - name: Wood Planks (2)
+  - name: Wood Plank (2)
     BaseMaterial: 1
     id: 2
     ConsumeOnPickup: 0
-    description: Planks made of wood.
+    description: Plank of wood.
     sprite: {fileID: 21300424, guid: ff58a1725e26e464c8e562413502c6db, type: 3}
-    worldPrefabSingle: {fileID: 1733709345621532, guid: e22c562afda7d794e967f23a06ce8b75,
+    prefabSingle: {fileID: 1733709345621532, guid: e22c562afda7d794e967f23a06ce8b75,
       type: 3}
-    worldPrefabMultiple: {fileID: 1733709345621532, guid: 04e5de6cbe07af941a88a30dba261657,
+    prefabMultiple: {fileID: 1733709345621532, guid: 04e5de6cbe07af941a88a30dba261657,
       type: 3}
     worldPrefab: {fileID: 0}
-    itemType: 0
+    itemType: 1
     slotType: 0
     maxStackSize: 64
     recipe:
@@ -107,18 +107,18 @@ MonoBehaviour:
     intelligence: 0
     dexterity: 0
     luck: 0
-  - name: Sitck (3)
+  - name: Stick (3)
     BaseMaterial: 1
     id: 3
     ConsumeOnPickup: 0
-    description: A wooden stick
+    description: A Wooden Stick
     sprite: {fileID: 21300422, guid: ff58a1725e26e464c8e562413502c6db, type: 3}
-    worldPrefabSingle: {fileID: 1520493659561722, guid: 9dc520f13acc2db4cb9678d66150db72,
+    prefabSingle: {fileID: 1520493659561722, guid: 9dc520f13acc2db4cb9678d66150db72,
       type: 3}
-    worldPrefabMultiple: {fileID: 1331811618145706, guid: ae155095c24defe43b9827bba0740b7f,
+    prefabMultiple: {fileID: 1331811618145706, guid: ae155095c24defe43b9827bba0740b7f,
       type: 3}
     worldPrefab: {fileID: 0}
-    itemType: 0
+    itemType: 1
     slotType: 0
     maxStackSize: 64
     recipe:
@@ -140,17 +140,17 @@ MonoBehaviour:
     dexterity: 0
     luck: 0
   - name: Chest (4)
-    BaseMaterial: 0
+    BaseMaterial: 1
     id: 4
     ConsumeOnPickup: 0
-    description: A wooden chest
+    description: A Wooden Chest
     sprite: {fileID: 21300426, guid: ff58a1725e26e464c8e562413502c6db, type: 3}
-    worldPrefabSingle: {fileID: 1700630183180908, guid: 4f907e96a669d7346bdde51000c5f840,
+    prefabSingle: {fileID: 1700630183180908, guid: 4f907e96a669d7346bdde51000c5f840,
       type: 3}
-    worldPrefabMultiple: {fileID: 0}
+    prefabMultiple: {fileID: 0}
     worldPrefab: {fileID: 1199596462942388, guid: 6ad6da87b0c7cf848b01b75bb1d65857,
       type: 3}
-    itemType: 0
+    itemType: 4
     slotType: 0
     maxStackSize: 1
     recipe:
@@ -158,7 +158,7 @@ MonoBehaviour:
       - cells: 020000000200000002000000
       - cells: 020000000000000002000000
       - cells: 020000000200000002000000
-    craftCount: 1
+    craftCount: 4
     salvageable: 0
     recycable: 1
     maxDurability: 0
@@ -175,14 +175,14 @@ MonoBehaviour:
     BaseMaterial: 0
     id: 5
     ConsumeOnPickup: 0
-    description: Dry Dino Juice.
-    sprite: {fileID: 21300378, guid: ff58a1725e26e464c8e562413502c6db, type: 3}
-    worldPrefabSingle: {fileID: 1354892342653322, guid: b8acd0254c663c844bb3f40a41486c80,
+    description: Dry Dino Juice
+    sprite: {fileID: 21300412, guid: ff58a1725e26e464c8e562413502c6db, type: 3}
+    prefabSingle: {fileID: 1354892342653322, guid: b8acd0254c663c844bb3f40a41486c80,
       type: 3}
-    worldPrefabMultiple: {fileID: 1585198167899930, guid: 2ec5de3a33a4a2a4dab0d1561e667ef9,
+    prefabMultiple: {fileID: 1585198167899930, guid: 2ec5de3a33a4a2a4dab0d1561e667ef9,
       type: 3}
     worldPrefab: {fileID: 0}
-    itemType: 0
+    itemType: 1
     slotType: 0
     maxStackSize: 64
     recipe:
@@ -190,8 +190,8 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
       - cells: 000000000000000000000000
-    craftCount: 1
-    salvageable: 1
+    craftCount: 0
+    salvageable: 0
     recycable: 0
     maxDurability: 0
     damage: 0
@@ -207,15 +207,15 @@ MonoBehaviour:
     BaseMaterial: 0
     id: 6
     ConsumeOnPickup: 0
-    description: Light your way thing.
+    description: Fire on a Stick
     sprite: {fileID: 21300420, guid: ff58a1725e26e464c8e562413502c6db, type: 3}
-    worldPrefabSingle: {fileID: 1151371225988902, guid: 817872457d7e9f84181a35a76134f6b3,
+    prefabSingle: {fileID: 1151371225988902, guid: 817872457d7e9f84181a35a76134f6b3,
       type: 3}
-    worldPrefabMultiple: {fileID: 1855082035215902, guid: 4efe208b457a9cb4d811211dffd7b727,
+    prefabMultiple: {fileID: 1855082035215902, guid: 4efe208b457a9cb4d811211dffd7b727,
       type: 3}
     worldPrefab: {fileID: 1902317910161082, guid: f5a172192c37ded49bc4c9da0c6824f0,
       type: 3}
-    itemType: 0
+    itemType: 1
     slotType: 0
     maxStackSize: 64
     recipe:
@@ -223,7 +223,7 @@ MonoBehaviour:
       - cells: 000000000000000000000000
       - cells: 000000000500000000000000
       - cells: 000000000300000000000000
-    craftCount: 1
+    craftCount: 4
     salvageable: 0
     recycable: 1
     maxDurability: 0
