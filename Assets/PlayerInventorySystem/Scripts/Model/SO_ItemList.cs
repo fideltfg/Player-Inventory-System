@@ -10,6 +10,7 @@ namespace PlayerInventorySystem
     public class SO_ItemList : ScriptableObject
     {
         public List<ItemData> list = new List<ItemData>();
+        
 
         public Item GetItemByID(int itemID)
         {

@@ -32,4 +32,138 @@ namespace PlayerInventorySystem
         ITEMBAR,
         CHARACTER
     }
+
+    public enum MATERIALTYPE
+    {
+        NONE,
+        WOOD,
+        STONE,
+        METAL,
+        CLOTH,
+        BONE,
+        GLASS,
+        GEM
+    }
+
+    // add material variant enum for each of the material types
+    public enum WOODTYPE
+    {
+        NONE,
+        OAK,
+        PINE,
+        BIRCH,
+        MAPLE,
+        MAHOGANY,
+        TEAK,
+        WILLOW,
+        ELM,
+        ASH,
+        BEECH,
+        CEDAR,
+        CHERRY,
+        CHESTNUT,
+        EUCALYPTUS,
+        HICKORY,
+        LARCH,
+        LIME,
+        SYCAMORE,
+        WALNUT,
+        YEW
+    }
+
+    public enum STONETYPE
+    {
+        NONE,
+        GRANITE,
+        BASALT,
+        SANDSTONE,
+        LIMESTONE,
+        MARBLE,
+        SLATE,
+        QUARTZITE,
+        GNEISS,
+        OBSIDIAN,
+        PUMICE,
+        SHIST,
+        DOLOMITE,
+        TRAVERTINE,
+        TUFF,
+        CHALK,
+        GABBRO,
+        DIORITE,
+        RHYOLITE,
+        ANDESITE,
+        PERIDOTITE
+    }
+
+    public enum METALTYPE
+    {
+        NONE,
+        IRON,
+        STEEL,
+        COPPER,
+        BRONZE,
+        BRASS,
+        TIN,
+        ALUMINIUM,
+        NICKEL,
+        SILVER,
+        GOLD,
+        PLATINUM,
+        TITANIUM,
+        ZINC,
+        LEAD,
+        CHROMIUM,
+        COBALT,
+        MANGANESE,
+        TUNGSTEN,
+        MOLYBDENUM
+    }
+
+    public enum CLOTHTYPE
+    {
+        LEATHER,
+        COTTON,
+        WOOL,
+        SILK,
+        NYLON,
+        LINEN,
+        SPANDEX,
+        ACRYLIC
+    }
+
+    public enum BONETYPE
+    {
+        NONE,
+        HUMAN,
+        ANIMAL,
+        FISH,
+        BIRD,
+        REPTILE,
+        MOLLUSK,
+        CRUSTACEAN
+    }
+
+    public enum GLASSTYPE
+    {
+        NONE
+    }
+
+    public enum GEMTYPE
+    {
+        NONE,
+        DIAMOND,
+        RUBY,
+        SAPPHIRE,
+        EMERALD,
+        AMETHYST,
+        TOPAZ,
+        OPAL,
+        PEARL
+    }
+
+
+
+
+
 }

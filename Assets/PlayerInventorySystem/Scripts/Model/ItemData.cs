@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace PlayerInventorySystem
@@ -18,7 +19,13 @@ namespace PlayerInventorySystem
         /// The human readable name of this object
         /// </summary>
         [Tooltip("The human readable name of this object")]
-        public new string name;
+        public string name;
+
+        public MATERIALTYPE BaseMaterial;
+
+
+        public Enum MaterialVariant;
+
 
         /// <summary>
         /// The catalog ID of this item
@@ -46,13 +53,13 @@ namespace PlayerInventorySystem
         /// The prefab that will represent a single instance of the item in your game world.
         /// </summary>
         [Tooltip("The prefab that will represent a single instance of the item dropped in the game world.")]
-        public GameObject worldPrefabSingle;
+        public GameObject prefabSingle;
 
         /// <summary>
         /// The prefab the will represent a stack of the item in your game world.
         /// </summary>
         [Tooltip("The prefab the will represent a stack of the item dropped in the game world.")]
-        public GameObject worldPrefabMultiple;
+        public GameObject prefabMultiple;
 
         /// <summary>
         /// The game object that represents this item when its equiped on the player

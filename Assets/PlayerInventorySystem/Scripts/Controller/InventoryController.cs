@@ -271,9 +271,6 @@ namespace PlayerInventorySystem
             InventoryPanel.gameObject.SetActive(false);
             InventoryPanel.Build(0);
 
-
-
-
             // setup and config the item bar
             ItemBar.Build(1);
 
@@ -465,11 +462,11 @@ namespace PlayerInventorySystem
 
             ItemData itemData = Instance.ItemCatalog.list[itemID];
 
-            GameObject prefab = itemData.worldPrefabSingle;
+            GameObject prefab = itemData.prefabSingle;
 
             if (stackCount > 1)
             {
-                prefab = itemData.worldPrefabMultiple;
+                prefab = itemData.prefabMultiple;
             }
 
             if (prefab == null)
@@ -771,7 +768,30 @@ namespace PlayerInventorySystem
                     // If the item has a world prefab then place it in the world
                     if (item.Data.worldPrefab != null)
                     {
-                        Item.Place(item, pos, rot, scale);
+                        //  Item.Place(item, pos, rot, scale);
+
+
+
+                        switch (item.Data.worldPrefab.tag.ToLower())
+                        {
+                            case "chest":
+                                _ = SpawnChest(GetNewChestID(), item.Data.id, pos, rot, scale);
+                                OnPlaceItem(item);
+                                break;
+
+                            case "craftingtable":
+                                CraftingTableController cTc = SpawnCraftingTable(item.Data.id, pos, rot, scale);
+                                OnPlaceItem(item, cTc);
+                                break;
+
+                            default:
+                                GameObject go = GameObject.Instantiate(item.Data.worldPrefab, pos, rot);
+                                PlacedItem pi = go.AddComponent<PlacedItem>();
+                                OnPlaceItem(item, pi);
+                                break;
+                        }
+
+
                     }
                 }
             }

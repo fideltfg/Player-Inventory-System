@@ -35,7 +35,10 @@ namespace PlayerInventorySystem
         /// </summary>
         public SlotController SelectedSlotController
         {
-            get { return SlotList[SelectedSlotID]; }
+            get { 
+                Debug.Log("SelectedSlotID: " + SelectedSlotID);
+                
+                return SlotList[SelectedSlotID]; }
         }
 
         /// <summary>

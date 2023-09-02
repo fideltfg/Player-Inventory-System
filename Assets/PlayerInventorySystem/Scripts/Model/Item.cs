@@ -162,6 +162,7 @@ namespace PlayerInventorySystem
         /// <exception cref="NotImplementedException"></exception>
         internal static void Place(Item item, Vector3 position, Quaternion rotation, Vector3 scale)
         {
+
             switch (item.Data.worldPrefab.tag.ToLower())
             {
                 case "chest":

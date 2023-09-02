@@ -207,7 +207,9 @@ namespace PlayerInventorySystem.Serial
                             InventoryController.OnPlaceItem(item, cTc, false);
                             break;
                         default:
-                            Item.Place(item, spi.Transform.Position, Quaternion.Euler(spi.Transform.Rotation), spi.Transform.Scale);
+                            GameObject go = GameObject.Instantiate(item.Data.worldPrefab, spi.Transform.Position, Quaternion.Euler(spi.Transform.Rotation));
+                            PlacedItem pi = go.AddComponent<PlacedItem>();
+                            InventoryController.OnPlaceItem(item, pi, false);
                             break;
                     }
 

@@ -14,7 +14,7 @@ namespace PlayerInventorySystem
         int slotID;
         protected float counter = 0;
         private Color unselectedColor;
-        private bool mouseOver;
+        protected bool mouseOver;
         public bool showInfoPanel;
         public bool interactable = true;
         private Transform infoPanel;
@@ -482,7 +482,7 @@ namespace PlayerInventorySystem
         }
 
 
-        bool MoveStack()
+        protected bool MoveStack()
         {
             // if no windows are open do nothing
             if (!InventoryController.Instance.AnyWindowOpen)
@@ -770,7 +770,7 @@ namespace PlayerInventorySystem
             return false;
         }
 
-        void PickUpHalfStack()
+        protected void PickUpHalfStack()
         {
             if (this.Slot.Item.StackCount == 1)
             {
@@ -810,7 +810,7 @@ namespace PlayerInventorySystem
             return new Vector2Int(firstNumber, secondNumber);
         }
 
-        void PickUpStack()
+        protected void PickUpStack()
         {
             HeldItem = this.Slot.Item;
             Slot.SetItem(null);

@@ -227,7 +227,7 @@ Transform:
   - {fileID: 6523394749437258317}
   - {fileID: 1634267320829810333}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -125.96, z: 0}
 --- !u!95 &2133535637082804293
 Animator:
@@ -530,6 +530,10 @@ PrefabInstance:
     - target: {fileID: 100006, guid: 12a1b6f29545ec141b8e965475168cbc, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 12a1b6f29545ec141b8e965475168cbc, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100008, guid: 12a1b6f29545ec141b8e965475168cbc, type: 3}
       propertyPath: m_Layer

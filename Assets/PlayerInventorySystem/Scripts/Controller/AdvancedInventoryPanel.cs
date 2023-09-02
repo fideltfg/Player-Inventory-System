@@ -14,7 +14,7 @@ public class AdvancedInventoryPanel : InventorySystemPanel
 
     public override void Build(int InventoryIndex)
     {
-        inventoryPanel.Build(0);
+       // inventoryPanel.Build(0);
         craftingPanel.Build(2);
         characterPanel.Build(3);
         salvagePanel.Build(6);
