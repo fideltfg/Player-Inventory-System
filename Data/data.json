@@ -6,104 +6,104 @@
             "slots": [
                 {
                     "slotID": 0,
-                    "itemID": 0,
-                    "stackCount": 0,
+                    "itemID": 7,
+                    "stackCount": 64,
                     "durability": 0.0
                 },
                 {
                     "slotID": 1,
-                    "itemID": 0,
-                    "stackCount": 0,
-                    "durability": 0.0
-                },
-                {
-                    "slotID": 2,
-                    "itemID": 0,
-                    "stackCount": 0,
-                    "durability": 0.0
-                },
-                {
-                    "slotID": 3,
-                    "itemID": 0,
-                    "stackCount": 0,
-                    "durability": 0.0
-                },
-                {
-                    "slotID": 4,
-                    "itemID": 0,
-                    "stackCount": 0,
-                    "durability": 0.0
-                },
-                {
-                    "slotID": 5,
-                    "itemID": 0,
-                    "stackCount": 0,
-                    "durability": 0.0
-                },
-                {
-                    "slotID": 6,
-                    "itemID": 0,
-                    "stackCount": 0,
-                    "durability": 0.0
-                },
-                {
-                    "slotID": 7,
-                    "itemID": 0,
-                    "stackCount": 0,
-                    "durability": 0.0
-                },
-                {
-                    "slotID": 8,
-                    "itemID": 0,
-                    "stackCount": 0,
-                    "durability": 0.0
-                },
-                {
-                    "slotID": 9,
-                    "itemID": 0,
-                    "stackCount": 0,
-                    "durability": 0.0
-                },
-                {
-                    "slotID": 10,
-                    "itemID": 0,
-                    "stackCount": 0,
-                    "durability": 0.0
-                },
-                {
-                    "slotID": 11,
-                    "itemID": 0,
-                    "stackCount": 0,
-                    "durability": 0.0
-                },
-                {
-                    "slotID": 12,
-                    "itemID": 0,
-                    "stackCount": 0,
-                    "durability": 0.0
-                },
-                {
-                    "slotID": 13,
-                    "itemID": 0,
-                    "stackCount": 0,
-                    "durability": 0.0
-                },
-                {
-                    "slotID": 14,
-                    "itemID": 0,
-                    "stackCount": 0,
-                    "durability": 0.0
-                },
-                {
-                    "slotID": 15,
                     "itemID": 1,
                     "stackCount": 64,
                     "durability": 0.0
                 },
                 {
-                    "slotID": 16,
+                    "slotID": 2,
+                    "itemID": 2,
+                    "stackCount": 64,
+                    "durability": 0.0
+                },
+                {
+                    "slotID": 3,
+                    "itemID": 1,
+                    "stackCount": 64,
+                    "durability": 0.0
+                },
+                {
+                    "slotID": 4,
+                    "itemID": 8,
+                    "stackCount": 6,
+                    "durability": 0.0
+                },
+                {
+                    "slotID": 5,
+                    "itemID": 7,
+                    "stackCount": 64,
+                    "durability": 0.0
+                },
+                {
+                    "slotID": 6,
+                    "itemID": 2,
+                    "stackCount": 60,
+                    "durability": 0.0
+                },
+                {
+                    "slotID": 7,
+                    "itemID": 5,
+                    "stackCount": 64,
+                    "durability": 0.0
+                },
+                {
+                    "slotID": 8,
+                    "itemID": 1,
+                    "stackCount": 64,
+                    "durability": 0.0
+                },
+                {
+                    "slotID": 9,
+                    "itemID": 3,
+                    "stackCount": 12,
+                    "durability": 0.0
+                },
+                {
+                    "slotID": 10,
+                    "itemID": 5,
+                    "stackCount": 64,
+                    "durability": 0.0
+                },
+                {
+                    "slotID": 11,
+                    "itemID": 7,
+                    "stackCount": 55,
+                    "durability": 0.0
+                },
+                {
+                    "slotID": 12,
+                    "itemID": 5,
+                    "stackCount": 64,
+                    "durability": 0.0
+                },
+                {
+                    "slotID": 13,
+                    "itemID": 1,
+                    "stackCount": 8,
+                    "durability": 0.0
+                },
+                {
+                    "slotID": 14,
+                    "itemID": 5,
+                    "stackCount": 4,
+                    "durability": 0.0
+                },
+                {
+                    "slotID": 15,
                     "itemID": 0,
                     "stackCount": 0,
+                    "durability": 0.0
+                },
+                {
+                    "slotID": 16,
+                    "itemID": 6,
+                    "stackCount": 3,
                     "durability": 0.0
                 },
                 {
@@ -120,8 +120,8 @@
                 },
                 {
                     "slotID": 19,
-                    "itemID": 0,
-                    "stackCount": 0,
+                    "itemID": 9,
+                    "stackCount": 1,
                     "durability": 0.0
                 },
                 {
@@ -138,14 +138,14 @@
                 },
                 {
                     "slotID": 22,
-                    "itemID": 3,
-                    "stackCount": 14,
+                    "itemID": 0,
+                    "stackCount": 0,
                     "durability": 0.0
                 },
                 {
                     "slotID": 23,
-                    "itemID": 0,
-                    "stackCount": 0,
+                    "itemID": 4,
+                    "stackCount": 1,
                     "durability": 0.0
                 }
             ]
@@ -156,13 +156,13 @@
                 {
                     "slotID": 0,
                     "itemID": 5,
-                    "stackCount": 26,
+                    "stackCount": 63,
                     "durability": 0.0
                 },
                 {
                     "slotID": 1,
-                    "itemID": 0,
-                    "stackCount": 0,
+                    "itemID": 2,
+                    "stackCount": 64,
                     "durability": 0.0
                 },
                 {
@@ -179,38 +179,38 @@
                 },
                 {
                     "slotID": 4,
-                    "itemID": 0,
-                    "stackCount": 0,
+                    "itemID": 7,
+                    "stackCount": 64,
                     "durability": 0.0
                 },
                 {
                     "slotID": 5,
                     "itemID": 1,
-                    "stackCount": 1,
+                    "stackCount": 64,
                     "durability": 0.0
                 },
                 {
                     "slotID": 6,
-                    "itemID": 0,
-                    "stackCount": 0,
+                    "itemID": 1,
+                    "stackCount": 64,
                     "durability": 0.0
                 },
                 {
                     "slotID": 7,
-                    "itemID": 2,
-                    "stackCount": 1,
+                    "itemID": 1,
+                    "stackCount": 64,
                     "durability": 0.0
                 },
                 {
                     "slotID": 8,
-                    "itemID": 0,
-                    "stackCount": 0,
+                    "itemID": 1,
+                    "stackCount": 64,
                     "durability": 0.0
                 },
                 {
                     "slotID": 9,
-                    "itemID": 0,
-                    "stackCount": 0,
+                    "itemID": 5,
+                    "stackCount": 64,
                     "durability": 0.0
                 }
             ]
@@ -220,26 +220,26 @@
             "slots": [
                 {
                     "slotID": 0,
-                    "itemID": 2,
-                    "stackCount": 2,
+                    "itemID": 0,
+                    "stackCount": 0,
                     "durability": 0.0
                 },
                 {
                     "slotID": 1,
-                    "itemID": 2,
-                    "stackCount": 1,
+                    "itemID": 0,
+                    "stackCount": 0,
                     "durability": 0.0
                 },
                 {
                     "slotID": 2,
-                    "itemID": 2,
-                    "stackCount": 1,
+                    "itemID": 0,
+                    "stackCount": 0,
                     "durability": 0.0
                 },
                 {
                     "slotID": 3,
-                    "itemID": 2,
-                    "stackCount": 2,
+                    "itemID": 0,
+                    "stackCount": 0,
                     "durability": 0.0
                 },
                 {
@@ -250,26 +250,26 @@
                 },
                 {
                     "slotID": 5,
-                    "itemID": 2,
-                    "stackCount": 1,
+                    "itemID": 0,
+                    "stackCount": 0,
                     "durability": 0.0
                 },
                 {
                     "slotID": 6,
-                    "itemID": 2,
-                    "stackCount": 53,
+                    "itemID": 0,
+                    "stackCount": 0,
                     "durability": 0.0
                 },
                 {
                     "slotID": 7,
-                    "itemID": 2,
-                    "stackCount": 2,
+                    "itemID": 0,
+                    "stackCount": 0,
                     "durability": 0.0
                 },
                 {
                     "slotID": 8,
-                    "itemID": 2,
-                    "stackCount": 2,
+                    "itemID": 0,
+                    "stackCount": 0,
                     "durability": 0.0
                 }
             ]
@@ -331,8 +331,8 @@
             "slots": [
                 {
                     "slotID": 0,
-                    "itemID": 4,
-                    "stackCount": 1,
+                    "itemID": 0,
+                    "stackCount": 0,
                     "durability": 0.0
                 }
             ]
@@ -342,8 +342,8 @@
             "slots": [
                 {
                     "slotID": 0,
-                    "itemID": 6,
-                    "stackCount": 3,
+                    "itemID": 0,
+                    "stackCount": 0,
                     "durability": 0.0
                 }
             ]
@@ -377,8 +377,8 @@
                 },
                 {
                     "slotID": 4,
-                    "itemID": 5,
-                    "stackCount": 1,
+                    "itemID": 0,
+                    "stackCount": 0,
                     "durability": 0.0
                 },
                 {
@@ -395,8 +395,8 @@
                 },
                 {
                     "slotID": 7,
-                    "itemID": 3,
-                    "stackCount": 1,
+                    "itemID": 0,
+                    "stackCount": 0,
                     "durability": 0.0
                 },
                 {
@@ -740,8 +740,8 @@
     ],
     "panelLocations": [
         {
-            "px": 315.5625,
-            "py": 380.8125,
+            "px": 183.5160675048828,
+            "py": 373.34832763671877,
             "pz": 0.0,
             "rx": 0.0,
             "ry": 0.0,
@@ -753,8 +753,8 @@
             "w": 275.0
         },
         {
-            "px": 241.3125,
-            "py": 387.0,
+            "px": 122.06181335449219,
+            "py": 378.4695129394531,
             "pz": 0.0,
             "rx": 0.0,
             "ry": 0.0,
@@ -766,8 +766,8 @@
             "w": 200.0
         },
         {
-            "px": 847.6875,
-            "py": 387.0,
+            "px": 623.9381713867188,
+            "py": 378.4695129394531,
             "pz": 0.0,
             "rx": 0.0,
             "ry": 0.0,
@@ -779,8 +779,8 @@
             "w": 200.0
         },
         {
-            "px": 819.2249755859375,
-            "py": 349.265625,
+            "px": 600.3807373046875,
+            "py": 347.238037109375,
             "pz": 0.0,
             "rx": 0.0,
             "ry": 0.0,
