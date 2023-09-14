@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEditor.Rendering.BuiltIn.ShaderGraph;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +11,7 @@ namespace PlayerInventorySystem
     /// </summary>
     public class ItemBar : InventorySystemPanel
     {
+        public bool built = false;
 
         public override void OnEnable() { }
 
@@ -32,6 +34,7 @@ namespace PlayerInventorySystem
             }
 
         }
+       
         public override void Build(int InventoryIndex)
         {
             base.Build(InventoryIndex);
@@ -39,18 +42,22 @@ namespace PlayerInventorySystem
             GridLayoutGroup.cellSize = SlotPrefab.GetComponent<RectTransform>().sizeDelta;
 
             // add the slot objects for the players inventory
-
-            foreach (Slot slot in InventoryController.GetInventory(this.Index))
+            if (!built)
             {
-                GameObject go = GameObject.Instantiate(SlotPrefab, Vector3.zero, Quaternion.identity, transform);
-                SlotController sc = go.GetComponent<SlotController>();
-                sc.Index = this.Index;
-                sc.slotLocation = SLOTLOCATION.ITEMBAR;
-                sc.SetSlot(slot);
-                SlotList.Add(sc);
+                foreach (Slot slot in InventoryController.GetInventory(this.Index))
+                {
+                    GameObject go = GameObject.Instantiate(SlotPrefab, Vector3.zero, Quaternion.identity, transform);
+                    SlotController sc = go.GetComponent<SlotController>();
+                    sc.Index = this.Index;
+                    sc.slotLocation = SLOTLOCATION.ITEMBAR;
+                    sc.SetSlot(slot);
+                    SlotList.Add(sc);
 
+                }
+                SlotList[0].Selected = true;
             }
-            SlotList[0].Selected = true;
+            // TEST
+            built = true;
         }
 
         /// <summary>
@@ -62,7 +69,7 @@ namespace PlayerInventorySystem
             {
                 PlayerInventoryController pic = InventoryController.Instance.PlayerIC;
 
-                if(pic == null)
+                if (pic == null)
                 {
                     Debug.LogError("PlayerInventoryController is null");
                     return;

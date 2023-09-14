@@ -60,7 +60,7 @@ namespace PlayerInventorySystem
                         {
                             for (int i = 0; i < craftCount; i += Slot.Item.Data.craftCount)
                             {
-                                if (InventoryController.ItemBarInventory.AddItem(Item.New(Slot.Item.Data, Slot.Item.Data.craftCount)))
+                                if (InventoryController.ItemBarInventory.AddItem(Item.New(Slot.Item.Data.id, Slot.Item.Data.craftCount)))
                                 {
                                     Consume();
                                 }
@@ -70,14 +70,14 @@ namespace PlayerInventorySystem
                         {
                             for (int i = 0; i < ItemBarSpaces; i += Slot.Item.Data.craftCount)
                             {
-                                if (InventoryController.ItemBarInventory.AddItem(Item.New(Slot.Item.Data, Slot.Item.Data.craftCount)))
+                                if (InventoryController.ItemBarInventory.AddItem(Item.New(Slot.Item.Data.id, Slot.Item.Data.craftCount)))
                                 {
                                     Consume();
                                 }
                             }
                             for (int i = 0; i < (craftCount - ItemBarSpaces); i += Slot.Item.Data.craftCount)
                             {
-                                if (InventoryController.PlayerInventory.AddItem(Item.New(Slot.Item.Data, Slot.Item.Data.craftCount)))
+                                if (InventoryController.PlayerInventory.AddItem(Item.New(Slot.Item.Data.id, Slot.Item.Data.craftCount)))
                                 {
                                     Consume();
                                 }

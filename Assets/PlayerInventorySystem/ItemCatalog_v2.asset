@@ -300,7 +300,7 @@ MonoBehaviour:
     intelligence: 0
     dexterity: 0
     luck: 0
-  - name: Iron Axe
+  - name: Iron Axe (9)
     BaseMaterial: 0
     id: 9
     ConsumeOnPickup: 0
@@ -318,6 +318,38 @@ MonoBehaviour:
       - cells: 080000000800000000000000
       - cells: 080000000300000000000000
       - cells: 000000000300000000000000
+    craftCount: 1
+    salvageable: 0
+    recycable: 1
+    maxDurability: 0
+    damage: 5
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    intelligence: 0
+    dexterity: 0
+    luck: 0
+  - name: Crafting Table (10)
+    BaseMaterial: 0
+    id: 10
+    ConsumeOnPickup: 0
+    description: Used to craft new items
+    sprite: {fileID: -1094243206, guid: dd6a569444722604694566bada177988, type: 3}
+    prefabSingle: {fileID: 1700630183180908, guid: 8c774e720c5047a4dab4f1774c64cc1f,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 1199596462942388, guid: cc8a64039aa51cd4c8a325fa90912742,
+      type: 3}
+    itemType: 4
+    slotType: 0
+    maxStackSize: 1
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 020000000200000000000000
+      - cells: 020000000200000000000000
     craftCount: 1
     salvageable: 0
     recycable: 1

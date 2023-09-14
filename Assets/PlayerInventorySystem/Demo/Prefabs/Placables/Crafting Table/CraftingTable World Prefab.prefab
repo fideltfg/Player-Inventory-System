@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 2302406036346109803}
   m_Layer: 6
   m_Name: CraftingTable World Prefab
-  m_TagString: craftingtable
+  m_TagString: CraftingTable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

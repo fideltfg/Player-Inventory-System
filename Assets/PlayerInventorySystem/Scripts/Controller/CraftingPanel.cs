@@ -98,7 +98,7 @@ namespace PlayerInventorySystem
             {
                 if (itemData.recipe.Ingredients.Equals(ingredients))
                 {
-                    return Item.New(itemData, itemData.craftCount);
+                    return Item.New(itemData.id, itemData.craftCount);
                 }
             }
             return null;

@@ -37,10 +37,10 @@ namespace PlayerInventorySystem
         /// <param name="sInventory"></param>
         internal Inventory(SerialInventory sInventory)
         {
-           // Debug.Log("Creating Inventory from SerialInventory " + sInventory.Index);
+            // Debug.Log("Creating Inventory from SerialInventory " + sInventory.Index);
             if (sInventory == null)
             {
-              //  Debug.Log("SerialInventory was null, creating new SerialInventory");
+                //  Debug.Log("SerialInventory was null, creating new SerialInventory");
                 sInventory = new SerialInventory(InventoryController.InventoryList.Count, new SerialSlot[InventoryController.PlayerInventoryCapacity]);
             }
 
@@ -57,7 +57,9 @@ namespace PlayerInventorySystem
                 SerialSlot sSlot = sInventory.SerialSlots[i];
                 if (sSlot.ItemID > 0)
                 {
-                    this[sSlot.SlotID].SetItem(new Item(sSlot.ItemID, sSlot.StackCount) { Durability = sSlot.Durability });
+                    Item newItem = Item.New(sSlot.ItemID, sSlot.StackCount);
+                    newItem.Durability = sSlot.Durability;
+                    this[sSlot.SlotID].SetItem(newItem);
                 }
                 else
                 {
@@ -161,10 +163,7 @@ namespace PlayerInventorySystem
 
                         if (slot.selected)
                         {
-                            if (InventoryController.Instance.OnSelectedItemChangeCallBack != null)
-                            {
-                                InventoryController.Instance.OnSelectedItemChangeCallBack(slot.Item);
-                            }
+                            InventoryController.Instance.OnSelectedItemChangeCallBack?.Invoke(slot.Item);
                         }
 
                     }
@@ -250,7 +249,27 @@ namespace PlayerInventorySystem
 
         }
 
+        /// <summary>
+        /// Returns the count of the given item in this inventory.
+        /// </summary>
+        /// <param name="itemID"></param>
+        /// <returns></returns>
+        internal int GetItemCount(int itemID)
+        {
 
+            // find all the current stacks of the item
+            List<Slot> foundStacks = FindAll(delegate (Slot slot) { return slot.Item != null && slot.Item.Data.id == itemID; });
+            if (foundStacks.Count > 0)
+            {
+                int count = 0;
+                foreach (Slot slot in foundStacks)
+                {
+                    count += slot.StackCount;
+                }
+                return count;
+            }
+            return 0;
+        }
 
 
     }

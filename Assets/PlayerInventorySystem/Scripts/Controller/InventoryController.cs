@@ -622,7 +622,7 @@ namespace PlayerInventorySystem
                 return false;
             }
 
-            Item newItem = new Item(itemID, stackCount);
+            Item newItem = Item.New(itemID, stackCount);
 
             if (ItemBarInventory.AddItem(newItem) == false)
             {
@@ -744,13 +744,33 @@ namespace PlayerInventorySystem
             {
                 CraftingPanel.CraftingTable = cTc; // pass the selected chest to the chest panel
                 CraftingPanel.gameObject.SetActive(true);
-
-
             }
             else
             {
                 Debug.LogError("CraftingTableController is null");
             }
+        }
+
+        internal Item Mine(Mineable mineableObject)
+        {
+            Item toolItem = ItemBar.SelectedSlotController.Slot.Item;
+            if (toolItem == null)
+            {
+                Debug.Log("No Tool Selected");
+            }
+            else if (toolItem.Data.itemType == ITEMTYPE.USABLE)
+            {
+                Debug.Log("Tool is a mining tool");
+
+                // calculate the damage to the mineable object based on.
+                // the tools damage
+                // and the players luck
+                float damage = toolItem.Data.damage + UnityEngine.Random.Range(0, PlayerIC.BuffValues["Luck"]);
+
+                // call the mine method
+                return mineableObject.Mine(damage);
+            }
+            return null;
         }
 
         /// <summary>
@@ -835,6 +855,20 @@ namespace PlayerInventorySystem
             Save();
         }
 
+        /// <summary>
+        /// method to return the a totoal count of the given item type in the players inventory and item bar
+        /// </summary>
+        /// <param name="itemID"></param>
+        /// <returns></returns>
+        internal int GetItemCount(int itemID)
+        {
+            // get the count of the item in the players inventory
+            int count = PlayerInventory.GetItemCount(itemID);
+            // get the count of the item in the players item bar
+            count += ItemBarInventory.GetItemCount(itemID);
+
+            return count;
+        }
 
     }
 }

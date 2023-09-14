@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 135337379886049112}
   - component: {fileID: 114391395587855926}
   - component: {fileID: 114810728342459866}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DiamondPickAxe
   m_TagString: Item
   m_Icon: {fileID: 0}
@@ -180,11 +180,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ItemID: 39
-  stackCount: 1
-  durabilty: 0
-  TTL: 99999
-  timer: 0
-  loadSpawnPoint: {x: 0, y: 0, z: 0}
+  StackCount: 1
+  Durability: 0
+  TimeToLive: 30
+  Timer: 0
+  Position: {x: 0, y: 0, z: 0}
 --- !u!114 &114810728342459866
 MonoBehaviour:
   m_ObjectHideFlags: 0

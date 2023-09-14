@@ -7,6 +7,7 @@ TagManager:
   - Item
   - Chest
   - CraftingTable
+  - Mineable
   layers:
   - Default
   - TransparentFX
@@ -15,7 +16,7 @@ TagManager:
   - Water
   - UI
   - Interactive
-  - 
+  - DroppedItems
   - 
   - 
   - 

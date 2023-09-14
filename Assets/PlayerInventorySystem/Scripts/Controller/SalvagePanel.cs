@@ -89,7 +89,7 @@ namespace PlayerInventorySystem
                     int i = 0;
                     foreach (SlotController sc in SlotList)
                     {
-                        Item item = InventoryController.Instance.ItemCatalog.GetItemByID(salvagableItemIDs[i]);
+                        Item item = Item.New(salvagableItemIDs[i]);
                         i++;
 
                         // set the put slot item

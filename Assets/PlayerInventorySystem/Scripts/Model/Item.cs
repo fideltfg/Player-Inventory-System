@@ -34,45 +34,19 @@ namespace PlayerInventorySystem
         }
 
         /// <summary>
-        /// Method to return a new stack of an item created from the given data
-        /// </summary>
-        /// <param name="data">The Items data</param>
-        /// <param name="count">the stack count</param>
-        /// <returns>An Item or null</returns>
-        public static Item New(ItemData data, int count = 1)
-        {
-            if (data != null)
-            {
-                return new Item(data, count);
-            }
-            return null;
-        }
-
-        /// <summary>
         /// Method to return a new Item of the given ID with the givne stack count
         /// </summary>
         /// <param name="itemID">The ID of the Item to return</param>
         /// <param name="count">The stack count</param>
-        /// <returns>An Item or null</returns>
+        /// <returns>An Item with a stack count as given or null if invalid item ID</returns>
         public static Item New(int itemID, int count = 1)
         {
-            if (itemID > 0 && itemID < InventoryController.Instance.ItemCatalog.list.Count)
+            if (InventoryController.Instance.ItemCatalog.list.Find(item => item.id == itemID) != null)
             {
                 return new Item(itemID, count);
             }
             return null;
-        }
 
-        /// <summary>
-        /// use Item.New to create items
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="count"></param>
-        public Item(ItemData data, int count = 1)
-        {
-            this.Data = data;
-            StackCount = Mathf.Clamp(count, 1, data.maxStackSize);
-            this.Durability = this.Data.maxDurability;
         }
 
         /// <summary>
@@ -80,7 +54,7 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="itemID"></param>
         /// <param name="count"></param>
-        public Item(int itemID, int count)
+        private Item(int itemID, int count = 1)
         {
             this.Data = InventoryController.Instance.ItemCatalog.list[itemID];
             StackCount = Mathf.Clamp(count, 1, Data.maxStackSize);

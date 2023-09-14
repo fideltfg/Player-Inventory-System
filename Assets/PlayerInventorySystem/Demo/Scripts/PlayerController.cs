@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
 
     public Transform playerCamera;                        // Reference to the camera that focus the player.
     [HideInInspector]
-    public float turnSmoothing = 0.6f;                   // Speed of turn when moving to match camera facing.
+    public float turnSmoothing = 0.1f;                   // Speed of turn when moving to match camera facing.
     public float sprintFOV = 100f;                        // the FOV to use on the camera when player is sprinting.
     public string sprintButton = "Sprint";                // Default sprint button input name.
 

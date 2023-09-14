@@ -102,22 +102,33 @@ namespace PlayerInventorySystem
             }
 
 
-            Item newItem = new Item(droppedItem.ItemID, droppedItem.StackCount);
+            Item newItem = Item.New(droppedItem.ItemID, droppedItem.StackCount);
 
             if (newItem.Data.ConsumeOnPickup)
             {
                 ConsumeItem(newItem);
                 // TODO change this to play conumptioon sound
                 GetComponent<AudioSource>().PlayOneShot(pickupSound);
+                Destroy(collectedObject);
+                return true;
             }
             else
             {
-                GiveItem(newItem);
-                GetComponent<AudioSource>().PlayOneShot(pickupSound);
-            }
-            Destroy(collectedObject);
+                if (GiveItem(newItem))
+                {
+                    Destroy(collectedObject);
+                    GetComponent<AudioSource>().PlayOneShot(pickupSound);
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
 
-            return true;
+            }
+
+
+
 
         }
 
@@ -131,10 +142,6 @@ namespace PlayerInventorySystem
             if (InventoryController.ItemBarInventory.AddItem(item) == false)
             {
                 return InventoryController.PlayerInventory.AddItem(item);
-
-                // TODO: If both inventories are full then drop the item on the ground
-
-
             }
             return true;
         }
@@ -166,6 +173,30 @@ namespace PlayerInventorySystem
                         CraftingTableController cTc = hit.transform.GetComponent<CraftingTableController>();
                         cTc.Panel = InventoryController.Instance.CraftingPanel;
                         InventoryController.Instance.OpenCraftingTable(cTc);
+                        break;
+                    case "mineable":
+
+                        // get the mineable component
+                        Mineable mineable = hit.transform.GetComponent<Mineable>();
+                        // if the mineable component is not null
+                        if (mineable != null)
+                        {
+                            Item minedItem = InventoryController.Instance.Mine(mineable);
+
+                            if (minedItem != null)
+                            {
+                                // give the player the mined item or spawn it in the world
+                                if (GiveItem(minedItem) == false)
+                                {
+                                    DropItem(minedItem);
+                                }
+                            }
+
+
+
+
+                        }
+
                         break;
                     default:
                         // Debug.Log("Place Item");

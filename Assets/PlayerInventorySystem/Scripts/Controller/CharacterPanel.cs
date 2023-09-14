@@ -82,7 +82,7 @@ namespace PlayerInventorySystem
             float speed = baseSpeed;
             float luck = baseLuck;
 
-            // update defaults will buffs from items
+            // update default buffs from items
             foreach (SlotController SlotController in SlotList)
             {
                 if (SlotController.Slot.Item != null)

@@ -93,7 +93,6 @@ public class InputController : MonoBehaviour
             if (focus)
             {
                 InventoryController.Instance.PlayerIC.Interact();
-                // place the currently select item into the world
 
                 // call to method in PlayerController
                 PlayerController.instance.OnInteract();
