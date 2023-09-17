@@ -3,6 +3,11 @@ using System.Collections;
 
 namespace PlayerInventorySystem
 {
+    public enum GENDER
+    {
+        MALE,
+        FEMALE
+    }
 
     public enum ITEMTYPE
     {

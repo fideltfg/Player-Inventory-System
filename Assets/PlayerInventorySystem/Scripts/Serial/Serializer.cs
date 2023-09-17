@@ -52,20 +52,23 @@ namespace PlayerInventorySystem.Serial
         }
 
         // Method used by InventoryController to load the saved data file
-        internal static void Load()
+        internal static bool Load()
         {
             if (File.Exists(InventorySaveLocation))
             {
-
                 SerialSaveDataObject ssdo = ReadFromBinaryFile<SerialSaveDataObject>(InventorySaveLocation);
 
                 LoadSerialInventoryData(ssdo);
+                return true;
             }
             else
             {
                 //if you need to do something if the file does not exist do it here
                 Debug.Log("Save Data File Not Found!");
+
+                return false;
             }
+           
         }
 
         // Helper method to check and create a folder if it does not exist
@@ -142,7 +145,7 @@ namespace PlayerInventorySystem.Serial
             SerialRect[] sPanels = data.PanelLocations;
             SerialDroppedItem[] sDroppedItems = data.DroppedItems;
             SerialPlacedItem[] sPlacedItems = data.PlacedItems;
-
+            InventoryController.Character = data.Character;
             // Debug.Log("Loading Inventory Data");
             // Load all inventories
 
@@ -290,7 +293,9 @@ namespace PlayerInventorySystem.Serial
                 p++;
             }
 
-            SerialSaveDataObject ssdo = new SerialSaveDataObject(sInventories, sChests, sPanelLocations, sDroppedItems, sPlacedItems);
+            Character character = InventoryController.Character;
+
+            SerialSaveDataObject ssdo = new SerialSaveDataObject(sInventories, sChests, sPanelLocations, sDroppedItems, sPlacedItems, character);
 
             ssdo.PlayerInventoryCapacity = playerInventoryCapacity;
             return ssdo;

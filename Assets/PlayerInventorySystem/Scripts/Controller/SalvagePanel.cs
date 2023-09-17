@@ -29,7 +29,7 @@ namespace PlayerInventorySystem
             {
                 if (InventoryController.GiveItem(inputSlotController.Slot.Item.Data.id, inputSlotController.Slot.Item.StackCount) == false)
                 {
-                    InventoryController.Instance.PlayerIC.DropItem(inputSlotController.Slot.Item, inputSlotController.Slot.Item.StackCount);
+                    InventoryController.Instance.PlayerInventoryControler.DropItem(inputSlotController.Slot.Item, inputSlotController.Slot.Item.StackCount);
                 }
                 inputSlotController.Slot.SetItem(null);
 
@@ -135,7 +135,7 @@ namespace PlayerInventorySystem
                     {
                         if (sc.Slot.Item.Data.salvageable)
                         {
-                            InventoryController.Instance.PlayerIC.DropItem(sc.Slot.Item, sc.Slot.Item.StackCount);
+                            InventoryController.Instance.PlayerInventoryControler.DropItem(sc.Slot.Item, sc.Slot.Item.StackCount);
                         }
                         sc.Slot.SetItem(null);
                     }

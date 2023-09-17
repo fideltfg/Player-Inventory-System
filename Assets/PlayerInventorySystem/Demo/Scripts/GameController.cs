@@ -9,11 +9,15 @@ public class GameController : MonoBehaviour
 
     public PlayerController PlayerController;
 
+    public GameObject starterItems;
 
     private void Awake()
     {
         instance = this;
         PlayerController.gameObject.SetActive(true);
+
+
+
     }
 
 

@@ -5,7 +5,6 @@ using PlayerInventorySystem.Serial;
 
 ///*********************************************************************************
 /// Player Inventorty System
-/// version: 0.0.6 alpha
 ///*********************************************************************************
 
 namespace PlayerInventorySystem
@@ -20,6 +19,9 @@ namespace PlayerInventorySystem
         /// Static instance of the inventory controller.
         /// </summary>
         public static InventoryController Instance;
+
+
+        internal static Character Character;
 
         /// <summary>
         /// The list of items used in game. List inclues all needed data to generate and control items.
@@ -38,6 +40,11 @@ namespace PlayerInventorySystem
         public bool LoadInventory = false;
 
         /// <summary>
+        /// Set true to save inventory data on close
+        /// </summary>
+        public bool SaveOnClose = false;
+
+        /// <summary>
         /// Set true to save data to Application.persistentDataPath + "/Data/data.dat"
         /// Only use this when you have configured your Unity Player settings for publication
         /// keep false for testing in the editor.
@@ -47,29 +54,29 @@ namespace PlayerInventorySystem
         /// <summary>
         /// Holder for all inventories in the system eccept for chests.
         /// </summary>
-        internal static Dictionary<int, Inventory> InventoryList = new Dictionary<int, Inventory>();
+        internal static Dictionary<int, Inventory> InventoryList = new();
 
         /// <summary>
         /// Holder for all chest inventories in the system.
         /// </summary>
-        internal static Dictionary<int, Inventory> ChestInventories = new Dictionary<int, Inventory>();
+        internal static Dictionary<int, Inventory> ChestInventories = new();
 
         /// <summary>
         /// map of chest game objects to chest ID's
         /// </summary>
-        internal static Dictionary<int, GameObject> ChestMap = new Dictionary<int, GameObject>();
+        internal static Dictionary<int, GameObject> ChestMap = new();
 
         /// <summary>
         /// List of items dropped by the player or spawned from mob/destroyed object ect..
         /// that currently exist in the game world.
         /// Items remove themselves from this list when they despawn or are picked up.
         /// </summary>
-        internal List<DroppedItem> DroppedItems = new List<DroppedItem>();
+        internal List<DroppedItem> DroppedItems = new();
 
         /// <summary>
         /// List of items that the player has placed in the game world.
         /// </summary>
-        internal static List<PlacedItem> PlacedItems = new List<PlacedItem>();
+        internal static List<PlacedItem> PlacedItems = new();
 
         /// <summary>
         /// Static accessor for the players inventory
@@ -96,13 +103,18 @@ namespace PlayerInventorySystem
         /// </summary>
         internal static Inventory CraftingOutputInventory { get { return InventoryList[5]; } } // index 5
 
+        /// <summary>
+        /// Static accessor for the salvage panel input inventory
+        /// </summary>
         internal static Inventory SalvageInputInventory { get { return InventoryList[6]; } } // index 6
 
+        /// <summary>
+        /// Static accessor for the salvage panel output inventory
+        /// </summary>
         internal static Inventory SalvageOutputInventory { get { return InventoryList[7]; } } // index 7
 
-
         /// <summary>
-        /// Accessor for the held item
+        /// Accessor for the item 'held' on by the mouse cursor.
         /// 
         /// Inventory index 4
         /// </summary>
@@ -134,9 +146,7 @@ namespace PlayerInventorySystem
         /// <summary>
         /// this is the controller for the player to interface with the inventory system
         /// </summary>
-        public PlayerInventoryController PlayerIC;
-
-        #region UI Elements
+        public PlayerInventoryController PlayerInventoryControler;
 
         /// <summary>
         /// The controller for the inventory panel
@@ -163,6 +173,9 @@ namespace PlayerInventorySystem
         /// </summary>
         public CraftingPanel CraftingPanel;
 
+        /// <summary>
+        /// The controller for the salvage panel
+        /// </summary>
         public SalvagePanel SalvagePanel;
 
         /// <summary>
@@ -175,11 +188,10 @@ namespace PlayerInventorySystem
         /// </summary>
         public ChestPanel ChestPanel;
 
+        /// <summary>
+        /// The controller of the advanced inventory panel
+        /// </summary>
         public AdvancedInventoryPanel AdvancedInventoryPanel;
-
-
-        #endregion UI Elements
-        #region callbacks
 
         /// <summary>
         /// Action called whenever an inventory System panel is opened
@@ -205,8 +217,6 @@ namespace PlayerInventorySystem
         /// callback for when an item on the character panel is changed
         public Action OnCharacterItemChangeCallBack;
 
-        #endregion callbacks
-
         /// <summary>
         /// Indicates if any of the inventory system Panels are currently being displayed.
         /// </summary>
@@ -222,10 +232,19 @@ namespace PlayerInventorySystem
             }
         }
 
+    
+
         /// <summary>
         /// Default time to live of items dropped by the player into the game world in seconds
         /// </summary>
         public float DroppedItemTTL = 300;
+
+        /// <summary>
+        /// Define an object that will be spawned in the world when the game starts if its a new game.
+        /// </summary>
+        public GameObject StarterObject;
+
+        private bool newGame = true;
 
         void OnEnable()
         {
@@ -239,12 +258,12 @@ namespace PlayerInventorySystem
                 }
             }
 
-            if (!Player.TryGetComponent(out PlayerIC))
+            if (!Player.TryGetComponent(out PlayerInventoryControler))
             {
-                PlayerIC = Player.AddComponent<PlayerInventoryController>();
+                PlayerInventoryControler = Player.AddComponent<PlayerInventoryController>();
             }
 
-            if (PlayerIC == null)
+            if (PlayerInventoryControler == null)
             {
                 Debug.LogError("No PlayerInventoryController component was found on the player object. Either drag your player object on to the Inventoy Controller component player value or add a PlayerInventoryController component to your player object. ");
                 return;
@@ -264,8 +283,17 @@ namespace PlayerInventorySystem
 
             if (LoadInventory)
             {
-                Load();
+                // load returns true if it was successful
+                // Load would return false if there was no save data to load from a previous game
+                // so this would be a new game ergo newGame = true if load returns false
+                newGame = !Load();
+                Debug.Log("New Game = " + newGame);
+
+
+
             }
+
+            OnStartNewGame(newGame);
 
             // set up and config the inventory panel
             InventoryPanel.gameObject.SetActive(false);
@@ -296,7 +324,46 @@ namespace PlayerInventorySystem
             // register callbacks for when a window opens
             OnWindowOpenCallback += WindowOpenCallback;
 
+            // if its a new game enable the starter pack
+
         }
+
+        private void OnStartNewGame(bool newGame)
+        {
+            StarterObject.SetActive(newGame);
+
+            if (StarterObject == null)
+            {
+                return;
+            }
+
+            if (newGame)
+            {
+
+                Character = new Character()
+                {
+                    characterName = CharacterNameGenerator.GenerateRandomName(GENDER.FEMALE),
+                    GENDER = GENDER.FEMALE,
+                    Level = 1,
+                    Experience = 0,
+                    Health = 100,
+                    Mana = UnityEngine.Random.Range(0, 10),
+                    Stamina = UnityEngine.Random.Range(0, 10),
+                    Dexterity = UnityEngine.Random.Range(0, 10),
+                    Intelligence = UnityEngine.Random.Range(0, 10),
+                    Luck = UnityEngine.Random.Range(0, 10),
+                };
+            }
+            Debug.Log("Spawning Starter Pack");
+
+
+            // move the object to the players position
+            StarterObject.transform.position = Player.transform.position;
+            // move it 5 units up so the items drop to the ground correctly
+            StarterObject.transform.position += Vector3.up * 5;
+
+        }
+
 
         void Update()
         {
@@ -314,7 +381,7 @@ namespace PlayerInventorySystem
                     {
                         if (PlayerInventory.AddItem(HeldItem) == false)
                         {
-                            PlayerIC.DropItem(HeldItem, HeldItem.StackCount);
+                            PlayerInventoryControler.DropItem(HeldItem, HeldItem.StackCount);
                         }
                     }
                     HeldItem = null;
@@ -331,7 +398,6 @@ namespace PlayerInventorySystem
                 {
                     dropPanel.gameObject.SetActive(false);
                 }
-
             }
         }
 
@@ -354,12 +420,19 @@ namespace PlayerInventorySystem
             }
         }
 
-        // add register callbacks for oncharacter item change
+        /// <summary>
+        /// register callbacks for oncharacter item change
+        /// </summary>
+        /// <param name="callback"></param>
         public static void RegisterOnCharacterItemChangeCallback(Action callback)
         {
             Instance.OnCharacterItemChangeCallBack += callback;
         }
 
+        /// <summary>
+        /// Unregister callbacks for oncharacter item change
+        /// </summary>
+        /// <param name="callback"></param>
         public static void UnregisterOnCharacterItemChangeCallback(Action callback)
         {
             if (Instance.OnCharacterItemChangeCallBack != null)
@@ -392,7 +465,7 @@ namespace PlayerInventorySystem
         /// <summary>
         /// Method to resize a given inventory to the given size.
         /// If the new size is smaller then the origonal, the inventory will be repacked.
-        /// meaning aitems will be moved to the begining of the new inventory.
+        /// meaning items will be moved to the begining of the new inventory.
         /// Items that do not fit in to the new inventory will be discarded.
         /// If the new inventory size is greater then the old repacking will not take place
         /// and items will remain in there origonal slots.
@@ -402,7 +475,7 @@ namespace PlayerInventorySystem
         /// <returns></returns>
         internal static Inventory ResizeInventory(Inventory oldInventory, int size)
         {
-            Inventory newInv = new Inventory(oldInventory.Index, size);
+            Inventory newInv = new(oldInventory.Index, size);
             if (oldInventory.Count > size)
             {
                 foreach (Slot s in oldInventory)
@@ -410,7 +483,7 @@ namespace PlayerInventorySystem
                     if (!newInv.AddItem(s.Item))
                     {
                         // drop it
-                        Instance.PlayerIC.DropItem(s.Item, s.Item.StackCount);
+                        Instance.PlayerInventoryControler.DropItem(s.Item, s.Item.StackCount);
                     }
                 }
             }
@@ -765,7 +838,7 @@ namespace PlayerInventorySystem
                 // calculate the damage to the mineable object based on.
                 // the tools damage
                 // and the players luck
-                float damage = toolItem.Data.damage + UnityEngine.Random.Range(0, PlayerIC.BuffValues["Luck"]);
+                float damage = toolItem.Data.damage + UnityEngine.Random.Range(0, PlayerInventoryControler.BuffValues["Luck"]);
 
                 // call the mine method
                 return mineableObject.Mine(damage);
@@ -788,10 +861,6 @@ namespace PlayerInventorySystem
                     // If the item has a world prefab then place it in the world
                     if (item.Data.worldPrefab != null)
                     {
-                        //  Item.Place(item, pos, rot, scale);
-
-
-
                         switch (item.Data.worldPrefab.tag.ToLower())
                         {
                             case "chest":
@@ -810,8 +879,6 @@ namespace PlayerInventorySystem
                                 OnPlaceItem(item, pi);
                                 break;
                         }
-
-
                     }
                 }
             }
@@ -845,14 +912,17 @@ namespace PlayerInventorySystem
         /// <summary>
         /// Method to load the current saved data
         /// </summary>
-        public static void Load()
+        public static bool Load()
         {
-            Serial.Serializer.Load();
+            return Serial.Serializer.Load();
         }
 
         private void OnApplicationQuit()
         {
-            Save();
+            if (SaveOnClose)
+            {
+                Save();
+            }
         }
 
         /// <summary>

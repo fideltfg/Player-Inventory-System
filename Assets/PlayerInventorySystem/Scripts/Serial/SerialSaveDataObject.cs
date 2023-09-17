@@ -12,6 +12,7 @@
         [SerializeField] private SerialRect[] panelLocations;
         [SerializeField] private SerialDroppedItem[] droppedItems;
         [SerializeField] private SerialPlacedItem[] placedItems;
+        [SerializeField] private Character character;
 
 
 
@@ -57,6 +58,12 @@
             set { placedItems = value; }
         }
 
+        public Character Character
+        {
+            get { return character; }
+            set { character = value; }
+        }
+
         /// <summary>
         /// Constructor to create a new SerialSaveDataObject with the provided data.
         /// </summary>
@@ -64,13 +71,14 @@
         /// <param name="chests">An array of SerialChest objects representing the chests in the system.</param>
         /// <param name="panelLocations">An array of SerialRect objects representing the panel locations in the system.</param>
         /// <param name="droppedItems">An array of SerialDroppedItem objects representing the dropped or spawned items in the game world.</param>
-        public SerialSaveDataObject(SerialInventory[] inventories, SerialChest[] chests, SerialRect[] panelLocations, SerialDroppedItem[] droppedItems, SerialPlacedItem[] placedItems)
+        public SerialSaveDataObject(SerialInventory[] inventories, SerialChest[] chests, SerialRect[] panelLocations, SerialDroppedItem[] droppedItems, SerialPlacedItem[] placedItems, Character chara)
         {
             Inventories = inventories;
             Chests = chests;
             PanelLocations = panelLocations;
             DroppedItems = droppedItems;
             PlacedItems = placedItems;
+            character = chara;
         }
     }
 

@@ -92,7 +92,7 @@ public class InputController : MonoBehaviour
             // if aiming
             if (focus)
             {
-                InventoryController.Instance.PlayerIC.Interact();
+                InventoryController.Instance.PlayerInventoryControler.Interact();
 
                 // call to method in PlayerController
                 PlayerController.instance.OnInteract();

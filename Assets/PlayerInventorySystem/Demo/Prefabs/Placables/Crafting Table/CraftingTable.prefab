@@ -180,7 +180,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 990afc98698203c468996cea0fd72c42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ItemID: 5
+  ItemID: 10
   StackCount: 1
   Durability: 0
   TimeToLive: 30

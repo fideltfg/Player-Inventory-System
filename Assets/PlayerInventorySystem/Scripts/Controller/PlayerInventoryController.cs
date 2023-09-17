@@ -14,6 +14,11 @@ namespace PlayerInventorySystem
     [RequireComponent(typeof(BoxCollider))]
     public class PlayerInventoryController : MonoBehaviour
     {
+        public Transform Head;
+        public Transform Body;
+        public Transform LeftHand;
+        public Transform RightHand;
+
         /// <summary>
         /// Ceter offset for collider
         /// </summary>
@@ -31,6 +36,11 @@ namespace PlayerInventorySystem
         public Dictionary<string, float> BuffValues
         {
             get { return InventoryController.Instance.CharacterPanel.buffValues; }
+        }
+
+        internal Character Character
+        {
+            get { return InventoryController.Character; }
         }
 
         public AudioClip pickupSound;
@@ -101,13 +111,12 @@ namespace PlayerInventorySystem
                 return false;
             }
 
-
             Item newItem = Item.New(droppedItem.ItemID, droppedItem.StackCount);
 
             if (newItem.Data.ConsumeOnPickup)
             {
                 ConsumeItem(newItem);
-                // TODO change this to play conumptioon sound
+                // TODO change this to play conumption sound
                 GetComponent<AudioSource>().PlayOneShot(pickupSound);
                 Destroy(collectedObject);
                 return true;
@@ -124,12 +133,7 @@ namespace PlayerInventorySystem
                 {
                     return false;
                 }
-
             }
-
-
-
-
         }
 
         /// <summary>
@@ -191,10 +195,6 @@ namespace PlayerInventorySystem
                                     DropItem(minedItem);
                                 }
                             }
-
-
-
-
                         }
 
                         break;

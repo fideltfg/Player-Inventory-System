@@ -67,7 +67,7 @@ namespace PlayerInventorySystem
         {
             if (SelectedSlotController.Slot.Item != null)
             {
-                PlayerInventoryController pic = InventoryController.Instance.PlayerIC;
+                PlayerInventoryController pic = InventoryController.Instance.PlayerInventoryControler;
 
                 if (pic == null)
                 {

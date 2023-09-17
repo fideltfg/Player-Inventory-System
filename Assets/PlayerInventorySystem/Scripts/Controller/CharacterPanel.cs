@@ -8,45 +8,14 @@ namespace PlayerInventorySystem
     /// </summary>
     public class CharacterPanel : InventorySystemPanel
     {
-        /// <summary>
-        /// The starting health of your character
-        /// </summary>
-        public float baseHealth = 0;
-
-        /// <summary>
-        /// The starting stamina of your character
-        /// </summary>
-        public float baseStamina = 0;
-
-        /// <summary>
-        /// The starting dexterity of your character
-        /// </summary>
-        public float baseDexterity = 0;
-
-        /// <summary>
-        /// The starting armor of your character
-        /// </summary>
-        public float baseArmor = 0;
-
-        /// <summary>
-        /// The starting mana of your character
-        /// </summary>
-        public float baseMana = 0;
-
-        /// <summary>
-        /// The starting intelligence of your character
-        /// </summary>
-        public float baseIntelligence = 0;
-
-        /// <summary>
-        /// The starting speed of your character
-        /// </summary>
-        public float baseSpeed = 0;
-
-        /// <summary>
-        /// The starting lucj of your character
-        /// </summary>
-        public float baseLuck = 0;
+        float health = 0;
+        float stamina = 0;
+        float dexterity = 0;
+        float armor = 0;
+        float mana = 0;
+        float intelligence = 0;
+        float speed = 0;
+        float luck = 0;
 
         public SlotController HeadSlot;
         public SlotController LeftHandSlot;
@@ -64,7 +33,7 @@ namespace PlayerInventorySystem
         public Text SpeedText;
         public Text LuckText;
 
-        public Dictionary<string, float> buffValues = new Dictionary<string, float>();
+        public Dictionary<string, float> buffValues = new();
 
         /// <summary>
         /// method to update both the UI stats and the buffValues list
@@ -73,50 +42,40 @@ namespace PlayerInventorySystem
         public void UpdateStats(Slot slot)
         {
             // get default values
-            float health = baseHealth;
-            float stamina = baseStamina;
-            float dexterity = baseDexterity;
-            float armor = baseArmor;
-            float mana = baseMana;
-            float intelligence = baseIntelligence;
-            float speed = baseSpeed;
-            float luck = baseLuck;
+            health = InventoryController.Character.Health;
+            mana = InventoryController.Character.Mana;
+            stamina = InventoryController.Character.Stamina;
+            dexterity = InventoryController.Character.Dexterity;
+            intelligence = InventoryController.Character.Intelligence;
+            armor = InventoryController.Character.Armor;
+            speed = InventoryController.Character.Speed;
+            luck = InventoryController.Character.Luck;
 
-            // update default buffs from items
+            // update default buffs values
             foreach (SlotController SlotController in SlotList)
             {
                 if (SlotController.Slot.Item != null)
                 {
-                    health += SlotController.Slot.Item.Data.health;
-                    stamina += SlotController.Slot.Item.Data.stamina;
-                    dexterity += SlotController.Slot.Item.Data.dexterity;
-                    armor += SlotController.Slot.Item.Data.armor;
-                    mana += SlotController.Slot.Item.Data.mana;
-                    intelligence += SlotController.Slot.Item.Data.intelligence;
-                    speed += SlotController.Slot.Item.Data.speed;
-                    luck += SlotController.Slot.Item.Data.luck;
+                    buffValues["Health"] += SlotController.Slot.Item.Data.health;
+                    buffValues["Mana"] += SlotController.Slot.Item.Data.mana;
+                    buffValues["Stamina"] += SlotController.Slot.Item.Data.stamina;
+                    buffValues["Dexterity"] += SlotController.Slot.Item.Data.dexterity;
+                    buffValues["Intelligance"] += SlotController.Slot.Item.Data.intelligence;
+                    buffValues["Armor"] += SlotController.Slot.Item.Data.armor;
+                    buffValues["Speed"] += SlotController.Slot.Item.Data.speed;
+                    buffValues["Luck"] += SlotController.Slot.Item.Data.luck;
                 }
             }
 
             // set UI values
-            HealthText.text = health.ToString();
-            StaminaText.text = stamina.ToString();
-            DexterityText.text = dexterity.ToString();
-            ArmorText.text = armor.ToString();
-            ManaText.text = mana.ToString();
-            IntelligenceText.text = intelligence.ToString();
-            SpeedText.text = speed.ToString();
-            LuckText.text = luck.ToString();
-
-            // save values to buffValues dict
-            buffValues["Health"] = baseHealth;
-            buffValues["Stamina"] = baseStamina;
-            buffValues["Dexterity"] = baseDexterity;
-            buffValues["Armor"] = baseArmor;
-            buffValues["Mana"] = baseArmor;
-            buffValues["Intelligance"] = baseIntelligence;
-            buffValues["Speed"] = baseSpeed;
-            buffValues["Luck"] = baseLuck;
+            HealthText.text = "+" + buffValues["Health"].ToString() + " " +  health.ToString();
+            ManaText.text = mana + buffValues["Mana"].ToString();
+            StaminaText.text = (stamina + buffValues["Stamina"]).ToString();
+            DexterityText.text = (dexterity + buffValues["Dexterity"]).ToString();
+            IntelligenceText.text = (intelligence + buffValues["Intelligance"]).ToString();
+            ArmorText.text = (armor + buffValues["Armor"]).ToString();
+            SpeedText.text = (speed + buffValues["Speed"]).ToString();
+            LuckText.text = (luck + buffValues["Luck"]).ToString();
 
             // invloke callback to let other scripts know the stats have changed
             InventoryController.Instance.OnCharacterItemChangeCallBack?.Invoke();
@@ -133,51 +92,50 @@ namespace PlayerInventorySystem
             // check if the health value is already in the buffValues dict if not add it
             if (!buffValues.ContainsKey("Health"))
             {
-                buffValues.Add("Health", baseHealth);
+                buffValues.Add("Health", 0);
             }
 
             // check if the stamina value is already in the buffValues dict if not add it
             if (!buffValues.ContainsKey("Stamina"))
             {
-                buffValues.Add("Stamina", baseStamina);
+                buffValues.Add("Stamina", 0);
             }
 
             // check if the dexterity value is already in the buffValues dict if not add it
             if (!buffValues.ContainsKey("Dexterity"))
             {
-                buffValues.Add("Dexterity", baseDexterity);
+                buffValues.Add("Dexterity", 0);
             }
 
             // check if the armor value is already in the buffValues dict if not add it
             if (!buffValues.ContainsKey("Armor"))
             {
-                buffValues.Add("Armor", baseArmor);
+                buffValues.Add("Armor", 0);
             }
 
             // check if the mana value is already in the buffValues dict if not add it
             if (!buffValues.ContainsKey("Mana"))
             {
-                buffValues.Add("Mana", baseMana);
+                buffValues.Add("Mana", 0);
             }
 
             // check if the intelligence value is already in the buffValues dict if not add it
             if (!buffValues.ContainsKey("Intelligance"))
             {
-                buffValues.Add("Intelligance", baseIntelligence);
+                buffValues.Add("Intelligance", 0);
             }
 
             // check if the speed value is already in the buffValues dict if not add it
             if (!buffValues.ContainsKey("Speed"))
             {
-                buffValues.Add("Speed", baseSpeed);
+                buffValues.Add("Speed", 0);
             }
 
             // check if the luck value is already in the buffValues dict if not add it
             if (!buffValues.ContainsKey("Luck"))
             {
-                buffValues.Add("Luck", baseLuck);
+                buffValues.Add("Luck", 0);
             }
-
 
             if (HeadSlot == null || LeftHandSlot == null || RightHandSlot == null || BodySlot == null || LegsSlot == null || FeetSlot == null)
             {

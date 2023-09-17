@@ -55,7 +55,6 @@ namespace PlayerInventorySystem
                         // limit the craft amount so they fit in the inventory spaces availiable
                         craftCount = Mathf.Clamp(craftCount, 0, inventorySpaces + ItemBarSpaces);
 
-
                         if (craftCount <= ItemBarSpaces)
                         {
                             for (int i = 0; i < craftCount; i += Slot.Item.Data.craftCount)
