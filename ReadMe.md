@@ -131,7 +131,7 @@ The Player Inventory System is designed to simplify implementing an inventory in
 
 2. **Add Items**:
    - Select the `Item Catalog` in the Project view.
-   - In the Inspector, fill in details for each item:
+   - In the Inspector, add elemets to the catolog fill in details for each item: ``First item MUST BE NULL``
      - **Name**: The human-readable name of the item.
      - **BaseMaterial**: The base material of the item.
      - **MaterialVariant**: The variant of the material.
@@ -176,7 +176,7 @@ The Player Inventory System is designed to simplify implementing an inventory in
 - **Automatic**: Saves when the game closes or the Inventory System object is destroyed.
 - **Manual**: Call `Load()` and `Save()` methods from your scripts.
 - **Save Location**: 
-  - Set by the `UsePersistandDataPath` option on the `InventoryController`.
+  - Set by the `UsePersistantDataPath` option on the `InventoryController`.
   - True: Saves at `Application.persistentDataPath + "/Data/data.dat"`.
   - False: Saves at `pathToYourProject + "/Data/data.dat"`.
 
