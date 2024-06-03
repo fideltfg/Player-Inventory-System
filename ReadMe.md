@@ -245,7 +245,6 @@ The Player Inventory System is designed to simplify implementing an inventory in
 ## Additional Resources
 For more detailed information and tutorials, refer to the full online documentation.
 
-
 ## Assets
 While this project is in Alpha it makes use of a small number of 3rd party art assets. These are stored in the **ThridParty** folder. Remember to remove and replace these assets before you release your game.
 
@@ -253,10 +252,3 @@ While this project is in Alpha it makes use of a small number of 3rd party art a
 Both the repo and Unity package contain a simple demo scene that allows you to test each of the systems functions. Depending on the state of the project at the last push to the git repo, the demo scene may or may not work correctly.
 As the project progresses the demo scene will be expanded and features fixed in place.
 
-
-## Assets
-While this project is in Alpha it makes use of a small number of 3rd party art assets. These are stored in the **ThridParty** folder. Remember to remove and replace these assets before you release your game.
-
-## Demo Scene
-Both the repo and Unity package contain a simple demo scene that allows you to test each of the systems functions. Depending on the state of the project at the last push to the git repo, the demo scene may or may not work correctly.
-As the project progresses the demo scene will be expanded and features fixed in place.
