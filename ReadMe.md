@@ -5,8 +5,6 @@ The Player Inventory System is designed to make implementing an inventory system
 The Player Inventory System will allow you to add this functionality to you game with ease.
 
 ![Inventory Window](https://raw.githubusercontent.com/fideltfg/PlayerInventorySystem/master/Assets/PlayerInventorySystem/Docs/images/CS9raV.png)
-
-
 ## Features
 - Item Bar to store items for quick access,
 - Inventory Panel to allow player to carry more objects while they move around,
@@ -35,7 +33,6 @@ The Player Inventory System will allow you to add this functionality to you game
 1. Unity 2022.3 or higher
 2. Unity Input system Package 1.6.3 or higher
 
-
 ### Git Repo
 If you have downloaded or cloned the git repository you can open the project through Unity Hub.
 
@@ -55,65 +52,6 @@ Assuming you already have a Unity project open that contains either the contents
 5. Select the InventorySystem in the hierarchy and drag your player object in to the player property slot.
 
 NOTE: While the demo in the package includes scripts to control the player, anything located in the Demo folder is not supported under this system. The scripts are used to provide simple gameplay so the demo can do its thing. They should NOT be considered part of the Player Inventory System and as such are not covered in the documentation except were to explain how to integrate with existing player controllers and the input system.
-
-
-# Player Inventory System
-
-The Player Inventory System is designed to make implementing an inventory system in your game simple. I developed this system to replicate yet improve upon the functionality of the inventory system in an existing and very popular game.<br/> 
-The Player Inventory System will allow you to add this functionality to you game with ease.
-
-![Inventory Window](https://raw.githubusercontent.com/fideltfg/PlayerInventorySystem/master/Assets/PlayerInventorySystem/Docs/images/CS9raV.png)
-
-
-## Features
-- Item Bar to store items for quick access,
-- Inventory Panel to allow player to carry more objects while they move around,
-- Chests to allow leaving items long term,
-- Character Panel allows equipping gear and weapons and displays player stats,
-- Crafting Panel allows player to create new items from others,
-- Item info Panel allows player to view information about items in his/her inventory,
-- Drag and drop items between inventories and slots,
-- Place-able items,
-- Consumable items,
-- Stackable items,
-- Items can be used to impart buffs on player,
-- Item durability,
-- Item Catalog for easy configuration and mapping of items and their properties.
-- Custom editor scripts help organize items in your catalog.
-- Simple design allows you to easily swap catalogs and themes at runtime.
-- Encrypted object serialization and saving to help prevent cheating,
-- Inventory/chest contents, placed and dropped items can be loaded and saved automatically,
-- Keyboard and partial controller support using the new input system. (Full support coming soon!)
-- Item recyceling/salvage allows players to reclaim the items used to craft an item.
-
-
-## Getting Started
-
-### Requirements
-1. Unity 2022.3 or higher
-2. Unity Input system Package 1.6.3 or higher
-
-
-### Git Repo
-If you have downloaded or cloned the git repository you can open the project through Unity Hub.
-
-### Unity Package
-If you have downloaded the Unity package either..
-+ Open an existing project or create a new one,
-or
-+ Double click the downloaded package and import the Player Inventory System folder.
-
-### From Scratch
-Assuming you already have a Unity project open that contains either the contents of the Unity package or the repository, follow these steps to add the Player Inventory System to a new scene.
-
-1. Drag the prefab **PlayerInventorySystem\Prefabs\InventorySystem** into your scene. 
-2. Add an event system object by right clicking the hierarchy and selecting **UI->Event System**
-3. Add your player object to your scene. 
-4. Add a **PlayerInventoryControler** component to your player object.
-5. Select the InventorySystem in the hierarchy and drag your player object in to the player property slot.
-
-NOTE: While the demo in the package includes scripts to control the player, anything located in the Demo folder is not supported under this system. The scripts are used to provide simple gameplay so the demo can do its thing. They should NOT be considered part of the Player Inventory System and as such are not covered in the documentation except were to explain how to integrate with existing player controllers and the input system.
-
 
 # Player Inventory System Guide
 
