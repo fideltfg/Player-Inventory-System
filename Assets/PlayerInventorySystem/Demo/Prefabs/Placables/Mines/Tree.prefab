@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 6237035545609865009}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &4274612449946893496
 BoxCollider:
@@ -76,7 +76,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 1.5
-  m_Center: {x: 0, y: -0.04, z: 0}
+  m_Center: {x: 0, y: 0.1, z: 0}
 --- !u!114 &3076654248499806463
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -92,7 +92,7 @@ MonoBehaviour:
   ItemID: 0
   resourceCount: 10
   hitRate: 12
-  minedItemID: 5
+  minedItemID: 1
   refreshRate: 10
 --- !u!1001 &6237035545609477553
 PrefabInstance:

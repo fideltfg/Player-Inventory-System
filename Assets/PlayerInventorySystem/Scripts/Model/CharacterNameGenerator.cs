@@ -35,6 +35,7 @@ namespace PlayerInventorySystem
     "Zoe",
     "Aurora",
     "Savannah",
+    "Lydia",
     "Addison",
     "Brooklyn",
     "Hannah",

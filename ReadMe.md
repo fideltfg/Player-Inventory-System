@@ -1,5 +1,5 @@
 
-# Player Inventory System >> 0.0.5 Alpha!
+# Player Inventory System!
 
 The Player Inventory System is designed to make implementing an inventory system in your game simple. I developed this system to replicate yet improve upon the functionality of the inventory system in an existing and very popular game.<br/> 
 The Player Inventory System will allow you to add this functionality to you game with ease.

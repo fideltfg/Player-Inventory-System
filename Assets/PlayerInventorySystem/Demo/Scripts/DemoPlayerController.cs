@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using System;
+using System.Collections;
 
 // This class manages which player behaviour is active or overriding, and call its local functions.
 // Contains basic setup and common functions used by all the player behaviours.
-public class PlayerController : MonoBehaviour
+public class DemoPlayerController : MonoBehaviour
 {
-    public static PlayerController instance;
+    public static DemoPlayerController instance;
 
 
     public Transform playerCamera;                        // Reference to the camera that focus the player.
@@ -43,12 +44,9 @@ public class PlayerController : MonoBehaviour
     private List<GenericBehaviour> behaviours;            // The list containing all the enabled player behaviours.
     private List<GenericBehaviour> overridingBehaviours;  // List of current overriding behaviours.
 
-
-
     private Rigidbody rBody;                              // Reference to the player's rigidbody.
     private int groundedBool;                             // Animator variable related to whether or not the player is on the ground.
     private Vector3 colExtents;                           // Collider extents for ground test. 
-
 
     // Get the player camera script.
     public ThirdPersonOrbitCamBasic GetCamScript { get { return camScript; } }
@@ -61,7 +59,6 @@ public class PlayerController : MonoBehaviour
 
     // Get current default behaviour.
     public int GetDefaultBehaviour { get { return defaultBehaviour; } }
-
 
     public void OnForward(float v)
     {
@@ -81,10 +78,6 @@ public class PlayerController : MonoBehaviour
     {
         this.h = h;
     }
-    public void OnLeftBumper() { }
-    public void OnRightBumper() { }
-
-    public void OnPressDrop() { }
 
     public void OnInteract()
     {
@@ -120,6 +113,7 @@ public class PlayerController : MonoBehaviour
         anim.SetFloat(hFloat, H, 0.1f, Time.deltaTime);
         anim.SetFloat(vFloat, V, 0.1f, Time.deltaTime);
 
+
         // Toggle sprint by input.
         sprint = false;// Input.GetButton(sprintButton);
 
@@ -137,6 +131,7 @@ public class PlayerController : MonoBehaviour
         // Set the grounded test on the Animator Controller.
         anim.SetBool(groundedBool, IsGrounded());
     }
+
 
 
     public void OnJump()

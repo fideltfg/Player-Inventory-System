@@ -34,15 +34,15 @@ MonoBehaviour:
     salvageable: 0
     recycable: 0
     maxDurability: 0
-    damage: 1
-    speed: 0
+    Strength: 0
+    Speed: 0
     health: 0
     stamina: 0
     mana: 0
     armor: 0
-    intelligence: 0
-    dexterity: 0
-    luck: 0
+    IQ: 0
+    Dexterity: 0
+    Luck: 0
   - name: Wood Block (1)
     BaseMaterial: 1
     id: 1
@@ -66,15 +66,15 @@ MonoBehaviour:
     salvageable: 0
     recycable: 0
     maxDurability: 0
-    damage: 1
-    speed: 0
+    Strength: 0
+    Speed: 0
     health: 0
     stamina: 0
     mana: 0
     armor: 0
-    intelligence: 0
-    dexterity: 0
-    luck: 0
+    IQ: 0
+    Dexterity: 0
+    Luck: 0
   - name: Wood Plank (2)
     BaseMaterial: 1
     id: 2
@@ -98,15 +98,15 @@ MonoBehaviour:
     salvageable: 1
     recycable: 0
     maxDurability: 0
-    damage: 1
-    speed: 0
+    Strength: 0
+    Speed: 0
     health: 0
     stamina: 0
     mana: 0
     armor: 0
-    intelligence: 0
-    dexterity: 0
-    luck: 0
+    IQ: 0
+    Dexterity: 0
+    Luck: 0
   - name: Stick (3)
     BaseMaterial: 1
     id: 3
@@ -130,15 +130,15 @@ MonoBehaviour:
     salvageable: 1
     recycable: 0
     maxDurability: 0
-    damage: 1
-    speed: 0
+    Strength: 0
+    Speed: 0
     health: 0
     stamina: 0
     mana: 0
     armor: 0
-    intelligence: 0
-    dexterity: 0
-    luck: 0
+    IQ: 0
+    Dexterity: 0
+    Luck: 0
   - name: Chest (4)
     BaseMaterial: 1
     id: 4
@@ -162,15 +162,15 @@ MonoBehaviour:
     salvageable: 0
     recycable: 1
     maxDurability: 0
-    damage: 0
-    speed: 0
+    Strength: 0
+    Speed: 0
     health: 0
     stamina: 0
     mana: 0
     armor: 0
-    intelligence: 0
-    dexterity: 0
-    luck: 0
+    IQ: 0
+    Dexterity: 0
+    Luck: 0
   - name: Coal (5)
     BaseMaterial: 0
     id: 5
@@ -194,15 +194,15 @@ MonoBehaviour:
     salvageable: 0
     recycable: 0
     maxDurability: 0
-    damage: 0
-    speed: 0
+    Strength: 0
+    Speed: 0
     health: 0
     stamina: 0
     mana: 0
     armor: 0
-    intelligence: 0
-    dexterity: 0
-    luck: 0
+    IQ: 0
+    Dexterity: 0
+    Luck: 0
   - name: Tourch (6)
     BaseMaterial: 0
     id: 6
@@ -227,15 +227,15 @@ MonoBehaviour:
     salvageable: 0
     recycable: 1
     maxDurability: 0
-    damage: 0
-    speed: 0
+    Strength: 0
+    Speed: 0
     health: 0
     stamina: 0
     mana: 0
     armor: 0
-    intelligence: 0
-    dexterity: 0
-    luck: 0
+    IQ: 0
+    Dexterity: 0
+    Luck: 0
   - name: Iron Ore(7)
     BaseMaterial: 0
     id: 7
@@ -259,15 +259,15 @@ MonoBehaviour:
     salvageable: 0
     recycable: 0
     maxDurability: 0
-    damage: 0
-    speed: 0
+    Strength: 0
+    Speed: 0
     health: 0
     stamina: 0
     mana: 0
     armor: 0
-    intelligence: 0
-    dexterity: 0
-    luck: 0
+    IQ: 0
+    Dexterity: 0
+    Luck: 0
   - name: Iron Ingot (8)
     BaseMaterial: 0
     id: 8
@@ -291,15 +291,15 @@ MonoBehaviour:
     salvageable: 0
     recycable: 0
     maxDurability: 0
-    damage: 0
-    speed: 0
+    Strength: 0
+    Speed: 0
     health: 0
     stamina: 0
     mana: 0
     armor: 0
-    intelligence: 0
-    dexterity: 0
-    luck: 0
+    IQ: 0
+    Dexterity: 0
+    Luck: 0
   - name: Iron Axe (9)
     BaseMaterial: 0
     id: 9
@@ -322,15 +322,15 @@ MonoBehaviour:
     salvageable: 0
     recycable: 1
     maxDurability: 0
-    damage: 5
-    speed: 0
+    Strength: 0
+    Speed: 0
     health: 0
     stamina: 0
     mana: 0
     armor: 0
-    intelligence: 0
-    dexterity: 0
-    luck: 0
+    IQ: 0
+    Dexterity: 0
+    Luck: 0
   - name: Crafting Table (10)
     BaseMaterial: 0
     id: 10
@@ -354,15 +354,15 @@ MonoBehaviour:
     salvageable: 0
     recycable: 1
     maxDurability: 0
-    damage: 0
-    speed: 0
+    Strength: 0
+    Speed: 0
     health: 0
     stamina: 0
     mana: 0
     armor: 0
-    intelligence: 0
-    dexterity: 0
-    luck: 0
+    IQ: 0
+    Dexterity: 0
+    Luck: 0
   - name: Stone (11)
     BaseMaterial: 0
     id: 11
@@ -386,15 +386,15 @@ MonoBehaviour:
     salvageable: 1
     recycable: 0
     maxDurability: 0
-    damage: 1
-    speed: 0
+    Strength: 0
+    Speed: 0
     health: 0
     stamina: 0
     mana: 0
     armor: 0
-    intelligence: 0
-    dexterity: 0
-    luck: 0
+    IQ: 0
+    Dexterity: 0
+    Luck: 0
   - name: Stone Spear (12)
     BaseMaterial: 0
     id: 12
@@ -418,12 +418,76 @@ MonoBehaviour:
     salvageable: 1
     recycable: 1
     maxDurability: 0
-    damage: 3
-    speed: 0
+    Strength: 0
+    Speed: 0
     health: 0
     stamina: 0
     mana: 0
     armor: 0
-    intelligence: 0
-    dexterity: 0
-    luck: 0
+    IQ: 0
+    Dexterity: 0
+    Luck: 0
+  - name: Iron Tunic(13)
+    BaseMaterial: 3
+    id: 13
+    ConsumeOnPickup: 0
+    description: Iron Shirt
+    sprite: {fileID: 401563791, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    prefabSingle: {fileID: 1617573061036268, guid: 19bd9b8867732b74f85391c4676826f4,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 1617573061036268, guid: 19bd9b8867732b74f85391c4676826f4,
+      type: 3}
+    itemType: 2
+    slotType: 2
+    maxStackSize: 1
+    recipe:
+      rows:
+      - cells: 080000000000000008000000
+      - cells: 080000000800000008000000
+      - cells: 080000000800000008000000
+    craftCount: 1
+    salvageable: 0
+    recycable: 1
+    maxDurability: 0
+    Strength: 0
+    Speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    Dexterity: 0
+    Luck: 0
+  - name: Iron Pants(14)
+    BaseMaterial: 3
+    id: 14
+    ConsumeOnPickup: 0
+    description: Iron Pants
+    sprite: {fileID: -2067224009, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    prefabSingle: {fileID: 1960838220018798, guid: 373c9d3a55e1c034caa52c302e14a7e4,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 1960838220018798, guid: 373c9d3a55e1c034caa52c302e14a7e4,
+      type: 3}
+    itemType: 2
+    slotType: 6
+    maxStackSize: 1
+    recipe:
+      rows:
+      - cells: 080000000800000008000000
+      - cells: 080000000000000008000000
+      - cells: 080000000000000008000000
+    craftCount: 1
+    salvageable: 0
+    recycable: 1
+    maxDurability: 0
+    Strength: 1
+    Speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 100
+    Dexterity: 0
+    Luck: 0

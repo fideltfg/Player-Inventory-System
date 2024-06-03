@@ -19,6 +19,9 @@ namespace PlayerInventorySystem
         public Transform LeftHand;
         public Transform RightHand;
 
+
+        public Animator animator;
+
         /// <summary>
         /// Ceter offset for collider
         /// </summary>
@@ -160,6 +163,9 @@ namespace PlayerInventorySystem
             InventoryController.Instance.SpawnDroppedItem(item.Data.id, transform.position + transform.forward * 1.5f, quantity);
         }
 
+
+        bool mining = false;
+
         /// <summary>
         /// Method for the player to interact with the world and items in it
         /// </summary>
@@ -180,21 +186,9 @@ namespace PlayerInventorySystem
                         break;
                     case "mineable":
 
-                        // get the mineable component
-                        Mineable mineable = hit.transform.GetComponent<Mineable>();
-                        // if the mineable component is not null
-                        if (mineable != null)
+                        if (!mining)
                         {
-                            Item minedItem = InventoryController.Instance.Mine(mineable);
-
-                            if (minedItem != null)
-                            {
-                                // give the player the mined item or spawn it in the world
-                                if (GiveItem(minedItem) == false)
-                                {
-                                    DropItem(minedItem);
-                                }
-                            }
+                            StartCoroutine(Mine());
                         }
 
                         break;
@@ -209,6 +203,39 @@ namespace PlayerInventorySystem
                 //Debug.Log("Can Not Interact Here!");
                 return;
             }
+        }
+
+
+        private IEnumerator Mine()
+        {
+            mining = true;
+            animator.SetBool("Mine", true);
+
+            while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.9)
+            {
+                yield return null;
+            }
+            animator.SetBool("Mine", false);
+            // get the mineable component
+            Mineable mineable = hit.transform.GetComponent<Mineable>();
+            // if the mineable component is not null
+            if (mineable != null)
+            {
+                Item minedItem = InventoryController.Instance.Mine(mineable);
+
+                if (minedItem != null)
+                {
+                    // give the player the mined item or spawn it in the world
+                    if (GiveItem(minedItem) == false)
+                    {
+                        DropItem(minedItem);
+                    }
+                }
+            }
+
+            mining = false;
+            yield return null;
+
         }
 
         internal void ConsumeItem(Item item)

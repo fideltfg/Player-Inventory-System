@@ -104,6 +104,7 @@ namespace PlayerInventorySystem
         }
 
         // Method to open or close the chest lid
+        // Todo: should trigger a call to the chest controller to open or close the chest
         public void OpenCloseChestLid(bool v)
         {
             // If we have a valid chest

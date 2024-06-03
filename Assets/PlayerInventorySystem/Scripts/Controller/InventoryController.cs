@@ -49,6 +49,7 @@ namespace PlayerInventorySystem
         /// Only use this when you have configured your Unity Player settings for publication
         /// keep false for testing in the editor.
         /// </summary>
+        [HideInInspector]
         public bool UsePersistentDataPath = false;
 
         /// <summary>
@@ -136,6 +137,19 @@ namespace PlayerInventorySystem
                 InventoryList[4][0].SetItem(value);
 
             }
+        }
+
+
+        public static bool PlayerHasItem(int itemID)
+        {
+            foreach (Inventory inventory in InventoryList.Values)
+            {
+                if (inventory.InventoryContains(itemID))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         /// <summary>
@@ -232,7 +246,7 @@ namespace PlayerInventorySystem
             }
         }
 
-    
+
 
         /// <summary>
         /// Default time to live of items dropped by the player into the game world in seconds
@@ -287,10 +301,6 @@ namespace PlayerInventorySystem
                 // Load would return false if there was no save data to load from a previous game
                 // so this would be a new game ergo newGame = true if load returns false
                 newGame = !Load();
-                Debug.Log("New Game = " + newGame);
-
-
-
             }
 
             OnStartNewGame(newGame);
@@ -330,7 +340,7 @@ namespace PlayerInventorySystem
 
         private void OnStartNewGame(bool newGame)
         {
-            StarterObject.SetActive(newGame);
+
 
             if (StarterObject == null)
             {
@@ -339,7 +349,7 @@ namespace PlayerInventorySystem
 
             if (newGame)
             {
-
+                Debug.Log("Spawning Starter Pack");
                 Character = new Character()
                 {
                     characterName = CharacterNameGenerator.GenerateRandomName(GENDER.FEMALE),
@@ -347,20 +357,24 @@ namespace PlayerInventorySystem
                     Level = 1,
                     Experience = 0,
                     Health = 100,
-                    Mana = UnityEngine.Random.Range(0, 10),
-                    Stamina = UnityEngine.Random.Range(0, 10),
-                    Dexterity = UnityEngine.Random.Range(0, 10),
-                    Intelligence = UnityEngine.Random.Range(0, 10),
-                    Luck = UnityEngine.Random.Range(0, 10),
+                    Mana = UnityEngine.Random.Range(0f, 10f),
+                    Stamina = UnityEngine.Random.Range(0f, 10f),
+                    Strength = UnityEngine.Random.Range(0f, 10f),
+                    Dexterity = UnityEngine.Random.Range(0f, 10f),
+                    IQ = UnityEngine.Random.Range(0f, 10f),
+                    Luck = UnityEngine.Random.Range(0f, 1f),
+                    Speed = UnityEngine.Random.Range(0f, 10f),
+                    Armor = 1
                 };
+                StarterObject.SetActive(newGame);
+
+                // move the object to the players position
+                StarterObject.transform.position = Player.transform.position;
+                // move it 5 units up so the items drop to the ground correctly
+                StarterObject.transform.position += Vector3.up * 5;
             }
-            Debug.Log("Spawning Starter Pack");
 
 
-            // move the object to the players position
-            StarterObject.transform.position = Player.transform.position;
-            // move it 5 units up so the items drop to the ground correctly
-            StarterObject.transform.position += Vector3.up * 5;
 
         }
 
@@ -507,11 +521,11 @@ namespace PlayerInventorySystem
 
             dropPanel.gameObject.SetActive(true); // turn on the drop panel
 
-            UnityEngine.Cursor.lockState = CursorLockMode.None; // unlock the mouse
+            //UnityEngine.Cursor.lockState = CursorLockMode.None; // unlock the mouse
 
             if (HeldItem == null)
             {
-                UnityEngine.Cursor.visible = true; // show the mouse
+              //  UnityEngine.Cursor.visible = true; // show the mouse
             }
         }
 
@@ -835,11 +849,9 @@ namespace PlayerInventorySystem
             {
                 Debug.Log("Tool is a mining tool");
 
-                // calculate the damage to the mineable object based on.
-                // the tools damage
-                // and the players luck
-                float damage = toolItem.Data.damage + UnityEngine.Random.Range(0, PlayerInventoryControler.BuffValues["Luck"]);
-
+                // calculate the damage to the mineable object based on the tools damage and the players damage
+                float damage = toolItem.Data.damage + Character.Damage;
+                //Debug.Log("Damage = " + damage);
                 // call the mine method
                 return mineableObject.Mine(damage);
             }

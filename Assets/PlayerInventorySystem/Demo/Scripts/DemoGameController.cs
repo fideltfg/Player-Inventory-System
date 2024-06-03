@@ -2,12 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameController : MonoBehaviour
+
+/// <summary>
+/// This is a simple game controller for the demo scene.
+/// </summary>
+public class DemoGameController : MonoBehaviour
 {
-    public static GameController instance;
+    public static DemoGameController instance;
     public InputController InputController;
 
-    public PlayerController PlayerController;
+    public DemoPlayerController PlayerController;
 
     public GameObject starterItems;
 
@@ -15,7 +19,7 @@ public class GameController : MonoBehaviour
     {
         instance = this;
         PlayerController.gameObject.SetActive(true);
-
+        Cursor.lockState = CursorLockMode.Confined;
 
 
     }

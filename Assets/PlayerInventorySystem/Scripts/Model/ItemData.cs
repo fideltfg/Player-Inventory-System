@@ -118,15 +118,28 @@ namespace PlayerInventorySystem
 
         /// <summary>
         /// The damage bonus this item will bestow upon player when equiped 
+        /// damage is calculated using strength, speed, dexterity, intelligence, and luck
         /// </summary>
-        [Tooltip("The damage bonus this item will bestow upon player when equiped")]
-        public float damage;
+        public float damage
+        {
+            get
+            {
+                {
+                    return ((Strength * Speed) + (Dexterity * IQ)) * Luck;
+                }
+            }
+        }
+
+        /// <summary>
+        /// The strength bonus this item will bestow upon player when equiped
+        /// </summary>
+        public float Strength;
 
         /// <summary>
         /// The speed bonus this item will bestow upon player when equiped 
         /// </summary>
         [Tooltip("The speed bonus this item will bestow upon player when equiped")]
-        public float speed;
+        public float Speed;
 
         /// <summary>
         /// The health bonus this item will bestow upon player when equiped 
@@ -153,22 +166,23 @@ namespace PlayerInventorySystem
         public float armor;
 
         /// <summary>
-        /// The intelligence bonus this item will bestow upon player when equiped 
+        /// The IQ/Intelligence bonus this item will bestow upon player when equiped 
         /// </summary>
-        [Tooltip("The intelligence bonus this item will bestow upon player when equiped")]
-        public float intelligence;
+        [Tooltip("The IQ/Intelligence bonus this item will bestow upon player when equiped")]
+        public float IQ;
 
         /// <summary>
         /// The dexterity bonus this item will bestow upon player when equiped 
         /// </summary>
         [Tooltip("The dexterity bonus this item will bestow upon player when equiped")]
-        public float dexterity;
+        public float Dexterity;
 
         /// <summary>
         /// The luck bonus this item will bestow upon player when equiped 
         /// </summary>
         [Tooltip("The luck bonus this item will bestow upon player when equiped")]
-        public float luck;
+        [Range(0f, 1f)]
+        public float Luck;
 
 
 

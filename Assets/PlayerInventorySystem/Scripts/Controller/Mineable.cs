@@ -11,8 +11,8 @@ namespace PlayerInventorySystem
         [Tooltip("The number of items that could be mined here")]
         public int resourceCount = 10;
 
-        [Tooltip("The rate are which items will be mined")]
-        public float hitRate = 10; //hit damage needed to mine an item
+        [Tooltip("How many hits it takes to mine one resource")]
+        public float hitRate = 10; 
 
         int hitCounter = 0; // the current number of hits on this item since the last refresh
 
@@ -21,7 +21,7 @@ namespace PlayerInventorySystem
         public int minedItemID = 0;
 
         // the amount for time it takes to reset the mineing on this item and allow another hit
-        [Tooltip("The amount for time it takes to reset the mineing on this item and allow another hit")]
+        [Tooltip("HOw long it takes for hit counter to reset to 0 shoudl the player leave")]
         public float refreshRate = 5;
 
         float refreshCounter = 0;

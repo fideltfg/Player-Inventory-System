@@ -76,7 +76,7 @@ public class FlyBehaviour : GenericBehaviour
         behaviourManager.GetCamScript.SetMaxVerticalAngle(flyMaxVerticalAngle);
 
         // Call the fly manager.
-        FlyManagement(GameController.instance.InputController.XRotation, GameController.instance.InputController.YRotation);
+        FlyManagement(DemoGameController.instance.InputController.XRotation, DemoGameController.instance.InputController.YRotation);
     }
     // Deal with the player movement when flying.
     void FlyManagement(float horizontal, float vertical)

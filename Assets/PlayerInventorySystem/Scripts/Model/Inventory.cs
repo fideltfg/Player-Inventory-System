@@ -94,6 +94,36 @@ namespace PlayerInventorySystem
             return slot.IsEmpty;
         }
 
+        public bool InventoryContains(Item item)
+        {
+            // find all the current stacks of the item
+            List<Slot> foundStacks = GetItemSlots(item);
+            return foundStacks != null && foundStacks.Count > 0;
+        }
+
+        /// <summary>
+        /// method to check if this inventory contains an item with the given ID
+        /// </summary>
+        /// <param name="itemID"></param>
+        /// <returns></returns>
+        public bool InventoryContains(int itemID)
+        {
+            return InventoryContains(Item.New(itemID));
+        }
+
+        /// <summary>
+        /// method to return all the slots in the inventory that contain the given item.
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        public List<Slot> GetItemSlots(Item item)
+        {
+            searchItem = item;
+
+            // find all the current stacks of the item
+            return FindAll(FindItemStack);
+        }
+
         /// <summary>
         /// Method to place an item in to an empty slot of this inventory.
         /// If there are no empty slots this method will throw an exception.

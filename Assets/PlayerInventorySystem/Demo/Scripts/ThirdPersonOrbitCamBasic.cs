@@ -62,8 +62,8 @@ public class ThirdPersonOrbitCamBasic : MonoBehaviour
         // angleH += Mathf.Clamp(Input.GetAxis("Mouse X"), -1, 1) * horizontalAimingSpeed;
         // angleV += Mathf.Clamp(Input.GetAxis("Mouse Y"), -1, 1) * verticalAimingSpeed;
 
-        angleH += (GameController.instance.InputController.XRotation * horizontalAimingSpeed) * Time.deltaTime;
-        angleV += (GameController.instance.InputController.YRotation * verticalAimingSpeed) * Time.deltaTime;
+        angleH += (DemoGameController.instance.InputController.XRotation * horizontalAimingSpeed) * Time.deltaTime;
+        angleV += (DemoGameController.instance.InputController.YRotation * verticalAimingSpeed) * Time.deltaTime;
 
         /*// Joystick:
 		angleH += Mathf.Clamp(Input.GetAxis(XAxis), -1, 1) * 60 * horizontalAimingSpeed * Time.deltaTime;

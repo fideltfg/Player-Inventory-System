@@ -59,7 +59,7 @@ public class MoveBehaviour : GenericBehaviour
 
 
     float v1 = .455f;
-    float v2 = 1f;
+   // float v2 = 1f;
     Vector3 GetFloorCast()
     {
 
@@ -86,7 +86,7 @@ public class MoveBehaviour : GenericBehaviour
     public override void LocalFixedUpdate()
     {
         // Call the basic movement manager.
-        MovementManagement(GameController.instance.PlayerController.H, GameController.instance.PlayerController.V);
+        MovementManagement(DemoGameController.instance.PlayerController.H, DemoGameController.instance.PlayerController.V);
 
 
         // Call the jump manager.

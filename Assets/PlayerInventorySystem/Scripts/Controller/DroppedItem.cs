@@ -25,7 +25,6 @@ namespace PlayerInventorySystem
         /// </summary>
         public float Durability = 0;
 
-
         /// <summary>
         /// The amount of time this object will remain after being dropped befor despawning.
         /// </summary>
@@ -33,8 +32,6 @@ namespace PlayerInventorySystem
         public float TimeToLive = 30;
 
         public float Timer = 0;
-
-
 
         /// <summary>
         /// holder for position data.

@@ -16,7 +16,7 @@ public class InputController : MonoBehaviour
         if (ctx.performed)
         {
 
-            GameController.instance.OnPause();
+            DemoGameController.instance.OnPause();
         }
     }
 
@@ -25,11 +25,11 @@ public class InputController : MonoBehaviour
     {
         if (ctx.performed)
         {
-            PlayerController.instance.OnForward(1);
+            DemoPlayerController.instance.OnForward(1);
         }
         else
         {
-            PlayerController.instance.OnForward(0);
+            DemoPlayerController.instance.OnForward(0);
         }
     }
 
@@ -37,11 +37,11 @@ public class InputController : MonoBehaviour
     {
         if (ctx.performed)
         {
-            PlayerController.instance.OnBack(-1);
+            DemoPlayerController.instance.OnBack(-1);
         }
         else
         {
-            PlayerController.instance.OnBack(0);
+            DemoPlayerController.instance.OnBack(0);
         }
     }
 
@@ -49,11 +49,11 @@ public class InputController : MonoBehaviour
     {
         if (ctx.performed)
         {
-            PlayerController.instance.OnLeft(-1);
+            DemoPlayerController.instance.OnLeft(-1);
         }
         else
         {
-            PlayerController.instance.OnLeft(0);
+            DemoPlayerController.instance.OnLeft(0);
         }
     }
 
@@ -61,11 +61,11 @@ public class InputController : MonoBehaviour
     {
         if (ctx.performed)
         {
-            PlayerController.instance.OnRight(1);
+            DemoPlayerController.instance.OnRight(1);
         }
         else
         {
-            PlayerController.instance.OnRight(0);
+            DemoPlayerController.instance.OnRight(0);
         }
     }
 
@@ -92,10 +92,12 @@ public class InputController : MonoBehaviour
             // if aiming
             if (focus)
             {
+                // call to method in PlayerController
+                DemoPlayerController.instance.OnInteract();
+
                 InventoryController.Instance.PlayerInventoryControler.Interact();
 
-                // call to method in PlayerController
-                PlayerController.instance.OnInteract();
+                
             }
             else
             {
@@ -118,12 +120,12 @@ public class InputController : MonoBehaviour
     {
         if (ctx.performed)
         {
-            PlayerController.instance.OnFocus(true);
+            DemoPlayerController.instance.OnFocus(true);
             focus = true;
         }
         else if (ctx.canceled)
         {
-            PlayerController.instance.OnFocus(false);
+            DemoPlayerController.instance.OnFocus(false);
             focus = false;
         }
     }
@@ -132,7 +134,7 @@ public class InputController : MonoBehaviour
     {
         if (ctx.performed)
         {
-            PlayerController.instance.OnAimSwitch();
+            DemoPlayerController.instance.OnAimSwitch();
         }
     }
 
@@ -140,7 +142,7 @@ public class InputController : MonoBehaviour
     {
         if (ctx.performed)
         {
-            PlayerController.instance.OnJump();
+            DemoPlayerController.instance.OnJump();
         }
     }
 
