@@ -2,6 +2,12 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using PlayerInventorySystem;
 
+
+/// <summary>
+/// Controller for the player input
+/// This class acts as a bridge between the player input component and the player controller
+/// </summary>
+
 public class InputController : MonoBehaviour
 {
     [HideInInspector]

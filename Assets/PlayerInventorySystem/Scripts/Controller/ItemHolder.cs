@@ -26,6 +26,7 @@ namespace PlayerInventorySystem
             {
                 if (heldItem.StackCount <= 0)
                 {
+                    Cursor.visible = false;
                     heldItem = null;
                 }
                 else
@@ -45,7 +46,7 @@ namespace PlayerInventorySystem
             }
             else if (heldItem == null || heldItem.StackCount <= 0)
             {
-                Cursor.visible = true;
+                
                 text.enabled = false;
                 image.enabled = false;
                 itemInfoBox.Show(null);

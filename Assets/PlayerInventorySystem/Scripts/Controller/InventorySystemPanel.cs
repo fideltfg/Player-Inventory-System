@@ -77,16 +77,23 @@ namespace PlayerInventorySystem
 
         public virtual void OnEnable()
         {
+            Cursor.visible = true;
             InventoryController.Instance.OnWindowOpenCallback(this);
             transform.SetAsLastSibling();
         }
 
-        public virtual void OnDisable()
+          public virtual void OnDisable()
         {
             // make sure all highlighting is turned off
             foreach (SlotController sc in SlotList)
             {
                 sc.outline.enabled = false;
+            }
+
+            // check if this is the last window open. if it is, hide the cursor
+            if (!InventoryController.Instance.AnyWindowOpen && !(this is ItemBar))
+            {
+                Cursor.visible = false;
             }
         }
 

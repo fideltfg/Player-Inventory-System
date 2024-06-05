@@ -1294,7 +1294,7 @@ TextureImporter:
         width: 200
         height: 200
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -1302,6 +1302,27 @@ TextureImporter:
       bones: []
       spriteID: 1046b85a3a564124187f5bce11168eb4
       internalID: -1094243206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ResourceIcons_47
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 200
+        width: 200
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09ab8e94dc33039428ea60a8c2f34d94
+      internalID: -191081709
       vertices: []
       indices: 
       edges: []
@@ -1361,6 +1382,7 @@ TextureImporter:
       ResourceIcons_44: 1850442745
       ResourceIcons_45: -1344413784
       ResourceIcons_46: 62415439
+      ResourceIcons_47: -191081709
       ResourceIcons_48: -1726718600
       ResourceIcons_49: -1679650797
       ResourceIcons_5: 1615223372

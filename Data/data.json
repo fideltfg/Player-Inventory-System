@@ -12,14 +12,14 @@
                 },
                 {
                     "slotID": 1,
-                    "itemID": 0,
-                    "stackCount": 0,
+                    "itemID": 11,
+                    "stackCount": 1,
                     "durability": 0.0
                 },
                 {
                     "slotID": 2,
-                    "itemID": 0,
-                    "stackCount": 0,
+                    "itemID": 10,
+                    "stackCount": 1,
                     "durability": 0.0
                 },
                 {
@@ -72,8 +72,8 @@
                 },
                 {
                     "slotID": 11,
-                    "itemID": 14,
-                    "stackCount": 1,
+                    "itemID": 0,
+                    "stackCount": 0,
                     "durability": 0.0
                 },
                 {
@@ -102,8 +102,8 @@
                 },
                 {
                     "slotID": 16,
-                    "itemID": 13,
-                    "stackCount": 1,
+                    "itemID": 8,
+                    "stackCount": 15,
                     "durability": 0.0
                 },
                 {
@@ -126,8 +126,8 @@
                 },
                 {
                     "slotID": 20,
-                    "itemID": 0,
-                    "stackCount": 0,
+                    "itemID": 3,
+                    "stackCount": 2,
                     "durability": 0.0
                 },
                 {
@@ -155,8 +155,8 @@
             "slots": [
                 {
                     "slotID": 0,
-                    "itemID": 10,
-                    "stackCount": 1,
+                    "itemID": 0,
+                    "stackCount": 0,
                     "durability": 0.0
                 },
                 {
@@ -173,14 +173,14 @@
                 },
                 {
                     "slotID": 3,
-                    "itemID": 3,
-                    "stackCount": 2,
+                    "itemID": 0,
+                    "stackCount": 0,
                     "durability": 0.0
                 },
                 {
                     "slotID": 4,
-                    "itemID": 11,
-                    "stackCount": 1,
+                    "itemID": 0,
+                    "stackCount": 0,
                     "durability": 0.0
                 },
                 {
@@ -411,8 +411,8 @@
     "chests": [],
     "panelLocations": [
         {
-            "px": 312.4740295410156,
-            "py": 413.5995178222656,
+            "px": 276.706787109375,
+            "py": 411.66357421875,
             "pz": 0.0,
             "rx": 0.0,
             "ry": 0.0,
@@ -424,8 +424,8 @@
             "w": 275.0
         },
         {
-            "px": 549.8389892578125,
-            "py": 420.11370849609377,
+            "px": 503.99444580078127,
+            "py": 417.9012451171875,
             "pz": 0.0,
             "rx": 0.0,
             "ry": 0.0,
@@ -437,8 +437,8 @@
             "w": 200.0
         },
         {
-            "px": 872.696533203125,
-            "py": 420.11370849609377,
+            "px": 813.1450805664063,
+            "py": 417.9012451171875,
             "pz": 0.0,
             "rx": 0.0,
             "ry": 0.0,
@@ -450,8 +450,8 @@
             "w": 200.0
         },
         {
-            "px": 842.731201171875,
-            "py": 380.38690185546877,
+            "px": 784.451904296875,
+            "py": 379.8609924316406,
             "pz": 0.0,
             "rx": 0.0,
             "ry": 0.0,
@@ -466,19 +466,19 @@
     "droppedItems": [],
     "placedItems": [],
     "character": {
-        "characterName": "Skylar Davis",
+        "characterName": "Lillian Coleman",
         "ID": 0,
         "GENDER": 1,
         "Level": 1,
         "Experience": 0,
         "Health": 100.0,
-        "Mana": 3.255171298980713,
-        "Stamina": 3.7463693618774416,
-        "Strength": 0.8971261978149414,
-        "Dexterity": 5.108305931091309,
-        "IQ": 4.640659809112549,
+        "Mana": 7.056517601013184,
+        "Stamina": 3.3891444206237795,
+        "Strength": 7.970402240753174,
+        "Dexterity": 9.524393081665039,
+        "IQ": 4.817026138305664,
         "Armor": 1.0,
-        "Speed": 1.2784361839294434,
-        "Luck": 0.713571310043335
+        "Speed": 2.032691240310669,
+        "Luck": 0.5705799460411072
     }
 }

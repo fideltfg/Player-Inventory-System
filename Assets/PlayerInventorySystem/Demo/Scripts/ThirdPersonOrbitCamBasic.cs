@@ -56,6 +56,15 @@ public class ThirdPersonOrbitCamBasic : MonoBehaviour
 
     void Update()
     {
+        // check if the player is in the inventory
+        if (PlayerInventorySystem.InventoryController.Instance.AnyWindowOpen)
+        {
+            return;
+        }
+
+
+
+
 
         // Get mouse movement to orbit the camera.
         // Mouse:

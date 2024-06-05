@@ -135,7 +135,6 @@ namespace PlayerInventorySystem
                     Instance.dropPanel.gameObject.SetActive(false);
                 }
                 InventoryList[4][0].SetItem(value);
-
             }
         }
 
@@ -241,10 +240,12 @@ namespace PlayerInventorySystem
                 return InventoryPanel.gameObject.activeSelf ||
                     CraftingPanel.gameObject.activeSelf ||
                     CharacterPanel.gameObject.activeSelf ||
-                    ItemBar.gameObject.activeSelf ||
+                    //ItemBar.gameObject.activeSelf ||
+                    AdvancedInventoryPanel.gameObject.activeSelf ||
                     ChestPanel.gameObject.activeSelf;
             }
         }
+
 
 
 
@@ -262,6 +263,7 @@ namespace PlayerInventorySystem
 
         void OnEnable()
         {
+            Cursor.visible = false;
             if (Player == null)
             {
                 Player = GameObject.FindGameObjectWithTag("Player");
@@ -402,17 +404,7 @@ namespace PlayerInventorySystem
                 }
 
             }
-            else
-            {
-                if (HeldItem != null)
-                {
-                    dropPanel.gameObject.SetActive(true);
-                }
-                else
-                {
-                    dropPanel.gameObject.SetActive(false);
-                }
-            }
+           
         }
 
         /// <summary>
@@ -521,7 +513,7 @@ namespace PlayerInventorySystem
 
             dropPanel.gameObject.SetActive(true); // turn on the drop panel
 
-            //UnityEngine.Cursor.lockState = CursorLockMode.None; // unlock the mouse
+            UnityEngine.Cursor.lockState = CursorLockMode.None; // unlock the mouse
 
             if (HeldItem == null)
             {
@@ -727,7 +719,7 @@ namespace PlayerInventorySystem
         public void ToggleInventoryPanel()
         {
             Debug.Log("Toggling Inventory Panel");
-            InventoryPanel.gameObject.SetActive(!InventoryPanel.gameObject.activeInHierarchy);
+            AdvancedInventoryPanel.gameObject.SetActive(!AdvancedInventoryPanel.gameObject.activeInHierarchy);
         }
 
         /// <summary>
