@@ -322,7 +322,6 @@ namespace PlayerInventorySystem
             }
 
             lastName = lastNames[Random.Range(0, lastNames.Count)];
-            Debug.Log("here");
             return $"{firstName} {lastName}";
         }
     }

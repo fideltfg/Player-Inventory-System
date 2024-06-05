@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 namespace PlayerInventorySystem
 {
-
     /// <summary>
     /// Controller for the Crafting panel
     /// 
@@ -15,26 +14,20 @@ namespace PlayerInventorySystem
     {
         public SalvageSlotController inputSlotController;
         public Transform OutputArray;
-        /// <summary>
-        /// indicates if the current recipe is valid for salvage
-        /// </summary>
         private bool validSalvage = false;
 
         public override void OnDisable()
         {
-            // move remaining items back to the inventory
-            // if there is no room for it then drop it on the ground
-
             if (inputSlotController.Slot.Item != null)
             {
-                if (InventoryController.GiveItem(inputSlotController.Slot.Item.Data.id, inputSlotController.Slot.Item.StackCount) == false)
+                var item = inputSlotController.Slot.Item;
+                if (!InventoryController.GiveItem(item.Data.id, item.StackCount))
                 {
-                    InventoryController.Instance.PlayerInventoryControler.DropItem(inputSlotController.Slot.Item, inputSlotController.Slot.Item.StackCount);
+                    InventoryController.Instance.PlayerInventoryControler.DropItem(item, item.StackCount);
                 }
                 inputSlotController.Slot.SetItem(null);
-
             }
-            // clear the output slots
+
             foreach (SlotController sc in SlotList)
             {
                 sc.Slot.SetItem(null);
@@ -43,114 +36,78 @@ namespace PlayerInventorySystem
             base.OnDisable();
         }
 
-        public override void Build(int InventoryIndex)
+        public override void Build(int inventoryIndex)
         {
-            Index = InventoryIndex;
+            Index = inventoryIndex;
             inputSlotController.Index = Index;
             inputSlotController.SetSlot(InventoryController.SalvageInputInventory[0]);
             inputSlotController.Slot.RegisterSlotChangedCallback(SlotChangeCallback);
 
-           // Transform InputArry = transform.Find("OutputArray");
             foreach (Slot slot in InventoryController.SalvageOutputInventory)
             {
-                GameObject go = Instantiate(SlotPrefab, Vector3.zero, Quaternion.identity, OutputArray);
-                go.SetActive(true);
-                SlotController sc = go.GetComponent<SlotController>();
-                sc.interactable = false;
-                sc.Index = this.Index + 1; //assuming the inventory for salvage panel is the next index, not a goot thing to do but it works for now
-                sc.SetSlot(slot);
-                SlotList.Add(sc);
+                var slotGO = Instantiate(SlotPrefab, Vector3.zero, Quaternion.identity, OutputArray);
+                slotGO.SetActive(true);
+                var slotController = slotGO.GetComponent<SlotController>();
+                slotController.interactable = false;
+                slotController.Index = this.Index + 1;
+                slotController.SetSlot(slot);
+                SlotList.Add(slotController);
             }
-
-
         }
 
         public void SlotChangeCallback(Slot slot)
         {
-            foreach (SlotController sc in SlotList)
+            foreach (var sc in SlotList)
             {
                 sc.outline.enabled = false;
                 sc.Slot.SetItem(null);
             }
-            if (slot != null)
+
+            if (slot?.Item == null)
             {
-                if (slot.Item != null)
-                {
-                    int[] salvagableItemIDs = slot.Item.Data.recipe.GetRequiredItemIds();
-                  /*  string t = "";
-                    foreach (int y in salvagableItemIDs)
-                    {
-                        t += y.ToString() + " ";
-                    }
-                    Debug.Log("Salvage item ids: " + t);
-                  */
-                    validSalvage = salvagableItemIDs.Length >= 1 && !salvagableItemIDs.All(num => num == 0);
+                validSalvage = false;
+                return;
+            }
 
-                    int i = 0;
-                    foreach (SlotController sc in SlotList)
-                    {
-                        Item item = Item.New(salvagableItemIDs[i]);
-                        i++;
+            var salvagableItemIDs = slot.Item.Data.recipe.GetRequiredItemIds();
+            Debug.Log("Salvage item ids: " + string.Join(" ", salvagableItemIDs));
 
-                        // set the put slot item
-                        sc.Slot.SetItem(item);
+            validSalvage = salvagableItemIDs.Length >= 1 && salvagableItemIDs.Any(id => id != 0);
 
-                        // check if the item is not null
-                        if (item == null)
-                        {
-                            continue;
-                        }
+            for (int i = 0; i < SlotList.Count; i++)
+            {
+                var sc = SlotList[i];
+                int itemId = salvagableItemIDs[i];
 
+                if (itemId == 0) continue;
 
+                var item = Item.New(itemId);
+                sc.Slot.SetItem(item);
 
-                        // check if the item is salvageable and set the outline color accordingly
-                        if (sc.Slot.Item.Data.salvageable)
-                        {
-                            sc.SetOutLineColor(sc.ValidColor);
-                        }
-                        else
-                        {
-                            sc.SetOutLineColor(sc.ErrorColor);
-                        }
+                if (item == null) continue;
 
-                    }
-                }
-                else
-                {
-                    validSalvage = false;
-                    // clear the output slots
-                   
-                }
+                sc.SetOutLineColor(item.Data.salvageable ? sc.ValidColor : sc.ErrorColor);
             }
         }
 
         public void SalvageButton()
         {
-            // spawn the salvage output items
-            if (validSalvage)
-            {
-                foreach (SlotController sc in SlotList)
-                {
-                    if (sc.Slot.Item != null)
-                    {
-                        if (sc.Slot.Item.Data.salvageable)
-                        {
-                            InventoryController.Instance.PlayerInventoryControler.DropItem(sc.Slot.Item, sc.Slot.Item.StackCount);
-                        }
-                        sc.Slot.SetItem(null);
-                    }
-                }
+            if (!validSalvage) return;
 
-                // clear the input slot
-                if (inputSlotController.Slot.Item != null)
+            foreach (var sc in SlotList)
+            {
+                var item = sc.Slot.Item;
+                if (item != null && item.Data.salvageable)
                 {
-                    inputSlotController.Slot.SetItem(null);
+                    InventoryController.Instance.PlayerInventoryControler.GiveItem(item);
+                    sc.Slot.SetItem(null);
                 }
             }
 
+            if (inputSlotController.Slot.Item != null)
+            {
+                inputSlotController.Slot.SetItem(null);
+            }
         }
-
-
-
     }
 }

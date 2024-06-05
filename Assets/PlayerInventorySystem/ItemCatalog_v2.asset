@@ -288,7 +288,7 @@ MonoBehaviour:
       - cells: 000000000700000000000000
       - cells: 000000000500000000000000
     craftCount: 1
-    salvageable: 0
+    salvageable: 1
     recycable: 0
     maxDurability: 0
     Strength: 0

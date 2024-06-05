@@ -226,7 +226,7 @@ namespace PlayerInventorySystem
         {
             counter = 0;
             InventoryController.Instance.ItemHolder.itemInfoBox.Show(null);
-            if (Slot != null && Slot.Item != null)
+            if (Slot != null && Slot.Item != null && Slot.Item.Data.name != "NULL")
             {
                 image.sprite = Slot.Item.Data.sprite;
                 image.enabled = true;

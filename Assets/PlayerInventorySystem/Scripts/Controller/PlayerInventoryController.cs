@@ -144,7 +144,7 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="itemID">The ID of the item to be added</param>
         /// <returns>Returns true on success else false</returns>
-        internal static bool GiveItem(Item item)
+        internal bool GiveItem(Item item)
         {
             if (InventoryController.ItemBarInventory.AddItem(item) == false)
             {
