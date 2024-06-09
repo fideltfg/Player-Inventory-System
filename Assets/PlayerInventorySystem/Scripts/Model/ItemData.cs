@@ -117,8 +117,8 @@ namespace PlayerInventorySystem
         public float maxDurability = 0;
 
         /// <summary>
-        /// The damage bonus this item will bestow upon player when equiped 
-        /// damage is calculated using strength, speed, dexterity, intelligence, and luck
+        /// The damage bonus this item will bestow upon the player when equiped. 
+        /// Damage is calculated using strength, speed, dexterity, intelligence, and luck
         /// </summary>
         public float damage
         {
@@ -183,9 +183,6 @@ namespace PlayerInventorySystem
         [Tooltip("The luck bonus this item will bestow upon player when equiped")]
         [Range(0f, 1f)]
         public float Luck;
-
-
-
     }
 
     /// <summary>

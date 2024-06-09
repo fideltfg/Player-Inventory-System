@@ -12,14 +12,14 @@
                 },
                 {
                     "slotID": 1,
-                    "itemID": 11,
-                    "stackCount": 1,
+                    "itemID": 0,
+                    "stackCount": 0,
                     "durability": 0.0
                 },
                 {
                     "slotID": 2,
-                    "itemID": 10,
-                    "stackCount": 1,
+                    "itemID": 1,
+                    "stackCount": 40,
                     "durability": 0.0
                 },
                 {
@@ -30,20 +30,20 @@
                 },
                 {
                     "slotID": 4,
-                    "itemID": 0,
-                    "stackCount": 0,
+                    "itemID": 5,
+                    "stackCount": 1,
                     "durability": 0.0
                 },
                 {
                     "slotID": 5,
-                    "itemID": 0,
-                    "stackCount": 0,
+                    "itemID": 4,
+                    "stackCount": 1,
                     "durability": 0.0
                 },
                 {
                     "slotID": 6,
-                    "itemID": 0,
-                    "stackCount": 0,
+                    "itemID": 6,
+                    "stackCount": 1,
                     "durability": 0.0
                 },
                 {
@@ -102,14 +102,14 @@
                 },
                 {
                     "slotID": 16,
-                    "itemID": 8,
-                    "stackCount": 15,
+                    "itemID": 3,
+                    "stackCount": 26,
                     "durability": 0.0
                 },
                 {
                     "slotID": 17,
-                    "itemID": 0,
-                    "stackCount": 0,
+                    "itemID": 2,
+                    "stackCount": 9,
                     "durability": 0.0
                 },
                 {
@@ -126,8 +126,8 @@
                 },
                 {
                     "slotID": 20,
-                    "itemID": 3,
-                    "stackCount": 2,
+                    "itemID": 0,
+                    "stackCount": 0,
                     "durability": 0.0
                 },
                 {
@@ -144,8 +144,8 @@
                 },
                 {
                     "slotID": 23,
-                    "itemID": 0,
-                    "stackCount": 0,
+                    "itemID": 2,
+                    "stackCount": 11,
                     "durability": 0.0
                 }
             ]
@@ -191,8 +191,8 @@
                 },
                 {
                     "slotID": 6,
-                    "itemID": 0,
-                    "stackCount": 0,
+                    "itemID": 2,
+                    "stackCount": 1,
                     "durability": 0.0
                 },
                 {
@@ -411,8 +411,8 @@
     "chests": [],
     "panelLocations": [
         {
-            "px": 276.706787109375,
-            "py": 411.66357421875,
+            "px": 186.21304321289063,
+            "py": 383.1623840332031,
             "pz": 0.0,
             "rx": 0.0,
             "ry": 0.0,
@@ -424,8 +424,8 @@
             "w": 275.0
         },
         {
-            "px": 503.99444580078127,
-            "py": 417.9012451171875,
+            "px": 377.0565185546875,
+            "py": 388.3998718261719,
             "pz": 0.0,
             "rx": 0.0,
             "ry": 0.0,
@@ -437,8 +437,8 @@
             "w": 200.0
         },
         {
-            "px": 813.1450805664063,
-            "py": 417.9012451171875,
+            "px": 636.6367797851563,
+            "py": 388.3998718261719,
             "pz": 0.0,
             "rx": 0.0,
             "ry": 0.0,
@@ -450,8 +450,8 @@
             "w": 200.0
         },
         {
-            "px": 784.451904296875,
-            "py": 379.8609924316406,
+            "px": 612.5443115234375,
+            "py": 356.45916748046877,
             "pz": 0.0,
             "rx": 0.0,
             "ry": 0.0,
@@ -466,19 +466,19 @@
     "droppedItems": [],
     "placedItems": [],
     "character": {
-        "characterName": "Lillian Coleman",
+        "characterName": "Madison Butler",
         "ID": 0,
         "GENDER": 1,
         "Level": 1,
         "Experience": 0,
         "Health": 100.0,
-        "Mana": 7.056517601013184,
-        "Stamina": 3.3891444206237795,
-        "Strength": 7.970402240753174,
-        "Dexterity": 9.524393081665039,
-        "IQ": 4.817026138305664,
+        "Mana": 8.295726776123047,
+        "Stamina": 5.991036415100098,
+        "Strength": 5.49696159362793,
+        "Dexterity": 0.08018136024475098,
+        "IQ": 6.239321708679199,
         "Armor": 1.0,
-        "Speed": 2.032691240310669,
-        "Luck": 0.5705799460411072
+        "Speed": 9.673413276672364,
+        "Luck": 0.17711710929870606
     }
 }

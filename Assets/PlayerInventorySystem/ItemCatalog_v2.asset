@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e50cec6b61ef7d4fb4b05588e382d84, type: 3}
   m_Name: ItemCatalog_v2
   m_EditorClassIdentifier: 
+  catalogID: 0
   list:
   - name: NULL
     BaseMaterial: 0
@@ -43,76 +44,12 @@ MonoBehaviour:
     IQ: 0
     Dexterity: 0
     Luck: 0
-  - name: Wood Block (1)
+  - name: Stick (1)
     BaseMaterial: 1
     id: 1
     ConsumeOnPickup: 0
-    description: Block Of Wood.
-    sprite: {fileID: 745989117, guid: dd6a569444722604694566bada177988, type: 3}
-    prefabSingle: {fileID: 1733709345621532, guid: f1a6321d44b6c3841985f6e326ea9a4e,
-      type: 3}
-    prefabMultiple: {fileID: 1636007887016790, guid: 7ccc858a2934d774a93577eb43f0ba80,
-      type: 3}
-    worldPrefab: {fileID: 0}
-    itemType: 1
-    slotType: 0
-    maxStackSize: 64
-    recipe:
-      rows:
-      - cells: 000000000000000000000000
-      - cells: 000000000000000000000000
-      - cells: 000000000000000000000000
-    craftCount: 0
-    salvageable: 0
-    recycable: 0
-    maxDurability: 0
-    Strength: 0
-    Speed: 0
-    health: 0
-    stamina: 0
-    mana: 0
-    armor: 0
-    IQ: 0
-    Dexterity: 0
-    Luck: 0
-  - name: Wood Plank (2)
-    BaseMaterial: 1
-    id: 2
-    ConsumeOnPickup: 0
-    description: Plank of wood.
-    sprite: {fileID: -2032043183, guid: dd6a569444722604694566bada177988, type: 3}
-    prefabSingle: {fileID: 1733709345621532, guid: e22c562afda7d794e967f23a06ce8b75,
-      type: 3}
-    prefabMultiple: {fileID: 1733709345621532, guid: 04e5de6cbe07af941a88a30dba261657,
-      type: 3}
-    worldPrefab: {fileID: 0}
-    itemType: 1
-    slotType: 0
-    maxStackSize: 64
-    recipe:
-      rows:
-      - cells: 000000000000000000000000
-      - cells: 000000000100000000000000
-      - cells: 000000000000000000000000
-    craftCount: 4
-    salvageable: 1
-    recycable: 0
-    maxDurability: 0
-    Strength: 0
-    Speed: 0
-    health: 0
-    stamina: 0
-    mana: 0
-    armor: 0
-    IQ: 0
-    Dexterity: 0
-    Luck: 0
-  - name: Stick (3)
-    BaseMaterial: 1
-    id: 3
-    ConsumeOnPickup: 0
     description: A Wooden Stick
-    sprite: {fileID: -2092482378, guid: dd6a569444722604694566bada177988, type: 3}
+    sprite: {fileID: 269356469, guid: 38ac8ba136f9f464687c73a2e3b22e63, type: 3}
     prefabSingle: {fileID: 1520493659561722, guid: 9dc520f13acc2db4cb9678d66150db72,
       type: 3}
     prefabMultiple: {fileID: 1331811618145706, guid: ae155095c24defe43b9827bba0740b7f,
@@ -139,28 +76,28 @@ MonoBehaviour:
     IQ: 0
     Dexterity: 0
     Luck: 0
-  - name: Chest (4)
+  - name: Wood Plank (2)
     BaseMaterial: 1
-    id: 4
+    id: 2
     ConsumeOnPickup: 0
-    description: A Wooden Chest
-    sprite: {fileID: -1134703858, guid: dd6a569444722604694566bada177988, type: 3}
-    prefabSingle: {fileID: 1700630183180908, guid: 4f907e96a669d7346bdde51000c5f840,
+    description: Plank of wood.
+    sprite: {fileID: -716878215, guid: 38ac8ba136f9f464687c73a2e3b22e63, type: 3}
+    prefabSingle: {fileID: 1733709345621532, guid: e22c562afda7d794e967f23a06ce8b75,
       type: 3}
-    prefabMultiple: {fileID: 0}
-    worldPrefab: {fileID: 1199596462942388, guid: 6ad6da87b0c7cf848b01b75bb1d65857,
+    prefabMultiple: {fileID: 1733709345621532, guid: 04e5de6cbe07af941a88a30dba261657,
       type: 3}
-    itemType: 4
+    worldPrefab: {fileID: 0}
+    itemType: 1
     slotType: 0
-    maxStackSize: 1
+    maxStackSize: 64
     recipe:
       rows:
-      - cells: 020000000200000002000000
-      - cells: 020000000000000002000000
-      - cells: 020000000200000002000000
+      - cells: 000000000000000000000000
+      - cells: 000000000100000000000000
+      - cells: 000000000000000000000000
     craftCount: 4
-    salvageable: 0
-    recycable: 1
+    salvageable: 1
+    recycable: 0
     maxDurability: 0
     Strength: 0
     Speed: 0
@@ -176,7 +113,7 @@ MonoBehaviour:
     id: 5
     ConsumeOnPickup: 0
     description: Dry Dino Juice
-    sprite: {fileID: -1679650797, guid: dd6a569444722604694566bada177988, type: 3}
+    sprite: {fileID: -1806647981, guid: 38ac8ba136f9f464687c73a2e3b22e63, type: 3}
     prefabSingle: {fileID: 1354892342653322, guid: b8acd0254c663c844bb3f40a41486c80,
       type: 3}
     prefabMultiple: {fileID: 1585198167899930, guid: 2ec5de3a33a4a2a4dab0d1561e667ef9,
@@ -241,7 +178,7 @@ MonoBehaviour:
     id: 7
     ConsumeOnPickup: 0
     description: Iron from the ground
-    sprite: {fileID: 863185340, guid: dd6a569444722604694566bada177988, type: 3}
+    sprite: {fileID: -699217827, guid: 38ac8ba136f9f464687c73a2e3b22e63, type: 3}
     prefabSingle: {fileID: 1660967605425422, guid: 4b6540d96fefacc4397b45405bb2cbba,
       type: 3}
     prefabMultiple: {fileID: 1696950699884030, guid: f2f94171b8edb6d4b874834344228e33,
@@ -305,13 +242,13 @@ MonoBehaviour:
     id: 9
     ConsumeOnPickup: 0
     description: An Iron made from Iron and wood.
-    sprite: {fileID: 1208520217, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    sprite: {fileID: 2001405394, guid: 38ac8ba136f9f464687c73a2e3b22e63, type: 3}
     prefabSingle: {fileID: 1564220894873904, guid: 92a0e1ab362f106418a8adf0b17d994f,
       type: 3}
     prefabMultiple: {fileID: 0}
     worldPrefab: {fileID: 0}
     itemType: 1
-    slotType: 0
+    slotType: 5
     maxStackSize: 1
     recipe:
       rows:
@@ -319,6 +256,166 @@ MonoBehaviour:
       - cells: 080000000300000000000000
       - cells: 000000000300000000000000
     craftCount: 1
+    salvageable: 0
+    recycable: 1
+    maxDurability: 0
+    Strength: 0
+    Speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    Dexterity: 0
+    Luck: 0
+  - name: Stone Spear (12)
+    BaseMaterial: 0
+    id: 12
+    ConsumeOnPickup: 0
+    description: A spear with a stone tip
+    sprite: {fileID: -1206298091, guid: 38ac8ba136f9f464687c73a2e3b22e63, type: 3}
+    prefabSingle: {fileID: 8233276631047261810, guid: 54c107d51d456724f9d424d489f467a0,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 1791658245907946822, guid: 88fab9d60957f18459111f0f9aa665d8,
+      type: 3}
+    itemType: 2
+    slotType: 5
+    maxStackSize: 1
+    recipe:
+      rows:
+      - cells: 000000000b00000000000000
+      - cells: 000000000300000000000000
+      - cells: 000000000300000000000000
+    craftCount: 0
+    salvageable: 1
+    recycable: 1
+    maxDurability: 0
+    Strength: 2.3
+    Speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    Dexterity: 0
+    Luck: 0
+  - name: Iron Tunic(13)
+    BaseMaterial: 3
+    id: 13
+    ConsumeOnPickup: 0
+    description: Iron Shirt
+    sprite: {fileID: -399123291, guid: 38ac8ba136f9f464687c73a2e3b22e63, type: 3}
+    prefabSingle: {fileID: 1617573061036268, guid: 19bd9b8867732b74f85391c4676826f4,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 1617573061036268, guid: 19bd9b8867732b74f85391c4676826f4,
+      type: 3}
+    itemType: 2
+    slotType: 2
+    maxStackSize: 1
+    recipe:
+      rows:
+      - cells: 080000000000000008000000
+      - cells: 080000000800000008000000
+      - cells: 080000000800000008000000
+    craftCount: 1
+    salvageable: 0
+    recycable: 1
+    maxDurability: 0
+    Strength: 0
+    Speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 10
+    IQ: 0
+    Dexterity: -1
+    Luck: 0
+  - name: Iron Pants(14)
+    BaseMaterial: 3
+    id: 14
+    ConsumeOnPickup: 0
+    description: Iron Pants
+    sprite: {fileID: 346339794, guid: 38ac8ba136f9f464687c73a2e3b22e63, type: 3}
+    prefabSingle: {fileID: 1960838220018798, guid: 373c9d3a55e1c034caa52c302e14a7e4,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 1960838220018798, guid: 373c9d3a55e1c034caa52c302e14a7e4,
+      type: 3}
+    itemType: 2
+    slotType: 6
+    maxStackSize: 1
+    recipe:
+      rows:
+      - cells: 080000000800000008000000
+      - cells: 080000000000000008000000
+      - cells: 080000000000000008000000
+    craftCount: 1
+    salvageable: 0
+    recycable: 1
+    maxDurability: 0
+    Strength: -1
+    Speed: -1
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 10
+    IQ: 20
+    Dexterity: 3
+    Luck: 0
+  - name: Iron Boots
+    BaseMaterial: 3
+    id: 15
+    ConsumeOnPickup: 0
+    description: Iron Boots
+    sprite: {fileID: -1553812367, guid: 38ac8ba136f9f464687c73a2e3b22e63, type: 3}
+    prefabSingle: {fileID: 1774655076062038, guid: c852de6915a10e14e8c1bfa6ab8f81b5,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 1774655076062038, guid: c852de6915a10e14e8c1bfa6ab8f81b5,
+      type: 3}
+    itemType: 2
+    slotType: 7
+    maxStackSize: 1
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 080000000000000008000000
+      - cells: 080000000000000008000000
+    craftCount: 1
+    salvageable: 1
+    recycable: 1
+    maxDurability: 0
+    Strength: 3
+    Speed: 5
+    health: 3
+    stamina: 2
+    mana: 1
+    armor: 2
+    IQ: 0
+    Dexterity: 3
+    Luck: 0.069
+  - name: Chest (4)
+    BaseMaterial: 1
+    id: 4
+    ConsumeOnPickup: 0
+    description: A Wooden Chest
+    sprite: {fileID: 314315940, guid: 38ac8ba136f9f464687c73a2e3b22e63, type: 3}
+    prefabSingle: {fileID: 1700630183180908, guid: 4f907e96a669d7346bdde51000c5f840,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 1199596462942388, guid: 6ad6da87b0c7cf848b01b75bb1d65857,
+      type: 3}
+    itemType: 4
+    slotType: 0
+    maxStackSize: 1
+    recipe:
+      rows:
+      - cells: 020000000200000002000000
+      - cells: 020000000000000002000000
+      - cells: 020000000200000002000000
+    craftCount: 4
     salvageable: 0
     recycable: 1
     maxDurability: 0
@@ -393,101 +490,5 @@ MonoBehaviour:
     mana: 0
     armor: 0
     IQ: 0
-    Dexterity: 0
-    Luck: 0
-  - name: Stone Spear (12)
-    BaseMaterial: 0
-    id: 12
-    ConsumeOnPickup: 0
-    description: A spear with a stone tip
-    sprite: {fileID: -2040412964, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
-    prefabSingle: {fileID: 8233276631047261810, guid: 54c107d51d456724f9d424d489f467a0,
-      type: 3}
-    prefabMultiple: {fileID: 0}
-    worldPrefab: {fileID: 1791658245907946822, guid: 88fab9d60957f18459111f0f9aa665d8,
-      type: 3}
-    itemType: 1
-    slotType: 0
-    maxStackSize: 1
-    recipe:
-      rows:
-      - cells: 000000000b00000000000000
-      - cells: 000000000300000000000000
-      - cells: 000000000300000000000000
-    craftCount: 0
-    salvageable: 1
-    recycable: 1
-    maxDurability: 0
-    Strength: 0
-    Speed: 0
-    health: 0
-    stamina: 0
-    mana: 0
-    armor: 0
-    IQ: 0
-    Dexterity: 0
-    Luck: 0
-  - name: Iron Tunic(13)
-    BaseMaterial: 3
-    id: 13
-    ConsumeOnPickup: 0
-    description: Iron Shirt
-    sprite: {fileID: 401563791, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
-    prefabSingle: {fileID: 1617573061036268, guid: 19bd9b8867732b74f85391c4676826f4,
-      type: 3}
-    prefabMultiple: {fileID: 0}
-    worldPrefab: {fileID: 1617573061036268, guid: 19bd9b8867732b74f85391c4676826f4,
-      type: 3}
-    itemType: 2
-    slotType: 2
-    maxStackSize: 1
-    recipe:
-      rows:
-      - cells: 080000000000000008000000
-      - cells: 080000000800000008000000
-      - cells: 080000000800000008000000
-    craftCount: 1
-    salvageable: 0
-    recycable: 1
-    maxDurability: 0
-    Strength: 0
-    Speed: 0
-    health: 0
-    stamina: 0
-    mana: 0
-    armor: 0
-    IQ: 0
-    Dexterity: 0
-    Luck: 0
-  - name: Iron Pants(14)
-    BaseMaterial: 3
-    id: 14
-    ConsumeOnPickup: 0
-    description: Iron Pants
-    sprite: {fileID: -2067224009, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
-    prefabSingle: {fileID: 1960838220018798, guid: 373c9d3a55e1c034caa52c302e14a7e4,
-      type: 3}
-    prefabMultiple: {fileID: 0}
-    worldPrefab: {fileID: 1960838220018798, guid: 373c9d3a55e1c034caa52c302e14a7e4,
-      type: 3}
-    itemType: 2
-    slotType: 6
-    maxStackSize: 1
-    recipe:
-      rows:
-      - cells: 080000000800000008000000
-      - cells: 080000000000000008000000
-      - cells: 080000000000000008000000
-    craftCount: 1
-    salvageable: 0
-    recycable: 1
-    maxDurability: 0
-    Strength: 1
-    Speed: 0
-    health: 0
-    stamina: 0
-    mana: 0
-    armor: 0
-    IQ: 100
     Dexterity: 0
     Luck: 0

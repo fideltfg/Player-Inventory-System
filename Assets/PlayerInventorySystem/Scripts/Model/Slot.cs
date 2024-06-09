@@ -42,6 +42,10 @@ namespace PlayerInventorySystem
         {
             get
             {
+                if (_item != null)
+                {
+                    _item.lastSlot = this;
+                }
                 return _item;
             }
             protected set

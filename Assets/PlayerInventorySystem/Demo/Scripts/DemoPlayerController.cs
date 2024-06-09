@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using System;
 using System.Collections;
+using PlayerInventorySystem;
 
 // This class manages which player behaviour is active or overriding, and call its local functions.
 // Contains basic setup and common functions used by all the player behaviours.
@@ -142,6 +143,11 @@ public class DemoPlayerController : MonoBehaviour
 
     public void OnFocus(bool aim)
     {
+        if (InventoryController.Instance.AnyWindowOpen)
+        {
+            return;
+        }
+
         AimBehaviourBasic abb = GetComponent<AimBehaviourBasic>();
 
         if (aim && !abb.currentlyAiming)

@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
-using UnityEngine.EventSystems;
-using System;
 
 namespace PlayerInventorySystem
 {
@@ -14,50 +11,54 @@ namespace PlayerInventorySystem
     /// </summary>
     public class ItemHolder : MonoBehaviour
     {
-        public ItemInfoBox itemInfoBox;
-        public Image image;
-        public Text text;
+        public ItemInfoBox itemInfoBox;  // Reference to the ItemInfoBox component
+        public Image image;              // Reference to the Image component
+        public Text text;                // Reference to the Text component
 
-        public void Update ()
+        // Update is called once per frame
+        public void Update()
         {
+            // Get the currently held item from the InventoryController
             Item heldItem = InventoryController.HeldItem;
 
+            // Check if there is a held item and its stack count is greater than 0
             if (heldItem != null && heldItem.StackCount > 0)
             {
-                if (heldItem.StackCount <= 0)
-                {
-                    Cursor.visible = false;
-                    heldItem = null;
-                }
-                else
-                {
-                    image.sprite = heldItem.Data.sprite;
-                    text.text = heldItem.StackCount.ToString();
-                    image.enabled = true;
-                    if (heldItem.StackCount < 2)
-                    {
-                        text.enabled = false;
-                    }
-                    else
-                    {
-                        text.enabled = true;
-                    }
-                }
+                UpdateItemDisplay(heldItem);
             }
-            else if (heldItem == null || heldItem.StackCount <= 0)
+            else
             {
-                
-                text.enabled = false;
-                image.enabled = false;
-                itemInfoBox.Show(null);
+                ClearItemDisplay();
             }
-            transform.position = Input.mousePosition;
 
+            // Update the position of the ItemHolder to the mouse position
+            transform.position = Input.mousePosition;
         }
 
-        private void FixedUpdate ()
+        // FixedUpdate is called at a fixed interval
+        private void FixedUpdate()
         {
+            // Ensure the ItemHolder is rendered last (on top of other UI elements)
             transform.SetAsLastSibling();
+        }
+
+        // Update the item display with the held item's details
+        private void UpdateItemDisplay(Item heldItem)
+        {
+            image.sprite = heldItem.Data.sprite;  // Set the image sprite to the held item's sprite
+            text.text = heldItem.StackCount.ToString();  // Set the text to display the stack count
+
+            image.enabled = true;  // Enable the image component
+            text.enabled = heldItem.StackCount > 1;  // Enable or disable the text component based on stack count
+        }
+
+        // Clear the item display when no item is held
+        private void ClearItemDisplay()
+        {
+            Cursor.visible = InventoryController.Instance.AnyWindowOpen;  // Show/hide the cursor
+            text.enabled = false;  // Disable the text component
+            image.enabled = false;  // Disable the image component
+            itemInfoBox.Show(null);  // Show the item info box with no item
         }
     }
 }

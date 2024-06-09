@@ -242,6 +242,7 @@ namespace PlayerInventorySystem
                     CharacterPanel.gameObject.activeSelf ||
                     //ItemBar.gameObject.activeSelf ||
                     AdvancedInventoryPanel.gameObject.activeSelf ||
+                    SalvagePanel.gameObject.activeSelf ||
                     ChestPanel.gameObject.activeSelf;
             }
         }

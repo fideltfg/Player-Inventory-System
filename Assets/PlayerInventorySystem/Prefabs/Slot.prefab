@@ -130,6 +130,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d09f82aad3a180f409549041b6d23b3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showInfoPanel: 0
+  interactable: 1
   Index: 0
   image: {fileID: 114019564150249482}
   text: {fileID: 114016547666154610}
@@ -567,8 +569,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 1}
-  m_SizeDelta: {x: -10, y: -8}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: -4, y: -4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &222183721247372368
 CanvasRenderer:

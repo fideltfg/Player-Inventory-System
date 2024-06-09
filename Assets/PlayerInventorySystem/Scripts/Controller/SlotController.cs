@@ -18,6 +18,7 @@ namespace PlayerInventorySystem
         public bool showInfoPanel;
         public bool interactable = true;
         private Transform infoPanel;
+
         /// <summary>
         /// The index of this slots inventory
         /// </summary>

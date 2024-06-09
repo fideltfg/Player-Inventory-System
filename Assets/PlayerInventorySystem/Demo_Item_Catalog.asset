@@ -1,0 +1,207 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e50cec6b61ef7d4fb4b05588e382d84, type: 3}
+  m_Name: Demo_Item_Catalog
+  m_EditorClassIdentifier: 
+  catalogID: 0
+  list:
+  - name: NULL
+    BaseMaterial: 0
+    id: 0
+    ConsumeOnPickup: 0
+    description: blank
+    sprite: {fileID: 0}
+    prefabSingle: {fileID: 0}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 1
+    slotType: 0
+    maxStackSize: 0
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+    craftCount: 0
+    salvageable: 0
+    recycable: 0
+    maxDurability: 0
+    Strength: 0
+    Speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    Dexterity: 0
+    Luck: 0
+  - name: Wood 1
+    BaseMaterial: 0
+    id: 1
+    ConsumeOnPickup: 0
+    description: blank
+    sprite: {fileID: 745989117, guid: dd6a569444722604694566bada177988, type: 3}
+    prefabSingle: {fileID: 1733709345621532, guid: f1a6321d44b6c3841985f6e326ea9a4e,
+      type: 3}
+    prefabMultiple: {fileID: 1636007887016790, guid: 7ccc858a2934d774a93577eb43f0ba80,
+      type: 3}
+    worldPrefab: {fileID: 1733709345621532, guid: 68f0f7d728b762c49a60216fc305f13c,
+      type: 3}
+    itemType: 1
+    slotType: 0
+    maxStackSize: 64
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+    craftCount: 0
+    salvageable: 0
+    recycable: 0
+    maxDurability: 0
+    Strength: 0
+    Speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    Dexterity: 0
+    Luck: 0
+  - name: Wood Plank 2
+    BaseMaterial: 1
+    id: 2
+    ConsumeOnPickup: 0
+    description: blank
+    sprite: {fileID: -716878215, guid: 38ac8ba136f9f464687c73a2e3b22e63, type: 3}
+    prefabSingle: {fileID: 1733709345621532, guid: e22c562afda7d794e967f23a06ce8b75,
+      type: 3}
+    prefabMultiple: {fileID: 1733709345621532, guid: 04e5de6cbe07af941a88a30dba261657,
+      type: 3}
+    worldPrefab: {fileID: 0}
+    itemType: 1
+    slotType: 0
+    maxStackSize: 64
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 000000000100000000000000
+      - cells: 000000000000000000000000
+    craftCount: 0
+    salvageable: 1
+    recycable: 0
+    maxDurability: 0
+    Strength: 0
+    Speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    Dexterity: 0
+    Luck: 0
+  - name: Stick 3
+    BaseMaterial: 1
+    id: 3
+    ConsumeOnPickup: 0
+    description: blank
+    sprite: {fileID: 269356469, guid: 38ac8ba136f9f464687c73a2e3b22e63, type: 3}
+    prefabSingle: {fileID: 1520493659561722, guid: 9dc520f13acc2db4cb9678d66150db72,
+      type: 3}
+    prefabMultiple: {fileID: 1331811618145706, guid: ae155095c24defe43b9827bba0740b7f,
+      type: 3}
+    worldPrefab: {fileID: 0}
+    itemType: 1
+    slotType: 0
+    maxStackSize: 64
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 000000000200000000000000
+      - cells: 000000000000000000000000
+    craftCount: 0
+    salvageable: 1
+    recycable: 1
+    maxDurability: 0
+    Strength: 0
+    Speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    Dexterity: 0
+    Luck: 0
+  - name: Crafting Table 4
+    BaseMaterial: 1
+    id: 5
+    ConsumeOnPickup: 0
+    description: blank
+    sprite: {fileID: 178764496, guid: 38ac8ba136f9f464687c73a2e3b22e63, type: 3}
+    prefabSingle: {fileID: 1700630183180908, guid: 8c774e720c5047a4dab4f1774c64cc1f,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 1199596462942388, guid: cc8a64039aa51cd4c8a325fa90912742,
+      type: 3}
+    itemType: 1
+    slotType: 0
+    maxStackSize: 1
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 020000000200000000000000
+      - cells: 020000000200000000000000
+    craftCount: 0
+    salvageable: 1
+    recycable: 1
+    maxDurability: 0
+    Strength: 0
+    Speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    Dexterity: 0
+    Luck: 0
+  - name: Chest 5
+    BaseMaterial: 1
+    id: 5
+    ConsumeOnPickup: 0
+    description: blank
+    sprite: {fileID: 314315940, guid: 38ac8ba136f9f464687c73a2e3b22e63, type: 3}
+    prefabSingle: {fileID: 1700630183180908, guid: 4f907e96a669d7346bdde51000c5f840,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 1199596462942388, guid: 6ad6da87b0c7cf848b01b75bb1d65857,
+      type: 3}
+    itemType: 1
+    slotType: 0
+    maxStackSize: 1
+    recipe:
+      rows:
+      - cells: 020000000200000002000000
+      - cells: 020000000000000002000000
+      - cells: 020000000200000002000000
+    craftCount: 0
+    salvageable: 1
+    recycable: 1
+    maxDurability: 0
+    Strength: 0
+    Speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    Dexterity: 0
+    Luck: 0

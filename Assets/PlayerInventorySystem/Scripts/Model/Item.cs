@@ -33,6 +33,9 @@ namespace PlayerInventorySystem
             get { return Data.maxStackSize > 1; }
         }
 
+
+        public Slot lastSlot;
+
         /// <summary>
         /// Method to return a new Item of the given ID with the givne stack count
         /// </summary>
@@ -125,7 +128,7 @@ namespace PlayerInventorySystem
         }
 
         /// <summary>
-        /// Method to place AN item in the world and consume it from the inventory
+        /// Method to place AN item in the world and remove it from the inventory
         /// 
         /// dont use this for loading from serial data
         /// </summary>
