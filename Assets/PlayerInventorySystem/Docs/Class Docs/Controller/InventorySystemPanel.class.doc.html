@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>InventorySystemPanel Class Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #2e6da4;
+        }
+        .section p {
+            margin: 5px 0;
+        }
+        .code {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>InventorySystemPanel Class</h1>
+    <p>Base class for all inventory panels.</p>
+
+    <div class="section">
+        <h2>Private Fields</h2>
+
+        <h3>selectedSlotID</h3>
+        <p>The slot that is currently selected in this panel.</p>
+        <div class="code">
+            <pre><code>private int selectedSlotID;</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Public Properties</h2>
+
+        <h3>SelectedSlotID</h3>
+        <p>ID of the slot the player has currently selected.</p>
+        <div class="code">
+            <pre><code>public int SelectedSlotID { get; set; }</code></pre>
+        </div>
+
+        <h3>SelectedSlotController</h3>
+        <p>The slot controller of the currently selected slot.</p>
+        <div class="code">
+            <pre><code>public SlotController SelectedSlotController { get; }</code></pre>
+        </div>
+
+        <h3>GridLayoutGroup</h3>
+        <p>Holds the GridLayoutGroup component (read-only).</p>
+        <div class="code">
+            <pre><code>public GridLayoutGroup GridLayoutGroup { get { return GetComponent<GridLayoutGroup>(); } }</code></pre>
+        </div>
+
+        <h3>SlotPrefab</h3>
+        <p>The prefab that will be used to generate the slots for this panel.</p>
+        <div class="code">
+            <pre><code>public GameObject SlotPrefab;</code></pre>
+        </div>
+
+        <h3>SlotList</h3>
+        <p>Provides a list of all SlotController components of the slots on this panel.</p>
+        <div class="code">
+            <pre><code>internal List<SlotController> SlotList = new List<SlotController>();</code></pre>
+        </div>
+
+        <h3>Index</h3>
+        <p>The index of the inventory this panel is displaying.</p>
+        <div class="code">
+            <pre><code>internal virtual int Index { get; set; }</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Public Methods</h2>
+
+        <h3>Build</h3>
+        <p>Called to generate the panel's slots and arrange them on start.</p>
+        <div class="code">
+            <pre><code>public virtual void Build(int InventoryIndex = 0);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>InventoryIndex</strong>: The index of the inventory to build slots from (default is 0).</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Usage Examples</h2>
+
+        <h3>Example: Build the inventory panel</h3>
+        <div class="code">
+            <pre><code>InventorySystemPanel inventoryPanel = GetComponent&lt;InventorySystemPanel&gt;();
+inventoryPanel.Build(0);
+Debug.Log("Inventory panel built");</code></pre>
+        </div>
+
+        <h3>Example: Select the next slot</h3>
+        <div class="code">
+            <pre><code>inventoryPanel.SelectedSlotID++;
+Debug.Log("Next slot selected");</code></pre>
+        </div>
+
+        <h3>Example: Get the selected item</h3>
+        <div class="code">
+            <pre><code>Item selectedItem = inventoryPanel.SelectedSlotController.Slot.Item;
+if (selectedItem != null) {
+    Debug.Log("Selected item: " + selectedItem.Data.name);
+} else {
+    Debug.Log("No item selected");
+}</code></pre>
+        </div>
+    </div>
+</body>
+</html>

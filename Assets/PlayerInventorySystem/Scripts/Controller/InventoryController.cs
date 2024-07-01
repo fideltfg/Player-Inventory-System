@@ -20,28 +20,38 @@ namespace PlayerInventorySystem
         /// </summary>
         public static InventoryController Instance;
 
-
-        internal static Character Character;
+        public static Character Character;
 
         /// <summary>
         /// The list of items used in game. List inclues all needed data to generate and control items.
         /// </summary>
+        [Tooltip("The list of items used in game. List includs all needed data to generate and control items.")]
         public SO_ItemList ItemCatalog;
 
         /// <summary>
         /// The default capacity of the players inventory.
-        /// must  have a  multiple of four slots (4, 8, 12, 16, 20 24....)
+        /// must have a  multiple of four slots (4, 8, 12, 16, 20 24....)
         /// </summary>
         public static int PlayerInventoryCapacity = 24;
 
         /// <summary>
+        /// Set true to use the players inventory. 
+        /// Set false to restrict the player to only use the item bar.
+        /// </summary>
+        /// 
+        [Tooltip("Set true to use the players inventory. Set false to restrict the player to only use the item bar.")]
+        public bool UsePlayerInventory = true;
+
+        /// <summary>
         /// Set true to load saved inventory data on start
         /// </summary>
+        [Tooltip("Set true to load saved inventory data on start")]
         public bool LoadInventory = false;
 
         /// <summary>
         /// Set true to save inventory data on close
         /// </summary>
+        [Tooltip("Set true to save inventory data on close")]
         public bool SaveOnClose = false;
 
         /// <summary>
@@ -114,6 +124,12 @@ namespace PlayerInventorySystem
         /// </summary>
         internal static Inventory SalvageOutputInventory { get { return InventoryList[7]; } } // index 7
 
+        internal static Inventory CatalogInventory { get { return InventoryList[8]; } } // index 8
+
+        [Tooltip("ItemBar slot count")]
+        [Range(1, 10)]
+        public int ItemBarSlotCount = 10;
+
         /// <summary>
         /// Accessor for the item 'held' on by the mouse cursor.
         /// 
@@ -138,18 +154,7 @@ namespace PlayerInventorySystem
             }
         }
 
-
-        public static bool PlayerHasItem(int itemID)
-        {
-            foreach (Inventory inventory in InventoryList.Values)
-            {
-                if (inventory.InventoryContains(itemID))
-                {
-                    return true;
-                }
-            }
-            return false;
-        }
+        public static bool InputModifier = false;
 
         /// <summary>
         /// The player game object that this inventory is connected to.
@@ -201,6 +206,8 @@ namespace PlayerInventorySystem
         /// </summary>
         public ChestPanel ChestPanel;
 
+        public CatalogPanel CatalogPanel;
+
         /// <summary>
         /// The controller of the advanced inventory panel
         /// </summary>
@@ -214,6 +221,11 @@ namespace PlayerInventorySystem
         internal Action<InventorySystemPanel> OnWindowOpenCallback;
 
         /// <summary>
+        /// Action called whenever an inventory System panel is closed
+        /// </summary>
+        internal Action<InventorySystemPanel> OnWindowCloseCallback;
+
+        /// <summary>
         /// Action called whenever the player selects a new item on the item bar
         /// Register for this callback to trigger actions outside the inventory system when the player changes their selected item.
         /// This callback passes the item that was selected.
@@ -222,9 +234,14 @@ namespace PlayerInventorySystem
 
         /// <summary>
         /// Action called whenever the player drops an item into the game world
-        /// This callback passes the item that was dropped.
+        /// This callback passes the 'dropped' item that was dropped.
         /// </summary>
-        public Action<Item> OnItemDroppedCallBack;
+        public Action<DroppedItem> OnItemDroppedCallBack;
+
+
+        /// <summary>
+        /// Action called whenever the player consumes an item either in pickup or from the item bar
+        public Action<Item> OnConsumeItem;
 
         /// <summary>
         /// callback for when an item on the character panel is changed
@@ -262,9 +279,10 @@ namespace PlayerInventorySystem
 
         private bool newGame = true;
 
-        void OnEnable()
+        void Start()
         {
             Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
             if (Player == null)
             {
                 Player = GameObject.FindGameObjectWithTag("Player");
@@ -289,14 +307,14 @@ namespace PlayerInventorySystem
             Instance = this; // create controller instance
 
             CreatePlayerInventory();// create the players inventory FIRST!!!! (0)
-            AddNewInventory(10); // add the item bar inventory (1)
+            AddNewInventory(ItemBarSlotCount); // add the item bar inventory (1)
             AddNewInventory(9); // add crafting table inventory(2)
             AddNewInventory(6); // add character panel inventory(3)
             AddNewInventory(1); // Inventory for the current held Item (4)
             AddNewInventory(1); // inventory for crafting output item (5)
             AddNewInventory(1); // inventory for salvage input item (6)
             AddNewInventory(9); // inventory for salvage output inventory (7)
-
+            AddNewInventory(ItemCatalog.list.Count); // inventory for the catalog panel (8)
 
             if (LoadInventory)
             {
@@ -328,17 +346,17 @@ namespace PlayerInventorySystem
             CharacterPanel.Build(3);
 
             ChestPanel.gameObject.SetActive(false);
-            ChestPanel.Build(); //chest panel get build when chest is opened!!!
+            ChestPanel.Build(); //chest panel gets built when chest is opened!!!
 
             AdvancedInventoryPanel.gameObject.SetActive(false);
             AdvancedInventoryPanel.Build(0);
 
+            CatalogPanel.gameObject.SetActive(false);
+            CatalogPanel.Build(8);
 
-            // register callbacks for when a window opens
+            // register callbacks for when a windows open and closes
             OnWindowOpenCallback += WindowOpenCallback;
-
-            // if its a new game enable the starter pack
-
+            OnWindowCloseCallback += WindowCloseCallBack;
         }
 
         private void OnStartNewGame(bool newGame)
@@ -352,7 +370,7 @@ namespace PlayerInventorySystem
 
             if (newGame)
             {
-                Debug.Log("Spawning Starter Pack");
+                Debug.Log("Spawning Starter Pack and creating new character");
                 Character = new Character()
                 {
                     characterName = CharacterNameGenerator.GenerateRandomName(GENDER.FEMALE),
@@ -369,12 +387,12 @@ namespace PlayerInventorySystem
                     Speed = UnityEngine.Random.Range(0f, 10f),
                     Armor = 1
                 };
+
+
+
                 StarterObject.SetActive(newGame);
 
-                // move the object to the players position
-                StarterObject.transform.position = Player.transform.position;
-                // move it 5 units up so the items drop to the ground correctly
-                StarterObject.transform.position += Vector3.up * 5;
+
             }
 
 
@@ -386,11 +404,14 @@ namespace PlayerInventorySystem
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                Debug.Log("Escape Pressed");
                 InventoryPanel.gameObject.SetActive(false);
                 CharacterPanel.gameObject.SetActive(false);
                 CraftingPanel.gameObject.SetActive(false);
                 ChestPanel.gameObject.SetActive(false);
-                dropPanel.gameObject.SetActive(false);
+                AdvancedInventoryPanel.gameObject.SetActive(false);
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
 
                 if (HeldItem != null)
                 {
@@ -398,15 +419,27 @@ namespace PlayerInventorySystem
                     {
                         if (PlayerInventory.AddItem(HeldItem) == false)
                         {
-                            PlayerInventoryControler.DropItem(HeldItem, HeldItem.StackCount);
+                            PlayerInventoryControler.DropItem(HeldItem, HeldItem.StackCount, HeldItem.Durability);
                         }
                     }
                     HeldItem = null;
                 }
-
             }
-           
+
         }
+
+        public static bool PlayerHasItem(int itemID)
+        {
+            foreach (Inventory inventory in InventoryList.Values)
+            {
+                if (inventory.InventoryContains(itemID))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
 
         /// <summary>
         /// Method used to create an empty player inventory
@@ -490,7 +523,7 @@ namespace PlayerInventorySystem
                     if (!newInv.AddItem(s.Item))
                     {
                         // drop it
-                        Instance.PlayerInventoryControler.DropItem(s.Item, s.Item.StackCount);
+                        Instance.PlayerInventoryControler.DropItem(s.Item, s.Item.StackCount, s.Item.Durability);
                     }
                 }
             }
@@ -510,15 +543,22 @@ namespace PlayerInventorySystem
         /// <param name="window"></param>
         private void WindowOpenCallback(InventorySystemPanel window)
         {
-            //  EnablePlayerMovent(false);// disable player movement while windows are open
+            // dropPanel.gameObject.SetActive(true); // turn on the drop panel
+            Cursor.lockState = CursorLockMode.None; // unlock the mouse
+            Cursor.visible = true;
+        }
 
-            dropPanel.gameObject.SetActive(true); // turn on the drop panel
-
-            UnityEngine.Cursor.lockState = CursorLockMode.None; // unlock the mouse
-
-            if (HeldItem == null)
+        /// <summary>
+        ///  Method called whenever an inventory panel is closed.
+        /// </summary>
+        /// <param name="window"></param>
+        private void WindowCloseCallBack(InventorySystemPanel window)
+        {
+            if (!InventoryController.Instance.AnyWindowOpen && !(this is ItemBar))
             {
-              //  UnityEngine.Cursor.visible = true; // show the mouse
+                // dropPanel.gameObject.SetActive(false); // turn off the drop panel
+                Cursor.lockState = CursorLockMode.Locked; // lock the mouse
+                Cursor.visible = false;
             }
         }
 
@@ -532,58 +572,67 @@ namespace PlayerInventorySystem
         /// <param name="TTL">The time the item will reamin in the world</param>
         /// <returns>Returns true on success else false</returns>
         /// 
-        internal bool SpawnDroppedItem(int itemID, Vector3 position, int stackCount, float ttl = 30)
+        internal GameObject SpawnItem(int itemID, Vector3 position, int stackCount = 1, float ttl = 30, float durability = 0)
         {
-
             if (itemID <= 0)
             {
-                return false;
+                return null;
             }
-
-            ItemData itemData = Instance.ItemCatalog.list[itemID];
+            ItemData itemData = InventoryController.Instance.ItemCatalog.list.Find(item => item.id == itemID);
 
             GameObject prefab = itemData.prefabSingle;
 
-            if (stackCount > 1)
+            if (stackCount > 1 && itemData.prefabMultiple != null)
             {
                 prefab = itemData.prefabMultiple;
             }
 
             if (prefab == null)
             {
-                return false;
+                Debug.LogWarning("No prefab found for item ID: " + itemID);
+                return null;
             }
-
-            // Calculate a random direction for popping up
-            Vector3 popDirection = new Vector3(UnityEngine.Random.Range(-1f, 1f), 1f, UnityEngine.Random.Range(-1f, 1f)).normalized;
 
             GameObject g = Instantiate(prefab, position, Quaternion.identity);
 
-            if (g.TryGetComponent<DroppedItem>(out var di))
+            if (g.TryGetComponent<DroppedItem>(out var droppedItem))
             {
-                di.ItemID = itemData.id;
-                di.StackCount = stackCount;
-                di.TimeToLive = ttl;
+                // set the item id of the dropped item
+                droppedItem.ItemID = itemData.id;
 
-                // Apply the pop direction to the spawned item's rigidbody
-                if (di.TryGetComponent<Rigidbody>(out var rb))
-                {
-                    rb.AddForce(popDirection * 3, ForceMode.Impulse);
-                }
+                // set the stack count of the dropped item
+                droppedItem.StackCount = stackCount;
 
-                DroppedItems.Add(di);
+                // set the time to live of the dropped item
+                droppedItem.TimeToLive = ttl;
+
+                // set the durability of the dropped item
+                droppedItem.Durability = durability;
+
+
+                // add the dropped item to the list of dropped items
+                DroppedItems.Add(droppedItem);
+
+                // invoke the callback
+                OnItemDroppedCallBack?.Invoke(droppedItem);
+                Debug.Log("Item Dropped");
             }
             else
             {
                 Debug.LogWarning("ItemPickup component missing from spawned item prefab. Item cannot be picked up without it.");
             }
 
-            return true;
+            return g;
         }
 
+        /// <summary>
+        /// method to spawn a dropped item that was previously saved.
+        /// </summary>
+        /// <param name="sdi"></param>
+        /// <returns></returns>
         internal bool SpawnDroppedItem(SerialDroppedItem sdi)
         {
-            return SpawnDroppedItem(sdi.ItemID, sdi.Transform.Position, sdi.StackCount, sdi.TimeToLive);
+            return SpawnItem(sdi.ItemID, sdi.Transform.Position, sdi.StackCount, sdi.TimeToLive);
         }
 
         /// <summary>
@@ -593,28 +642,39 @@ namespace PlayerInventorySystem
         /// <param name="itemCatalogID"></param>
         /// <param name="inventory"></param>
         /// <param name="sTransform"></param>
-        internal static ChestController SpawnChest(int chestID, int itemCatalogID, Vector3 position, Quaternion rotation, Vector3 scale, Inventory inventory = null)
+        internal static ChestController SpawnChest(int chestID, int itemID, Vector3 position, Quaternion rotation, Vector3 scale, Inventory inventory = null)
         {
             //  Debug.Log("Spawning chest");
 
-            GameObject go = Instantiate(Instance.ItemCatalog.list[itemCatalogID].worldPrefab, position, rotation);
-            go.transform.localScale = scale;
+            GameObject p = Instance.ItemCatalog.GetItemByID(itemID).Data.worldPrefab;
 
-            ChestController cc = go.AddComponent<ChestController>();
-            cc.ChestID = chestID;
-            cc.ItemID = itemCatalogID;
-            //   cc.Panel = Instance.ChestPanel;
+            GameObject chestObject = Instantiate(p, position, rotation);
+
+            chestObject.transform.localScale = scale;
+
+            ChestController chestController = chestObject.GetComponent<ChestController>();
+            if (chestController == null)
+            {
+                chestController = chestObject.AddComponent<ChestController>();
+            }
+
+            chestController.ID = chestID;
+
+            chestController.ItemID = itemID;
+
             if (inventory != null)
             {
-                cc.Inventory = inventory;
+                chestController.Inventory = inventory;
             }
             else
             {
-                cc.Inventory = new Inventory(0, 24);
+                chestController.Inventory = new Inventory(0, 24);
             }
 
-            MapChest(cc);
-            return cc;
+            // add the chest to the chest map
+            MapChest(chestController);
+
+            return chestController;
 
         }
 
@@ -627,12 +687,23 @@ namespace PlayerInventorySystem
         /// <param name="scale"></param>
         internal static CraftingTableController SpawnCraftingTable(int itemID, Vector3 position, Quaternion rotation, Vector3 scale)
         {
-            GameObject go = Instantiate(Instance.ItemCatalog.list[itemID].worldPrefab, position, rotation);
-            go.transform.localScale = scale;
-            CraftingTableController cTc = go.AddComponent<CraftingTableController>();
-            cTc.ItemID = itemID;
-            //   cTc.Panel = Instance.CraftingPanel;
-            return cTc;
+            GameObject tablePrefab = Instance.ItemCatalog.GetItemByID(itemID).Data.worldPrefab;
+            GameObject tableObject = Instantiate(tablePrefab, position, rotation);
+            tableObject.transform.localScale = scale;
+            CraftingTableController craftingTableController = tableObject.GetComponent<CraftingTableController>();
+            craftingTableController.ItemID = itemID;
+            craftingTableController.Panel = Instance.CraftingPanel;
+            return craftingTableController;
+        }
+
+        internal static FurnaceController SpawnFurnace(int itemID, Vector3 position, Quaternion rotation, Vector3 scale)
+        {
+            GameObject furnacePrefab = Instance.ItemCatalog.GetItemByID(itemID).Data.worldPrefab;
+            GameObject furnaceObject = Instantiate(furnacePrefab, position, rotation);
+            furnaceObject.transform.localScale = scale;
+            FurnaceController furnaceController = furnaceObject.GetComponent<FurnaceController>();
+            furnaceController.ItemID = itemID;
+            return furnaceController;
         }
 
         /// <summary>
@@ -641,14 +712,14 @@ namespace PlayerInventorySystem
         /// <param name="cc"></param>
         internal static void MapChest(ChestController cc)
         {
-            if (ChestInventories.ContainsKey(cc.ChestID) == false)
+            if (ChestInventories.ContainsKey(cc.ID) == false)
             {
-                ChestInventories.Add(cc.ChestID, cc.Inventory);
+                ChestInventories.Add(cc.ID, cc.Inventory);
             }
 
-            if (ChestMap.ContainsKey(cc.ChestID) == false)
+            if (ChestMap.ContainsKey(cc.ID) == false)
             {
-                ChestMap.Add(cc.ChestID, cc.gameObject);
+                ChestMap.Add(cc.ID, cc.gameObject);
             }
 
         }
@@ -663,25 +734,15 @@ namespace PlayerInventorySystem
             // Debug.Log("OnPlaceItem");
             if (consume)
             {
-                //   Debug.Log("Consume");
                 // remove the item from the players inventory
-                Instance.ItemBar.SelectedSlotController.Slot.IncermentStackCount(-1);
-
-                // if the item stack count is 0 then remove the item from the slot
-                if (Instance.ItemBar.SelectedSlotController.Slot.Item.StackCount <= 0)
-                {
-                    // remove the item from the slot
-                    Instance.ItemBar.SelectedSlotController.Slot.SetItem(null);
-                }
+                Instance.ItemBar.ConsumeSelectedItem();
             }
 
             // if the placed item is not null then add it to the placed items list
             if (placedItem != null)
             {
                 placedItem.ItemID = item.Data.id;
-
-                // if the plased item is craftingtable then set its pan
-
+                placedItem.durability = item.Data.maxDurability;
 
                 PlacedItems.Add(placedItem);
             }
@@ -695,7 +756,7 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="itemID">The ID of the item to be added</param>
         /// <returns>Returns true on success else false</returns>
-        internal static bool GiveItem(int itemID, int stackCount = 1)
+        internal static bool GiveItem(int itemID, int stackCount = 1, float durability = 0)
         {
             if (itemID <= 0)
             {
@@ -703,6 +764,8 @@ namespace PlayerInventorySystem
             }
 
             Item newItem = Item.New(itemID, stackCount);
+
+            newItem.Durability = durability;
 
             if (ItemBarInventory.AddItem(newItem) == false)
             {
@@ -799,59 +862,6 @@ namespace PlayerInventorySystem
         }
 
         /// <summary>
-        /// method to display the chest Panel and the selected chest inventory
-        /// </summary>
-        internal void OpenChest(ChestController chestController)
-        {
-            if (chestController != null)
-            {
-                ChestPanel.Chest = chestController; // pass the selected chest to the chest panel
-                ChestPanel.OpenCloseChestLid(true);
-                ChestPanel.gameObject.SetActive(true);
-            }
-            else
-            {
-                Debug.LogError("ChestController is null");
-            }
-        }
-
-        /// <summary>
-        /// method to toggle the crafting panel
-        /// </summary>
-        internal void OpenCraftingTable(CraftingTableController cTc)
-        {
-            if (cTc != null)
-            {
-                CraftingPanel.CraftingTable = cTc; // pass the selected chest to the chest panel
-                CraftingPanel.gameObject.SetActive(true);
-            }
-            else
-            {
-                Debug.LogError("CraftingTableController is null");
-            }
-        }
-
-        internal Item Mine(Mineable mineableObject)
-        {
-            Item toolItem = ItemBar.SelectedSlotController.Slot.Item;
-            if (toolItem == null)
-            {
-                Debug.Log("No Tool Selected");
-            }
-            else if (toolItem.Data.itemType == ITEMTYPE.USABLE)
-            {
-                Debug.Log("Tool is a mining tool");
-
-                // calculate the damage to the mineable object based on the tools damage and the players damage
-                float damage = toolItem.Data.damage + Character.Damage;
-                //Debug.Log("Damage = " + damage);
-                // call the mine method
-                return mineableObject.Mine(damage);
-            }
-            return null;
-        }
-
-        /// <summary>
         /// Method to place the currently selected item from the itembar in the world
         /// </summary>
         internal void PlaceItem(Vector3 pos, Quaternion rot, Vector3 scale)
@@ -877,10 +887,14 @@ namespace PlayerInventorySystem
                                 CraftingTableController cTc = SpawnCraftingTable(item.Data.id, pos, rot, scale);
                                 OnPlaceItem(item, cTc);
                                 break;
+                            case "furnace":
+                                FurnaceController fc = SpawnFurnace(item.Data.id, pos, rot, scale);
+                                OnPlaceItem(item, fc);
+                                break;
 
                             default:
                                 GameObject go = GameObject.Instantiate(item.Data.worldPrefab, pos, rot);
-                                PlacedItem pi = go.AddComponent<PlacedItem>();
+                                PlacedItem pi = go.GetComponent<PlacedItem>();
                                 OnPlaceItem(item, pi);
                                 break;
                         }
@@ -943,6 +957,23 @@ namespace PlayerInventorySystem
             count += ItemBarInventory.GetItemCount(itemID);
 
             return count;
+        }
+
+        public static Item GetItemByIngredients(string ingredients)
+        {
+            if (ingredients.Length <= 0)
+            {
+                return null;
+            }
+
+            foreach (ItemData itemData in InventoryController.Instance.ItemCatalog.list)
+            {
+                if (itemData.recipe.Ingredients.Equals(ingredients))
+                {
+                    return Item.New(itemData.id, itemData.craftCount);
+                }
+            }
+            return null;
         }
 
     }

@@ -43,6 +43,7 @@ namespace PlayerInventorySystem
         private void OnEnable ()
         {
             gameObject.tag = "Item";
+            gameObject.layer = 7;
             Timer = 0;
         }
 

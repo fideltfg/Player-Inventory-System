@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PlayerInventoryController Class Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #2e6da4;
+        }
+        .section p {
+            margin: 5px 0;
+        }
+        .code {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>PlayerInventoryController Class</h1>
+    <p>Component added to the player object to allow items to be picked up.</p>
+
+    <div class="section">
+        <h2>Public Fields</h2>
+
+        <h3>Head</h3>
+        <p>The Transform representing the player's head.</p>
+        <div class="code">
+            <pre><code>public Transform Head;</code></pre>
+        </div>
+
+        <h3>Body</h3>
+        <p>The Transform representing the player's body.</p>
+        <div class="code">
+            <pre><code>public Transform Body;</code></pre>
+        </div>
+
+        <h3>LeftHand</h3>
+        <p>The Transform representing the player's left hand.</p>
+        <div class="code">
+            <pre><code>public Transform LeftHand;</code></pre>
+        </div>
+
+        <h3>RightHand</h3>
+        <p>The Transform representing the player's right hand.</p>
+        <div class="code">
+            <pre><code>public Transform RightHand;</code></pre>
+        </div>
+
+        <h3>animator</h3>
+        <p>The Animator component for the player.</p>
+        <div class="code">
+            <pre><code>public Animator animator;</code></pre>
+        </div>
+
+        <h3>colliderCenter</h3>
+        <p>Center offset for the collider.</p>
+        <div class="code">
+            <pre><code>public Vector3 colliderCenter = new Vector3(0, .75f, 0);</code></pre>
+        </div>
+
+        <h3>colliderSize</h3>
+        <p>Size of the collider.</p>
+        <div class="code">
+            <pre><code>public Vector3 colliderSize = new Vector3(1, 1.5f, 1);</code></pre>
+        </div>
+
+        <h3>layermask</h3>
+        <p>The LayerMask for detecting interactable objects.</p>
+        <div class="code">
+            <pre><code>public LayerMask layermask;</code></pre>
+        </div>
+
+        <h3>pickupSound</h3>
+        <p>The sound clip played when an item is picked up.</p>
+        <div class="code">
+            <pre><code>public AudioClip pickupSound;</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Public Properties</h2>
+
+        <h3>BuffValues</h3>
+        <p>Provides access to the values added from equipping items on the character panel.</p>
+        <div class="code">
+            <pre><code>public Dictionary<string, float> BuffValues { get; }</code></pre>
+        </div>
+
+        <h3>Character</h3>
+        <p>Gets the character instance from the inventory controller.</p>
+        <div class="code">
+            <pre><code>internal Character Character { get; }</code></pre>
+        </div>
+
+        <h3>CanInteract</h3>
+        <p>Indicates if the player is looking at an interactable object or at the ground where an item can be placed.</p>
+        <div class="code">
+            <pre><code>public bool CanInteract { get; }</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Public Methods</h2>
+
+        <h3>OnEnable</h3>
+        <p>Sets up the collider properties when the component is enabled.</p>
+        <div class="code">
+            <pre><code>void OnEnable();</code></pre>
+        </div>
+
+        <h3>OnTriggerEnter</h3>
+        <p>Handles the trigger enter event to pick up items.</p>
+        <div class="code">
+            <pre><code>private void OnTriggerEnter(Collider other);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>other</strong>: The collider that triggered the event.</li>
+        </ul>
+
+        <h3>PickUpItem</h3>
+        <p>Allows the player to pick up an item and place it in the inventory or consume it if it is a consumable item.</p>
+        <div class="code">
+            <pre><code>internal bool PickUpItem(GameObject collectedObject);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>collectedObject</strong>: The GameObject to be picked up.</li>
+        </ul>
+        <p>Returns:</p>
+        <ul>
+            <li><strong>bool</strong>: True if the item was successfully picked up, false otherwise.</li>
+        </ul>
+
+        <h3>GiveItem</h3>
+        <p>Adds a single item directly into the player's item bar or inventory.</p>
+        <div class="code">
+            <pre><code>internal bool GiveItem(Item item);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>item</strong>: The item to be added.</li>
+        </ul>
+        <p>Returns:</p>
+        <ul>
+            <li><strong>bool</strong>: True on success, false otherwise.</li>
+        </ul>
+
+        <h3>DropItem</h3>
+        <p>Allows the player to drop an item.</p>
+        <div class="code">
+            <pre><code>internal void DropItem(Item item, int quantity = 1);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>item</strong>: The item to be dropped.</li>
+            <li><strong>quantity</strong>: The quantity of the item to be dropped.</li>
+        </ul>
+
+        <h3>Interact</h3>
+        <p>Allows the player to interact with the world and items in it.</p>
+        <div class="code">
+            <pre><code>internal void Interact();</code></pre>
+        </div>
+
+        <h3>ConsumeItem</h3>
+        <p>Consumes an item if it is a consumable item.</p>
+        <div class="code">
+            <pre><code>internal void ConsumeItem(Item item);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>item</strong>: The item to be consumed.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Usage Examples</h2>
+
+        <h3>Example: Pick up an item</h3>
+        <div class="code">
+            <pre><code>GameObject itemObject = ...;
+PlayerInventoryController playerInventory = GetComponent&lt;PlayerInventoryController&gt;();
+bool pickedUp = playerInventory.PickUpItem(itemObject);
+Debug.Log("Item picked up: " + pickedUp);</code></pre>
+        </div>
+
+        <h3>Example: Give an item to the player</h3>
+        <div class="code">
+            <pre><code>Item newItem = Item.New(1, 1);
+bool itemGiven = playerInventory.GiveItem(newItem);
+Debug.Log("Item given: " + itemGiven);</code></pre>
+        </div>
+
+        <h3>Example: Drop an item</h3>
+        <div class="code">
+            <pre><code>Item itemToDrop = Item.New(1, 1);
+playerInventory.DropItem(itemToDrop, 1);
+Debug.Log("Item dropped");</code></pre>
+        </div>
+
+        <h3>Example: Interact with the environment</h3>
+        <div class="code">
+            <pre><code>playerInventory.Interact();
+Debug.Log("Player interacted with environment");</code></pre>
+        </div>
+
+        <h3>Example: Consume an item</h3>
+        <div class="code">
+            <pre><code>Item consumableItem = Item.New(2, 1);
+playerInventory.ConsumeItem(consumableItem);
+Debug.Log("Item consumed");</code></pre>
+        </div>
+    </div>
+</body>
+</html>

@@ -11,13 +11,13 @@ namespace PlayerInventorySystem
     /// </summary>
     public class SlotController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
     {
-        int slotID;
-        protected float counter = 0;
-        private Color unselectedColor;
-        protected bool mouseOver;
+        public int slotID;
+        public float counter = 0;
+        public Color unselectedColor;
+        public bool mouseOver;
         public bool showInfoPanel;
         public bool interactable = true;
-        private Transform infoPanel;
+        public Transform infoPanel;
 
         /// <summary>
         /// The index of this slots inventory
@@ -299,8 +299,6 @@ namespace PlayerInventorySystem
                 SetOutLineColor();
             }
 
-
-
             if (Slot.Item != null)
             {
                 mouseOver = true;
@@ -485,148 +483,70 @@ namespace PlayerInventorySystem
 
         protected bool MoveStack()
         {
-            // if no windows are open do nothing
             if (!InventoryController.Instance.AnyWindowOpen)
             {
                 return false;
             }
 
-            // if this slot is in the player inventory
-            if (this.slotLocation == SLOTLOCATION.INVENTORY)
+            bool isSlotMoved = false;
+            switch (this.slotLocation)
             {
-                // if the character panel is open
-                if (InventoryController.Instance.CharacterPanel.gameObject.activeInHierarchy)
-                {
-                    //try and move the stacj to a valid character slot
-                    if (MoveStackToCharacter())
-                    {
-                        return true;
-                    }
-                }
-                // still here so no valid charater slot.. continue
+                case SLOTLOCATION.INVENTORY:
+                    isSlotMoved = TryMoveToCharacterPanel() || TryMoveToChestPanel() || TryMoveToItemBar();
+                    break;
 
-                // if the chest panel is open and not full, move there, return
-                if (InventoryController.Instance.ChestPanel.gameObject.activeInHierarchy)
-                {
-                    if (MoveStackToChest())
-                    {
-                        return true;
-                    }
-                }
-                // still here so no valid Chest slot
+                case SLOTLOCATION.ITEMBAR:
+                    isSlotMoved = TryMoveToCharacterPanel() || TryMoveToInventoryPanel() || TryMoveToChestPanel();
+                    break;
 
-                // try putting it on the Item bar
+                case SLOTLOCATION.CHARACTER:
+                    isSlotMoved = TryMoveToInventoryPanel() || TryMoveToChestPanel() || TryMoveToItemBar();
+                    break;
 
-                if (InventoryController.ItemBarInventory.AddItem(this.Slot.Item))
-                {
-                    Slot.SetItem(null);
-                    return true;
-                }
-
-                return false;
-
-                // still here so no place to put this stack/item
-                // Do nothing ... DROP IT maybe???
+                case SLOTLOCATION.CHEST:
+                    isSlotMoved = TryMoveToCharacterPanel() || TryMoveToInventoryPanel() || TryMoveToItemBar();
+                    break;
             }
-            // if this stack is in the Item bar
-            if (this.slotLocation == SLOTLOCATION.ITEMBAR)
+
+            return isSlotMoved;
+        }
+
+        private bool TryMoveToCharacterPanel()
+        {
+            if (InventoryController.Instance.CharacterPanel.gameObject.activeInHierarchy && MoveStackToCharacter())
             {
-                // if the character panel is open
-                if (InventoryController.Instance.CharacterPanel.gameObject.activeInHierarchy)
-                {
-                    //try and move the stacj to a valid character slot
-                    if (MoveStackToCharacter())
-                    {
-                        return true;
-                    }
-                }
-                // still here so no valid charater slot..  
-                // if the inventory panel is open and not full, move there, return
-                if (InventoryController.Instance.InventoryPanel.gameObject.activeInHierarchy)
-                {
-                    if (InventoryController.PlayerInventory.AddItem(this.Slot.Item))
-                    {
-                        Slot.SetItem(null);
-                        return true;
-                    }
-                }
-                // still here so no valid Inventory slot..
-                // if the chest panel is open and not full, move there, return
-                if (InventoryController.Instance.ChestPanel.gameObject.activeInHierarchy)
-                {
-                    if (MoveStackToChest())
-                    {
-                        return true;
-                    }
-                }
-                return false;
-                // still here so no place to put this stack/item
-                // Do nothing ... DROP IT maybe???
+                return true;
             }
-            // if this stack is on the character panel
-            else if (this.slotLocation == SLOTLOCATION.CHARACTER)
+            return false;
+        }
+
+        private bool TryMoveToChestPanel()
+        {
+            if (InventoryController.Instance.ChestPanel.gameObject.activeInHierarchy && MoveStackToChest())
             {
-                // if the inventory panel is open and not full, move there, return
-                if (InventoryController.Instance.InventoryPanel.gameObject.activeInHierarchy)
-                {
-                    if (InventoryController.PlayerInventory.AddItem(this.Slot.Item))
-                    {
-                        Slot.SetItem(null);
-                        return true;
-                    }
-                }
-                // still here so no valid Inventory slot..
-                // if the chest panel is open and not full, move there, return
-                if (InventoryController.Instance.ChestPanel.gameObject.activeInHierarchy)
-                {
-                    if (MoveStackToChest())
-                    {
-                        return true;
-                    }
-                }
-                // still here so no valid chest panel
-                // try putting it on the Item bar
-
-                if (InventoryController.ItemBarInventory.AddItem(this.Slot.Item))
-                {
-                    Slot.SetItem(null);
-                    return true;
-                }
-                return false;
-
+                return true;
             }
-            // if this stack is on the chest panel
-            else if (this.slotLocation == SLOTLOCATION.CHEST)
+            return false;
+        }
+
+        private bool TryMoveToInventoryPanel()
+        {
+            if ((InventoryController.Instance.InventoryPanel.gameObject.activeInHierarchy ||
+                 InventoryController.Instance.AdvancedInventoryPanel.gameObject.activeInHierarchy) &&
+                InventoryController.PlayerInventory.AddItem(this.Slot.Item))
             {
-                // if the character panel is open
-                if (InventoryController.Instance.CharacterPanel.gameObject.activeInHierarchy)
-                {
-                    //try and move the stacj to a valid character slot
-                    if (MoveStackToCharacter())
-                    {
-                        return true;
-                    }
-                }
-                // still here so no valid charater slot.. continue
-                // if the inventory panel is open and not full, move there, return
-                if (InventoryController.Instance.InventoryPanel.gameObject.activeInHierarchy)
-                {
+                Slot.SetItem(null);
+                return true;
+            }
+            return false;
+        }
 
-                    if (InventoryController.PlayerInventory.AddItem(this.Slot.Item))
-                    {
-                        Slot.SetItem(null);
-                        return true;
-                    }
-
-                }
-                // still here so no valid Inventory slot..
-                // try putting it on the Item bar
-
-                if (InventoryController.ItemBarInventory.AddItem(this.Slot.Item))
-                {
-                    Slot.SetItem(null);
-                    return true;
-                }
+        private bool TryMoveToItemBar()
+        {
+            if (InventoryController.ItemBarInventory.AddItem(this.Slot.Item))
+            {
+                Slot.SetItem(null);
+                return true;
             }
             return false;
         }
@@ -771,30 +691,7 @@ namespace PlayerInventorySystem
             return false;
         }
 
-        protected void PickUpHalfStack()
-        {
-            if (this.Slot.Item.StackCount == 1)
-            {
-                HeldItem = this.Slot.Item.Clone();
-                Slot.SetItem(null);
-            }
-            else
-            {
-                HeldItem = this.Slot.Item.Clone();
-
-                Vector2Int v = SplitIntVectorInt(Slot.Item.StackCount);
-                Slot.SetItemStackCount(v.x);
-                HeldItem.SetStackCount(v.y);
-
-                // if the stack is now empty  clear the slot
-                if (Slot.Item.StackCount <= 0)
-                {
-                    Slot.SetItem(null);
-                }
-            }
-        }
-
-        private Vector2Int SplitIntVectorInt(int number)
+        protected Vector2Int SplitIntVectorInt(int number)
         {
             int firstNumber = number / 2;
             int secondNumber = number - firstNumber;
@@ -810,8 +707,31 @@ namespace PlayerInventorySystem
 
             return new Vector2Int(firstNumber, secondNumber);
         }
+        
+        protected virtual void PickUpHalfStack()
+        {
+            if (this.Slot.Item.StackCount == 1)
+            {
+                HeldItem = this.Slot.Item.Clone();
+                Slot.SetItem(null);
+            }
+            else
+            {
+                HeldItem = this.Slot.Item.Clone();
 
-        protected void PickUpStack()
+                Vector2Int v = SplitIntVectorInt(Slot.Item.StackCount);
+                Slot.SetStackCount(v.x);
+                HeldItem.SetStackCount(v.y);
+
+                // if the stack is now empty  clear the slot
+                if (Slot.Item.StackCount <= 0)
+                {
+                    Slot.SetItem(null);
+                }
+            }
+        }
+
+        protected virtual void PickUpStack()
         {
             HeldItem = this.Slot.Item;
             Slot.SetItem(null);

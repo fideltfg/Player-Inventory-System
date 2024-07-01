@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>InventoryController Class Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section h2 {
+            color: #2e6da4;
+        }
+
+        .section p {
+            margin: 5px 0;
+        }
+
+        .code {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>InventoryController Class</h1>
+    <p>The primary component and controller of the player inventory system.</p>
+
+    <div class="section">
+        <h2>Public Fields</h2>
+
+        <h3>ItemCatalog</h3>
+        <p>The list of items used in the game. Includes all data needed to generate and control items.</p>
+        <div class="code">
+            <pre><code>public SO_ItemList ItemCatalog;</code></pre>
+        </div>
+
+        <h3>PlayerInventoryCapacity</h3>
+        <p>The default capacity of the player's inventory. Must have a multiple of four slots (4, 8, 12, 16, 20,
+            24,...).</p>
+        <div class="code">
+            <pre><code>public static int PlayerInventoryCapacity = 24;</code></pre>
+        </div>
+
+        <h3>UsePlayerInventory</h3>
+        <p>Set true to use the player's inventory. Set false to restrict the player to only use the item bar.</p>
+        <div class="code">
+            <pre><code>public bool UsePlayerInventory = true;</code></pre>
+        </div>
+
+        <h3>LoadInventory</h3>
+        <p>Set true to load saved inventory data on start.</p>
+        <div class="code">
+            <pre><code>public bool LoadInventory = false;</code></pre>
+        </div>
+
+        <h3>SaveOnClose</h3>
+        <p>Set true to save inventory data on close.</p>
+        <div class="code">
+            <pre><code>public bool SaveOnClose = false;</code></pre>
+        </div>
+
+        <h3>UsePersistentDataPath</h3>
+        <p>Set true to save data to Application.persistentDataPath + "/Data/data.dat". Only use this when you have
+            configured your Unity Player settings for publication. Keep false for testing in the editor.</p>
+        <div class="code">
+            <pre><code>public bool UsePersistentDataPath = false;</code></pre>
+        </div>
+
+        <h3>ItemBarSlotCount</h3>
+        <p>ItemBar slot count. Range between 1 and 10.</p>
+        <div class="code">
+            <pre><code>[Range(1, 10)]
+public int ItemBarSlotCount = 10;</code></pre>
+        </div>
+
+        <h3>Player</h3>
+        <p>The player game object that this inventory is connected to.</p>
+        <div class="code">
+            <pre><code>public GameObject Player;</code></pre>
+        </div>
+
+        <h3>PlayerInventoryControler</h3>
+        <p>This is the controller for the player to interface with the inventory system.</p>
+        <div class="code">
+            <pre><code>public PlayerInventoryController PlayerInventoryControler;</code></pre>
+        </div>
+
+        <h3>InventoryPanel</h3>
+        <p>The controller for the inventory panel.</p>
+        <div class="code">
+            <pre><code>public InventoryPanel InventoryPanel;</code></pre>
+        </div>
+
+        <h3>ItemBar</h3>
+        <p>The controller for the item bar.</p>
+        <div class="code">
+            <pre><code>public ItemBar ItemBar;</code></pre>
+        </div>
+
+        <h3>dropPanel</h3>
+        <p>The controller for the drop panel.</p>
+        <div class="code">
+            <pre><code>public DropPanel dropPanel;</code></pre>
+        </div>
+
+        <h3>ItemHolder</h3>
+        <p>The controller for the item holder.</p>
+        <div class="code">
+            <pre><code>public ItemHolder ItemHolder;</code></pre>
+        </div>
+
+        <h3>CraftingPanel</h3>
+        <p>The controller for the crafting panel.</p>
+        <div class="code">
+            <pre><code>public CraftingPanel CraftingPanel;</code></pre>
+        </div>
+
+        <h3>SalvagePanel</h3>
+        <p>The controller for the salvage panel.</p>
+        <div class="code">
+            <pre><code>public SalvagePanel SalvagePanel;</code></pre>
+        </div>
+
+        <h3>CharacterPanel</h3>
+        <p>The controller for the character panel.</p>
+        <div class="code">
+            <pre><code>public CharacterPanel CharacterPanel;</code></pre>
+        </div>
+
+        <h3>ChestPanel</h3>
+        <p>The controller of the chest panel.</p>
+        <div class="code">
+            <pre><code>public ChestPanel ChestPanel;</code></pre>
+        </div>
+
+        <h3>CatalogPanel</h3>
+        <p>The controller of the catalog panel.</p>
+        <div class="code">
+            <pre><code>public CatalogPanel CatalogPanel;</code></pre>
+        </div>
+
+        <h3>AdvancedInventoryPanel</h3>
+        <p>The controller of the advanced inventory panel.</p>
+        <div class="code">
+            <pre><code>public AdvancedInventoryPanel AdvancedInventoryPanel;</code></pre>
+        </div>
+
+        <h3>DroppedItemTTL</h3>
+        <p>Default time to live of items dropped by the player into the game world in seconds.</p>
+        <div class="code">
+            <pre><code>public float DroppedItemTTL = 300;</code></pre>
+        </div>
+
+        <h3>StarterObject</h3>
+        <p>Define an object that will be spawned in the world when the game starts if it's a new game.</p>
+        <div class="code">
+            <pre><code>public GameObject StarterObject;</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Public Methods</h2>
+
+        <h3>RegisterOnCharacterItemChangeCallback</h3>
+        <p>Register callbacks for on character item change.</p>
+        <div class="code">
+            <pre><code>public static void RegisterOnCharacterItemChangeCallback(Action callback);</code></pre>
+        </div>
+
+        <h3>UnregisterOnCharacterItemChangeCallback</h3>
+        <p>Unregister callbacks for on character item change.</p>
+        <div class="code">
+            <pre><code>public static void UnregisterOnCharacterItemChangeCallback(Action callback);</code></pre>
+        </div>
+
+        <h3>RegisterOnSelectedItemChangeCallback</h3>
+        <p>Method to register a callback for when the selected item changes.</p>
+        <div class="code">
+            <pre><code>public static void RegisterOnSelectedItemChangeCallback(Action<Item> callback);</code></pre>
+        </div>
+
+        <h3>UnregisterOnSelectedItemChangeCallback</h3>
+        <p>Method to unregister a callback for when the selected item changes.</p>
+        <div class="code">
+            <pre><code>public static void UnregisterOnSelectedItemChangeCallback(Action<Item> callback);</code></pre>
+        </div>
+
+        <h3>ToggleInventoryPanel</h3>
+        <p>Method to toggle the inventory panel.</p>
+        <div class="code">
+            <pre><code>public void ToggleInventoryPanel();</code></pre>
+        </div>
+
+        <h3>ToggleCharacterPanel</h3>
+        <p>Method to toggle the character panel.</p>
+        <div class="code">
+            <pre><code>public void ToggleCharacterPanel();</code></pre>
+        </div>
+
+        <h3>ToggleChestPanel</h3>
+        <p>Method to toggle the chest panel.</p>
+        <div class="code">
+            <pre><code>public void ToggleChestPanel();</code></pre>
+        </div>
+
+        <h3>ToggleCraftingPanel</h3>
+        <p>Method to toggle the crafting panel.</p>
+        <div class="code">
+            <pre><code>public void ToggleCraftingPanel();</code></pre>
+        </div>
+
+        <h3>ToggleItemBar</h3>
+        <p>Method to toggle the item bar.</p>
+        <div class="code">
+            <pre><code>public void ToggleItemBar();</code></pre>
+        </div>
+
+        <h3>SpawnItem</h3>
+        <p>Method to spawn a dropped item into the world. Use this when you want an item to be dropped by an NPC or
+            spawned when the player destroys an object but not from the player.</p>
+        <div class="code">
+            <pre><code>internal GameObject SpawnItem(int itemID, Vector3 position, int stackCount = 1, float ttl = 30);</code></pre>
+        </div>
+
+        <h3>SpawnDroppedItem</h3>
+        <p>Method to spawn a dropped item that was previously saved.</p>
+        <div class="code">
+            <pre><code>internal bool SpawnDroppedItem(SerialDroppedItem sdi);</code></pre>
+        </div>
+
+        <h3>SpawnChest</h3>
+        <p>Method to spawn a chest that was previously saved.</p>
+        <div class="code">
+            <pre><code>internal static ChestController SpawnChest(int chestID, int itemID, Vector3 position, Quaternion rotation, Vector3 scale, Inventory inventory = null);</code></pre>
+        </div>
+
+        <h3>SpawnCraftingTable</h3>
+        <p>Method to spawn a crafting table.</p>
+        <div class="code">
+            <pre><code>internal static CraftingTableController SpawnCraftingTable(int itemID, Vector3 position, Quaternion rotation, Vector3 scale);</code></pre>
+        </div>
+
+        <h3>MapChest</h3>
+        <p>Method to store a chest for saving.</p>
+        <div class="code">
+            <pre><code>internal static void MapChest(ChestController cc);</code></pre>
+        </div>
+
+        <h3>OnPlaceItem</h3>
+        <p>Method called when the player places an item to register the item to be saved.</p>
+        <div class="code">
+            <pre><code>internal static void OnPlaceItem(Item item, PlacedItem placedItem = null, bool consume = true);</code></pre>
+        </div>
+
+        <h3>GiveItem</h3>
+        <p>Method to add an item (or stack of) directly into the player's item bar or inventory. Use this method when
+            you want to add an item to the player's inventory but not from the world.</p>
+        <div class="code">
+            <pre><code>internal static bool GiveItem(int itemID, int stackCount = 1);</code></pre>
+        </div>
+
+        <h3>AddNewInventory</h3>
+        <p>Method to add an inventory to the controller.</p>
+        <div class="code">
+            <pre><code>private int AddNewInventory(int size);</code></pre>
+        </div>
+
+        <h3>GetInventory</h3>
+        <p>Method to return the inventory at the given index.</p>
+        <div class="code">
+            <pre><code>internal static Inventory GetInventory(int index);</code></pre>
+        </div>
+
+        <h3>GetChestInventory</h3>
+        <p>Method to return the inventory of the chest with the given id.</p>
+        <div class="code">
+            <pre><code>internal static Inventory GetChestInventory(int chestID);</code></pre>
+        </div>
+
+        <h3>OpenChest</h3>
+        <p>Method to display the chest panel and the selected chest inventory.</p>
+        <div class="code">
+            <pre><code>internal void OpenChest(ChestController chestController);</code></pre>
+        </div>
+
+        <h3>OpenCraftingTable</h3>
+        <p>Method to toggle the crafting panel.</p>
+        <div class="code">
+            <pre><code>internal void OpenCraftingTable(CraftingTableController cTc);</code></pre>
+        </div>
+
+        <h3>Mine</h3>
+        <p>Method to mine a mineable object with a tool item.</p>
+        <div class="code">
+            <pre><code>internal Item Mine(Mineable mineableObject);</code></pre>
+        </div>
+
+        <h3>PlaceItem</h3>
+        <p>Method to place the currently selected item from the item bar in the world.</p>
+        <div class="code">
+            <pre><code>internal void PlaceItem(Vector3 pos, Quaternion rot, Vector3 scale);</code></pre>
+        </div>
+
+        <h3>GetNewChestID</h3>
+        <p>Method to generate a new ID for chests.</p>
+        <div class="code">
+            <pre><code>internal static int GetNewChestID();</code></pre>
+        </div>
+
+        <h3>Save</h3>
+        <p>Method to save the inventory data.</p>
+        <div class="code">
+            <pre><code>public static void Save();</code></pre>
+        </div>
+
+        <h3>Load</h3>
+        <p>Method to load the current saved data.</p>
+        <div class="code">
+            <pre><code>public static bool Load();</code></pre>
+        </div>
+
+        <h3>GetItemCount</h3>
+        <p>Method to return the total count of the given item type in the player's inventory and item bar.</p>
+        <div class="code">
+            <pre><code>internal int GetItemCount(int itemID);</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Usage Examples</h2>
+
+        <h3>Example: Register a callback for character item change</h3>
+        <div class="code">
+            <pre><code>InventoryController.RegisterOnCharacterItemChangeCallback(() => {
+    Debug.Log("Character item changed");
+});</code></pre>
+        </div>
+
+        <h3>Example: Spawn a dropped item in the world</h3>
+        <div class="code">
+            <pre><code>Vector3 spawnPosition = new Vector3(0, 0, 0);
+int itemID = 1;
+int stackCount = 5;
+float ttl = 60;
+GameObject droppedItem = InventoryController.Instance.SpawnItem(itemID, spawnPosition, stackCount, ttl);</code></pre>
+        </div>
+
+        <h3>Example: Toggle the inventory panel</h3>
+        <div class="code">
+            <pre><code>InventoryController.Instance.ToggleInventoryPanel();</code></pre>
+        </div>
+
+        <h3>Example: Give an item to the player</h3>
+        <div class="code">
+            <pre><code>int itemID = 2;
+int stackCount = 10;
+bool success = InventoryController.GiveItem(itemID, stackCount);
+if (success) {
+    Debug.Log("Item added to player's inventory");
+} else {
+    Debug.Log("Failed to add item to player's inventory");
+}</code></pre>
+        </div>
+    </div>
+</body>
+
+</html>

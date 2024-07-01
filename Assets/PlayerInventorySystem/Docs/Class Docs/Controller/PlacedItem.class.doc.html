@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PlacedItem Class Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #2e6da4;
+        }
+        .section p {
+            margin: 5px 0;
+        }
+        .code {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>PlacedItem Class</h1>
+    <p>Component added to item prefabs so the inventory system can identify them for saving and respawning.</p>
+
+    <div class="section">
+        <h2>Public Fields</h2>
+
+        <h3>ItemID</h3>
+        <p>The ID of the item.</p>
+        <div class="code">
+            <pre><code>public int ItemID = 0;</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Usage Examples</h2>
+
+        <h3>Example: Assign an ItemID to a placed item</h3>
+        <div class="code">
+            <pre><code>GameObject placedItemObject = ...;
+PlacedItem placedItem = placedItemObject.GetComponent&lt;PlacedItem&gt;();
+placedItem.ItemID = 1;
+Debug.Log("Placed item ID set to: " + placedItem.ItemID);</code></pre>
+        </div>
+    </div>
+</body>
+</html>

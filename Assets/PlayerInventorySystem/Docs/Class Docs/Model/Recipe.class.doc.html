@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recipe Class Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #2e6da4;
+        }
+        .section p {
+            margin: 5px 0;
+        }
+        .code {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Recipe Class</h1>
+    <p>Defines and holds a crafting recipe.</p>
+
+    <div class="section">
+        <h2>Public Fields</h2>
+
+        <h3>rows</h3>
+        <p>An array of Row objects representing the rows in the recipe.</p>
+        <div class="code">
+            <pre><code>public Row[] rows = new Row[3];</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Public Properties</h2>
+
+        <h3>Ingredients</h3>
+        <p>Gets the recipe in a format that can be used by the crafting system to test if a recipe is met.</p>
+        <div class="code">
+            <pre><code>public string Ingredients { get; }</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Public Methods</h2>
+
+        <h3>InRecipe</h3>
+        <p>Checks if an item is required for this recipe.</p>
+        <div class="code">
+            <pre><code>public bool InRecipe(int x);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>x</strong>: The item ID to look for in this recipe.</li>
+        </ul>
+        <p>Returns:</p>
+        <ul>
+            <li><strong>bool</strong>: True if the item is required, false otherwise.</li>
+        </ul>
+
+        <h3>GetRequiredItemIds</h3>
+        <p>Gets an array of item IDs required for this recipe.</p>
+        <div class="code">
+            <pre><code>internal int[] GetRequiredItemIds();</code></pre>
+        </div>
+        <p>Returns:</p>
+        <ul>
+            <li><strong>int[]</strong>: An array of item IDs required for this recipe.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Nested Types</h2>
+
+        <h3>Row</h3>
+        <p>A struct representing a row in the recipe.</p>
+        <div class="code">
+            <pre><code>public struct Row { public int[] cells; }</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Usage Examples</h2>
+
+        <h3>Example: Check if an item is in the recipe</h3>
+        <div class="code">
+            <pre><code>Recipe recipe = new Recipe();
+bool isInRecipe = recipe.InRecipe(1);
+if (isInRecipe) {
+    Debug.Log("Item is in the recipe");
+} else {
+    Debug.Log("Item is not in the recipe");
+}</code></pre>
+        </div>
+
+        <h3>Example: Get the ingredients of the recipe</h3>
+        <div class="code">
+            <pre><code>Recipe recipe = new Recipe();
+string ingredients = recipe.Ingredients;
+Debug.Log("Recipe ingredients: " + ingredients);</code></pre>
+        </div>
+
+        <h3>Example: Get required item IDs for the recipe</h3>
+        <div class="code">
+            <pre><code>Recipe recipe = new Recipe();
+int[] requiredItemIds = recipe.GetRequiredItemIds();
+Debug.Log("Required item IDs: " + string.Join(", ", requiredItemIds));</code></pre>
+        </div>
+    </div>
+</body>
+</html>

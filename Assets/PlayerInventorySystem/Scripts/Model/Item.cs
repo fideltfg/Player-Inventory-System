@@ -37,17 +37,19 @@ namespace PlayerInventorySystem
         public Slot lastSlot;
 
         /// <summary>
-        /// Method to return a new Item of the given ID with the givne stack count
+        /// Method to return a new Item of the given ID with the given stack count
         /// </summary>
         /// <param name="itemID">The ID of the Item to return</param>
         /// <param name="count">The stack count</param>
         /// <returns>An Item with a stack count as given or null if invalid item ID</returns>
         public static Item New(int itemID, int count = 1)
         {
-            if (InventoryController.Instance.ItemCatalog.list.Find(item => item.id == itemID) != null)
+            ItemData data = InventoryController.Instance.ItemCatalog.list.Find(item => item.id == itemID);
+            if (data != null)
             {
-                return new Item(itemID, count);
+                return new Item(data, count);
             }
+            Debug.LogWarning("Item ID not found in catalog: " + itemID);
             return null;
 
         }
@@ -57,9 +59,9 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="itemID"></param>
         /// <param name="count"></param>
-        private Item(int itemID, int count = 1)
+        private Item(ItemData data, int count = 1)
         {
-            this.Data = InventoryController.Instance.ItemCatalog.list[itemID];
+            this.Data = data;
             StackCount = Mathf.Clamp(count, 1, Data.maxStackSize);
             this.Durability = this.Data.maxDurability;
         }
@@ -80,7 +82,7 @@ namespace PlayerInventorySystem
         }
 
         /// <summary>
-        /// methof to set the value of stackCount.
+        /// method to set the value of stackCount.
         /// </summary>
         /// <param name="val">The value to set</param>
         /// <returns>True if the value was succesfuly set. Else false</returns>
@@ -91,7 +93,7 @@ namespace PlayerInventorySystem
                 StackCount = Mathf.Clamp(val, 0, Data.maxStackSize);
                 return true;
             }
-            Debug.LogWarning("SetStackCount value exceeds MaxStackSize!");
+            //Debug.LogWarning("SetStackCount value exceeds MaxStackSize!");
             return false;
         }
 
@@ -127,6 +129,15 @@ namespace PlayerInventorySystem
             }
         }
 
+        public int ItemID
+        {
+            get
+            {
+                return Data.id;
+            }
+            private set { }
+        }
+
         /// <summary>
         /// Method to place AN item in the world and remove it from the inventory
         /// 
@@ -158,6 +169,11 @@ namespace PlayerInventorySystem
                     InventoryController.OnPlaceItem(item, pi);
                     break;
             }
+        }
+
+        internal static Item New(object itemID, int v)
+        {
+            throw new NotImplementedException();
         }
     }
 }

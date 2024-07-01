@@ -1,0 +1,2965 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e50cec6b61ef7d4fb4b05588e382d84, type: 3}
+  m_Name: ItemCatalog
+  m_EditorClassIdentifier: 
+  catalogID: 0
+  list:
+  - name: NULL
+    id: 0
+    description: blank
+    sprite: {fileID: 0}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 0}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 0
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+    craftCount: 0
+    maxStackSize: 0
+    maxDurability: 0
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Stone Ore
+    id: 1
+    description: Rocks and stones
+    sprite: {fileID: -844094650, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 2
+    prefabSingle: {fileID: 2278112997800886534, guid: 119ce8acc36bf5d4bba4ad16b2297e55,
+      type: 3}
+    prefabMultiple: {fileID: 4784552379856875030, guid: 10027b646efea3548943de0940ba4448,
+      type: 3}
+    worldPrefab: {fileID: 0}
+    itemType: 0
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+    craftCount: 0
+    maxStackSize: 64
+    maxDurability: 100
+    strength: 1
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0.002
+  - name: Coal
+    id: 2
+    description: Condenced Dino Juice
+    sprite: {fileID: -106804983, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 2
+    prefabSingle: {fileID: 7347815395940279692, guid: bae549d94275ca94bb951d0964d20f15,
+      type: 3}
+    prefabMultiple: {fileID: 7287536473415582311, guid: 17fe8cf0d70c1504ba6535279bd22125,
+      type: 3}
+    worldPrefab: {fileID: 0}
+    itemType: 0
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 0
+    canBeFuel: 1
+    fuelValue: 1
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+    craftCount: 0
+    maxStackSize: 64
+    maxDurability: 5
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Iron Ore
+    id: 3
+    description: A lump of iron ore
+    sprite: {fileID: -299018472, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 3
+    prefabSingle: {fileID: 5260938692865589290, guid: 66bcd917eba491f48acac3f1fbefcf73,
+      type: 3}
+    prefabMultiple: {fileID: 8342741646246193025, guid: 1b480e0b0277e0f4eaa705c4608dd799,
+      type: 3}
+    worldPrefab: {fileID: 0}
+    itemType: 0
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+    craftCount: 0
+    maxStackSize: 64
+    maxDurability: 20
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0.006
+  - name: Gold nugget
+    id: 4
+    description: A wee bit of gold
+    sprite: {fileID: 488110435, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 5487062884080071770, guid: af91a582aef767f43a2d32d50d3c2257,
+      type: 3}
+    prefabMultiple: {fileID: 705952798370815306, guid: 413143f53003aee4787ac4738be6fee7,
+      type: 3}
+    worldPrefab: {fileID: 0}
+    itemType: 0
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+    craftCount: 0
+    maxStackSize: 64
+    maxDurability: 15
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Titanium Ore
+    id: 5
+    description: Impure Titainium
+    sprite: {fileID: 1876378442, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 2647569727787527207, guid: ead437eb136d8db428ae5b3f8fc62c61,
+      type: 3}
+    prefabMultiple: {fileID: 3882467402770779471, guid: 001410551c1e63b4691a78a7495af425,
+      type: 3}
+    worldPrefab: {fileID: 0}
+    itemType: 0
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+    craftCount: 0
+    maxStackSize: 64
+    maxDurability: 30
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Vibrainium Ore
+    id: 6
+    description: We dont know what this is!
+    sprite: {fileID: -1656417893, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 3
+    prefabSingle: {fileID: 2650121226448023649, guid: 60be12cadbeae0341850d1a18c2ab538,
+      type: 3}
+    prefabMultiple: {fileID: 4864892731384037042, guid: b9a45c51aa4d1a543a3d3b9dc8d9b9bb,
+      type: 3}
+    worldPrefab: {fileID: 0}
+    itemType: 0
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+    craftCount: 0
+    maxStackSize: 64
+    maxDurability: 50
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Iron Ingot
+    id: 7
+    description: Pure Iron
+    sprite: {fileID: -2099194518, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 3
+    prefabSingle: {fileID: 3816651859765517733, guid: b799afd1fd664564ea415a3e29035f91,
+      type: 3}
+    prefabMultiple: {fileID: 1086975238765410527, guid: 4c2a2f6ed201c814081a750e1ae65097,
+      type: 3}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 030000000300000003000000
+      - cells: 000000000000000000000000
+    craftCount: 1
+    maxStackSize: 64
+    maxDurability: 25
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Steel Ingot
+    id: 8
+    description: Iron and carbon
+    sprite: {fileID: 317380637, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 4173770742277539672, guid: 202f17b37f3ece244a98a48a41851441,
+      type: 3}
+    prefabMultiple: {fileID: 2698362392200906956, guid: c405bd2b4b8c28a45877b86db0aff046,
+      type: 3}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000200000000000000
+      - cells: 030000000300000003000000
+      - cells: 000000000200000000000000
+    craftCount: 2
+    maxStackSize: 64
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: -1
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Gold Ingot
+    id: 9
+    description: 24 ct Gold Bar
+    sprite: {fileID: 1421342596, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 3
+    prefabSingle: {fileID: 7203973169011570356, guid: e22511904fa95d84c85815bcc3ad48e1,
+      type: 3}
+    prefabMultiple: {fileID: 7519023404203185063, guid: a012242d47d0b0d4fbe4d5bd9792d426,
+      type: 3}
+    worldPrefab: {fileID: 1660967605425422, guid: bf1f1a6564a47944da684e10d56c2164,
+      type: 3}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 1
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 040000000400000004000000
+      - cells: 000000000000000000000000
+    craftCount: 1
+    maxStackSize: 64
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Titainium Ingot
+    id: 10
+    description: Pure Titainium
+    sprite: {fileID: -43336359, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 3
+    prefabSingle: {fileID: 1165781369549906519, guid: f73bc44bd0604f34d94fc9bb198104c1,
+      type: 3}
+    prefabMultiple: {fileID: 5062213202219774381, guid: 3e981e506e5f6254cae607e7562f31a9,
+      type: 3}
+    worldPrefab: {fileID: 1660967605425422, guid: 55bd61d9b56b4264e897d93ea0b4dde8,
+      type: 3}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 050000000500000005000000
+      - cells: 000000000000000000000000
+    craftCount: 1
+    maxStackSize: 64
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Vibrainium Ingot
+    id: 11
+    description: Pure Vibrainium
+    sprite: {fileID: -556025175, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 241496222525010558, guid: 00ce0e348bb3b4d46b0ed4a722ae6827,
+      type: 3}
+    prefabMultiple: {fileID: 5374974976337682086, guid: fcf833a15b012764fb2e31ed3d5eadb5,
+      type: 3}
+    worldPrefab: {fileID: 1660967605425422, guid: fa24646df15ef544bb025cd369564117,
+      type: 3}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 060000000600000006000000
+      - cells: 000000000000000000000000
+    craftCount: 1
+    maxStackSize: 64
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0.153
+  - name: Stone Block
+    id: 12
+    description: A shaped bolder
+    sprite: {fileID: -1419517666, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 3760513245683418938, guid: 3efd96905a7fa124a8ece31eb56c5593,
+      type: 3}
+    prefabMultiple: {fileID: 51992633212294904, guid: e805d5e19c2ce0342b7942229b947b50,
+      type: 3}
+    worldPrefab: {fileID: 4505381274181030093, guid: 1ab5ef4e8bd54fa4aa13a541b23b92e7,
+      type: 3}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 010000000100000001000000
+      - cells: 010000000100000001000000
+      - cells: 010000000100000001000000
+    craftCount: 0
+    maxStackSize: 64
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 10
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Wood Block
+    id: 13
+    description: blank
+    sprite: {fileID: -1180597382, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 1
+    prefabSingle: {fileID: 987338391442486070, guid: 150216a58bf2c174b86585dba2a62cac,
+      type: 3}
+    prefabMultiple: {fileID: 9033042970187221341, guid: d41ac470ccfd9924099ccbe873477cd8,
+      type: 3}
+    worldPrefab: {fileID: 1621076832525100735, guid: 5bbd546d1f2848641b6e1e91c676c8dd,
+      type: 3}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 0e0000000e0000000e000000
+      - cells: 0e0000000e0000000e000000
+      - cells: 0e0000000e0000000e000000
+    craftCount: 1
+    maxStackSize: 64
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 10
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Wood Planks
+    id: 14
+    description: blank
+    sprite: {fileID: -497329262, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 3855000998394089469, guid: 3d7b8ab97554fd04095bfd3acde054cb,
+      type: 3}
+    prefabMultiple: {fileID: 3855000998394089469, guid: 3d7b8ab97554fd04095bfd3acde054cb,
+      type: 3}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 000000000d00000000000000
+      - cells: 000000000000000000000000
+    craftCount: 9
+    maxStackSize: 64
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Iron Block
+    id: 15
+    description: blank
+    sprite: {fileID: -236359468, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 7925819434022789281, guid: 38b65442d44927c438c350b4100552a7,
+      type: 3}
+    prefabMultiple: {fileID: 5097313695162689704, guid: 6d4e1b59fb28d4e40856a62018e7f919,
+      type: 3}
+    worldPrefab: {fileID: 1665286182977708627, guid: 5d1e7831636a8c545a317e9394ab1b27,
+      type: 3}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 070000000700000007000000
+      - cells: 070000000700000007000000
+      - cells: 070000000700000007000000
+    craftCount: 1
+    maxStackSize: 64
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Steel Block
+    id: 16
+    description: blank
+    sprite: {fileID: -631570485, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 3
+    prefabSingle: {fileID: 7164025559711065475, guid: 2e8a0512d39074d44b60311634b980d3,
+      type: 3}
+    prefabMultiple: {fileID: 8664708590045513041, guid: 0f0af6780cf5f9c4eb7298510ebb9838,
+      type: 3}
+    worldPrefab: {fileID: 4189378274423171422, guid: c7632fcc205ceb94f97edcfe62a87742,
+      type: 3}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 080000000800000008000000
+      - cells: 080000000800000008000000
+      - cells: 080000000800000008000000
+    craftCount: 1
+    maxStackSize: 64
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 80
+    IQ: 0
+    dexterity: 0
+    Luck: 0.03
+  - name: Gold Block
+    id: 17
+    description: blank
+    sprite: {fileID: 992670626, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 6303985771938256160, guid: 69ba6df48351994428a792170c1b1a10,
+      type: 3}
+    prefabMultiple: {fileID: 2509953797115351783, guid: ce709f1433706c747826d080f1f9a773,
+      type: 3}
+    worldPrefab: {fileID: 7536730684507510610, guid: f5903444196af764dbbd86ce9d921858,
+      type: 3}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 090000000900000009000000
+      - cells: 090000000900000009000000
+      - cells: 090000000900000009000000
+    craftCount: 1
+    maxStackSize: 64
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Titainium Block
+    id: 18
+    description: blank
+    sprite: {fileID: 721924618, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 1136125861495032953, guid: 1533f6897e9b36f4b87664f4e4aa2573,
+      type: 3}
+    prefabMultiple: {fileID: 3153364749023125798, guid: 6a45e784a39215e48ba9d7c45bde597b,
+      type: 3}
+    worldPrefab: {fileID: 3134041703333087503, guid: 85cea7974770ca14fb28fbd35a2270f2,
+      type: 3}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 0a0000000a0000000a000000
+      - cells: 0a0000000a0000000a000000
+      - cells: 0a0000000a0000000a000000
+    craftCount: 1
+    maxStackSize: 64
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Vibrainium Block
+    id: 19
+    description: blank
+    sprite: {fileID: -1084044766, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 5823191095549444802, guid: 10e4219b56bbb1c449cdbeda82a95e62,
+      type: 3}
+    prefabMultiple: {fileID: 5145933944420810753, guid: 820f0bf89a896c940a4464d62433e1cc,
+      type: 3}
+    worldPrefab: {fileID: 13595628397967600, guid: 272fb961bb0ca8445a2525d91edaba09,
+      type: 3}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 0b0000000b0000000b000000
+      - cells: 0b0000000b0000000b000000
+      - cells: 0b0000000b0000000b000000
+    craftCount: 1
+    maxStackSize: 64
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Wood Stick
+    id: 20
+    description: blank
+    sprite: {fileID: 31958587, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 8552064784636045168, guid: f1d3b3d0dbed19b49862d7cbfc0590d3,
+      type: 3}
+    prefabMultiple: {fileID: 8552064784636045168, guid: f1d3b3d0dbed19b49862d7cbfc0590d3,
+      type: 3}
+    worldPrefab: {fileID: 1520493659561722, guid: a0bf7231a8df3954aab4b9d7a736d32d,
+      type: 3}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 000000000e00000000000000
+      - cells: 000000000000000000000000
+    craftCount: 4
+    maxStackSize: 64
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Iron Rod
+    id: 21
+    description: blank
+    sprite: {fileID: -1160745805, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 1400107318944946, guid: 015e05a10a625ed449b92e005e5db5c1,
+      type: 3}
+    prefabMultiple: {fileID: 1226094928537626, guid: 4ae9d2f116ed3684e988671f707fa1f8,
+      type: 3}
+    worldPrefab: {fileID: 1795285872641222, guid: 27b1c2b43162bd84d9ed129a22a9c13b,
+      type: 3}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000700000000000000
+      - cells: 000000000700000000000000
+      - cells: 000000000700000000000000
+    craftCount: 4
+    maxStackSize: 64
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Steel Rod
+    id: 22
+    description: blank
+    sprite: {fileID: -1266368156, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 3406303460668664499, guid: d2622d646ab348840aa72010b4768356,
+      type: 3}
+    prefabMultiple: {fileID: 3406303460668664499, guid: d2622d646ab348840aa72010b4768356,
+      type: 3}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000800000000000000
+      - cells: 000000000800000000000000
+      - cells: 000000000800000000000000
+    craftCount: 4
+    maxStackSize: 64
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Gold Rod
+    id: 23
+    description: blank
+    sprite: {fileID: 371329991, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 1263628562283884449, guid: e5333e894bd9edb4b9a389df73d27b89,
+      type: 3}
+    prefabMultiple: {fileID: 1263628562283884449, guid: e5333e894bd9edb4b9a389df73d27b89,
+      type: 3}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000900000000000000
+      - cells: 000000000900000000000000
+      - cells: 000000000900000000000000
+    craftCount: 4
+    maxStackSize: 64
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Titainium Rod
+    id: 24
+    description: blank
+    sprite: {fileID: 1348008681, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 50571454018253668, guid: 49a150861bbc99b4591c80094daae059,
+      type: 3}
+    prefabMultiple: {fileID: 50571454018253668, guid: 49a150861bbc99b4591c80094daae059,
+      type: 3}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000a00000000000000
+      - cells: 000000000a00000000000000
+      - cells: 000000000a00000000000000
+    craftCount: 4
+    maxStackSize: 64
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Vibrainium Rod
+    id: 25
+    description: blank
+    sprite: {fileID: 1822923653, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 189759744653384678, guid: e7d895e0c9df10c4b8aa4e60b6394743,
+      type: 3}
+    prefabMultiple: {fileID: 189759744653384678, guid: e7d895e0c9df10c4b8aa4e60b6394743,
+      type: 3}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000b00000000000000
+      - cells: 000000000b00000000000000
+      - cells: 000000000b00000000000000
+    craftCount: 4
+    maxStackSize: 64
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Wood Axe
+    id: 101
+    description: blank
+    sprite: {fileID: -203393771, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 7145775297009741383, guid: dc92b2f920800db45bc29ec12e8cc490,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 0d0000000d00000000000000
+      - cells: 0d0000001400000000000000
+      - cells: 000000001400000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Stone Axe
+    id: 102
+    description: blank
+    sprite: {fileID: -2005405825, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 6796064121324867504, guid: f5beb75a42620cc439615710aee81c72,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 0c0000000c00000000000000
+      - cells: 0c0000001400000000000000
+      - cells: 000000001400000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Iron Axe
+    id: 103
+    description: blank
+    sprite: {fileID: -120949486, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 74717105552725930, guid: 33777b104d6c6de418512c98068d0e66,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 070000000700000000000000
+      - cells: 070000001400000000000000
+      - cells: 000000001400000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Steel Axe
+    id: 104
+    description: blank
+    sprite: {fileID: 250472492, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 6796064121324867504, guid: f5beb75a42620cc439615710aee81c72,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 080000000800000000000000
+      - cells: 080000001400000000000000
+      - cells: 000000001400000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Gold Axe
+    id: 105
+    description: blank
+    sprite: {fileID: -2119609678, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 2203626910832296917, guid: 66c5772dcbcf245469769e2fbeb4236c,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 090000000900000000000000
+      - cells: 090000001400000000000000
+      - cells: 000000001400000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Titainium Axe
+    id: 106
+    description: blank
+    sprite: {fileID: 1450546480, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 2203626910832296917, guid: 66c5772dcbcf245469769e2fbeb4236c,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 0a0000000a00000000000000
+      - cells: 0a0000001600000000000000
+      - cells: 000000001600000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Vibrainium Axe
+    id: 107
+    description: blank
+    sprite: {fileID: -1762948924, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 4499310909175678170, guid: 4a2ee7bf9a2c0ca44ac8bbb0458212ab,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 0b0000000b00000000000000
+      - cells: 0b0000001800000000000000
+      - cells: 000000001800000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Wood Sword
+    id: 108
+    description: blank
+    sprite: {fileID: 1898075585, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 4714459119018539055, guid: 8df447985ccb9124eaafbb6231edc172,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000e00000000000000
+      - cells: 000000000e00000000000000
+      - cells: 000000001400000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Stone Sword
+    id: 109
+    description: blank
+    sprite: {fileID: 779672843, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 513176174002114159, guid: 22ec895b7b9da464f96ba70a34e99f07,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000c00000000000000
+      - cells: 000000000c00000000000000
+      - cells: 000000001400000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Iron Sword
+    id: 110
+    description: blank
+    sprite: {fileID: -982727108, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 6862298518004055852, guid: 1f60c8303cefe4b4da765b63ce64d81c,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000700000000000000
+      - cells: 000000000700000000000000
+      - cells: 000000001400000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Steel Sword
+    id: 111
+    description: blank
+    sprite: {fileID: 2005877447, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 1194693943372998, guid: 05e8a13975f659d42bf26a767084f6b6,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 1194693943372998, guid: 15808bbb8f58dde46bbcd8a0d79009b2,
+      type: 3}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000800000000000000
+      - cells: 000000000800000000000000
+      - cells: 000000001500000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Gold Sword
+    id: 112
+    description: blank
+    sprite: {fileID: 1748575284, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 558794298704951965, guid: f465de5405234ce46a15e7a1a0647b24,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000900000000000000
+      - cells: 000000000900000000000000
+      - cells: 000000001600000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 1
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Titainium Sword
+    id: 113
+    description: blank
+    sprite: {fileID: -33186089, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 226362141668531296, guid: 9fc024292cf504440b45d817e75d5728,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000a00000000000000
+      - cells: 000000000a00000000000000
+      - cells: 000000001600000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Vibrainium Sword
+    id: 114
+    description: blank
+    sprite: {fileID: 1320801522, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 3
+    prefabSingle: {fileID: 4044762634663039105, guid: 957ab944f9bdd7249a3d8dfce322dafb,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000b00000000000000
+      - cells: 000000000b00000000000000
+      - cells: 000000001800000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Wood Shovel
+    id: 115
+    description: blank
+    sprite: {fileID: 486940445, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 2
+    prefabSingle: {fileID: 1469474084898978354, guid: cf8e307ff501e56448dc1ed8f05c05fc,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000d00000000000000
+      - cells: 000000001400000000000000
+      - cells: 000000001400000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Stone Shovel
+    id: 116
+    description: blank
+    sprite: {fileID: -98322347, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 4136042016550492855, guid: 236e77512eec3764b918fd207751fe4b,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000100000000000000
+      - cells: 000000001400000000000000
+      - cells: 000000001400000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Iron Shovel
+    id: 117
+    description: blank
+    sprite: {fileID: 1284606306, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 5344236914606983819, guid: 4d2efcccb6c4c0543a73eaffb949960c,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000700000000000000
+      - cells: 000000001400000000000000
+      - cells: 000000001400000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Steel Shovel
+    id: 118
+    description: blank
+    sprite: {fileID: -877477020, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 1129912153893382420, guid: 1ccc25ab80bbb524fbbbb388f17fec97,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000800000000000000
+      - cells: 000000001400000000000000
+      - cells: 000000001400000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Gold Shovel
+    id: 119
+    description: blank
+    sprite: {fileID: -1595332766, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 4640387000613101487, guid: df231865cf231ae4ba6ddfe56cd4b0ee,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000900000000000000
+      - cells: 000000001400000000000000
+      - cells: 000000001400000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Titainium Shovel
+    id: 120
+    description: blank
+    sprite: {fileID: -21199708, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 5304927976659982542, guid: c9292de63657ee5488e3b2a452e0822b,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000a00000000000000
+      - cells: 000000001400000000000000
+      - cells: 000000001400000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Vibrainium Shovel
+    id: 121
+    description: blank
+    sprite: {fileID: -1307999470, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 3
+    prefabSingle: {fileID: 2158849737839050376, guid: 32e709f20344f7f409f47512b218725d,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000b00000000000000
+      - cells: 000000001800000000000000
+      - cells: 000000001800000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Wood Pickaxe
+    id: 122
+    description: blank
+    sprite: {fileID: 1515260472, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 1830158322243155295, guid: 5b783c041b39a444bbc498d199ff8cf2,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000d0000000d000000
+      - cells: 00000000140000000d000000
+      - cells: 140000000000000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Stone Pickaxe
+    id: 123
+    description: blank
+    sprite: {fileID: 1489031470, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 6738385867052505576, guid: db616744625921644993810cf736ab01,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000100000001000000
+      - cells: 000000001400000001000000
+      - cells: 140000000000000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Iron Pickaxe
+    id: 124
+    description: blank
+    sprite: {fileID: -48949282, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 3923912451515753147, guid: fff2965f139e5d74cb94b7002ab1a080,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 5
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000700000007000000
+      - cells: 000000001400000007000000
+      - cells: 140000000000000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Steel Pickaxe
+    id: 125
+    description: blank
+    sprite: {fileID: 1334836010, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 2095873757179757088, guid: c64aaa63ae0cd084eb84326ad4996c97,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000800000008000000
+      - cells: 000000001500000008000000
+      - cells: 150000000000000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Gold Pickaxe
+    id: 126
+    description: blank
+    sprite: {fileID: -283899073, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 2839376236162068593, guid: 8b0d3386fab5e884e90890f9c5c0cc8e,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000900000009000000
+      - cells: 000000001600000009000000
+      - cells: 160000000000000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Titainium Pickaxe
+    id: 127
+    description: blank
+    sprite: {fileID: 1540588844, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 3714996012106282363, guid: 326d2d1d670deee41817f62ed0cfe112,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000a0000000a000000
+      - cells: 00000000160000000a000000
+      - cells: 160000000000000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Vibrainium Pickaxe
+    id: 128
+    description: blank
+    sprite: {fileID: -229708152, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 1230355569201947692, guid: f4dfdb876fc29664b971c02c74bb3a3e,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000b0000000b000000
+      - cells: 00000000180000000b000000
+      - cells: 180000000000000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 1
+    dexterity: 0
+    Luck: 0.136
+  - name: Leather Boots
+    id: 200
+    description: blank
+    sprite: {fileID: -984841724, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 1230355569201947692, guid: f4dfdb876fc29664b971c02c74bb3a3e,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 7
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 2d010000000000002d010000
+      - cells: 2d010000000000002d010000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 2
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Iron Boots
+    id: 201
+    description: blank
+    sprite: {fileID: 1002097240, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 7536231615467814218, guid: 705aaad480705e9448928768c2bb6cc8,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 6
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 070000000000000007000000
+      - cells: 070000000000000007000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Steel Boots
+    id: 202
+    description: blank
+    sprite: {fileID: 300379098, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 6333107536405368815, guid: 05bc0246e9baaf04ead849fc246816a3,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 7
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 080000000000000008000000
+      - cells: 080000000000000008000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 15
+    strength: 0
+    speed: -2.5
+    health: 2
+    stamina: 0
+    mana: 0
+    armor: 2
+    IQ: 0
+    dexterity: 1
+    Luck: 0.482
+  - name: Gold Boots
+    id: 203
+    description: blank
+    sprite: {fileID: 334997683, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 6333107536405368815, guid: 05bc0246e9baaf04ead849fc246816a3,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 7
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 090000000000000009000000
+      - cells: 090000000000000009000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Titainium Boots
+    id: 204
+    description: blank
+    sprite: {fileID: 139412269, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 1533681086588210774, guid: 902407cf146d9dd47b9e64ba1d428606,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 7
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 0a000000000000000a000000
+      - cells: 0a000000000000000a000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Vibrainium Boots
+    id: 205
+    description: blank
+    sprite: {fileID: -1005931029, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 1128629606184988136, guid: 9b65b5f87f88b444cb1ba44ebf2c8f6d,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 7
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 0b000000000000000b000000
+      - cells: 0b000000000000000b000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Leather Pants
+    id: 206
+    description: blank
+    sprite: {fileID: 764828138, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 824386665296683343, guid: c0be7950f1299ff46a82805cfe6249df,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 6
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 2d0100002d0100002d010000
+      - cells: 2d010000000000002d010000
+      - cells: 2d010000000000002d010000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 2.5
+    health: 3
+    stamina: 1
+    mana: 0.2
+    armor: 6
+    IQ: 11
+    dexterity: 3
+    Luck: 0.851
+  - name: Iron Pants
+    id: 207
+    description: blank
+    sprite: {fileID: 527755858, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 3542023787151247817, guid: 84bc477ff30b8b443aeef4cb1d334e9d,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 6
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 070000002d01000007000000
+      - cells: 2d010000000000002d010000
+      - cells: 070000000000000007000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Steel Pants
+    id: 208
+    description: blank
+    sprite: {fileID: -687743252, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 3034737408584665719, guid: 1b5a9aa06b22cb142b2e7f2c357668ce,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 6
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 080000000700000008000000
+      - cells: 070000000000000007000000
+      - cells: 080000000000000008000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Gold Pants
+    id: 209
+    description: blank
+    sprite: {fileID: 1901190537, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 7662800935200345320, guid: e7a37ffac92011e40901a13cebb5a28d,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 6
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 090000000800000009000000
+      - cells: 080000000000000008000000
+      - cells: 090000000000000009000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Titainium Pants
+    id: 210
+    description: blank
+    sprite: {fileID: -1298154929, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 5804712876343174965, guid: 3cce3830327f36445ab6309967fa026b,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 6
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 0a0000000a0000000a000000
+      - cells: 090000000000000009000000
+      - cells: 0a000000000000000a000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Vibrainium Pants
+    id: 211
+    description: blank
+    sprite: {fileID: -722437701, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 6885084310896956111, guid: 855286d566624774e9928b29a0a56d2a,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 6
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 0b0000000a0000000b000000
+      - cells: 0a000000000000000a000000
+      - cells: 0b000000000000000b000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Leather Tunic
+    id: 212
+    description: blank
+    sprite: {fileID: -1782854097, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 6828119842200359586, guid: 38a0997faa2d62b4bb5415cf224a9d84,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 2
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 2d010000000000002d010000
+      - cells: 2d0100002d0100002d010000
+      - cells: 2d0100002d0100002d010000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Iron Tunic
+    id: 213
+    description: blank
+    sprite: {fileID: 1524197996, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 6828119842200359586, guid: 38a0997faa2d62b4bb5415cf224a9d84,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 2
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 070000000000000007000000
+      - cells: 070000002d01000007000000
+      - cells: 070000000700000007000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: -0.5
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 10
+    IQ: 0
+    dexterity: -1
+    Luck: 0.707
+  - name: Steel Tunic
+    id: 214
+    description: blank
+    sprite: {fileID: -392217224, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 3810744233372575823, guid: a0d78ac752961084496456c308d0daf0,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 2
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 080000000000000008000000
+      - cells: 080000002d01000008000000
+      - cells: 080000000800000008000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Gold Tunic
+    id: 215
+    description: blank
+    sprite: {fileID: 1335670084, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 6117028659337113867, guid: 8b75cdd617513254eb1a642df56c16f5,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 2
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 090000000000000009000000
+      - cells: 090000002d01000009000000
+      - cells: 090000000900000009000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 1
+    mana: 0
+    armor: 3
+    IQ: 0
+    dexterity: 0
+    Luck: 0.227
+  - name: Titainium Tunic
+    id: 216
+    description: blank
+    sprite: {fileID: 1067455859, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 5653197927745001864, guid: f079f3914bba8b94f8323635b367e655,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 1194693943372998, guid: d8b7fc1c687ec1d449e8476785b3c8f0,
+      type: 3}
+    itemType: 2
+    slotType: 2
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 0a000000000000000a000000
+      - cells: 0a0000002d0100000a000000
+      - cells: 0a0000000a0000000a000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Vibrainium Tunic
+    id: 217
+    description: blank
+    sprite: {fileID: 217348387, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 5653197927745001864, guid: f079f3914bba8b94f8323635b367e655,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 2
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 0b000000000000000b000000
+      - cells: 0b0000002d0100000b000000
+      - cells: 0b0000000b0000000b000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Leather Helm
+    id: 218
+    description: blank
+    sprite: {fileID: -880231198, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 6036195131375351732, guid: 6e1c42ddebdae934fa8046e0f6c01fc5,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 1
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 2d0100002d0100002d010000
+      - cells: 2d010000000000002d010000
+      - cells: 000000000000000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 1
+    stamina: 5
+    mana: 0
+    armor: 2
+    IQ: 1.5
+    dexterity: 0
+    Luck: 0.608
+  - name: Iron Helm
+    id: 219
+    description: blank
+    sprite: {fileID: 349814538, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 7665874134706852372, guid: 625546dc393d93f449a84646dfe0d2c4,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 1
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 070000000700000007000000
+      - cells: 070000002d01000007000000
+      - cells: 000000000000000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Steel Helm
+    id: 220
+    description: blank
+    sprite: {fileID: 124074221, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 508832151403566700, guid: dc4858954e32d15428feeb2aebefb255,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 1
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 080000000800000008000000
+      - cells: 080000002d01000008000000
+      - cells: 000000000000000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Gold Helm
+    id: 221
+    description: blank
+    sprite: {fileID: 1005803271, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 2023348668310301955, guid: 1a2fc6c345ffc0c4cbe299ccd8bb8220,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 1
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 090000000900000009000000
+      - cells: 090000002d01000009000000
+      - cells: 000000000000000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Titainium Helm
+    id: 222
+    description: blank
+    sprite: {fileID: 1848399999, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 8174075248418158378, guid: d47fdd18c1370294a89cc860b5888db4,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 1
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 0a0000000a0000000a000000
+      - cells: 0a0000002d0100000a000000
+      - cells: 000000000000000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 5
+    IQ: 0
+    dexterity: 0
+    Luck: 0.7
+  - name: Vibrainum Helm
+    id: 223
+    description: blank
+    sprite: {fileID: 2036374081, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 2032604033209473860, guid: 0dce6fb320120ba49aecee8a5dc664aa,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 1
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 0b0000000b0000000b000000
+      - cells: 0b0000002d0100000b000000
+      - cells: 000000000000000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Torch
+    id: 300
+    description: blank
+    sprite: {fileID: -1115082094, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 6320216645726763734, guid: fb45d744c42629f42a2e93ff2f5f94d4,
+      type: 3}
+    prefabMultiple: {fileID: 6320216645726763734, guid: fb45d744c42629f42a2e93ff2f5f94d4,
+      type: 3}
+    worldPrefab: {fileID: 1902317910161082, guid: 434da4f535ccb1542ab4aede1aed5b7c,
+      type: 3}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 000000000200000000000000
+      - cells: 000000001400000000000000
+    craftCount: 4
+    maxStackSize: 64
+    maxDurability: 2
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Leather
+    id: 301
+    description: blank
+    sprite: {fileID: 781701214, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 1635672122186198997, guid: 49b3d10638340884aa0fb6b0fb1aa5ee,
+      type: 3}
+    prefabMultiple: {fileID: 1635672122186198997, guid: 49b3d10638340884aa0fb6b0fb1aa5ee,
+      type: 3}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+    craftCount: 4
+    maxStackSize: 64
+    maxDurability: 1
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Chest
+    id: 302
+    description: blank
+    sprite: {fileID: 1883198268, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 1
+    prefabSingle: {fileID: 1700630183180908, guid: 4f907e96a669d7346bdde51000c5f840,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 1199596462942388, guid: 6ad6da87b0c7cf848b01b75bb1d65857,
+      type: 3}
+    itemType: 4
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 0e0000000e0000000e000000
+      - cells: 0e000000000000000e000000
+      - cells: 0e0000000e0000000e000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 1
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Crafting Table
+    id: 303
+    description: blank
+    sprite: {fileID: -545469724, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 1
+    prefabSingle: {fileID: 1700630183180908, guid: 8c774e720c5047a4dab4f1774c64cc1f,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 1199596462942388, guid: cc8a64039aa51cd4c8a325fa90912742,
+      type: 3}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 070000000700000007000000
+      - cells: 0e0000000f0000000e000000
+      - cells: 0e0000000e0000000e000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 1
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Furnace
+    id: 304
+    description: blank
+    sprite: {fileID: -2003118433, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 2
+    prefabSingle: {fileID: 1700630183180908, guid: 75f265e0052b8d14a91b193495a23315,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 1199596462942388, guid: f71b95519a5573a49ad7febf5f106029,
+      type: 3}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 1
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 0c0000002c0100000c000000
+      - cells: 0c0000000c0000000c000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 1
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0

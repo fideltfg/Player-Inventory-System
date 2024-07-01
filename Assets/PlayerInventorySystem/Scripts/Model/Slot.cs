@@ -26,7 +26,7 @@ namespace PlayerInventorySystem
         public bool selected = false;
 
 
-        private Action<Slot> SlotChanged;
+        internal Action<Slot> SlotChanged;
 
         /// <summary>
         /// The type of slot this is
@@ -119,7 +119,7 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="val"></param>
         /// <returns></returns>
-        internal bool SetItemStackCount(int val)
+        internal bool SetStackCount(int val)
         {
             if (Item != null)
             {
@@ -140,7 +140,7 @@ namespace PlayerInventorySystem
         /// <returns>true on success else false</returns>
         internal bool IncermentStackCount(int val)
         {
-            return SetItemStackCount(StackCount + val);
+            return SetStackCount(StackCount + val);
         }
 
         /// <summary>

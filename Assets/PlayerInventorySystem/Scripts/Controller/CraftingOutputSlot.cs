@@ -37,13 +37,18 @@ namespace PlayerInventorySystem
         public override void OnPointerDown(PointerEventData eventData)
         {
 
+            // check the player input controler to see if the player is holding down shift
+
+
+
             // if there is an item in the output slot
             if (!Slot.IsEmpty && Slot.Item != null)
             {
                 if (HeldItem == null)
                 {
                     // if the player is holding down shift
-                    if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+                 //   if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+                 if(InventoryController.InputModifier)
                     {
                         // calculate how many items can be crafted with the items in the crafting array
                         int craftCount = MaxCraftCount();
@@ -85,6 +90,7 @@ namespace PlayerInventorySystem
                     }
                     else
                     {
+                        Debug.Log("Normal Click");
                         // pick up one crafted stack
 
                         // clone this item  to the held Item 
@@ -93,10 +99,11 @@ namespace PlayerInventorySystem
                         Consume();
                     }
                 }
-
+                
                 // if held item is not null but held item is the same as this Item
                 else
                 {
+                    Debug.Log("HeldItem is not null");
 
                     if (HeldItem.Data.id == Slot.Item.Data.id)
                     {

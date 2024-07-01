@@ -1,10 +1,9 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using UnityEngine;
 
 namespace PlayerInventorySystem
 {
-    public class Mineable : PlacedItem
+    public class Mineable : Interactive
     {
 
         // the max  number of items that could be mined here
@@ -21,10 +20,13 @@ namespace PlayerInventorySystem
         public int minedItemID = 0;
 
         // the amount for time it takes to reset the mineing on this item and allow another hit
-        [Tooltip("HOw long it takes for hit counter to reset to 0 shoudl the player leave")]
+        [Tooltip("How long it takes for hit counter to reset to 0 should the player leave")]
         public float refreshRate = 5;
 
         float refreshCounter = 0;
+
+        [Tooltip("If true the mined item will be added to the player inventory else it will be spawned in the world")]
+        public bool mineToPlayerInventory = false;
 
         /// <summary>
         /// Method to mine this item. a hit is the act of the player striking the minable once
@@ -32,26 +34,24 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="hitPower"> how hard the player hits the minable</param>
         /// <returns>the item that was mined if any else null</returns>
-        internal Item Mine(float hitPower)
+        internal Item Mine(Item toolItem)
         {
+            float hitPower = toolItem.Data.damage + InventoryController.Character.Damage;
             hitCounter++; // add a hit
             Item minedItem = null;
             // if the hit counter is greater than the hit rate then mine the item
             if (hitCounter > (hitRate / hitPower))
             {
-                Debug.Log("Mined");
                 refreshCounter = 0;
                 hitCounter = 0;
-                // give the player the mined item or spawn it in the world
                 resourceCount--;
                 minedItem = Item.New(minedItemID);
             }
 
-
             return minedItem;
         }
 
-        private void Update()
+        public virtual void Update()
         {
             if (hitCounter > 0)
             {
@@ -73,6 +73,6 @@ namespace PlayerInventorySystem
             }
 
         }
-
+ 
     }
 }

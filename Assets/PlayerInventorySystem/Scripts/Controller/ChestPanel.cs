@@ -73,7 +73,7 @@ namespace PlayerInventorySystem
         // Method to populate the chest with items
         private void Populate(ChestController chest)
         {
-            Index = chest.ChestID;
+            Index = chest.ID;
 
             Inventory inv = chest.Inventory;
 

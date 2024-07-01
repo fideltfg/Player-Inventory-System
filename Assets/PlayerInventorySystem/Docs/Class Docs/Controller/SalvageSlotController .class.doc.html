@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SalvageSlotController Class Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #2e6da4;
+        }
+        .section p {
+            margin: 5px 0;
+        }
+        .code {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>SalvageSlotController Class</h1>
+    <p>Handles interactions with slots in the salvage panel, extending the functionality of the base `SlotController`.</p>
+
+    <div class="section">
+        <h2>Overrides</h2>
+
+        <h3>SetOutLineColor</h3>
+        <p>Sets the outline color of the slot based on the recyclability of the held item.</p>
+        <div class="code">
+            <pre><code>internal override void SetOutLineColor();</code></pre>
+        </div>
+
+        <h3>OnPointerDown</h3>
+        <p>Handles the mouse pointer down event on this slot.</p>
+        <div class="code">
+            <pre><code>public override void OnPointerDown(PointerEventData eventData);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>eventData</strong>: The pointer event data.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Usage Examples</h2>
+
+        <h3>Example: Handle pointer down event on a salvage slot</h3>
+        <div class="code">
+            <pre><code>public void OnPointerDown(PointerEventData eventData) {
+    salvageSlotController.OnPointerDown(eventData);
+    Debug.Log("Pointer down on salvage slot");
+}</code></pre>
+        </div>
+
+        <h3>Example: Set the outline color of a salvage slot</h3>
+        <div class="code">
+            <pre><code>salvageSlotController.SetOutLineColor();
+Debug.Log("Outline color set for salvage slot");</code></pre>
+        </div>
+    </div>
+</body>
+</html>

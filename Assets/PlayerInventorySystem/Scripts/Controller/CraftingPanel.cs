@@ -18,10 +18,14 @@ namespace PlayerInventorySystem
 
         public override void Update()
         {
-            Item craftedItem = GetItemByIngredients(GivenItemsAsRecipe(InventoryController.Instance.CraftingPanel.SlotList));
+            Item craftedItem = InventoryController.GetItemByIngredients(GivenItemsAsRecipe(InventoryController.Instance.CraftingPanel.SlotList));
             if (outputSlot != null)
             {
-                outputSlot.Slot.SetItem(craftedItem);
+                // if the crafted item requires a furnace then it can not be crafted here
+               // if (craftedItem.Data.requiresFurnace == false)
+               // {
+                    outputSlot.Slot.SetItem(craftedItem);
+               // }
             }
         }
 
@@ -35,7 +39,7 @@ namespace PlayerInventorySystem
                 {
                     if(InventoryController.GiveItem(slotController.Slot.Item.Data.id, slotController.Slot.Item.StackCount)  == false)
                     {
-                        InventoryController.Instance.PlayerInventoryControler.DropItem(slotController.Slot.Item, slotController.Slot.Item.StackCount);
+                        InventoryController.Instance.PlayerInventoryControler.DropItem(slotController.Slot.Item, slotController.Slot.Item.StackCount, slotController.Slot.Item.Durability);
                     }
                     slotController.Slot.SetItem(null);
                 }
@@ -86,23 +90,7 @@ namespace PlayerInventorySystem
             char[] t = { 'X' };
             return recipe.Trim(t);
         }
-
-        private Item GetItemByIngredients(string ingredients)
-        {
-            if (ingredients.Length <= 0)
-            {
-                return null;
-            }
-
-            foreach (ItemData itemData in InventoryController.Instance.ItemCatalog.list)
-            {
-                if (itemData.recipe.Ingredients.Equals(ingredients))
-                {
-                    return Item.New(itemData.id, itemData.craftCount);
-                }
-            }
-            return null;
-        }
+ 
 
     }
 }

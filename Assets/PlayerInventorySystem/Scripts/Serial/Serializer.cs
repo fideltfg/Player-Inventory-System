@@ -1,20 +1,16 @@
 ﻿using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using System;
 using System.Security.Cryptography;
 using System.Linq;
-using static UnityEditor.Progress;
-using UnityEngine.UIElements;
-
 
 namespace PlayerInventorySystem.Serial
 {
     public class Serializer
     {
         // File paths and encryption keys
-        public static string SavePath = "Data";
-        public static string SaveFile = "data.dat";
+        private const string SavePath = "Data";
+        private const string SaveFile = "data.dat";
 
         private static readonly byte[] kk = { 0x93, 0x17, 0x01, 0x9C, 0xE6, 0xB7, 0x11, 0xD1, 0xE0, 0xE7, 0x1E, 0x5E, 0xF8, 0x17, 0xA5, 0xCC, 0xB3, 0x05, 0x88, 0x26, 0xA5, 0x25, 0x15, 0xBD };
         private static readonly byte[] ii = { 0xD5, 0x65, 0x05, 0xF9, 0xD4, 0x06, 0xDC, 0x42 };
@@ -23,31 +19,28 @@ namespace PlayerInventorySystem.Serial
         /// private static readonly byte[] ii = { *//* Initialization Vector - 8 bytes *//* };
 
         // Array of panels for serialization
-        private static InventorySystemPanel[] panels = { InventoryController.Instance.InventoryPanel, InventoryController.Instance.CharacterPanel, InventoryController.Instance.CraftingPanel, InventoryController.Instance.ChestPanel };
+        private static readonly InventorySystemPanel[] panels =
+        {
+            InventoryController.Instance.InventoryPanel,
+            InventoryController.Instance.CharacterPanel,
+            InventoryController.Instance.CraftingPanel,
+            InventoryController.Instance.ChestPanel,
+            InventoryController.Instance.SalvagePanel,
+           // InventoryController.Instance.FurnacePanel,
+            InventoryController.Instance.AdvancedInventoryPanel
+
+        };
 
         // Helper method to get the complete inventory save location
-        private static string InventorySaveLocation
-        {
-            get
-            {
-                if (InventoryController.Instance.UsePersistentDataPath)
-                {
-                    string s = Application.persistentDataPath + "/" + SavePath + "/" + SaveFile;
-                    // Debug.Log(s);
-                    return s;
-                }
-                else
-                {
-                    //Debug.Log(SavePath + "/" + SaveFile);
-                    return SavePath + "/" + SaveFile;
-                }
-            }
-        }
+        private static string InventorySaveLocation =>
+            InventoryController.Instance.UsePersistentDataPath
+                ? Path.Combine(Application.persistentDataPath, SavePath, SaveFile)
+                : Path.Combine(SavePath, SaveFile);
 
         // Method used by InventoryController to save the inventory data
         internal static void Save()
         {
-            SerialSaveDataObject ssdo = GetSerializeGameData();
+            var ssdo = GetSerializeGameData();
             WriteToBinaryFile(InventorySaveLocation, ssdo);
         }
 
@@ -56,250 +49,146 @@ namespace PlayerInventorySystem.Serial
         {
             if (File.Exists(InventorySaveLocation))
             {
-                SerialSaveDataObject ssdo = ReadFromBinaryFile<SerialSaveDataObject>(InventorySaveLocation);
-
+                var ssdo = ReadFromBinaryFile<SerialSaveDataObject>(InventorySaveLocation);
                 LoadSerialInventoryData(ssdo);
                 return true;
             }
-            else
-            {
-                //if you need to do something if the file does not exist do it here
-                Debug.Log("Save Data File Not Found!");
 
-                return false;
-            }
-           
+            Debug.Log("Save Data File Not Found!");
+            return false;
         }
 
         // Helper method to check and create a folder if it does not exist
         private static bool CheckGenFolder(string path)
         {
-            if (Directory.Exists(path))
+            if (Directory.Exists(path)) return true;
+            try
             {
+                Directory.CreateDirectory(path);
                 return true;
             }
-            else
+            catch (System.Exception e)
             {
-                try
-                {
-                    Directory.CreateDirectory(path);
-                    return true;
-                }
-                catch (System.Exception e)
-                {
-                    Debug.Log(e.StackTrace.ToString());
-                }
+                Debug.Log(e.StackTrace);
+                return false;
             }
-            return false;
         }
 
         // Helper method to write an object instance to a binary file
         private static void WriteToBinaryFile<T>(string filePath, T objectToWrite, bool append = false)
         {
-            // Create the folder if it does not exist
             CheckGenFolder(SavePath);
 
-
-            // Create the file if it does not exist
             using var fs = new FileStream(filePath, append ? FileMode.Append : FileMode.Create);
+            using var des = new TripleDESCryptoServiceProvider();
+            using var s = new CryptoStream(fs, des.CreateEncryptor(kk, ii), CryptoStreamMode.Write);
 
-            // Encrypt the file
-            TripleDESCryptoServiceProvider des = new();
-
-
-            // Write the object to the file
-            using CryptoStream s = new(fs, des.CreateEncryptor(kk, ii), CryptoStreamMode.Write);
-
-            // Serialize the object
-            BinaryFormatter formatter = new();
+            var formatter = new BinaryFormatter();
             formatter.Serialize(s, objectToWrite);
 
-
-            // Serialize the object to JSON
-            string json = JsonUtility.ToJson(objectToWrite, true);
-
-            // Write the JSON to the file
-            File.WriteAllText(SavePath + "/data.json", json);
-
-            s.Close();
-
+            var json = JsonUtility.ToJson(objectToWrite, true);
+            File.WriteAllText(Path.Combine(SavePath, "data.json"), json);
         }
 
         // Helper method to read an object instance from a binary file
         private static T ReadFromBinaryFile<T>(string filePath) where T : class
         {
-            TripleDESCryptoServiceProvider des = new();
             using var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+            using var des = new TripleDESCryptoServiceProvider();
             using var s = new CryptoStream(fs, des.CreateDecryptor(kk, ii), CryptoStreamMode.Read);
-            BinaryFormatter f = new();
-            object o = f.Deserialize(s) as T;
-            s.Close();
-            return (T)o;
+
+            var formatter = new BinaryFormatter();
+            return formatter.Deserialize(s) as T;
         }
 
         // Helper method to load the serialized inventory data
         private static void LoadSerialInventoryData(SerialSaveDataObject data)
         {
-            SerialInventory[] sInventories = data.Inventories;
-            SerialChest[] sChests = data.Chests;
-            SerialRect[] sPanels = data.PanelLocations;
-            SerialDroppedItem[] sDroppedItems = data.DroppedItems;
-            SerialPlacedItem[] sPlacedItems = data.PlacedItems;
-            InventoryController.Character = data.Character;
-            // Debug.Log("Loading Inventory Data");
-            // Load all inventories
+            var sInventories = data.Inventories;
+            InventoryController.PlayerInventoryCapacity = sInventories[0]?.SerialSlots?.Length ?? 24;
 
-            if (sInventories[0] != null)
-            {
-                if (sInventories[0].SerialSlots != null)
-                {
-                    InventoryController.PlayerInventoryCapacity = sInventories[0].SerialSlots.Length;
-                }
-                else
-                {
-                    // REDUNDANT??
-                    InventoryController.PlayerInventoryCapacity = 24;
-                }
-            }
-
-            foreach (SerialInventory sInv in sInventories)
+            foreach (var sInv in sInventories)
             {
                 InventoryController.InventoryList[sInv.Index] = new Inventory(sInv);
             }
 
-            // Load saved chests
-            foreach (SerialChest sc in sChests)
+            foreach (var sc in data.Chests)
             {
-                _ = InventoryController.SpawnChest(sc.ChestID, sc.ItemID, sc.Transform.Position, Quaternion.Euler(sc.Transform.Rotation), sc.Transform.Scale, new Inventory(sc.Inventory));
+                InventoryController.SpawnChest(sc.ChestID, sc.ItemID, sc.Transform.Position, Quaternion.Euler(sc.Transform.Rotation), sc.Transform.Scale, new Inventory(sc.Inventory));
             }
 
-            // Load panel locations
             for (int i = 0; i < panels.Length; i++)
             {
-                if (panels[i].TryGetComponent<RectTransform>(out RectTransform rt))
+                if (panels[i].TryGetComponent<RectTransform>(out var rt))
                 {
                     // DISABLED FOR NOW
-                    // rt.sizeDelta = sPanels[i].Size;
-                    // rt.position = sPanels[i].Position;
+                    rt.sizeDelta = data.PanelLocations[i].Size;
+                    rt.position = data.PanelLocations[i].Position;
                 }
             }
 
-            // Load and spawn dropped items
-            foreach (SerialDroppedItem sdi in sDroppedItems)
+            foreach (var sdi in data.DroppedItems)
             {
-                if (sdi != null && sdi.ItemID > 0)
+                if (sdi?.ItemID > 0)
                 {
                     InventoryController.Instance.SpawnDroppedItem(sdi);
                 }
             }
 
-            // load and spawn placed items
-            foreach (SerialPlacedItem spi in sPlacedItems)
+            foreach (var spi in data.PlacedItems)
             {
-                Item item = Item.New(spi.ItemID);
+                var item = Item.New(spi.ItemID);
                 if (item.Data.worldPrefab != null)
                 {
                     switch (item.Data.worldPrefab.tag.ToLower())
                     {
                         case "chest":
-                            _ = InventoryController.SpawnChest(InventoryController.GetNewChestID(), spi.ItemID, spi.Transform.Position, Quaternion.Euler(spi.Transform.Rotation), spi.Transform.Scale);
+                            InventoryController.SpawnChest(InventoryController.GetNewChestID(), spi.ItemID, spi.Transform.Position, Quaternion.Euler(spi.Transform.Rotation), spi.Transform.Scale);
                             InventoryController.OnPlaceItem(item, null, false);
                             break;
                         case "craftingtable":
-                            CraftingTableController cTc = InventoryController.SpawnCraftingTable(spi.ItemID, spi.Transform.Position, Quaternion.Euler(spi.Transform.Rotation), spi.Transform.Scale);
+                            var cTc = InventoryController.SpawnCraftingTable(spi.ItemID, spi.Transform.Position, Quaternion.Euler(spi.Transform.Rotation), spi.Transform.Scale);
                             InventoryController.OnPlaceItem(item, cTc, false);
                             break;
                         default:
-                            GameObject go = GameObject.Instantiate(item.Data.worldPrefab, spi.Transform.Position, Quaternion.Euler(spi.Transform.Rotation));
-                            PlacedItem pi = go.AddComponent<PlacedItem>();
+                            var go = GameObject.Instantiate(item.Data.worldPrefab, spi.Transform.Position, Quaternion.Euler(spi.Transform.Rotation));
+                            var pi = go.AddComponent<PlacedItem>();
                             InventoryController.OnPlaceItem(item, pi, false);
                             break;
                     }
-
                 }
-
             }
         }
 
         // Helper method to get the serialized inventory data
         private static SerialSaveDataObject GetSerializeGameData()
         {
-            //   Debug.Log("Collecting Data to Save");
+            var inventories = InventoryController.InventoryList.Values.ToArray();
+            var sInventories = inventories.Select(inventory => new SerialInventory(inventory)).ToArray();
 
-            //  Debug.Log("Collecting Inventories");
-            Inventory[] inventories = InventoryController.InventoryList.Values.ToArray();
-            int playerInventoryCapacity = InventoryController.PlayerInventoryCapacity;
-            SerialInventory[] sInventories = new SerialInventory[inventories.Length];
+            var sChests = InventoryController.ChestMap.Values
+                .Select(chestObject => chestObject.GetComponent<ChestController>())
+                .Select(cc => new SerialChest(cc.ItemID, new SerialTransform(cc.transform)) { Inventory = new SerialInventory(cc.Inventory), ChestID = cc.ID })
+                .ToArray();
 
-
-            // Convert each inventory to SerialInventory
-
-            foreach (Inventory inventory in inventories)
+            var sPanelLocations = panels.Select(panel =>
             {
-                sInventories[inventory.Index] = new SerialInventory(inventory);
-            }
+                panel.TryGetComponent<RectTransform>(out var rt);
+                return rt != null ? new SerialRect(rt) : null;
+            }).ToArray();
 
-            // Convert chests to SerialChest
-            // Debug.Log("Converting Chests to SerialChests");
-            SerialChest[] sChests = new SerialChest[InventoryController.ChestMap.Count];
-            int ii = 0;
-            foreach (GameObject chestObject in InventoryController.ChestMap.Values)
+            var sDroppedItems = InventoryController.Instance.DroppedItems
+                .Select(di => new SerialDroppedItem(di.ItemID, new SerialTransform(di.transform), di.StackCount, di.TimeToLive - di.Timer))
+                .ToArray();
+
+            var sPlacedItems = InventoryController.PlacedItems
+                .Select(pi => new SerialPlacedItem(pi.ItemID, new SerialTransform(pi.transform)))
+                .ToArray();
+
+            return new SerialSaveDataObject(sInventories, sChests, sPanelLocations, sDroppedItems, sPlacedItems, InventoryController.Character)
             {
-                ChestController cc = chestObject.GetComponent<ChestController>();
-                sChests[ii] = new SerialChest(cc.ItemID, new(cc.transform))
-                {
-                    Inventory = new(cc.Inventory),
-                    ChestID = cc.ChestID
-                };
-                ii++;
-            }
-
-            // Collect panel locations
-            // Debug.Log("Collecting Panel Locations");
-            SerialRect[] sPanelLocations = new SerialRect[panels.Length];
-            for (int i = 0; i < panels.Length; i++)
-            {
-                //  Debug.Log("Converting Panel " + i + " to SerialRect");
-                if (panels[i].TryGetComponent<RectTransform>(out var rt))
-                {
-                    sPanelLocations[i] = new SerialRect(rt);
-                }
-                else
-                {
-                    sPanelLocations[i] = null;
-                }
-            }
-
-            // Collect data for dropped and spawned items
-            //Debug.Log("Collecting Dropped Items");
-            SerialDroppedItem[] sDroppedItems = new SerialDroppedItem[InventoryController.Instance.DroppedItems.Count];
-            int x = 0;
-            foreach (DroppedItem di in InventoryController.Instance.DroppedItems)
-            {
-                //  Debug.Log("Converting Dropped Item " + di.name + " to SerialDroppedItem");
-                sDroppedItems[x] = new SerialDroppedItem(di.ItemID, new SerialTransform(di.transform), di.StackCount, di.TimeToLive - di.Timer);
-                x++;
-            }
-
-
-            // Collect data for placed items
-            //Debug.Log("Collecting Placed Items");
-            SerialPlacedItem[] sPlacedItems = new SerialPlacedItem[InventoryController.PlacedItems.Count];
-            int p = 0;
-            foreach (PlacedItem pi in InventoryController.PlacedItems)
-            {
-                //  Debug.Log("Converting Placed Item " + pi.name + " to SerialPlacedItem");
-                sPlacedItems[p] = new SerialPlacedItem(pi.ItemID, new SerialTransform(pi.transform));
-                p++;
-            }
-
-            Character character = InventoryController.Character;
-
-            SerialSaveDataObject ssdo = new SerialSaveDataObject(sInventories, sChests, sPanelLocations, sDroppedItems, sPlacedItems, character);
-
-            ssdo.PlayerInventoryCapacity = playerInventoryCapacity;
-            return ssdo;
+                PlayerInventoryCapacity = InventoryController.PlayerInventoryCapacity
+            };
         }
-
     }
 }

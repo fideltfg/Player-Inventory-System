@@ -1,8 +1,6 @@
-﻿using UnityEngine;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
 using PlayerInventorySystem.Serial;
-using static UnityEditor.Experimental.GraphView.Port;
 
 namespace PlayerInventorySystem
 {
@@ -301,6 +299,12 @@ namespace PlayerInventorySystem
             return 0;
         }
 
-
+        internal void EmptyAllSlots()
+        {
+            foreach (Slot slot in this)
+            {
+                slot.SetItem(null);
+            }
+        }
     }
 }

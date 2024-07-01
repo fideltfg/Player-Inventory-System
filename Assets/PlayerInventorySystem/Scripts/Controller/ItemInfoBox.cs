@@ -78,14 +78,14 @@ namespace PlayerInventorySystem
                     //gameObject.GetComponent<RectTransform>().sizeDelta = new Vector2(120, 135);
                     this.damage.text = item.Data.damage.ToString();
 
-                    this.speed.text = item.Data.Speed.ToString();
-                    this.strength.text = item.Data.Strength.ToString();
+                    this.speed.text = item.Data.speed.ToString();
+                    this.strength.text = item.Data.strength.ToString();
                     this.health.text = item.Data.health.ToString();
                     this.stamina.text = item.Data.stamina.ToString();
                     this.mana.text = item.Data.mana.ToString();
                     this.armor.text = item.Data.armor.ToString();
                     this.IQ.text = item.Data.IQ.ToString();
-                    this.dexterity.text = item.Data.Dexterity.ToString();
+                    this.dexterity.text = item.Data.dexterity.ToString();
                     this.itemID.text = item.Data.id.ToString();
                     this.ItemType.text = ((ITEMTYPE)item.Data.itemType).ToString();
                     this.SlotType.text = item.Data.slotType.ToString();

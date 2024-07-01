@@ -21,20 +21,11 @@ namespace PlayerInventorySystem
         [Tooltip("The human readable name of this object")]
         public string name;
 
-        public MATERIALTYPE BaseMaterial;
-
-
-        public Enum MaterialVariant;
-
-
         /// <summary>
         /// The catalog ID of this item
         /// </summary>
         [Tooltip("The catalog ID of this item")]
         public int id;
-
-        [Tooltip("Indicates if this item will be consumed/used when picked up. Item will not be placed in inventory. Use this for things like food or health packs that automaticaly aply when picked up.")]
-        public bool ConsumeOnPickup = false;
 
         /// <summary>
         /// A brife description of this item
@@ -48,6 +39,13 @@ namespace PlayerInventorySystem
         [Tooltip("The inventory sprite used to display this item in slots")]
         [PreviewSprite]
         public Sprite sprite;
+
+
+        public MATERIALTYPE BaseMaterial;
+
+
+        public Enum MaterialVariant;
+
 
         /// <summary>
         /// The prefab that will represent a single instance of the item in your game world.
@@ -80,12 +78,46 @@ namespace PlayerInventorySystem
         [Tooltip("Defines the type of slot this item requires")]
         public SLOTTYPE slotType;
 
-        /// <summary>
-        /// The max number of this item that can be stacked in one slot
-        /// </summary>
-        [Tooltip("The max number of this item that can be stacked in one slot")]
-        public int maxStackSize = 5; // default and min = 1
+        [Tooltip("Indicates if this item will be consumed/used when picked up. Item will not be placed in inventory. Use this for things like food or health packs that automaticaly aply when picked up.")]
+        public bool ConsumeOnPickup = false;
 
+        /// <summary>
+        /// Set true to require a furnace to craft this item. Setting true locks this item out of the crafting and salvaging panels
+        /// </summary>
+        [Tooltip("Set true to require a furnace to craft this item. Setting true locks this item out of the crafting and salvaging panels")]
+        public bool requiresFurnace = false;
+
+        /// <summary>
+        /// The time it takes to smelt this item in a furnace
+        /// </summary>
+        [Tooltip("The time it takes to smelt this item in a furnace.")]
+        public float smeltTime = 10;
+
+        /// <summary>
+        /// Indicates if the item can be used as a fuel source.
+        /// </summary>
+        [Tooltip("Indicates if the item can be used as a fuel source.")]
+        public bool canBeFuel = false;
+
+        /// <summary>
+        /// the amount of fuel this item will provide when used as a fuel source.
+        /// </summary>
+        [Tooltip("The seconds worth of fuel this item will provide when used as a fuel source.")]
+        public float fuelValue = 1;
+        
+        /// <summary>
+        /// indicate if this item can be salvaged from other items
+        /// </summary>
+        [Tooltip("indicate if this item can be salvaged/reclaimed from other items")]
+        public bool salvageable = true;
+
+        /// <summary>
+        /// indicate if this item can be recycled into other items via the salvage process
+        /// </summary>
+        [Tooltip("indicate if this item can be recycled into other items via the salvage process")]
+        public bool recyclable = true;
+
+        
         /// <summary>
         /// The recipe to craft this item
         /// </summary>
@@ -99,16 +131,12 @@ namespace PlayerInventorySystem
         public int craftCount = 1; // the number of items that are crafted with the recipe
 
         /// <summary>
-        /// indicate if this item can be salvaged from other items
+        /// The max number of this item that can be stacked in one slot
         /// </summary>
-        [Tooltip("indicate if this item can be salvaged/reclaimed from other items")]
-        public bool salvageable = true;
+        [Tooltip("The max number of this item that can be stacked in one slot")]
+        public int maxStackSize = 5; // default and min = 1
 
-        /// <summary>
-        /// indicate if this item can be recycled into other items via the salvage process
-        /// </summary>
-        [Tooltip("indicate if this item can be recycled into other items via the salvage process")]
-        public bool recycable = true;
+
 
         /// <summary>
         /// The durability of this item when new
@@ -125,7 +153,7 @@ namespace PlayerInventorySystem
             get
             {
                 {
-                    return ((Strength * Speed) + (Dexterity * IQ)) * Luck;
+                    return  (strength + IQ + dexterity + speed) * Luck + 1;
                 }
             }
         }
@@ -133,13 +161,13 @@ namespace PlayerInventorySystem
         /// <summary>
         /// The strength bonus this item will bestow upon player when equiped
         /// </summary>
-        public float Strength;
+        public float strength;
 
         /// <summary>
         /// The speed bonus this item will bestow upon player when equiped 
         /// </summary>
         [Tooltip("The speed bonus this item will bestow upon player when equiped")]
-        public float Speed;
+        public float speed;
 
         /// <summary>
         /// The health bonus this item will bestow upon player when equiped 
@@ -175,14 +203,14 @@ namespace PlayerInventorySystem
         /// The dexterity bonus this item will bestow upon player when equiped 
         /// </summary>
         [Tooltip("The dexterity bonus this item will bestow upon player when equiped")]
-        public float Dexterity;
+        public float dexterity;
 
         /// <summary>
         /// The luck bonus this item will bestow upon player when equiped 
         /// </summary>
         [Tooltip("The luck bonus this item will bestow upon player when equiped")]
         [Range(0f, 1f)]
-        public float Luck;
+        public float Luck = .0001f;
     }
 
     /// <summary>

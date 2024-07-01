@@ -1,0 +1,90 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3286521824400379425
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 628752008739455282, guid: e2253036f17076346b7345819d9ccd25,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2e15dd14f0906224d9cadf3641292ae2, type: 2}
+    - target: {fileID: 3772706419945914812, guid: e2253036f17076346b7345819d9ccd25,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3772706419945914812, guid: e2253036f17076346b7345819d9ccd25,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 28
+      objectReference: {fileID: 0}
+    - target: {fileID: 3772706419945914812, guid: e2253036f17076346b7345819d9ccd25,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3772706419945914812, guid: e2253036f17076346b7345819d9ccd25,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 3772706419945914812, guid: e2253036f17076346b7345819d9ccd25,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3772706419945914812, guid: e2253036f17076346b7345819d9ccd25,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3772706419945914812, guid: e2253036f17076346b7345819d9ccd25,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3772706419945914812, guid: e2253036f17076346b7345819d9ccd25,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3772706419945914812, guid: e2253036f17076346b7345819d9ccd25,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3772706419945914812, guid: e2253036f17076346b7345819d9ccd25,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3772706419945914812, guid: e2253036f17076346b7345819d9ccd25,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5554214346805078778, guid: e2253036f17076346b7345819d9ccd25,
+        type: 3}
+      propertyPath: m_Name
+      value: Vibrainium Tunic - drop Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 7242933422014920506, guid: e2253036f17076346b7345819d9ccd25,
+        type: 3}
+      propertyPath: ItemID
+      value: 217
+      objectReference: {fileID: 0}
+    - target: {fileID: 7242933422014920506, guid: e2253036f17076346b7345819d9ccd25,
+        type: 3}
+      propertyPath: TimeToLive
+      value: 60
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e2253036f17076346b7345819d9ccd25, type: 3}

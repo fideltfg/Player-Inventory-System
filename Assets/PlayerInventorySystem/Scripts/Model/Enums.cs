@@ -11,6 +11,7 @@ namespace PlayerInventorySystem
 
     public enum ITEMTYPE
     {
+        DEFAULT, // default item type
         CONSUMABLE, // item such as food, cloth, rock or other consumable items
         USABLE, // items such as tools,  weapons and other none consumables.
         WEARABLE, //  clothing
@@ -35,7 +36,8 @@ namespace PlayerInventorySystem
         CHEST,
         INVENTORY,
         ITEMBAR,
-        CHARACTER
+        CHARACTER,
+        CATALOG
     }
 
     public enum MATERIALTYPE

@@ -1,21 +1,18 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System;
-
 namespace PlayerInventorySystem
 {
 
     /// <summary>
     /// Class to define and hold a crafting recipe
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public class Recipe
     {
         /// <summary>
         /// Row struct for Recipe
         /// </summary>
-        [System.Serializable]
+        [Serializable]
         public struct Row
         {
             public int[] cells;

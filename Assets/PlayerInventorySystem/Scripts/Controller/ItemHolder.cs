@@ -16,7 +16,7 @@ namespace PlayerInventorySystem
         public Text text;                // Reference to the Text component
 
         // Update is called once per frame
-        public void Update()
+        void Update()
         {
             // Get the currently held item from the InventoryController
             Item heldItem = InventoryController.HeldItem;
@@ -36,7 +36,7 @@ namespace PlayerInventorySystem
         }
 
         // FixedUpdate is called at a fixed interval
-        private void FixedUpdate()
+        void FixedUpdate()
         {
             // Ensure the ItemHolder is rendered last (on top of other UI elements)
             transform.SetAsLastSibling();

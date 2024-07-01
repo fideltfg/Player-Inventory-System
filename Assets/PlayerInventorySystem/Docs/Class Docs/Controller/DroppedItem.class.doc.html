@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DroppedItem Class Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #2e6da4;
+        }
+        .section p {
+            margin: 5px 0;
+        }
+        .code {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>DroppedItem Class</h1>
+    <p>Component to add to items that are dropped in the world to allow the player to pick them up. This component will change the object's tag to "Item" when used.</p>
+
+    <div class="section">
+        <h2>Public Fields</h2>
+
+        <h3>ItemID</h3>
+        <p>The ID of the item the GameObject represents.</p>
+        <div class="code">
+            <pre><code>public int ItemID = 0;</code></pre>
+        </div>
+
+        <h3>StackCount</h3>
+        <p>The stack count for the item.</p>
+        <div class="code">
+            <pre><code>public int StackCount = 1;</code></pre>
+        </div>
+
+        <h3>Durability</h3>
+        <p>The current durability value for this item. Does not apply if the stack count &gt; 1.</p>
+        <div class="code">
+            <pre><code>public float Durability = 0;</code></pre>
+        </div>
+
+        <h3>TimeToLive</h3>
+        <p>The amount of time this object will remain after being dropped before despawning.</p>
+        <div class="code">
+            <pre><code>public float TimeToLive = 30;</code></pre>
+        </div>
+
+        <h3>Timer</h3>
+        <p>Timer to track the elapsed time since the item was dropped.</p>
+        <div class="code">
+            <pre><code>public float Timer = 0;</code></pre>
+        </div>
+
+        <h3>Position</h3>
+        <p>Holder for position data. Used only when the game loads saved inventory data; should be null otherwise.</p>
+        <div class="code">
+            <pre><code>public Vector3 Position;</code></pre>
+        </div>
+    </div>
+ 
+</body>
+</html>

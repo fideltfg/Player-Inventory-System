@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ItemInfoBox Class Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #2e6da4;
+        }
+        .section p {
+            margin: 5px 0;
+        }
+        .code {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>ItemInfoBox Class</h1>
+    <p>Component methods and parameters for displaying information about items under the cursor.</p>
+
+    <div class="section">
+        <h2>Public Fields</h2>
+
+        <h3>image</h3>
+        <p>The Image component to display the item's sprite.</p>
+        <div class="code">
+            <pre><code>public Image image;</code></pre>
+        </div>
+
+        <h3>itemName</h3>
+        <p>The Text component to display the item's name.</p>
+        <div class="code">
+            <pre><code>public Text itemName;</code></pre>
+        </div>
+
+        <h3>description</h3>
+        <p>The Text component to display the item's description.</p>
+        <div class="code">
+            <pre><code>public Text description;</code></pre>
+        </div>
+
+        <h3>statsPanel</h3>
+        <p>The GameObject for the stats panel.</p>
+        <div class="code">
+            <pre><code>public GameObject statsPanel;</code></pre>
+        </div>
+
+        <h3>health</h3>
+        <p>The Text component to display the health bonus of the item.</p>
+        <div class="code">
+            <pre><code>public Text health;</code></pre>
+        </div>
+
+        <h3>mana</h3>
+        <p>The Text component to display the mana bonus of the item.</p>
+        <div class="code">
+            <pre><code>public Text mana;</code></pre>
+        </div>
+
+        <h3>stamina</h3>
+        <p>The Text component to display the stamina bonus of the item.</p>
+        <div class="code">
+            <pre><code>public Text stamina;</code></pre>
+        </div>
+
+        <h3>dexterity</h3>
+        <p>The Text component to display the dexterity bonus of the item.</p>
+        <div class="code">
+            <pre><code>public Text dexterity;</code></pre>
+        </div>
+
+        <h3>IQ</h3>
+        <p>The Text component to display the IQ bonus of the item.</p>
+        <div class="code">
+            <pre><code>public Text IQ;</code></pre>
+        </div>
+
+        <h3>armor</h3>
+        <p>The Text component to display the armor bonus of the item.</p>
+        <div class="code">
+            <pre><code>public Text armor;</code></pre>
+        </div>
+
+        <h3>speed</h3>
+        <p>The Text component to display the speed bonus of the item.</p>
+        <div class="code">
+            <pre><code>public Text speed;</code></pre>
+        </div>
+
+        <h3>strength</h3>
+        <p>The Text component to display the strength bonus of the item.</p>
+        <div class="code">
+            <pre><code>public Text strength;</code></pre>
+        </div>
+
+        <h3>luck</h3>
+        <p>The Text component to display the luck bonus of the item.</p>
+        <div class="code">
+            <pre><code>public Text luck;</code></pre>
+        </div>
+
+        <h3>damage</h3>
+        <p>The Text component to display the damage bonus of the item.</p>
+        <div class="code">
+            <pre><code>public Text damage;</code></pre>
+        </div>
+
+        <h3>itemID</h3>
+        <p>The Text component to display the ID of the item.</p>
+        <div class="code">
+            <pre><code>public Text itemID;</code></pre>
+        </div>
+
+        <h3>ItemType</h3>
+        <p>The Text component to display the item type.</p>
+        <div class="code">
+            <pre><code>public Text ItemType;</code></pre>
+        </div>
+
+        <h3>SlotType</h3>
+        <p>The Text component to display the slot type of the item.</p>
+        <div class="code">
+            <pre><code>public Text SlotType;</code></pre>
+        </div>
+
+        <h3>BaseMaterial</h3>
+        <p>The Text component to display the base material of the item.</p>
+        <div class="code">
+            <pre><code>public Text BaseMaterial;</code></pre>
+        </div>
+
+        <h3>dSlider</h3>
+        <p>The Slider component to display the durability of the item.</p>
+        <div class="code">
+            <pre><code>public Slider dSlider;</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Public Methods</h2>
+
+        <h3>Show</h3>
+        <p>Displays the item info box with information about the given item.</p>
+        <div class="code">
+            <pre><code>public void Show(Item item);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>item</strong>: The item to display information about.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Usage Examples</h2>
+
+        <h3>Example: Show item information</h3>
+        <div class="code">
+            <pre><code>ItemInfoBox infoBox = GetComponent&lt;ItemInfoBox&gt;();
+Item item = ...; // The item to display information about
+infoBox.Show(item);
+Debug.Log("Item info displayed");</code></pre>
+        </div>
+    </div>
+</body>
+</html>

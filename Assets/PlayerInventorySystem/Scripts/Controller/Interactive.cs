@@ -6,30 +6,13 @@ using UnityEngine.InputSystem;
 
 namespace PlayerInventorySystem
 {
-    [RequireComponent(typeof(SphereCollider))]
     public class Interactive : PlacedItem
     {
 
         // the panel the player will see when they interact with this object
+        [HideInInspector]
         public InventorySystemPanel Panel;
 
-        internal int Radius = 2;
-
-        public virtual void Update()
-        {
-            if (Vector3.Distance(transform.position, InventoryController.Instance.Player.transform.position) > Radius)
-            {
-                ClosePanel();
-            }
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject.CompareTag("Player"))
-            {
-                //  Panel.gameObject.SetActive(true);
-            }
-        }
 
         private void OnTriggerExit(Collider other)
         {
@@ -41,9 +24,8 @@ namespace PlayerInventorySystem
 
         private void OnEnable()
         {
-            SphereCollider sc = GetComponent<SphereCollider>();
+            Collider sc = GetComponent<Collider>();
             sc.isTrigger = true;
-            sc.radius = Radius;
         }
 
         internal virtual void ClosePanel()
@@ -60,6 +42,11 @@ namespace PlayerInventorySystem
             {
                 Panel.gameObject.SetActive(true);
             }
+        }
+
+        public virtual void Interact(PlayerInventoryController playerInventoryController)
+        {
+           // throw new NotImplementedException();
         }
     }
 }

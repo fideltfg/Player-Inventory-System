@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DropPanel Class Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #2e6da4;
+        }
+        .section p {
+            margin: 5px 0;
+        }
+        .code {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>DropPanel Class</h1>
+    <p>Controller for allowing the player to click past the inventory panels to drop an item.</p>
+
+    <div class="section">
+        <h2>Public Methods</h2>
+
+        <h3>OnPointerDown</h3>
+        <p>Handles the pointer down event to drop the held item based on the mouse button clicked.</p>
+        <div class="code">
+            <pre><code>public void OnPointerDown(PointerEventData eventData);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>eventData</strong>: The pointer event data.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Usage Examples</h2>
+
+        <h3>Example: Handle pointer down event to drop an item</h3>
+        <div class="code">
+            <pre><code>public void OnPointerDown(PointerEventData eventData) {
+    DropPanel dropPanel = GetComponent&lt;DropPanel&gt;();
+    dropPanel.OnPointerDown(eventData);
+    Debug.Log("Pointer down on drop panel");
+}</code></pre>
+        </div>
+    </div>
+</body>
+</html>

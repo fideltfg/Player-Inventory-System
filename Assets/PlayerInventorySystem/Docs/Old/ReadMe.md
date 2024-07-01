@@ -115,8 +115,7 @@ If the destination slot currently has an item in it then that item is swapped wi
  **Slots** 
 <p>Each panel contains a number of slots that are capable of holding one item. Items can be stacked in a slot if they are the same.<br />
 he number of items that can be stacked is defined in the Item Catalog. See the **Inventory Items** section above for more details.</p>
-<p>By default the inventory is set up with 24 slots, the item bar and crafting panel with 10 and the character panel with 6. Chest panels differ depending on the number of slots assigned when the chest is created.<br />
-Please refer to the appropriate section to find out more details on each panel and the slots they contain.</p>
+<p>By default the inventory is set up with 24 slots, the item bar and crafting panel with 10 and the character panel with 6. Chest panels differ depending on the number of slots assigned when the chest is created.</p>
 
 
 <p>Slots display the sprite (as defined in the Item Catalog) of any item it contains. As well as the number of that item stacked there. Items that are single (or can not be stacked) will not display this number.<br .>

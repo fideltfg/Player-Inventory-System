@@ -61,8 +61,5 @@
             get { return transform; }
             set { transform = value; }
         }
-
-
     }
-
 }

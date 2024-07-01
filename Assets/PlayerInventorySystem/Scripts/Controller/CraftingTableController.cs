@@ -14,18 +14,17 @@ namespace PlayerInventorySystem
 
         internal override void ClosePanel()
         {
-            if(Panel != null)
+            if (Panel != null)
             {
                 Panel.gameObject.SetActive(false);
             }
         }
 
-        internal override void OpenPanel()
+        public override void Interact(PlayerInventoryController playerInventoryController)
         {
-            if(Panel != null)
-            {
-                  Panel.gameObject.SetActive(true);
-            }
+            Debug.Log("Interacting with Crafting Table");
+            InventoryController.Instance.CraftingPanel.CraftingTable = this; // pass the selected chest to the chest panel
+            InventoryController.Instance.CraftingPanel.gameObject.SetActive(true);
         }
     }
 }

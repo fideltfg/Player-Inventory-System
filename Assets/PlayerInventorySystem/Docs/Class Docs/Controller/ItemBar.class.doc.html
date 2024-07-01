@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ItemBar Class Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #2e6da4;
+        }
+        .section p {
+            margin: 5px 0;
+        }
+        .code {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>ItemBar Class</h1>
+    <p>ItemBar Component Class</p>
+
+    <div class="section">
+        <h2>Public Fields</h2>
+
+        <h3>built</h3>
+        <p>Indicates whether the item bar has been built.</p>
+        <div class="code">
+            <pre><code>public bool built = false;</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Public Methods</h2>
+
+        <h3>OnEnable</h3>
+        <p>Called when the item bar is enabled.</p>
+        <div class="code">
+            <pre><code>public override void OnEnable();</code></pre>
+        </div>
+
+        <h3>Update</h3>
+        <p>Called once per frame to update the item bar, handling mouse wheel input for slot selection.</p>
+        <div class="code">
+            <pre><code>public override void Update();</code></pre>
+        </div>
+
+        <h3>Build</h3>
+        <p>Builds the item bar with slots from the specified inventory index.</p>
+        <div class="code">
+            <pre><code>public override void Build(int InventoryIndex);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>InventoryIndex</strong>: The index of the inventory to build slots from.</li>
+        </ul>
+
+        <h3>DropSelectedItem</h3>
+        <p>Drops the item in the currently selected slot.</p>
+        <div class="code">
+            <pre><code>public void DropSelectedItem();</code></pre>
+        </div>
+
+        <h3>SelectNextSlot</h3>
+        <p>Selects the next slot in the item bar.</p>
+        <div class="code">
+            <pre><code>public void SelectNextSlot();</code></pre>
+        </div>
+
+        <h3>SelectPreviousSlot</h3>
+        <p>Selects the previous slot in the item bar.</p>
+        <div class="code">
+            <pre><code>public void SelectPreviousSlot();</code></pre>
+        </div>
+
+        <h3>GetSelectedItem</h3>
+        <p>Gets the currently selected item (or stack of items) from the item bar without removing it.</p>
+        <div class="code">
+            <pre><code>public Item GetSelectedItem();</code></pre>
+        </div>
+        <p>Returns:</p>
+        <ul>
+            <li><strong>Item</strong>: The currently selected item, or null if no item is selected.</li>
+        </ul>
+
+        <h3>ConsumeSelectedItem</h3>
+        <p>Consumes the currently selected item, decrementing its stack count or removing it if the stack is empty.</p>
+        <div class="code">
+            <pre><code>public void ConsumeSelectedItem();</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Usage Examples</h2>
+
+        <h3>Example: Build the item bar</h3>
+        <div class="code">
+            <pre><code>ItemBar itemBar = GetComponent&lt;ItemBar&gt;();
+itemBar.Build(0);
+Debug.Log("Item bar built");</code></pre>
+        </div>
+
+        <h3>Example: Drop the selected item</h3>
+        <div class="code">
+            <pre><code>itemBar.DropSelectedItem();
+Debug.Log("Selected item dropped");</code></pre>
+        </div>
+
+        <h3>Example: Select the next slot</h3>
+        <div class="code">
+            <pre><code>itemBar.SelectNextSlot();
+Debug.Log("Next slot selected");</code></pre>
+        </div>
+
+        <h3>Example: Get the selected item</h3>
+        <div class="code">
+            <pre><code>Item selectedItem = itemBar.GetSelectedItem();
+if (selectedItem != null) {
+    Debug.Log("Selected item: " + selectedItem.Data.name);
+} else {
+    Debug.Log("No item selected");
+}</code></pre>
+        </div>
+
+        <h3>Example: Consume the selected item</h3>
+        <div class="code">
+            <pre><code>itemBar.ConsumeSelectedItem();
+Debug.Log("Selected item consumed");</code></pre>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e50cec6b61ef7d4fb4b05588e382d84, type: 3}
+  m_Name: TDS_ItemCatalog
+  m_EditorClassIdentifier: 
+  catalogID: 0
+  list:
+  - name: NULL
+    id: 0
+    description: blank
+    sprite: {fileID: 0}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 0}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 1
+    slotType: 0
+    ConsumeOnPickup: 0
+    salvageable: 0
+    recycable: 0
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+    craftCount: 0
+    maxStackSize: 0
+    maxDurability: 0
+    Strength: 0
+    Speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    Dexterity: 0
+    Luck: 0
+  - name: item 1
+    id: 1
+    description: blank
+    sprite: {fileID: -278295826, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 8379345690307425883, guid: ace643f53fc7468498a022dd6e246b3f,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 1
+    slotType: 0
+    ConsumeOnPickup: 0
+    salvageable: 0
+    recycable: 0
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+    craftCount: 0
+    maxStackSize: 10
+    maxDurability: 0
+    Strength: 0
+    Speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    Dexterity: 0
+    Luck: 0
+  - name: item 2
+    id: 2
+    description: blank
+    sprite: {fileID: 294157496, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 7808001549402260617, guid: 179d75954505629449d7115a5a12f272,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 1
+    slotType: 0
+    ConsumeOnPickup: 0
+    salvageable: 0
+    recycable: 0
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+    craftCount: 0
+    maxStackSize: 10
+    maxDurability: 0
+    Strength: 0
+    Speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    Dexterity: 0
+    Luck: 0

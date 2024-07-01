@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Character Struct Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #2e6da4;
+        }
+        .section p {
+            margin: 5px 0;
+        }
+        .code {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Character Struct</h1>
+    <p>Struct that outlines the base character stats.</p>
+
+    <div class="section">
+        <h2>Public Fields</h2>
+
+        <h3>characterName</h3>
+        <p>The name of the character.</p>
+        <div class="code">
+            <pre><code>public string characterName;</code></pre>
+        </div>
+
+        <h3>ID</h3>
+        <p>The unique identifier for the character.</p>
+        <div class="code">
+            <pre><code>public int ID;</code></pre>
+        </div>
+
+        <h3>GENDER</h3>
+        <p>The gender of the character.</p>
+        <div class="code">
+            <pre><code>public GENDER GENDER;</code></pre>
+        </div>
+
+        <h3>Level</h3>
+        <p>The level of the character.</p>
+        <div class="code">
+            <pre><code>public int Level;</code></pre>
+        </div>
+
+        <h3>Experience</h3>
+        <p>The experience points of the character.</p>
+        <div class="code">
+            <pre><code>public int Experience;</code></pre>
+        </div>
+
+        <h3>Health</h3>
+        <p>The health points of the character.</p>
+        <div class="code">
+            <pre><code>public float Health;</code></pre>
+        </div>
+
+        <h3>Mana</h3>
+        <p>The mana points of the character.</p>
+        <div class="code">
+            <pre><code>public float Mana;</code></pre>
+        </div>
+
+        <h3>Stamina</h3>
+        <p>The stamina points of the character.</p>
+        <div class="code">
+            <pre><code>public float Stamina;</code></pre>
+        </div>
+
+        <h3>Strength</h3>
+        <p>The strength attribute of the character.</p>
+        <div class="code">
+            <pre><code>public float Strength;</code></pre>
+        </div>
+
+        <h3>Dexterity</h3>
+        <p>The dexterity attribute of the character.</p>
+        <div class="code">
+            <pre><code>public float Dexterity;</code></pre>
+        </div>
+
+        <h3>IQ</h3>
+        <p>The intelligence (IQ) attribute of the character.</p>
+        <div class="code">
+            <pre><code>public float IQ;</code></pre>
+        </div>
+
+        <h3>Armor</h3>
+        <p>The armor attribute of the character.</p>
+        <div class="code">
+            <pre><code>public float Armor;</code></pre>
+        </div>
+
+        <h3>Speed</h3>
+        <p>The speed attribute of the character.</p>
+        <div class="code">
+            <pre><code>public float Speed;</code></pre>
+        </div>
+
+        <h3>Luck</h3>
+        <p>The luck attribute of the character.</p>
+        <div class="code">
+            <pre><code>public float Luck;</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Public Properties</h2>
+
+        <h3>Damage</h3>
+        <p>The calculated damage value based on strength, speed, dexterity, intelligence, and luck.</p>
+        <div class="code">
+            <pre><code>public float Damage
+{
+    get
+    {
+        return ((Strength * IQ) + (Dexterity * Speed)) * Luck;
+    }
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Usage Examples</h2>
+
+        <h3>Example: Create a new character</h3>
+        <div class="code">
+            <pre><code>Character newCharacter = new Character
+{
+    characterName = "Archer",
+    ID = 1,
+    GENDER = GENDER.Male,
+    Level = 5,
+    Experience = 1500,
+    Health = 100f,
+    Mana = 50f,
+    Stamina = 75f,
+    Strength = 20f,
+    Dexterity = 30f,
+    IQ = 25f,
+    Armor = 10f,
+    Speed = 15f,
+    Luck = 5f
+};
+
+Debug.Log("Character Name: " + newCharacter.characterName);
+Debug.Log("Character Damage: " + newCharacter.Damage);</code></pre>
+        </div>
+    </div>
+</body>
+</html>

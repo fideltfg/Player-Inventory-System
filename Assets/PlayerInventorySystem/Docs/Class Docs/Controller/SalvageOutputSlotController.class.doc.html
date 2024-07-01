@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SalvageOutputSlotController Class Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #2e6da4;
+        }
+        .section p {
+            margin: 5px 0;
+        }
+        .code {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>SalvageOutputSlotController Class</h1>
+    <p>Handles interactions with slots in the salvage output panel, extending the functionality of the base `SlotController`.</p>
+
+    <div class="section">
+        <h2>Overrides</h2>
+
+        <h3>UpdateSlotUI</h3>
+        <p>Updates the slot's UI and sets the outline color based on the salvageability of the item.</p>
+        <div class="code">
+            <pre><code>internal override void UpdateSlotUI();</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Usage Examples</h2>
+
+        <h3>Example: Update the slot's UI in a salvage output slot</h3>
+        <div class="code">
+            <pre><code>salvageOutputSlotController.UpdateSlotUI();
+Debug.Log("Salvage output slot UI updated");</code></pre>
+        </div>
+    </div>
+</body>
+</html>

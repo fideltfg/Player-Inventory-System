@@ -34,7 +34,7 @@ namespace PlayerInventorySystem
             }
 
         }
-       
+
         public override void Build(int InventoryIndex)
         {
             base.Build(InventoryIndex);
@@ -67,15 +67,8 @@ namespace PlayerInventorySystem
         {
             if (SelectedSlotController.Slot.Item != null)
             {
-                PlayerInventoryController pic = InventoryController.Instance.PlayerInventoryControler;
 
-                if (pic == null)
-                {
-                    Debug.LogError("PlayerInventoryController is null");
-                    return;
-                }
-
-                pic.DropItem(SelectedSlotController.Slot.Item);
+                InventoryController.Instance.PlayerInventoryControler.DropItem(SelectedSlotController.Slot.Item, 1, SelectedSlotController.Slot.Item.Durability);
 
                 SelectedSlotController.Slot.IncermentStackCount(-1);
 
@@ -97,32 +90,27 @@ namespace PlayerInventorySystem
             SelectedSlotID--;
         }
 
-        public void UseSelectedItem()
+        /// <summary>
+        /// method to get the currently selected item (or stack of items) from the item bar.
+        /// This methid will not remove the item from the item bar slot
+        /// </summary>
+        /// <returns>Item or null</returns>
+        public Item GetSelectedItem()
         {
-            if (SelectedSlotController.Slot.Item != null)
-            {
-                switch (SelectedSlotController.Slot.Item.Data.itemType)
-                {
-                    case ITEMTYPE.CONSUMABLE: // food water healt packs ect
-                        Slot sS = SelectedSlotController.Slot;
-
-                        if (sS.StackCount <= 0)
-                        {
-                            sS.SetItem(null);
-                        }
-                        break;
-
-                    case ITEMTYPE.WEARABLE: // aka equipable... armor, tools and weapons
-                        break;
-
-                    case ITEMTYPE.USABLE: // keys and other items that can be used in predefind ways
-
-                        break;
-                }
-
-
-            }
+            return SelectedSlotController.Slot.Item;
         }
 
+        public void ConsumeSelectedItem()
+        {
+            Slot slot = SelectedSlotController.Slot;
+            if (slot.Item != null)
+            {
+                slot.IncermentStackCount(-1);
+                if (slot.Item.StackCount <= 0)
+                {
+                    slot.SetItem(null);
+                }
+            }
+        }
     }
 }

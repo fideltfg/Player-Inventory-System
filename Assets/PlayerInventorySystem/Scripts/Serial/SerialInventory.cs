@@ -49,7 +49,6 @@
         {
             if (inventory == null)
             {
-                Debug.Log("Inventory is null");
                 inventory = new Inventory(InventoryController.InventoryList.Count, InventoryController.PlayerInventoryCapacity);
             }
             
@@ -64,7 +63,6 @@
                 }
                 else
                 {
-
                     SerialSlots[s] = new SerialSlot(inventory[s].SlotID, 0, 0, 0);
                 }
             }

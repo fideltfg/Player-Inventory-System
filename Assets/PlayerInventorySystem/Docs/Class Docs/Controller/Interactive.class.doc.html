@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interactive Class Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #2e6da4;
+        }
+        .section p {
+            margin: 5px 0;
+        }
+        .code {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Interactive Class</h1>
+    <p>Represents an interactive item that the player can interact with, which displays an inventory panel when triggered.</p>
+
+    <div class="section">
+        <h2>Public Fields</h2>
+
+        <h3>Panel</h3>
+        <p>The panel the player will see when they interact with this object.</p>
+        <div class="code">
+            <pre><code>public InventorySystemPanel Panel;</code></pre>
+        </div>
+
+        <h3>Radius</h3>
+        <p>The interaction radius within which the player can interact with this object.</p>
+        <div class="code">
+            <pre><code>internal int Radius = 2;</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Public Methods</h2>
+
+        <h3>Update</h3>
+        <p>Checks the distance between the interactive item and the player to determine if the panel should be closed.</p>
+        <div class="code">
+            <pre><code>public virtual void Update();</code></pre>
+        </div>
+
+        <h3>ClosePanel</h3>
+        <p>Closes the interaction panel.</p>
+        <div class="code">
+            <pre><code>internal virtual void ClosePanel();</code></pre>
+        </div>
+
+        <h3>OpenPanel</h3>
+        <p>Opens the interaction panel.</p>
+        <div class="code">
+            <pre><code>internal virtual void OpenPanel();</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Usage Examples</h2>
+
+        <h3>Example: Open the interaction panel</h3>
+        <div class="code">
+            <pre><code>Interactive interactive = GetComponent&lt;Interactive&gt;();
+interactive.OpenPanel();
+Debug.Log("Interaction panel opened");</code></pre>
+        </div>
+
+        <h3>Example: Close the interaction panel</h3>
+        <div class="code">
+            <pre><code>interactive.ClosePanel();
+Debug.Log("Interaction panel closed");</code></pre>
+        </div>
+
+        <h3>Example: Update the interactive item</h3>
+        <div class="code">
+            <pre><code>interactive.Update();
+Debug.Log("Interactive item updated");</code></pre>
+        </div>
+    </div>
+</body>
+</html>

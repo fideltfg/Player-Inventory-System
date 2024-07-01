@@ -44,7 +44,7 @@ namespace PlayerInventorySystem
                 SlotList.Add(sc);
             }
 
-            SlotList[0].Selected = true;
+            //SlotList[0].Selected = true;
 
         }
     }

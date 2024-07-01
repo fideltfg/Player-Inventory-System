@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SlotController Class Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #2e6da4;
+        }
+        .section p {
+            margin: 5px 0;
+        }
+        .code {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>SlotController Class</h1>
+    <p>The base slot controller contains all methods for dealing with slots and provides access to items within the slot.</p>
+
+    <div class="section">
+        <h2>Public Fields</h2>
+
+        <h3>slotID</h3>
+        <p>The ID of this slot.</p>
+        <div class="code">
+            <pre><code>public int slotID;</code></pre>
+        </div>
+
+        <h3>counter</h3>
+        <p>Counter for internal timing.</p>
+        <div class="code">
+            <pre><code>public float counter = 0;</code></pre>
+        </div>
+
+        <h3>unselectedColor</h3>
+        <p>The color of the slot when it is not selected.</p>
+        <div class="code">
+            <pre><code>public Color unselectedColor;</code></pre>
+        </div>
+
+        <h3>mouseOver</h3>
+        <p>Indicates if the mouse is over the slot.</p>
+        <div class="code">
+            <pre><code>public bool mouseOver;</code></pre>
+        </div>
+
+        <h3>showInfoPanel</h3>
+        <p>Indicates if the info panel should be shown.</p>
+        <div class="code">
+            <pre><code>public bool showInfoPanel;</code></pre>
+        </div>
+
+        <h3>interactable</h3>
+        <p>Indicates if the slot is interactable.</p>
+        <div class="code">
+            <pre><code>public bool interactable = true;</code></pre>
+        </div>
+
+        <h3>infoPanel</h3>
+        <p>The transform of the info panel.</p>
+        <div class="code">
+            <pre><code>public Transform infoPanel;</code></pre>
+        </div>
+
+        <h3>Index</h3>
+        <p>The index of this slot's inventory.</p>
+        <div class="code">
+            <pre><code>public int Index = 0;</code></pre>
+        </div>
+
+        <h3>image</h3>
+        <p>The UI image that this slot will display an item's sprite.</p>
+        <div class="code">
+            <pre><code>public Image image;</code></pre>
+        </div>
+
+        <h3>text</h3>
+        <p>The text object that this controller will use to display the stack count.</p>
+        <div class="code">
+            <pre><code>public Text text;</code></pre>
+        </div>
+
+        <h3>dSlider</h3>
+        <p>The slot durability slider.</p>
+        <div class="code">
+            <pre><code>public Slider dSlider;</code></pre>
+        </div>
+
+        <h3>outline</h3>
+        <p>The outline component of the slot. Used to highlight the slot.</p>
+        <div class="code">
+            <pre><code>public Outline outline;</code></pre>
+        </div>
+
+        <h3>slotLocation</h3>
+        <p>The location of this controller's slot.</p>
+        <div class="code">
+            <pre><code>public SLOTLOCATION slotLocation = SLOTLOCATION.INVENTORY;</code></pre>
+        </div>
+
+        <h3>HighlightColor</h3>
+        <p>The default color for highlighting this slot.</p>
+        <div class="code">
+            <pre><code>public Color HighlightColor;</code></pre>
+        </div>
+
+        <h3>ValidColor</h3>
+        <p>Highlight color when item placement is valid.</p>
+        <div class="code">
+            <pre><code>public Color ValidColor;</code></pre>
+        </div>
+
+        <h3>ErrorColor</h3>
+        <p>The highlight color when item placement is invalid.</p>
+        <div class="code">
+            <pre><code>public Color ErrorColor;</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Public Properties</h2>
+
+        <h3>Slot</h3>
+        <p>The slot this controller controls.</p>
+        <div class="code">
+            <pre><code>public Slot Slot { get; }</code></pre>
+        </div>
+
+        <h3>Selected</h3>
+        <p>Indicates if this slot is selected.</p>
+        <div class="code">
+            <pre><code>internal bool Selected { get; set; }</code></pre>
+        </div>
+
+        <h3>HeldItem</h3>
+        <p>Accessor for the inventory system's held item.</p>
+        <div class="code">
+            <pre><code>public Item HeldItem { get; set; }</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Public Methods</h2>
+
+        <h3>SetSlot</h3>
+        <p>Sets the slot that this controller will control.</p>
+        <div class="code">
+            <pre><code>internal void SetSlot(Slot slot);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>slot</strong>: The slot to control.</li>
+        </ul>
+
+        <h3>OnSlotChanged</h3>
+        <p>Called whenever this slot or its item changes in any way.</p>
+        <div class="code">
+            <pre><code>internal void OnSlotChanged(Slot slot);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>slot</strong>: The slot that changed.</li>
+        </ul>
+
+        <h3>UpdateSlotUI</h3>
+        <p>Updates the slot's UI.</p>
+        <div class="code">
+            <pre><code>internal virtual void UpdateSlotUI();</code></pre>
+        </div>
+
+        <h3>OnPointerEnter</h3>
+        <p>Handles the mouse pointer entering the slot.</p>
+        <div class="code">
+            <pre><code>public virtual void OnPointerEnter(PointerEventData eventData);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>eventData</strong>: The pointer event data.</li>
+        </ul>
+
+        <h3>OnPointerExit</h3>
+        <p>Handles the pointer exiting the slot.</p>
+        <div class="code">
+            <pre><code>public virtual void OnPointerExit(PointerEventData eventData);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>eventData</strong>: The pointer event data.</li>
+        </ul>
+
+        <h3>OnPointerDown</h3>
+        <p>Handles the mouse pointer down event on this slot.</p>
+        <div class="code">
+            <pre><code>public virtual void OnPointerDown(PointerEventData eventData);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>eventData</strong>: The pointer event data.</li>
+        </ul>
+
+        <h3>OnPointerUp</h3>
+        <p>Handles the mouse pointer up event on this slot.</p>
+        <div class="code">
+            <pre><code>public virtual void OnPointerUp(PointerEventData eventData);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>eventData</strong>: The pointer event data.</li>
+        </ul>
+
+        <h3>SetOutLineColor</h3>
+        <p>Sets the outline color of the slot.</p>
+        <div class="code">
+            <pre><code>internal virtual void SetOutLineColor();</code></pre>
+        </div>
+
+        <h3>SetOutLineColor</h3>
+        <p>Sets the outline color of the slot to a specific color.</p>
+        <div class="code">
+            <pre><code>public void SetOutLineColor(Color color);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>color</strong>: The color to set the outline to.</li>
+        </ul>
+
+        <h3>SwapItems</h3>
+        <p>Swaps the held item with the item in the given slot.</p>
+        <div class="code">
+            <pre><code>public void SwapItems();</code></pre>
+        </div>
+
+        <h3>SwapWithItemBarSlot</h3>
+        <p>Swaps the item in this slot with the item in the item bar slot with the given ID.</p>
+        <div class="code">
+            <pre><code>public virtual void SwapWithItemBarSlot(int ItemBarSlotID);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>ItemBarSlotID</strong>: The ID of the item bar slot to swap with.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Usage Examples</h2>
+
+        <h3>Example: Set a slot for the SlotController to control</h3>
+        <div class="code">
+            <pre><code>Slot slot = new Slot(0);
+SlotController slotController = GetComponent&lt;SlotController&gt;();
+slotController.SetSlot(slot);
+Debug.Log("Slot set for SlotController");</code></pre>
+        </div>
+
+        <h3>Example: Update the slot's UI</h3>
+        <div class="code">
+            <pre><code>slotController.UpdateSlotUI();
+Debug.Log("Slot UI updated");</code></pre>
+        </div>
+
+        <h3>Example: Handle pointer enter event</h3>
+        <div class="code">
+            <pre><code>public void OnPointerEnter(PointerEventData eventData) {
+    slotController.OnPointerEnter(eventData);
+    Debug.Log("Pointer entered slot");
+}</code></pre>
+        </div>
+
+        <h3>Example: Swap items between slots</h3>
+        <div class="code">
+            <pre><code>slotController.SwapItems();
+Debug.Log("Items swapped between slots");</code></pre>
+        </div>
+    </div>
+</body>
+</html>

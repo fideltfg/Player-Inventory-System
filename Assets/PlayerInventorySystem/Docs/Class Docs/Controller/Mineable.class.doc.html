@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mineable Class Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #2e6da4;
+        }
+        .section p {
+            margin: 5px 0;
+        }
+        .code {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Mineable Class</h1>
+    <p>Represents a mineable resource in the game that players can mine to obtain items.</p>
+
+    <div class="section">
+        <h2>Public Fields</h2>
+
+        <h3>resourceCount</h3>
+        <p>The maximum number of items that can be mined from this resource.</p>
+        <div class="code">
+            <pre><code>[Tooltip("The number of items that could be mined here")]
+public int resourceCount = 10;</code></pre>
+        </div>
+
+        <h3>hitRate</h3>
+        <p>The number of hits it takes to mine one resource.</p>
+        <div class="code">
+            <pre><code>[Tooltip("How many hits it takes to mine one resource")]
+public float hitRate = 10;</code></pre>
+        </div>
+
+        <h3>minedItemID</h3>
+        <p>The ID of the item that will be mined from this resource.</p>
+        <div class="code">
+            <pre><code>[Tooltip("The item that will be mined from this mine by id")]
+public int minedItemID = 0;</code></pre>
+        </div>
+
+        <h3>refreshRate</h3>
+        <p>The amount of time it takes to reset the mining on this item and allow another hit.</p>
+        <div class="code">
+            <pre><code>[Tooltip("How long it takes for hit counter to reset to 0 should the player leave")]
+public float refreshRate = 5;</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Private Fields</h2>
+
+        <h3>hitCounter</h3>
+        <p>The current number of hits on this item since the last refresh.</p>
+        <div class="code">
+            <pre><code>int hitCounter = 0;</code></pre>
+        </div>
+
+        <h3>refreshCounter</h3>
+        <p>Counter to track the refresh time.</p>
+        <div class="code">
+            <pre><code>float refreshCounter = 0;</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Public Methods</h2>
+
+        <h3>Mine</h3>
+        <p>Mines this item. A hit is the act of the player striking the mineable resource once. This is time-limited by the refreshRate.</p>
+        <div class="code">
+            <pre><code>internal Item Mine(float hitPower);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>hitPower</strong>: How hard the player hits the mineable resource.</li>
+        </ul>
+        <p>Returns:</p>
+        <ul>
+            <li><strong>Item</strong>: The item that was mined, if any, otherwise null.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Unity Methods</h2>
+
+        <h3>Update</h3>
+        <p>Unity method called once per frame to update the mineable resource.</p>
+        <div class="code">
+            <pre><code>private void Update();</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Usage Examples</h2>
+
+        <h3>Example: Mine a resource</h3>
+        <div class="code">
+            <pre><code>Mineable mineable = GetComponent&lt;Mineable&gt;();
+float hitPower = 5.0f;
+Item minedItem = mineable.Mine(hitPower);
+if (minedItem != null) {
+    Debug.Log("Mined item: " + minedItem.Data.name);
+} else {
+    Debug.Log("No item mined");
+}</code></pre>
+        </div>
+    </div>
+</body>
+</html>

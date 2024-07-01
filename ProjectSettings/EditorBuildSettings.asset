@@ -6,8 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Demos/PlayerInventorySystem - Third Person Demo/Scenes/3rd Person
+      Demo.unity
+    guid: 9b6e41a5b11444a4593258fa854b71bf
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 08a8407d58c73484682d79abe4834a37,
       type: 2}

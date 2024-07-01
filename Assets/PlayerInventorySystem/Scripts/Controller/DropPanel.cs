@@ -1,7 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 
 namespace PlayerInventorySystem
 {
@@ -11,20 +9,23 @@ namespace PlayerInventorySystem
     /// </summary>
     public class DropPanel : MonoBehaviour, IPointerDownHandler
     {
-        public void OnPointerDown (PointerEventData eventData)
+        public void OnPointerDown(PointerEventData eventData)
         {
-          
+            Debug.Log("DropPanel.OnPointerDown");
             if (InventoryController.HeldItem != null)
             {
                 if (eventData.button == PointerEventData.InputButton.Left)
                 {
-                    InventoryController.Instance.PlayerInventoryControler.DropItem(InventoryController.HeldItem, InventoryController.HeldItem.StackCount);
+                    InventoryController.Instance.PlayerInventoryControler.DropItem(InventoryController.HeldItem, InventoryController.HeldItem.StackCount, InventoryController.HeldItem.Durability);
                     InventoryController.HeldItem = null;
                 }
                 // if no shift on right click
                 else if (eventData.button == PointerEventData.InputButton.Right)
                 {
-                    InventoryController.Instance.PlayerInventoryControler.DropItem(InventoryController.HeldItem);
+                    InventoryController.Instance.PlayerInventoryControler.DropItem(InventoryController.HeldItem, 1, InventoryController.HeldItem.Durability);
+                    // simulate throwing the first item from the stack and the next has full durability
+                    InventoryController.HeldItem.Durability = InventoryController.HeldItem.Data.maxDurability;
+
                     if (InventoryController.HeldItem.StackCount == 1)
                     {
                         InventoryController.HeldItem = null;
@@ -37,10 +38,5 @@ namespace PlayerInventorySystem
             }
 
         }
-
-        void OnDisable()
-        {
-        }
-
     }
 }

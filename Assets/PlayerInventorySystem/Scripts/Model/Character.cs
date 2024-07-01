@@ -31,7 +31,7 @@ namespace PlayerInventorySystem
         {
             get
             {
-                return   ((Strength * Speed) + (Dexterity * IQ)) * Luck;
+                return (Strength + IQ + Dexterity + Speed) * Luck + 1;
             }
         }
     }

@@ -12,7 +12,7 @@ namespace PlayerInventorySystem
             if (HeldItem != null)
             {
                 // if the item is recyclable its valid in this slot
-                if (HeldItem.Data.recycable)
+                if (HeldItem.Data.recyclable)
                 {
                     outline.effectColor = ValidColor;
                 }
@@ -72,7 +72,7 @@ namespace PlayerInventorySystem
             else if (HeldItem != null)
             {
                 // check if the item can be recycled
-                if (HeldItem.Data.recycable)
+                if (HeldItem.Data.recyclable)
                 { 
                     // and this slot is not empty
                     if (Slot.Item != null)

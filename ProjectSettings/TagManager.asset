@@ -8,6 +8,8 @@ TagManager:
   - Chest
   - CraftingTable
   - Mineable
+  - PlacedItem
+  - InventoryController
   layers:
   - Default
   - TransparentFX

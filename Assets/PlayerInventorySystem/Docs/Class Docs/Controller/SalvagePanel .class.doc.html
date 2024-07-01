@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SalvagePanel Class Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #2e6da4;
+        }
+        .section p {
+            margin: 5px 0;
+        }
+        .code {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>SalvagePanel Class</h1>
+    <p>Controller for the Salvage panel, handling the generation of the panel's slot list and cleanup when the panel is closed.</p>
+
+    <div class="section">
+        <h2>Public Fields</h2>
+
+        <h3>inputSlotController</h3>
+        <p>Controller for the input slot.</p>
+        <div class="code">
+            <pre><code>public SalvageSlotController inputSlotController;</code></pre>
+        </div>
+
+        <h3>OutputArray</h3>
+        <p>Transform for the output array.</p>
+        <div class="code">
+            <pre><code>public Transform OutputArray;</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Protected Fields</h2>
+
+        <h3>validSalvage</h3>
+        <p>Indicates if the current recipe is valid for salvage.</p>
+        <div class="code">
+            <pre><code>private bool validSalvage = false;</code></pre>
+        </div>
+
+        <h3>salvagableItemIDs</h3>
+        <p>Array of item IDs that are salvageable.</p>
+        <div class="code">
+            <pre><code>private int[] salvagableItemIDs;</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Public Methods</h2>
+
+        <h3>OnDisable</h3>
+        <p>Called when the panel is disabled, moves remaining items back to the inventory or drops them on the ground, and clears the output slots.</p>
+        <div class="code">
+            <pre><code>public override void OnDisable();</code></pre>
+        </div>
+
+        <h3>Build</h3>
+        <p>Builds the salvage panel.</p>
+        <div class="code">
+            <pre><code>public override void Build(int inventoryIndex);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>inventoryIndex</strong>: Index of the inventory.</li>
+        </ul>
+
+        <h3>SlotChangeCallback</h3>
+        <p>Callback for when the slot changes.</p>
+        <div class="code">
+            <pre><code>public void SlotChangeCallback(Slot slot);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>slot</strong>: The changed slot.</li>
+        </ul>
+
+        <h3>SalvageButton</h3>
+        <p>Handles the salvage button click, processing the output slots if the salvage is valid.</p>
+        <div class="code">
+            <pre><code>public void SalvageButton();</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Usage Examples</h2>
+
+        <h3>Example: Build the salvage panel</h3>
+        <div class="code">
+            <pre><code>SalvagePanel salvagePanel = new SalvagePanel();
+salvagePanel.Build(0);
+Debug.Log("Salvage panel built");</code></pre>
+        </div>
+
+        <h3>Example: Handle slot change in salvage panel</h3>
+        <div class="code">
+            <pre><code>Slot slot = new Slot(0);
+salvagePanel.SlotChangeCallback(slot);
+Debug.Log("Slot change handled");</code></pre>
+        </div>
+
+        <h3>Example: Handle salvage button click</h3>
+        <div class="code">
+            <pre><code>salvagePanel.SalvageButton();
+Debug.Log("Salvage button clicked");</code></pre>
+        </div>
+    </div>
+</body>
+</html>

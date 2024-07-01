@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Inventory Class Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #2e6da4;
+        }
+        .section p {
+            margin: 5px 0;
+        }
+        .code {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Inventory Class</h1>
+    <p>Provides methods to store, modify, and search items in the inventory system.</p>
+
+    <div class="section">
+        <h2>Public Fields</h2>
+
+        <h3>Index</h3>
+        <p>The index of this inventory in the InventoryController InventoryList, set at object creation.</p>
+        <div class="code">
+            <pre><code>public int Index { get; protected set; }</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Constructors</h2>
+
+        <h3>Inventory</h3>
+        <p>New Inventory Constructor.</p>
+        <div class="code">
+            <pre><code>internal Inventory(int index, int capacity);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>index</strong>: The index that this inventory will reside in the InventoryList of InventoryController.</li>
+            <li><strong>capacity</strong>: The number of slots available in this inventory.</li>
+        </ul>
+
+        <h3>Inventory</h3>
+        <p>Inventory Constructor from Serial Inventory.</p>
+        <div class="code">
+            <pre><code>internal Inventory(SerialInventory sInventory);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>sInventory</strong>: The serial inventory from which to create this inventory.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Public Methods</h2>
+
+        <h3>InventoryContains</h3>
+        <p>Method to check if this inventory contains an item.</p>
+        <div class="code">
+            <pre><code>public bool InventoryContains(Item item);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>item</strong>: The item to check for in the inventory.</li>
+        </ul>
+        <p>Returns:</p>
+        <ul>
+            <li><strong>bool</strong>: True if the item is found in the inventory, false otherwise.</li>
+        </ul>
+
+        <h3>InventoryContains</h3>
+        <p>Method to check if this inventory contains an item with the given ID.</p>
+        <div class="code">
+            <pre><code>public bool InventoryContains(int itemID);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>itemID</strong>: The ID of the item to check for in the inventory.</li>
+        </ul>
+        <p>Returns:</p>
+        <ul>
+            <li><strong>bool</strong>: True if the item is found in the inventory, false otherwise.</li>
+        </ul>
+
+        <h3>GetItemSlots</h3>
+        <p>Method to return all the slots in the inventory that contain the given item.</p>
+        <div class="code">
+            <pre><code>public List<Slot> GetItemSlots(Item item);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>item</strong>: The item to search for in the inventory.</li>
+        </ul>
+        <p>Returns:</p>
+        <ul>
+            <li><strong>List&lt;Slot&gt;</strong>: A list of slots containing the given item.</li>
+        </ul>
+
+        <h3>PlaceItemInNewSlot</h3>
+        <p>Method to place an item into an empty slot of this inventory. If there are no empty slots, this method will return false.</p>
+        <div class="code">
+            <pre><code>public bool PlaceItemInNewSlot(Item item);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>item</strong>: The item to be placed in the inventory.</li>
+        </ul>
+        <p>Returns:</p>
+        <ul>
+            <li><strong>bool</strong>: True if the item is successfully placed, false otherwise.</li>
+        </ul>
+
+        <h3>AddItem</h3>
+        <p>Method to add an item to this inventory. The item will be added to the first existing slot that already contains an instance of the given item (stacked) or if none exist it will be placed in an empty slot. If there are no empty slots, this method will return false.</p>
+        <div class="code">
+            <pre><code>public bool AddItem(Item item);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>item</strong>: The item to be added.</li>
+        </ul>
+        <p>Returns:</p>
+        <ul>
+            <li><strong>bool</strong>: True if the item is successfully added, false otherwise.</li>
+        </ul>
+
+        <h3>EmptySlotCount</h3>
+        <p>Property to return the number of empty slots available in this inventory.</p>
+        <div class="code">
+            <pre><code>public int EmptySlotCount { get; }</code></pre>
+        </div>
+        <p>Returns:</p>
+        <ul>
+            <li><strong>int</strong>: The number of empty slots.</li>
+        </ul>
+
+        <h3>GetSlotsWithItem</h3>
+        <p>Method to return an array of all the slots in this inventory that contain the item held in the given slot. If the given slot is from this inventory it will be excluded from the array.</p>
+        <div class="code">
+            <pre><code>public Slot[] GetSlotsWithItem(Slot slot);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>slot</strong>: The slot containing the item to search for.</li>
+        </ul>
+        <p>Returns:</p>
+        <ul>
+            <li><strong>Slot[]</strong>: An array of slots containing the same item.</li>
+        </ul>
+
+        <h3>GetItemCount</h3>
+        <p>Method to return the count of the given item in this inventory.</p>
+        <div class="code">
+            <pre><code>internal int GetItemCount(int itemID);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>itemID</strong>: The ID of the item to count.</li>
+        </ul>
+        <p>Returns:</p>
+        <ul>
+            <li><strong>int</strong>: The count of the item in the inventory.</li>
+        </ul>
+
+        <h3>EmptyAllSlots</h3>
+        <p>Method to empty all slots in this inventory.</p>
+        <div class="code">
+            <pre><code>internal void EmptyAllSlots();</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Usage Examples</h2>
+
+        <h3>Example: Add an item to the inventory</h3>
+        <div class="code">
+            <pre><code>Item newItem = Item.New(1, 5);
+bool added = inventory.AddItem(newItem);
+if (added) {
+    Debug.Log("Item added to inventory");
+} else {
+    Debug.Log("Failed to add item to inventory");
+}</code></pre>
+        </div>
+
+        <h3>Example: Check if inventory contains an item</h3>
+        <div class="code">
+            <pre><code>bool containsItem = inventory.InventoryContains(newItem);
+if (containsItem) {
+    Debug.Log("Item found in inventory");
+} else {
+    Debug.Log("Item not found in inventory");
+}</code></pre>
+        </div>
+
+        <h3>Example: Get the count of a specific item in the inventory</h3>
+        <div class="code">
+            <pre><code>int itemCount = inventory.GetItemCount(1);
+Debug.Log("Item count: " + itemCount);</code></pre>
+        </div>
+
+        <h3>Example: Get all slots containing a specific item</h3>
+        <div class="code">
+            <pre><code>Slot[] slotsWithItem = inventory.GetSlotsWithItem(someSlot);
+if (slotsWithItem != null) {
+    foreach (Slot slot in slotsWithItem) {
+        Debug.Log("Slot ID: " + slot.SlotID + ", Stack Count: " + slot.StackCount);
+    }
+} else {
+    Debug.Log("No slots contain the item");
+}</code></pre>
+        </div>
+
+        <h3>Example: Empty all slots in the inventory</h3>
+        <div class="code">
+            <pre><code>inventory.EmptyAllSlots();
+Debug.Log("All slots emptied");</code></pre>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SerialChest Class Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #2e6da4;
+        }
+        .section p {
+            margin: 5px 0;
+        }
+        .code {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>SerialChest Class</h1>
+    <p>The <code>SerialChest</code> class represents a serializable chest object in the inventory system.</p>
+
+    <div class="section">
+        <h2>Private Fields</h2>
+
+        <h3>chestID</h3>
+        <p>The ID of the chest.</p>
+        <div class="code">
+            <pre><code>[SerializeField] private int chestID;</code></pre>
+        </div>
+
+        <h3>inventory</h3>
+        <p>The inventory data associated with the chest.</p>
+        <div class="code">
+            <pre><code>[SerializeField] private SerialInventory inventory;</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Constructor</h2>
+
+        <h3>SerialChest</h3>
+        <p>Initializes a new instance of the <code>SerialChest</code> class with the specified item ID and serial transform.</p>
+        <div class="code">
+            <pre><code>public SerialChest(int itemID, SerialTransform serialTransform);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>itemID</strong>: The ID of the item.</li>
+            <li><strong>serialTransform</strong>: The serial transform data.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Public Properties</h2>
+
+        <h3>ChestID</h3>
+        <p>Gets or sets the ID of the chest.</p>
+        <div class="code">
+            <pre><code>internal int ChestID
+{
+    get { return chestID; }
+    set { chestID = value; }
+}</code></pre>
+        </div>
+
+        <h3>Inventory</h3>
+        <p>Gets or sets the inventory data associated with the chest.</p>
+        <div class="code">
+            <pre><code>internal SerialInventory Inventory
+{
+    get { return inventory; }
+    set { inventory = value; }
+}</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Usage Examples</h2>
+
+        <h3>Example: Create a new SerialChest</h3>
+        <div class="code">
+            <pre><code>SerialTransform transformData = new SerialTransform();
+// Assume SerialTransform is properly initialized
+SerialChest serialChest = new SerialChest(1, transformData);
+serialChest.ChestID = 123;
+serialChest.Inventory = new SerialInventory();
+Debug.Log("SerialChest created with ID: " + serialChest.ChestID);</code></pre>
+        </div>
+    </div>
+</body>
+</html>

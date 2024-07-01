@@ -1,8 +1,6 @@
 ﻿
-using System;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace PlayerInventorySystem
 {
@@ -26,9 +24,9 @@ namespace PlayerInventorySystem
             if (inputSlotController.Slot.Item != null)
             {
                 var item = inputSlotController.Slot.Item;
-                if (!InventoryController.GiveItem(item.Data.id, item.StackCount))
+                if (!InventoryController.GiveItem(item.Data.id, item.StackCount, item.Durability))
                 {
-                    InventoryController.Instance.PlayerInventoryControler.DropItem(item, item.StackCount);
+                    InventoryController.Instance.PlayerInventoryControler.DropItem(item, item.StackCount, item.Durability);
                 }
                 inputSlotController.Slot.SetItem(null);
             }
@@ -66,6 +64,8 @@ namespace PlayerInventorySystem
             }
         }
 
+        private int[] salvagableItemIDs;
+
         /// <summary>
         /// Callback for when the slot changes
         /// </summary>
@@ -86,9 +86,16 @@ namespace PlayerInventorySystem
                 return;
             }
 
+            // If item requires a furnace, mark as invalid salvage as the item cannot be salvaged
+            if (slot.Item.Data.requiresFurnace)
+            {
+                validSalvage = false;
+                return;
+            }
+
             // Get the required item IDs for salvage
-            var salvagableItemIDs = slot.Item.Data.recipe.GetRequiredItemIds();
-            Debug.Log("Salvage item ids: " + string.Join(" ", salvagableItemIDs));
+            salvagableItemIDs = slot.Item.Data.recipe.GetRequiredItemIds();
+            //Debug.Log("Salvage item ids: " + string.Join(" ", salvagableItemIDs));
 
             // Check if there are valid items for salvage
             validSalvage = salvagableItemIDs.Length >= 1 && salvagableItemIDs.Any(id => id != 0);
@@ -121,13 +128,19 @@ namespace PlayerInventorySystem
             // If salvage is valid, process the output slots
             if (!validSalvage) return;
 
-            foreach (var sc in SlotList)
-            {
-                var item = sc.Slot.Item;
-                if (item != null && item.Data.salvageable)
+
+            // loop through the salvagableItemIDs for each item in the input slot and give the items to the player that can me salvaged
+            for (int i = 0; i < inputSlotController.Slot.Item.StackCount; i++) {
+                foreach (var id in salvagableItemIDs)
                 {
-                    InventoryController.Instance.PlayerInventoryControler.GiveItem(item);
-                    sc.Slot.SetItem(null);
+                    var item = Item.New(id);
+                    if (item != null && item.Data.salvageable)
+                    {
+                        if (InventoryController.Instance.UsePlayerInventory == true)
+                        {
+                             InventoryController.PlayerInventory.AddItem(item);
+                        }
+                    }
                 }
             }
 

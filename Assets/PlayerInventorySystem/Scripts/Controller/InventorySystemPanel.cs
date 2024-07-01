@@ -24,7 +24,7 @@ namespace PlayerInventorySystem
             set
             {
                 SlotList[selectedSlotID].Selected = false;
-                selectedSlotID = (int)Mathf.Clamp(value, 0, 9);
+                selectedSlotID = (int)Mathf.Clamp(value, 0, InventoryController.Instance.ItemBarSlotCount - 1);
                 SlotList[selectedSlotID].Selected = true;
                 InventoryController.Instance.OnSelectedItemChangeCallBack?.Invoke(SelectedSlotController.Slot.Item);
             }
@@ -32,13 +32,13 @@ namespace PlayerInventorySystem
 
         /// <summary>
         /// The slot controller of the currently selected slot.
-        /// </summary>
+        /// </summary> 
         public SlotController SelectedSlotController
         {
-            get { 
-                Debug.Log("SelectedSlotID: " + SelectedSlotID);
-                
-                return SlotList[SelectedSlotID]; }
+            get
+            {
+                return SlotList[SelectedSlotID];
+            }
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace PlayerInventorySystem
             transform.SetAsLastSibling();
         }
 
-          public virtual void OnDisable()
+        public virtual void OnDisable()
         {
             // make sure all highlighting is turned off
             foreach (SlotController sc in SlotList)
@@ -91,10 +91,8 @@ namespace PlayerInventorySystem
             }
 
             // check if this is the last window open. if it is, hide the cursor
-            if (!InventoryController.Instance.AnyWindowOpen && !(this is ItemBar))
-            {
-                Cursor.visible = false;
-            }
+           
+                InventoryController.Instance.OnWindowCloseCallback(this);
         }
 
         /// <summary>

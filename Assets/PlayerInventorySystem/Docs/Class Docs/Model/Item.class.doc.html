@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Item Class Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #2e6da4;
+        }
+        .section p {
+            margin: 5px 0;
+        }
+        .code {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Item Class</h1>
+    <p>Defines the basic properties and methods of an item.</p>
+
+    <div class="section">
+        <h2>Public Fields</h2>
+
+        <h3>Data</h3>
+        <p>This item's catalog entry is stored here.</p>
+        <div class="code">
+            <pre><code>public ItemData Data;</code></pre>
+        </div>
+
+        <h3>StackCount</h3>
+        <p>How many copies of this item are currently stacked here.</p>
+        <div class="code">
+            <pre><code>public int StackCount { get; protected set; }</code></pre>
+        </div>
+
+        <h3>Durability</h3>
+        <p>The current durability value of this item.</p>
+        <div class="code">
+            <pre><code>public float Durability = 0;</code></pre>
+        </div>
+
+        <h3>Stackable</h3>
+        <p>Indicates if the item can be stacked.</p>
+        <div class="code">
+            <pre><code>public bool Stackable { get; }</code></pre>
+        </div>
+
+        <h3>lastSlot</h3>
+        <p>The last slot this item was in.</p>
+        <div class="code">
+            <pre><code>public Slot lastSlot;</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Public Methods</h2>
+
+        <h3>New</h3>
+        <p>Creates a new Item of the given ID with the given stack count.</p>
+        <div class="code">
+            <pre><code>public static Item New(int itemID, int count = 1);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>itemID</strong>: The ID of the Item to return.</li>
+            <li><strong>count</strong>: The stack count (default is 1).</li>
+        </ul>
+        <p>Returns:</p>
+        <ul>
+            <li><strong>Item</strong>: An Item with the specified stack count, or null if invalid item ID.</li>
+        </ul>
+
+        <h3>AddToStack</h3>
+        <p>Adds a quantity to this item's stack.</p>
+        <div class="code">
+            <pre><code>public bool AddToStack(int quantity);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>quantity</strong>: The quantity to add to the stack.</li>
+        </ul>
+        <p>Returns:</p>
+        <ul>
+            <li><strong>bool</strong>: True if the quantity was successfully added, false otherwise.</li>
+        </ul>
+
+        <h3>SetStackCount</h3>
+        <p>Sets the value of StackCount.</p>
+        <div class="code">
+            <pre><code>public bool SetStackCount(int val);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>val</strong>: The value to set.</li>
+        </ul>
+        <p>Returns:</p>
+        <ul>
+            <li><strong>bool</strong>: True if the value was successfully set, false otherwise.</li>
+        </ul>
+
+        <h3>Clone</h3>
+        <p>Clones this Item.</p>
+        <div class="code">
+            <pre><code>public Item Clone();</code></pre>
+        </div>
+        <p>Returns:</p>
+        <ul>
+            <li><strong>Item</strong>: A memberwise clone of this Item.</li>
+        </ul>
+
+        <h3>Uses</h3>
+        <p>Contains a list of items that need this item to be crafted.</p>
+        <div class="code">
+            <pre><code>public string[] Uses { get; }</code></pre>
+        </div>
+        <p>Returns:</p>
+        <ul>
+            <li><strong>string[]</strong>: An array of item names that require this item to be crafted.</li>
+        </ul>
+
+        <h3>Place</h3>
+        <p>Places an item in the world and removes it from the inventory.</p>
+        <div class="code">
+            <pre><code>internal static void Place(Item item, Vector3 position, Quaternion rotation, Vector3 scale);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>item</strong>: The item to place.</li>
+            <li><strong>position</strong>: The position to place the item.</li>
+            <li><strong>rotation</strong>: The rotation to place the item.</li>
+            <li><strong>scale</strong>: The scale to place the item.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Usage Examples</h2>
+
+        <h3>Example: Create a new item</h3>
+        <div class="code">
+            <pre><code>Item newItem = Item.New(1, 5);
+if (newItem != null) {
+    Debug.Log("Item created: " + newItem.Data.name);
+} else {
+    Debug.Log("Failed to create item");
+}</code></pre>
+        </div>
+
+        <h3>Example: Add to an item's stack</h3>
+        <div class="code">
+            <pre><code>bool success = newItem.AddToStack(3);
+if (success) {
+    Debug.Log("Added to stack. New stack count: " + newItem.StackCount);
+} else {
+    Debug.Log("Failed to add to stack");
+}</code></pre>
+        </div>
+
+        <h3>Example: Set an item's stack count</h3>
+        <div class="code">
+            <pre><code>bool success = newItem.SetStackCount(10);
+if (success) {
+    Debug.Log("Stack count set. New stack count: " + newItem.StackCount);
+} else {
+    Debug.Log("Failed to set stack count");
+}</code></pre>
+        </div>
+
+        <h3>Example: Clone an item</h3>
+        <div class="code">
+            <pre><code>Item clonedItem = newItem.Clone();
+Debug.Log("Cloned item: " + clonedItem.Data.name);</code></pre>
+        </div>
+
+        <h3>Example: Get items that use this item in their recipe</h3>
+        <div class="code">
+            <pre><code>string[] uses = newItem.Uses;
+Debug.Log("Items that use this item in their recipe: " + string.Join(", ", uses));</code></pre>
+        </div>
+
+        <h3>Example: Place an item in the world</h3>
+        <div class="code">
+            <pre><code>Item.Place(newItem, new Vector3(0, 0, 0), Quaternion.identity, Vector3.one);
+Debug.Log("Item placed in the world");</code></pre>
+        </div>
+    </div>
+</body>
+</html>

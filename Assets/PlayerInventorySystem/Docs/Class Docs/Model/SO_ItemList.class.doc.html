@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SO_ItemList Class Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #2e6da4;
+        }
+        .section p {
+            margin: 5px 0;
+        }
+        .code {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>SO_ItemList Class</h1>
+    <p>A ScriptableObject used to create the Item Catalog.</p>
+
+    <div class="section">
+        <h2>Public Fields</h2>
+
+        <h3>catalogID</h3>
+        <p>The ID of the item catalog.</p>
+        <div class="code">
+            <pre><code>public int catalogID = 0;</code></pre>
+        </div>
+
+        <h3>list</h3>
+        <p>A list of ItemData objects representing the items in the catalog.</p>
+        <div class="code">
+            <pre><code>public List<ItemData> list = new List<ItemData>();</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Public Methods</h2>
+
+        <h3>GetItemByID</h3>
+        <p>Gets an item by its ID.</p>
+        <div class="code">
+            <pre><code>public Item GetItemByID(int itemID);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>itemID</strong>: The ID of the item to retrieve.</li>
+        </ul>
+        <p>Returns:</p>
+        <ul>
+            <li><strong>Item</strong>: The item with the specified ID.</li>
+        </ul>
+
+        <h3>GetRandomItem</h3>
+        <p>Gets a random item from the catalog.</p>
+        <div class="code">
+            <pre><code>public Item GetRandomItem();</code></pre>
+        </div>
+        <p>Returns:</p>
+        <ul>
+            <li><strong>Item</strong>: A random item from the catalog.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Usage Examples</h2>
+
+        <h3>Example: Get an item by its ID</h3>
+        <div class="code">
+            <pre><code>int itemID = 1;
+SO_ItemList itemList = ScriptableObject.CreateInstance&lt;SO_ItemList&gt;();
+Item item = itemList.GetItemByID(itemID);
+Debug.Log("Retrieved item: " + item.Name);</code></pre>
+        </div>
+
+        <h3>Example: Get a random item from the catalog</h3>
+        <div class="code">
+            <pre><code>SO_ItemList itemList = ScriptableObject.CreateInstance&lt;SO_ItemList&gt;();
+Item randomItem = itemList.GetRandomItem();
+Debug.Log("Random item: " + randomItem.Name);</code></pre>
+        </div>
+    </div>
+</body>
+</html>

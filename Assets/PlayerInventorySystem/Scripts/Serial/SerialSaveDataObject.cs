@@ -14,8 +14,6 @@
         [SerializeField] private SerialPlacedItem[] placedItems;
         [SerializeField] private Character character;
 
-
-
         /// <summary>
         /// An array of all the inventories in the system serialized.
         /// </summary>
@@ -71,6 +69,7 @@
         /// <param name="chests">An array of SerialChest objects representing the chests in the system.</param>
         /// <param name="panelLocations">An array of SerialRect objects representing the panel locations in the system.</param>
         /// <param name="droppedItems">An array of SerialDroppedItem objects representing the dropped or spawned items in the game world.</param>
+        /// <param name="placedItems">An array of SerialPlacedItem objects representing the placed items (other than chests) in the game world.</param>
         public SerialSaveDataObject(SerialInventory[] inventories, SerialChest[] chests, SerialRect[] panelLocations, SerialDroppedItem[] droppedItems, SerialPlacedItem[] placedItems, Character chara)
         {
             Inventories = inventories;

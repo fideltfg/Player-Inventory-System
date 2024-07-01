@@ -3,7 +3,13 @@ guid: 4594536eb6d08d5499b4786bfe8072c3
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Head: {instanceID: 0}
+  - Body: {instanceID: 0}
+  - LeftHand: {instanceID: 0}
+  - RightHand: {instanceID: 0}
+  - animator: {instanceID: 0}
+  - pickupSound: {fileID: 8300000, guid: e3acf5d115b58b34bb1573d13535a5ad, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -28,9 +28,5 @@
             get { return inventory; }
             set { inventory = value; }
         }
-
-
-
     }
-
 }

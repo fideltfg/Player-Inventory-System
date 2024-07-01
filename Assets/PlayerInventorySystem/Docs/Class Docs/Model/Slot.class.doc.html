@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Slot Class Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #2e6da4;
+        }
+        .section p {
+            margin: 5px 0;
+        }
+        .code {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Slot Class</h1>
+    <p>Represents a slot in the inventory system and provides methods to manipulate the slot and its contents.</p>
+
+    <div class="section">
+        <h2>Public Fields</h2>
+
+        <h3>SlotID</h3>
+        <p>The ID or index of this slot in the inventory panel in which it exists.</p>
+        <div class="code">
+            <pre><code>public int SlotID;</code></pre>
+        </div>
+
+        <h3>index</h3>
+        <p>The index of the panel inventory.</p>
+        <div class="code">
+            <pre><code>public int index = 0;</code></pre>
+        </div>
+
+        <h3>selected</h3>
+        <p>Indicates if this is the currently selected slot.</p>
+        <div class="code">
+            <pre><code>public bool selected = false;</code></pre>
+        </div>
+
+        <h3>SlotType</h3>
+        <p>The type of slot this is.</p>
+        <div class="code">
+            <pre><code>public SLOTTYPE SlotType = SLOTTYPE.INVENTORY;</code></pre>
+        </div>
+
+        <h3>Item</h3>
+        <p>The item contained in this slot.</p>
+        <div class="code">
+            <pre><code>public Item Item { get; protected set; }</code></pre>
+        </div>
+
+        <h3>StackCount</h3>
+        <p>Contains the stack count of the item in this slot. 0 if slot is empty.</p>
+        <div class="code">
+            <pre><code>public int StackCount { get; protected set; }</code></pre>
+        </div>
+
+        <h3>IsEmpty</h3>
+        <p>True if the slot does not contain an item or the item stack is 0.</p>
+        <div class="code">
+            <pre><code>internal bool IsEmpty { get; }</code></pre>
+        </div>
+
+        <h3>Isfull</h3>
+        <p>True if the stack count of the item in this slot is >= the max stack count of the item contained in this slot.</p>
+        <div class="code">
+            <pre><code>internal bool Isfull { get; }</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Constructors</h2>
+
+        <h3>Slot</h3>
+        <p>Constructor that takes the ID of the slot.</p>
+        <div class="code">
+            <pre><code>internal Slot(int slotID);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>slotID</strong>: The ID of the slot.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Public Methods</h2>
+
+        <h3>SetItem</h3>
+        <p>Method to set the item for this slot.</p>
+        <div class="code">
+            <pre><code>internal virtual Item SetItem(Item newItem);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>newItem</strong>: The item to be placed in this slot.</li>
+        </ul>
+        <p>Returns:</p>
+        <ul>
+            <li><strong>Item</strong>: The item placed in the slot.</li>
+        </ul>
+
+        <h3>SetItemStackCount</h3>
+        <p>Method to set the stack count of the item in this slot.</p>
+        <div class="code">
+            <pre><code>internal bool SetItemStackCount(int val);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>val</strong>: The new stack count value.</li>
+        </ul>
+        <p>Returns:</p>
+        <ul>
+            <li><strong>bool</strong>: True on success, false otherwise.</li>
+        </ul>
+
+        <h3>IncermentStackCount</h3>
+        <p>Method to increment the stack count of the item in this slot.</p>
+        <div class="code">
+            <pre><code>internal bool IncermentStackCount(int val);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>val</strong>: The value to increment by.</li>
+        </ul>
+        <p>Returns:</p>
+        <ul>
+            <li><strong>bool</strong>: True on success, false otherwise.</li>
+        </ul>
+
+        <h3>RegisterSlotChangedCallback</h3>
+        <p>Method to register a callback for when this slot or the item in it changes in any way.</p>
+        <div class="code">
+            <pre><code>internal void RegisterSlotChangedCallback(Action<Slot> callback);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>callback</strong>: The callback to register.</li>
+        </ul>
+
+        <h3>UnregisterSlotChangeCallback</h3>
+        <p>Method to unregister a slot change callback.</p>
+        <div class="code">
+            <pre><code>internal void UnregisterSlotChangeCallback(Action<Slot> callback);</code></pre>
+        </div>
+        <p>Parameters:</p>
+        <ul>
+            <li><strong>callback</strong>: The callback to unregister.</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>Usage Examples</h2>
+
+        <h3>Example: Set an item in a slot</h3>
+        <div class="code">
+            <pre><code>Item newItem = Item.New(1, 5);
+Slot slot = new Slot(0);
+slot.SetItem(newItem);
+Debug.Log("Item set in slot");</code></pre>
+        </div>
+
+        <h3>Example: Increment the stack count of an item in a slot</h3>
+        <div class="code">
+            <pre><code>bool success = slot.IncermentStackCount(3);
+if (success) {
+    Debug.Log("Stack count incremented");
+} else {
+    Debug.Log("Failed to increment stack count");
+}</code></pre>
+        </div>
+
+        <h3>Example: Register a callback for slot change</h3>
+        <div class="code">
+            <pre><code>slot.RegisterSlotChangedCallback((Slot s) => {
+    Debug.Log("Slot changed");
+});</code></pre>
+        </div>
+
+        <h3>Example: Unregister a slot change callback</h3>
+        <div class="code">
+            <pre><code>slot.UnregisterSlotChangeCallback(myCallback);</code></pre>
+        </div>
+    </div>
+</body>
+</html>

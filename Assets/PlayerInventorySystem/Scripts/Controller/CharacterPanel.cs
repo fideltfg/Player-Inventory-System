@@ -40,16 +40,7 @@ namespace PlayerInventorySystem
         // Method to update stats and UI
         public void UpdateStats(Slot slot)
         {
-            // Get base stats from the character
-            health = InventoryController.Character.Health;
-            mana = InventoryController.Character.Mana;
-            stamina = InventoryController.Character.Stamina;
-            strength = InventoryController.Character.Strength;
-            dexterity = InventoryController.Character.Dexterity;
-            IQ = InventoryController.Character.IQ;
-            armor = InventoryController.Character.Armor;
-            speed = InventoryController.Character.Speed;
-            luck = InventoryController.Character.Luck;
+
             ResetBuffValues();
 
             // Update buff values based on equipped items
@@ -60,6 +51,17 @@ namespace PlayerInventorySystem
                     UpdateBuffValues(slotController.Slot.Item.Data);
                 }
             }
+
+            // Get base stats from the character
+            health = InventoryController.Character.Health + buffValues["Health"];
+            mana = InventoryController.Character.Mana + buffValues["Mana"];
+            stamina = InventoryController.Character.Stamina + buffValues["Stamina"];
+            strength = InventoryController.Character.Strength + buffValues["Strength"];
+            dexterity = InventoryController.Character.Dexterity + buffValues["Dexterity"];
+            IQ = InventoryController.Character.IQ + buffValues["IQ"];
+            armor = InventoryController.Character.Armor + buffValues["Armor"];
+            speed = InventoryController.Character.Speed + buffValues["Speed"];
+            luck = InventoryController.Character.Luck + buffValues["Luck"];
 
             // Update UI text for each stat
             UpdateUIText(HealthText, "Health", health);
@@ -113,10 +115,10 @@ namespace PlayerInventorySystem
             buffValues["Health"] += itemData.health;
             buffValues["Mana"] += itemData.mana;
             buffValues["Stamina"] += itemData.stamina;
-            buffValues["Strength"] += itemData.Strength;
-            buffValues["Dexterity"] += itemData.Dexterity;
+            buffValues["Strength"] += itemData.strength;
+            buffValues["Dexterity"] += itemData.dexterity;
             buffValues["IQ"] += itemData.IQ;
-            buffValues["Speed"] += itemData.Speed;
+            buffValues["Speed"] += itemData.speed;
             buffValues["Luck"] += itemData.Luck;
             buffValues["Armor"] += itemData.armor;
         }

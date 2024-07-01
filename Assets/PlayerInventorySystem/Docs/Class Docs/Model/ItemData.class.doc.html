@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ItemData Class Documentation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            color: #2e6da4;
+        }
+        .section p {
+            margin: 5px 0;
+        }
+        .code {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>ItemData Class</h1>
+    <p>Defines an item's stats in the Item catalog. Be careful when changing these values as it will affect all items in the catalog and may cause data loss.</p>
+
+    <div class="section">
+        <h2>Public Fields</h2>
+
+        <h3>name</h3>
+        <p>The human-readable name of this object.</p>
+        <div class="code">
+            <pre><code>public string name;</code></pre>
+        </div>
+
+        <h3>id</h3>
+        <p>The catalog ID of this item.</p>
+        <div class="code">
+            <pre><code>public int id;</code></pre>
+        </div>
+
+        <h3>description</h3>
+        <p>A brief description of this item.</p>
+        <div class="code">
+            <pre><code>public string description = "";</code></pre>
+        </div>
+
+        <h3>sprite</h3>
+        <p>The inventory sprite used to display this item in slots.</p>
+        <div class="code">
+            <pre><code>public Sprite sprite;</code></pre>
+        </div>
+
+        <h3>BaseMaterial</h3>
+        <p>The base material type of the item.</p>
+        <div class="code">
+            <pre><code>public MATERIALTYPE BaseMaterial;</code></pre>
+        </div>
+
+        <h3>MaterialVariant</h3>
+        <p>The material variant of the item.</p>
+        <div class="code">
+            <pre><code>public Enum MaterialVariant;</code></pre>
+        </div>
+
+        <h3>prefabSingle</h3>
+        <p>The prefab that represents a single instance of the item in the game world.</p>
+        <div class="code">
+            <pre><code>public GameObject prefabSingle;</code></pre>
+        </div>
+
+        <h3>prefabMultiple</h3>
+        <p>The prefab that represents a stack of the item in the game world.</p>
+        <div class="code">
+            <pre><code>public GameObject prefabMultiple;</code></pre>
+        </div>
+
+        <h3>worldPrefab</h3>
+        <p>The game object that represents this item when equipped on the player or placed in the game world.</p>
+        <div class="code">
+            <pre><code>public GameObject worldPrefab;</code></pre>
+        </div>
+
+        <h3>itemType</h3>
+        <p>Defines the item's type (e.g., Consumable, Usable, Wearable, Quest).</p>
+        <div class="code">
+            <pre><code>public ITEMTYPE itemType;</code></pre>
+        </div>
+
+        <h3>slotType</h3>
+        <p>Defines the type of slot this item requires.</p>
+        <div class="code">
+            <pre><code>public SLOTTYPE slotType;</code></pre>
+        </div>
+
+        <h3>ConsumeOnPickup</h3>
+        <p>Indicates if this item will be consumed/used when picked up. The item will not be placed in the inventory.</p>
+        <div class="code">
+            <pre><code>public bool ConsumeOnPickup = false;</code></pre>
+        </div>
+
+        <h3>salvageable</h3>
+        <p>Indicates if this item can be salvaged from other items.</p>
+        <div class="code">
+            <pre><code>public bool salvageable = true;</code></pre>
+        </div>
+
+        <h3>recycable</h3>
+        <p>Indicates if this item can be recycled into other items via the salvage process.</p>
+        <div class="code">
+            <pre><code>public bool recycable = true;</code></pre>
+        </div>
+
+        <h3>recipe</h3>
+        <p>The recipe to craft this item.</p>
+        <div class="code">
+            <pre><code>public Recipe recipe = new Recipe();</code></pre>
+        </div>
+
+        <h3>craftCount</h3>
+        <p>The number of this item that the crafting recipe will yield.</p>
+        <div class="code">
+            <pre><code>public int craftCount = 1;</code></pre>
+        </div>
+
+        <h3>maxStackSize</h3>
+        <p>The max number of this item that can be stacked in one slot.</p>
+        <div class="code">
+            <pre><code>public int maxStackSize = 5;</code></pre>
+        </div>
+
+        <h3>maxDurability</h3>
+        <p>The durability of this item when new.</p>
+        <div class="code">
+            <pre><code>public float maxDurability = 0;</code></pre>
+        </div>
+
+        <h3>damage</h3>
+        <p>The damage bonus this item will bestow upon the player when equipped.</p>
+        <div class="code">
+            <pre><code>public float damage { get; }</code></pre>
+        </div>
+
+        <h3>Strength</h3>
+        <p>The strength bonus this item will bestow upon the player when equipped.</p>
+        <div class="code">
+            <pre><code>public float Strength;</code></pre>
+        </div>
+
+        <h3>Speed</h3>
+        <p>The speed bonus this item will bestow upon the player when equipped.</p>
+        <div class="code">
+            <pre><code>public float Speed;</code></pre>
+        </div>
+
+        <h3>health</h3>
+        <p>The health bonus this item will bestow upon the player when equipped.</p>
+        <div class="code">
+            <pre><code>public float health;</code></pre>
+        </div>
+
+        <h3>stamina</h3>
+        <p>The stamina bonus this item will bestow upon the player when equipped.</p>
+        <div class="code">
+            <pre><code>public float stamina;</code></pre>
+        </div>
+
+        <h3>mana</h3>
+        <p>The mana bonus this item will bestow upon the player when equipped.</p>
+        <div class="code">
+            <pre><code>public float mana;</code></pre>
+        </div>
+
+        <h3>armor</h3>
+        <p>The armor bonus this item will bestow upon the player when equipped.</p>
+        <div class="code">
+            <pre><code>public float armor;</code></pre>
+        </div>
+
+        <h3>IQ</h3>
+        <p>The IQ/Intelligence bonus this item will bestow upon the player when equipped.</p>
+        <div class="code">
+            <pre><code>public float IQ;</code></pre>
+        </div>
+
+        <h3>Dexterity</h3>
+        <p>The dexterity bonus this item will bestow upon the player when equipped.</p>
+        <div class="code">
+            <pre><code>public float Dexterity;</code></pre>
+        </div>
+
+        <h3>Luck</h3>
+        <p>The luck bonus this item will bestow upon the player when equipped.</p>
+        <div class="code">
+            <pre><code>[Range(0f, 1f)]
+public float Luck;</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Nested Types</h2>
+
+        <h3>PreviewSpriteAttribute</h3>
+        <p>A helper class for PreviewSpriteDrawer.</p>
+        <div class="code">
+            <pre><code>public class PreviewSpriteAttribute : PropertyAttribute { }</code></pre>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Usage Examples</h2>
+
+        <h3>Example: Create a new item and set its properties</h3>
+        <div class="code">
+            <pre><code>ItemData newItemData = new ItemData();
+newItemData.name = "Sword of Destiny";
+newItemData.id = 1;
+newItemData.description = "A powerful sword with magical properties.";
+newItemData.sprite = mySprite;
+newItemData.BaseMaterial = MATERIALTYPE.Metal;
+newItemData.prefabSingle = myPrefabSingle;
+newItemData.prefabMultiple = myPrefabMultiple;
+newItemData.worldPrefab = myWorldPrefab;
+newItemData.itemType = ITEMTYPE.Usable;
+newItemData.slotType = SLOTTYPE.Weapon;
+newItemData.ConsumeOnPickup = false;
+newItemData.salvageable = true;
+newItemData.recycable = true;
+newItemData.recipe = myRecipe;
+newItemData.craftCount = 1;
+newItemData.maxStackSize = 10;
+newItemData.maxDurability = 100f;
+newItemData.Strength = 10f;
+newItemData.Speed = 5f;
+newItemData.health = 20f;
+newItemData.stamina = 15f;
+newItemData.mana = 0f;
+newItemData.armor = 5f;
+newItemData.IQ = 3f;
+newItemData.Dexterity = 7f;
+newItemData.Luck = 0.5f;</code></pre>
+        </div>
+
+        <h3>Example: Calculate the damage of an item</h3>
+        <div class="code">
+            <pre><code>float itemDamage = newItemData.damage;
+Debug.Log("Item Damage: " + itemDamage);</code></pre>
+        </div>
+    </div>
+</body>
+</html>
