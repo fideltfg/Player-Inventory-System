@@ -1,0 +1,296 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e50cec6b61ef7d4fb4b05588e382d84, type: 3}
+  m_Name: Item Catalog 2D Demo
+  m_EditorClassIdentifier: 
+  catalogID: 0
+  list:
+  - name: NULL
+    id: 0
+    description: 
+    sprite: {fileID: 0}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 0}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 0
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 0
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 0
+    recyclable: 0
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+    craftCount: 0
+    maxStackSize: 0
+    maxDurability: 0
+    strength: 0
+    speed: 0
+    health: 0
+    stamina: 0
+    mana: 0
+    armor: 0
+    IQ: 0
+    dexterity: 0
+    Luck: 0
+  - name: Stick
+    id: 1
+    description: Wood Stick
+    sprite: {fileID: 31958587, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 5501576757635759080, guid: e4b24bdbce9fad943905f69d1309b261,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 0
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 0
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+    craftCount: 4
+    maxStackSize: 64
+    maxDurability: 100
+    strength: 1
+    speed: -0.05
+    health: 5
+    stamina: -0.52
+    mana: 0
+    armor: 1
+    IQ: 0
+    dexterity: 0
+    Luck: 0.681
+  - name: Stone
+    id: 2
+    description: Stone
+    sprite: {fileID: -844094650, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 5501576757635759080, guid: 2c88d13362930d5409c6dab5c777edae,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 0
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 0
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+    craftCount: 4
+    maxStackSize: 64
+    maxDurability: 100
+    strength: 1
+    speed: -0.05
+    health: 5
+    stamina: -0.52
+    mana: 0
+    armor: 1
+    IQ: 0
+    dexterity: 0
+    Luck: 0.681
+  - name: Stone Pickaxe
+    id: 3
+    description: Pickaxe made from Stone and a sticks
+    sprite: {fileID: 1489031470, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 5501576757635759080, guid: 3afacd25029a0dc4d8eb5627013c07e6,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 0
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 000000000200000002000000
+      - cells: 000000000100000002000000
+      - cells: 010000000000000000000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 1
+    speed: -0.05
+    health: 5
+    stamina: -0.52
+    mana: 0
+    armor: 1
+    IQ: 0
+    dexterity: 0
+    Luck: 0.681
+  - name: Chest
+    id: 4
+    description: Chest made from sticks
+    sprite: {fileID: 1883198268, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 5501576757635759080, guid: 7824ae44014ad374cb7e8c800df1d03e,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 7946973888784580952, guid: 058ffc8f5793f264bb3bafc7c6aca893,
+      type: 3}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 0
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 1
+    recipe:
+      rows:
+      - cells: 010000000100000001000000
+      - cells: 010000000000000001000000
+      - cells: 010000000100000001000000
+    craftCount: 1
+    maxStackSize: 1
+    maxDurability: 100
+    strength: 1
+    speed: -0.05
+    health: 5
+    stamina: -0.52
+    mana: 0
+    armor: 1
+    IQ: 0
+    dexterity: 0
+    Luck: 0.681
+  - name: Coal
+    id: 5
+    description: A chunk of coal
+    sprite: {fileID: -106804983, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 5501576757635759080, guid: 8890e740f24f74a43844a5d61b6e3973,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 0
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 0
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+    craftCount: 1
+    maxStackSize: 64
+    maxDurability: 100
+    strength: 1
+    speed: -0.05
+    health: 5
+    stamina: -0.52
+    mana: 0
+    armor: 1
+    IQ: 0
+    dexterity: 0
+    Luck: 0.681
+  - name: Iron
+    id: 6
+    description: A chink of Iron
+    sprite: {fileID: -299018472, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 5501576757635759080, guid: c422fa3fe8ba79a4cbb21bbaffe72e05,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 0
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 0
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+    craftCount: 1
+    maxStackSize: 64
+    maxDurability: 100
+    strength: 1
+    speed: -0.05
+    health: 5
+    stamina: -0.52
+    mana: 0
+    armor: 1
+    IQ: 0
+    dexterity: 0
+    Luck: 0.681
+  - name: Gold
+    id: 7
+    description: A Gold Nugget
+    sprite: {fileID: 488110435, guid: cad720ac48ea46e4d88c49aadc516585, type: 3}
+    BaseMaterial: 0
+    prefabSingle: {fileID: 5501576757635759080, guid: 0c2557afecb399748af39015d0792b5c,
+      type: 3}
+    prefabMultiple: {fileID: 0}
+    worldPrefab: {fileID: 0}
+    itemType: 2
+    slotType: 0
+    ConsumeOnPickup: 0
+    requiresFurnace: 0
+    smeltTime: 0
+    canBeFuel: 0
+    fuelValue: 0
+    salvageable: 1
+    recyclable: 0
+    recipe:
+      rows:
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+      - cells: 000000000000000000000000
+    craftCount: 1
+    maxStackSize: 64
+    maxDurability: 100
+    strength: 1
+    speed: -0.05
+    health: 5
+    stamina: -0.52
+    mana: 0
+    armor: 1
+    IQ: 0
+    dexterity: 0
+    Luck: 0.681

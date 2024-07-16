@@ -100,6 +100,9 @@ namespace PlayerInventorySystem
             return SelectedSlotController.Slot.Item;
         }
 
+        /// <summary>
+        /// method to consume the currently selected item (or stack of items) from the item bar.
+        /// </summary>
         public void ConsumeSelectedItem()
         {
             Slot slot = SelectedSlotController.Slot;

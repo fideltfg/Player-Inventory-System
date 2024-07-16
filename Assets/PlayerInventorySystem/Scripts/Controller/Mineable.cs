@@ -73,6 +73,10 @@ namespace PlayerInventorySystem
             }
 
         }
- 
+
+        public override void Interact(PlayerInventoryController playerInventoryController)
+        {
+            // noting happens here.. maybe open a panel to show the player the mineable status?
+        }
     }
 }

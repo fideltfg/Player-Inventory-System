@@ -191,7 +191,7 @@ namespace PlayerInventorySystem
 
                         if (slot.selected)
                         {
-                            InventoryController.Instance.OnSelectedItemChangeCallBack?.Invoke(slot.Item);
+                            InventoryController.OnSelectedItemChangeCallBack?.Invoke(slot.Item);
                         }
 
                     }

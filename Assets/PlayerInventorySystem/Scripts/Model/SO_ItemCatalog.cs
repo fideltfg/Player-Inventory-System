@@ -9,7 +9,7 @@ namespace PlayerInventorySystem
     /// </summary>
     [Serializable]
     [CreateAssetMenu(menuName = "Inventory/Item Catalog")]
-    public class SO_ItemList : ScriptableObject
+    public class SO_ItemCatalog : ScriptableObject
     {
         public int catalogID = 0;
         public List<ItemData> list = new List<ItemData>();

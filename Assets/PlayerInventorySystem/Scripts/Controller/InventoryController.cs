@@ -26,11 +26,11 @@ namespace PlayerInventorySystem
         /// The list of items used in game. List inclues all needed data to generate and control items.
         /// </summary>
         [Tooltip("The list of items used in game. List includs all needed data to generate and control items.")]
-        public SO_ItemList ItemCatalog;
+        public SO_ItemCatalog ItemCatalog;
 
         /// <summary>
         /// The default capacity of the players inventory.
-        /// must have a  multiple of four slots (4, 8, 12, 16, 20 24....)
+        /// must have a  multiple of four slots (4, 8, 12, 16, 20, 24...) to diaplay corretly in the default inventory panel.
         /// </summary>
         public static int PlayerInventoryCapacity = 24;
 
@@ -132,12 +132,17 @@ namespace PlayerInventorySystem
 
         /// <summary>
         /// Accessor for the item 'held' on by the mouse cursor.
-        /// 
+        /// this is not the same as the item in the players hand.
+        /// this is used when the player is moving an item from one inventory to another.
         /// Inventory index 4
         /// </summary>
         public static Item HeldItem
         {
-            get { return InventoryList[4][0].Item; }
+            get
+            {
+                // if InventoryList[4] exists return the item in slot 0 else return null
+                return InventoryList.ContainsKey(4) ? InventoryList[4][0].Item : null;
+            }
             set
             {
                 if (value != null)
@@ -164,7 +169,7 @@ namespace PlayerInventorySystem
         /// <summary>
         /// this is the controller for the player to interface with the inventory system
         /// </summary>
-        public PlayerInventoryController PlayerInventoryControler;
+        internal PlayerInventoryController PlayerInventoryControler;
 
         /// <summary>
         /// The controller for the inventory panel
@@ -230,27 +235,26 @@ namespace PlayerInventorySystem
         /// Register for this callback to trigger actions outside the inventory system when the player changes their selected item.
         /// This callback passes the item that was selected.
         /// </summary>
-        internal Action<Item> OnSelectedItemChangeCallBack;
+        internal static Action<Item> OnSelectedItemChangeCallBack;
 
         /// <summary>
         /// Action called whenever the player drops an item into the game world
         /// This callback passes the 'dropped' item that was dropped.
         /// </summary>
-        public Action<DroppedItem> OnItemDroppedCallBack;
-
+       // public Action<DroppedItem> OnItemDroppedCallBack;
 
         /// <summary>
         /// Action called whenever the player consumes an item either in pickup or from the item bar
-        public Action<Item> OnConsumeItem;
+        //public Action<Item> OnConsumeItem;
 
         /// <summary>
         /// callback for when an item on the character panel is changed
-        public Action OnCharacterItemChangeCallBack;
+        internal static Action OnCharacterItemChangeCallBack;
 
         /// <summary>
         /// Indicates if any of the inventory system Panels are currently being displayed.
         /// </summary>
-        public bool AnyWindowOpen
+        internal bool AnyWindowOpen
         {
             get
             {
@@ -264,13 +268,10 @@ namespace PlayerInventorySystem
             }
         }
 
-
-
-
         /// <summary>
         /// Default time to live of items dropped by the player into the game world in seconds
         /// </summary>
-        public float DroppedItemTTL = 300;
+       // public float DroppedItemTTL = 300;
 
         /// <summary>
         /// Define an object that will be spawned in the world when the game starts if its a new game.
@@ -363,14 +364,15 @@ namespace PlayerInventorySystem
         {
 
 
-            if (StarterObject == null)
+            if (StarterObject != null)
             {
-                return;
+                Debug.Log("Spawning Starter Pack");
+                StarterObject.SetActive(newGame);
             }
 
             if (newGame)
             {
-                Debug.Log("Spawning Starter Pack and creating new character");
+                Debug.Log("Creating new character");
                 Character = new Character()
                 {
                     characterName = CharacterNameGenerator.GenerateRandomName(GENDER.FEMALE),
@@ -387,18 +389,8 @@ namespace PlayerInventorySystem
                     Speed = UnityEngine.Random.Range(0f, 10f),
                     Armor = 1
                 };
-
-
-
-                StarterObject.SetActive(newGame);
-
-
             }
-
-
-
         }
-
 
         void Update()
         {
@@ -428,7 +420,12 @@ namespace PlayerInventorySystem
 
         }
 
-        public static bool PlayerHasItem(int itemID)
+        /// <summary>
+        /// Method to test if the given item exists in any inventory
+        /// </summary>
+        /// <param name="itemID"></param>
+        /// <returns></returns>
+        public static bool ItemExists(int itemID)
         {
             foreach (Inventory inventory in InventoryList.Values)
             {
@@ -439,7 +436,6 @@ namespace PlayerInventorySystem
             }
             return false;
         }
-
 
         /// <summary>
         /// Method used to create an empty player inventory
@@ -466,7 +462,7 @@ namespace PlayerInventorySystem
         /// <param name="callback"></param>
         public static void RegisterOnCharacterItemChangeCallback(Action callback)
         {
-            Instance.OnCharacterItemChangeCallBack += callback;
+            OnCharacterItemChangeCallBack += callback;
         }
 
         /// <summary>
@@ -475,9 +471,9 @@ namespace PlayerInventorySystem
         /// <param name="callback"></param>
         public static void UnregisterOnCharacterItemChangeCallback(Action callback)
         {
-            if (Instance.OnCharacterItemChangeCallBack != null)
+            if (OnCharacterItemChangeCallBack != null)
             {
-                Instance.OnCharacterItemChangeCallBack -= callback;
+                OnCharacterItemChangeCallBack -= callback;
             }
         }
 
@@ -485,20 +481,21 @@ namespace PlayerInventorySystem
         /// Method to register a callback for when the selected item changes
         /// </summary>
         /// <param name="callbacK"></param>
-        public static void RegisterOnSlectedItemChangeCallback(Action<Item> callbacK)
+        public static void RegisterOnSelectedItemChangeCallback(Action<Item> callbacK)
         {
-            Instance.OnSelectedItemChangeCallBack += callbacK;
+                OnSelectedItemChangeCallBack += callbacK;
         }
 
         /// <summary>
         /// Method to unregister a callback for when the selected item changes
         /// </summary>
         /// <param name="callbacK"></param>
+
         public static void UnregisterOnSelectedItemChangeCallback(Action<Item> callbacK)
         {
-            if (Instance.OnSelectedItemChangeCallBack != null)
+            if (OnSelectedItemChangeCallBack != null)
             {
-                Instance.OnSelectedItemChangeCallBack -= callbacK;
+                OnSelectedItemChangeCallBack -= callbacK;
             }
         }
 
@@ -554,7 +551,7 @@ namespace PlayerInventorySystem
         /// <param name="window"></param>
         private void WindowCloseCallBack(InventorySystemPanel window)
         {
-            if (!InventoryController.Instance.AnyWindowOpen && !(this is ItemBar))
+            if (!InventoryController.Instance.AnyWindowOpen && !(this is ItemBar)) // not sure why I put this here??
             {
                 // dropPanel.gameObject.SetActive(false); // turn off the drop panel
                 Cursor.lockState = CursorLockMode.Locked; // lock the mouse
@@ -609,13 +606,8 @@ namespace PlayerInventorySystem
                 // set the durability of the dropped item
                 droppedItem.Durability = durability;
 
-
                 // add the dropped item to the list of dropped items
                 DroppedItems.Add(droppedItem);
-
-                // invoke the callback
-                OnItemDroppedCallBack?.Invoke(droppedItem);
-                Debug.Log("Item Dropped");
             }
             else
             {
@@ -945,7 +937,7 @@ namespace PlayerInventorySystem
         }
 
         /// <summary>
-        /// method to return the a totoal count of the given item type in the players inventory and item bar
+        /// method to return the a total count of the given item type in the players inventory and item bar
         /// </summary>
         /// <param name="itemID"></param>
         /// <returns></returns>
@@ -975,6 +967,7 @@ namespace PlayerInventorySystem
             }
             return null;
         }
+
 
     }
 }

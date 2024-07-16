@@ -7,7 +7,7 @@ namespace PlayerInventorySystem.Editor
     [CustomPropertyDrawer(typeof(Recipe))]
     public class RecipeDrawer : PropertyDrawer
     {
-        private SO_ItemList itemList;
+        private SO_ItemCatalog itemList;
         private List<GUIContent> itemContents;
         private SerializedProperty currentProperty;
 
@@ -66,7 +66,7 @@ namespace PlayerInventorySystem.Editor
 
         private void ShowItemListError(Rect position)
         {
-            EditorGUI.HelpBox(position, "Item list not found.", MessageType.Error);
+            EditorGUI.HelpBox(position, "Item list not found. Ensue you have placed this item list in your inventory controller.", MessageType.Error);
         }
 
         private void EnsureItemContentsLoaded()

@@ -110,9 +110,15 @@ namespace PlayerInventorySystem
             // If we have a valid chest
             if (chest != null)
             {
-                // Find the "Lid" child of the chest and set its "Open" state
-                chest.transform.Find("Lid").GetComponent<Animator>().SetBool("Open", v);
-                chest.Open = v;
+                Transform lid = chest.transform.Find("Lid");
+
+                if(lid != null)
+                {
+                    // Find the "Lid" child of the chest and set its "Open" state
+                    lid.GetComponent<Animator>().SetBool("Open", v);
+                    chest.Open = v;
+                }
+                
             }
         }
     }

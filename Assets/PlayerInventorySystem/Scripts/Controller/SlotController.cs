@@ -757,7 +757,7 @@ namespace PlayerInventorySystem
             Item i = InventoryController.ItemBarInventory[ItemBarSlotID].Item;
             InventoryController.ItemBarInventory[ItemBarSlotID].SetItem(null);
             InventoryController.ItemBarInventory[ItemBarSlotID].SetItem(Slot.Item);
-            InventoryController.Instance.OnSelectedItemChangeCallBack?.Invoke(InventoryController.Instance.ItemBar.SelectedSlotController.Slot.Item);
+            InventoryController.OnSelectedItemChangeCallBack?.Invoke(InventoryController.Instance.ItemBar.SelectedSlotController.Slot.Item);
             Slot.SetItem(i);
         }
 

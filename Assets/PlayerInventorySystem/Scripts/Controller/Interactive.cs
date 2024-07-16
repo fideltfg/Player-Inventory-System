@@ -25,7 +25,18 @@ namespace PlayerInventorySystem
         private void OnEnable()
         {
             Collider sc = GetComponent<Collider>();
-            sc.isTrigger = true;
+            if (sc != null)
+            {
+                sc.isTrigger = true;
+            }
+            else
+            {
+                Collider2D sc2d = gameObject.GetComponent<Collider2D>();
+                if (sc2d != null)
+                {
+                    sc2d.isTrigger = true;
+                }
+            }
         }
 
         internal virtual void ClosePanel()
@@ -46,7 +57,7 @@ namespace PlayerInventorySystem
 
         public virtual void Interact(PlayerInventoryController playerInventoryController)
         {
-           // throw new NotImplementedException();
+            // throw new NotImplementedException();
         }
     }
 }

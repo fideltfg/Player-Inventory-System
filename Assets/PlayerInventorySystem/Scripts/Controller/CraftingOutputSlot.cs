@@ -47,8 +47,8 @@ namespace PlayerInventorySystem
                 if (HeldItem == null)
                 {
                     // if the player is holding down shift
-                 //   if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
-                 if(InventoryController.InputModifier)
+                    //   if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+                    if (InventoryController.InputModifier)
                     {
                         // calculate how many items can be crafted with the items in the crafting array
                         int craftCount = MaxCraftCount();
@@ -99,7 +99,7 @@ namespace PlayerInventorySystem
                         Consume();
                     }
                 }
-                
+
                 // if held item is not null but held item is the same as this Item
                 else
                 {

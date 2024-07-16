@@ -109,7 +109,7 @@ namespace PlayerInventorySystem
             }
             if (selected)
             {
-                InventoryController.Instance.OnSelectedItemChangeCallBack?.Invoke(Item);
+                InventoryController.OnSelectedItemChangeCallBack?.Invoke(Item);
             }
             return Item;
         }

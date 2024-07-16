@@ -26,7 +26,7 @@ namespace PlayerInventorySystem
                 SlotList[selectedSlotID].Selected = false;
                 selectedSlotID = (int)Mathf.Clamp(value, 0, InventoryController.Instance.ItemBarSlotCount - 1);
                 SlotList[selectedSlotID].Selected = true;
-                InventoryController.Instance.OnSelectedItemChangeCallBack?.Invoke(SelectedSlotController.Slot.Item);
+                InventoryController.OnSelectedItemChangeCallBack?.Invoke(SelectedSlotController.Slot.Item);
             }
         }
 

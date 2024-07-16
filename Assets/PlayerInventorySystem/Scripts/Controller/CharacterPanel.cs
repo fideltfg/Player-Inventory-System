@@ -88,7 +88,7 @@ namespace PlayerInventorySystem
             UpdateUIColor(DamageText, "Damage");
 
             // Invoke callback for character item change
-            InventoryController.Instance.OnCharacterItemChangeCallBack?.Invoke();
+            InventoryController.OnCharacterItemChangeCallBack?.Invoke();
         }
 
         // Reset all buff values to zero

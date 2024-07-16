@@ -31,19 +31,20 @@ namespace PlayerInventorySystem
         /// 
         public float TimeToLive = 30;
 
-        public float Timer = 0;
+        internal float Timer = 0;
 
         /// <summary>
         /// holder for position data.
         /// used only when game loads saved inventory data. should be null otherwise.
         /// </summary>
-        public Vector3 Position;
+        
+        internal Vector3 Position;
 
 
         private void OnEnable ()
         {
             gameObject.tag = "Item";
-            gameObject.layer = 7;
+            //gameObject.layer = 7;
             Timer = 0;
         }
 

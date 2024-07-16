@@ -10,6 +10,8 @@ namespace PlayerInventorySystem
     public class PlacedItem : MonoBehaviour
     {
         public float durability = 100f;
+
+        [Tooltip("The ID of the item this object represents in the item catalog. Set to zero (0) for mines.")]
         public int ItemID = 0;
 
         internal virtual void TakeDamage(float damage)

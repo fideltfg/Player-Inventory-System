@@ -2,19 +2,19 @@ using UnityEditor;
 using UnityEngine;
 using PlayerInventorySystem;
 
-[CustomEditor(typeof(SO_ItemList))]
+[CustomEditor(typeof(SO_ItemCatalog))]
 public class SO_ItemListEditor : Editor
 {
     private SerializedProperty catalogID;
     private SerializedProperty list;
-    private SO_ItemList itemList;
+    private SO_ItemCatalog itemList;
 
     private void OnEnable()
     {
         // Ensure the target is correctly assigned
         if (target != null)
         {
-            itemList = (SO_ItemList)target;
+            itemList = (SO_ItemCatalog)target;
             catalogID = serializedObject.FindProperty("catalogID");
             list = serializedObject.FindProperty("list");
         }

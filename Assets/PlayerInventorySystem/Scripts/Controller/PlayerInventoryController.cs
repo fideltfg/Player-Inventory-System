@@ -2,14 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
-using Unity.VisualScripting;
 
 namespace PlayerInventorySystem
 {
     /// <summary>
     /// Component added to player object to allow items to be picked up.
     /// </summary>
-    [RequireComponent(typeof(BoxCollider))]
     public class PlayerInventoryController : MonoBehaviour
     {
         public Transform Head;
@@ -20,7 +18,31 @@ namespace PlayerInventorySystem
         [Range(0.1f, 10)]
         public float interactDistance = 8f;
 
+        [Tooltip("The object that the player is currently able to interact with.")]
+        public Interactive interactiveObject;
+
         public Animator animator;
+
+        /// <summary>
+        /// Callback for when the player attempts to mines an item
+        /// </summary>
+        internal Action<Mineable> OnMineCallback;
+
+        /// <summary>
+        /// Callback for when the player attempts to attack something
+        /// </summary>
+        internal Action<Item> OnUseItemCallback;
+
+        /// <summary>
+        /// Callback for when the player picks up an item
+        /// </summary>
+        internal Action<Item> OnPickupCallback;
+
+
+        /// <summary>
+        /// Callback for when the player drops an item
+        /// </summary>
+        internal Action<Item> OnDropItemCallback;
 
         /// <summary>
         /// Ceter offset for collider
@@ -31,7 +53,7 @@ namespace PlayerInventorySystem
         /// </summary>
         public Vector3 colliderSize = new Vector3(1, 1.5f, 1);
 
-        public LayerMask layermask;
+        public LayerMask InteractionLayerMask;
 
         /// <summary>
         /// Provides access to the values added from equipping items on the charater panel
@@ -51,9 +73,9 @@ namespace PlayerInventorySystem
         RaycastHit hit;
 
         /// <summary>
-        /// If the player is looking at an interactable object or at the ground where an item can be placed.
+        /// Indicates if the player can interact at this time
         /// </summary>
-        internal bool CanInteract
+        internal virtual bool CanInteract
         {
             get
             {
@@ -61,12 +83,12 @@ namespace PlayerInventorySystem
 
                 Ray ray = Camera.main.ScreenPointToRay(cameraCenter);
 
-                return Physics.Raycast(ray, out hit, interactDistance, layermask);
+                return Physics.Raycast(ray, out hit, interactDistance, InteractionLayerMask);
             }
             private set { }
         }
 
-        void OnEnable()
+        public virtual void OnEnable()
         {
             BoxCollider bc = GetComponent<BoxCollider>();
 
@@ -79,9 +101,11 @@ namespace PlayerInventorySystem
 
         private void OnTriggerEnter(Collider other)
         {
+            // if this is a dropped item
             if (PickUpItem(other.gameObject))
             {
-                GetComponent<AudioSource>().PlayOneShot(pickupSound);
+                Debug.Log("Picked up item");
+                return;
             }
         }
 
@@ -119,6 +143,9 @@ namespace PlayerInventorySystem
 
             Item newItem = Item.New(droppedItem.ItemID, droppedItem.StackCount);
 
+            // invoke on pickup callback
+            OnPickupCallback?.Invoke(newItem);
+
             if (newItem.Data.ConsumeOnPickup)
             {
                 ConsumeItem(newItem);
@@ -144,7 +171,7 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="itemID">The ID of the item to be added</param>
         /// <returns>Returns true on success else false</returns>
-        internal bool GiveItem(Item item)
+        private bool GiveItem(Item item)
         {
             if (InventoryController.ItemBarInventory.AddItem(item) == false)
             {
@@ -165,19 +192,25 @@ namespace PlayerInventorySystem
         /// </summary>
         /// <param name="item"></param>
         /// <param name="quantity"></param>
-        internal void DropItem(Item item, int quantity = 1, float durabiltiy = 100)
+        internal virtual GameObject DropItem(Item item, int quantity = 1, float durabiltiy = 100)
         {
+            if (item == null)
+            {
+                return null;
+            }
             // get the items default ttl value
             float ttl = item.Data.prefabSingle.GetComponent<DroppedItem>().TimeToLive;
             // spawn the item in the world
-            InventoryController.Instance.SpawnItem(item.Data.id, transform.position + (transform.forward * 1.5f) + (transform.up * 1.5f), quantity, ttl, durabiltiy);
+            return InventoryController.Instance.SpawnItem(item.Data.id, transform.position + (transform.forward * 1.5f) + (transform.up * 1.5f), quantity, ttl, durabiltiy);
         }
 
         /// <summary>
         /// Method for the player to interact with the world and items in it
         /// </summary>
-        internal void Interact()
+        internal virtual void Interact()
         {
+
+            Debug.Log("Interact 2");
             if (CanInteract == true && hit.transform != null)
             {
                 Interactive interactiveObject = hit.transform.gameObject.GetComponent<Interactive>();
@@ -202,10 +235,18 @@ namespace PlayerInventorySystem
             }
         }
 
-        private void Mine(Mineable mineable)
+        /// <summary>
+        /// method to mine a mineable object
+        /// </summary>
+        /// <param name="mineable"></param>
+        internal void Mine(Mineable mineable)
         {
-            if (!mining)
+            if (!isMining)
             {
+                Debug.Log("Mining");
+                OnMineCallback?.Invoke(mineable);
+
+                // comment out this line if you want to handel mining in a different way via the OnMineCallback in your own code
                 StartCoroutine(Mining(mineable));
             }
             else
@@ -214,17 +255,17 @@ namespace PlayerInventorySystem
             }
         }
 
-        internal bool mining = false;
+        private bool isMining = false;
 
         private IEnumerator Mining(Mineable mineable)
         {
-            if (mineable == null || mining)
+            if (mineable == null || isMining)
             {
                 Debug.Log("Not Mineable");
                 yield return null;
             }
             // set the mining flag to true
-            mining = true;
+            isMining = true;
             // get the tool item from the item bars selected slot
             Item toolItem = InventoryController.Instance.ItemBar.SelectedSlotController.Slot.Item;
 
@@ -237,13 +278,11 @@ namespace PlayerInventorySystem
             // check if the tool item is a usable item. Some items can not be used to mine
             if (toolItem.Data.itemType == ITEMTYPE.USABLE)
             {
-                animator.SetBool("Mine", true);
-
                 while (animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.6)
                 {
                     yield return null;
                 }
-                animator.SetBool("Mine", false);
+                // animator.SetBool("Mine", false);
                 Item minedItem = mineable.Mine(toolItem);
 
                 if (minedItem != null)
@@ -265,7 +304,7 @@ namespace PlayerInventorySystem
                 }
 
             }
-            mining = false;
+            isMining = false;
             yield return null;
 
         }
@@ -276,15 +315,17 @@ namespace PlayerInventorySystem
             if (item.Data.itemType == ITEMTYPE.CONSUMABLE)
             {
 
-
+                // TODO!
 
             }
         }
 
-        private void UseItem(Item itemBeingUsed)
+        internal virtual void UseItem(Item itemBeingUsed)
         {
+            //Debug.Log("Using Item");
             if (itemBeingUsed == null || InventoryController.Instance.AnyWindowOpen)
             {
+                //  Debug.Log("No Item Selected");
                 return;
             }
 
@@ -296,7 +337,7 @@ namespace PlayerInventorySystem
                     // test if there is an interactive item in front of the player
                     if (CanInteract == true && hit.transform != null)
                     {
-                        Interactive interactiveObject = hit.transform.gameObject.GetComponent<Interactive>();
+                        interactiveObject = hit.transform.gameObject.GetComponent<Interactive>();
 
                         if (interactiveObject != null)
                         {
@@ -313,11 +354,10 @@ namespace PlayerInventorySystem
 
                                 // play the attack animation
                                 animator.SetTrigger("Attack");
-                                Debug.Log("Attacking");
+                                // Debug.Log("Attacking");
 
                                 // get the placable component from the hit object
-                                PlacedItem placedItem = hit.transform.gameObject.GetComponent<PlacedItem>();
-                                if (placedItem != null)
+                                if (interactiveObject.TryGetComponent<PlacedItem>(out PlacedItem placedItem))
                                 {
                                     placedItem.TakeDamage(damage);
                                 }
@@ -331,13 +371,17 @@ namespace PlayerInventorySystem
                                 {
                                     itemBeingUsed.lastSlot.SetItem(null);
                                 }
-                                Debug.Log("Item is broken");
+                                // Debug.Log("Item is broken");
                                 return;
                             }
 
                             itemBeingUsed.Durability--;
                             itemBeingUsed.lastSlot.SlotChanged(itemBeingUsed.lastSlot);
                         }
+                    }
+                    else
+                    {
+                        //  Debug.Log("No Interactive Object");
                     }
 
                     break;
@@ -348,11 +392,51 @@ namespace PlayerInventorySystem
             }
         }
 
-        internal void UseCurrentItem()
+        public void UseCurrentItem()
         {
             // get the selected item from the item bar
             Item itemBeingUsed = InventoryController.Instance.ItemBar.SelectedSlotController.Slot.Item;
             UseItem(itemBeingUsed);
+        }
+
+        public void RegisterOnMineCallback(Action<Mineable> callback)
+        {
+            OnMineCallback += callback;
+        }
+
+        public void UnRegisterOnMineCallback(Action<Mineable> callback)
+        {
+            OnMineCallback -= callback;
+        }
+
+        public void RegisterOnAttackCallback(Action<Item> callback)
+        {
+            OnUseItemCallback += callback;
+        }
+
+        public void UnRegisterOnUseItemCallback(Action<Item> callback)
+        {
+            OnUseItemCallback -= callback;
+        }
+
+        public void RegisterOnPickupCallback(Action<Item> callback)
+        {
+            OnPickupCallback += callback;
+        }
+
+        public void UnRegisterOnPickupCallback(Action<Item> callback)
+        {
+            OnPickupCallback -= callback;
+        }
+
+        public void RegisterOnDropItemCallback(Action<Item> callback)
+        {
+            OnDropItemCallback += callback;
+        }
+
+        public void UnRegisterOnDropItemCallback(Action<Item> callback)
+        {
+            OnDropItemCallback -= callback;
         }
     }
 }

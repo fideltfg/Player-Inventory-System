@@ -6,13 +6,13 @@ using PlayerInventorySystem;
 public class ItemPickerWindow : EditorWindow
 {
     public static Action<int> OnItemPicked;
-    private SO_ItemList itemList;
+    private SO_ItemCatalog itemList;
     private Vector2 scrollPosition;
     private const float itemButtonSize = 50f;
     private const float itemButtonPadding = 10f;
     private Texture2D defaultTexture;
 
-    public static void ShowWindow(SO_ItemList itemList, Action<int> onItemPicked)
+    public static void ShowWindow(SO_ItemCatalog itemList, Action<int> onItemPicked)
     {
         var window = GetWindow<ItemPickerWindow>("Recipe Item Picker");
         window.itemList = itemList;

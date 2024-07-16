@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
+
 namespace PlayerInventorySystem
 {
-
     /// <summary>
     /// Controller for chest objects. Place this compentent of object you wish to set up as a chest.
     /// </summary>
@@ -11,6 +11,7 @@ namespace PlayerInventorySystem
         /// <summary>
         /// The ID of this chest and also the Index of its InventoryController.ChestList entry.
         /// </summary>
+        [Tooltip("The ID of this chest and also the Index of its InventoryController.ChestList entry.")]
         public int ID = 0;
 
         /// <summary>
@@ -18,12 +19,10 @@ namespace PlayerInventorySystem
         /// </summary>
         internal int Capacity = 24;
 
-
         /// <summary>
         /// Indicates if open or not.
         /// </summary>
         internal bool Open = false;
-
 
         /// <summary>
         /// points to InventoryController.ChestList entry for this chest.
