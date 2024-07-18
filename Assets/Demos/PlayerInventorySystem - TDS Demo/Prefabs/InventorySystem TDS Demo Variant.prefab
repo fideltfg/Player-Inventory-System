@@ -31,12 +31,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6091166410425251642}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 20}
+  m_SizeDelta: {x: 0, y: 42.9432}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &3652812309813642503
 CanvasRenderer:
@@ -77,7 +76,7 @@ MonoBehaviour:
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: Collect the pills and throw them in the colored goals. W,A,S and D or arrow
     keys to move. Mouse to aim,Wheel to select item. Button 0  to throw.
@@ -113,7 +112,6 @@ RectTransform:
   m_Children:
   - {fileID: 8718044067296678893}
   m_Father: {fileID: 1292792782169699165}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -664,12 +662,17 @@ PrefabInstance:
     - target: {fileID: 2490623765230845469, guid: c7b17ef35fcef6f4896787415cf3be2d,
         type: 3}
       propertyPath: m_Name
-      value: InventorySystem Variant
+      value: InventorySystem TDS Demo Variant
       objectReference: {fileID: 0}
     - target: {fileID: 2490623765230845469, guid: c7b17ef35fcef6f4896787415cf3be2d,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2490623765230845469, guid: c7b17ef35fcef6f4896787415cf3be2d,
+        type: 3}
+      propertyPath: m_TagString
+      value: InventoryController
       objectReference: {fileID: 0}
     - target: {fileID: 2580385758154139735, guid: c7b17ef35fcef6f4896787415cf3be2d,
         type: 3}
@@ -2145,6 +2148,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.a
       value: 0.8666667
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195164888532078348, guid: c7b17ef35fcef6f4896787415cf3be2d,
+        type: 3}
+      propertyPath: HideCursor
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8195164888532078348, guid: c7b17ef35fcef6f4896787415cf3be2d,
+        type: 3}
+      propertyPath: LockCursor
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8195164888532078348, guid: c7b17ef35fcef6f4896787415cf3be2d,
         type: 3}

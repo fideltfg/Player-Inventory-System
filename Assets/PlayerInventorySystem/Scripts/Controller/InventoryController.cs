@@ -147,7 +147,10 @@ namespace PlayerInventorySystem
             {
                 if (value != null)
                 {
-                    Cursor.visible = false;
+                    if (Instance.HideCursor)
+                    {
+                        Cursor.visible = false;
+                    }
                     Instance.dropPanel.gameObject.SetActive(true);
                 }
                 else
@@ -280,10 +283,18 @@ namespace PlayerInventorySystem
 
         private bool newGame = true;
 
+        public bool HideCursor = true;
+
+        public bool LockCursor = true;
+
         void Start()
         {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = HideCursor;
+
+            if (LockCursor == true)
+            {
+                Cursor.lockState = CursorLockMode.Locked;
+            }
             if (Player == null)
             {
                 Player = GameObject.FindGameObjectWithTag("Player");
@@ -402,8 +413,13 @@ namespace PlayerInventorySystem
                 CraftingPanel.gameObject.SetActive(false);
                 ChestPanel.gameObject.SetActive(false);
                 AdvancedInventoryPanel.gameObject.SetActive(false);
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
+
+                Cursor.visible = HideCursor;
+
+                if (LockCursor == true)
+                {
+                    Cursor.lockState = CursorLockMode.Locked;
+                }
 
                 if (HeldItem != null)
                 {
@@ -554,8 +570,20 @@ namespace PlayerInventorySystem
             if (!InventoryController.Instance.AnyWindowOpen && !(this is ItemBar)) // not sure why I put this here??
             {
                 // dropPanel.gameObject.SetActive(false); // turn off the drop panel
-                Cursor.lockState = CursorLockMode.Locked; // lock the mouse
-                Cursor.visible = false;
+                if (HideCursor)
+                {
+                    Cursor.visible = false;
+
+                }
+                if (LockCursor == true)
+                {
+                    Cursor.lockState = CursorLockMode.Locked;
+                }
+                else
+                {
+                    Cursor.lockState = CursorLockMode.None;
+                }
+
             }
         }
 
