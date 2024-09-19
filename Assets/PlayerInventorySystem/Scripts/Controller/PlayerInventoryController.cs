@@ -409,7 +409,7 @@ namespace PlayerInventorySystem
             OnMineCallback -= callback;
         }
 
-        public void RegisterOnAttackCallback(Action<Item> callback)
+        public void RegisterOnUseCallback(Action<Item> callback)
         {
             OnUseItemCallback += callback;
         }

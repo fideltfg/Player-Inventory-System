@@ -1,9 +1,8 @@
-﻿using PlayerInventorySystem;
+﻿//using PlayerInventorySystem;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.RuleTile.TilingRuleOutput;
+//using static UnityEngine.RuleTile.TilingRuleOutput;
 
 namespace PlayerInventorySystem
 {

@@ -17,12 +17,12 @@ namespace PlayerInventorySystem
 
         public override void Update()
         {
-
+            // TODO: Implement the Update method in the new input system
             // check if the user is scrolling the mouse wheel
             float s = Input.GetAxisRaw("Mouse ScrollWheel");
             if (s != 0)
             {
-                // move the high light left or right based on which way the wheel is scrolling
+                // move the highlight left or right based on which way the wheel is scrolling
                 if (s > 0)
                 {
                     SelectedSlotID--;

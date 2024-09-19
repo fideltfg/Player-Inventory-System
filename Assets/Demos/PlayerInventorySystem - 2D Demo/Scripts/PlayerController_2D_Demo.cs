@@ -59,7 +59,7 @@ public class PlayerController_2D_Demo : MonoBehaviour
         // register for the callbacks from the player and inventory controller
         PlayerInventoryController_2D p = GetComponent<PlayerInventoryController_2D>();
         p.RegisterOnMineCallback(OnMine);
-        p.RegisterOnAttackCallback(OnUseItem);
+        p.RegisterOnUseCallback(OnUseItem);
         p.RegisterOnPickupCallback(OnPickupItem);
         p.RegisterOnDropItemCallback(OnDropItem);
 
